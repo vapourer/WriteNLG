@@ -1,0 +1,19 @@
+Section	SectionTitle=Numbers
+Paragraph
+Sentence
+Clause
+Subclause
+Subject		:	maximum
+Verb		:	be
+Complement	:	@Maximum
+Subclause
+Subject		:	minimum
+Verb		:	be
+Complement	:	@Minimum
+Paragraph
+Sentence
+Clause
+Subject		:	average
+Verb		:	be
+DecimalPlaces=3
+Complement	:	@Average

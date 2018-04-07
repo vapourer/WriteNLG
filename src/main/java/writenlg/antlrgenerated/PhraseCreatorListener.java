@@ -1,0 +1,120 @@
+// Generated from PhraseCreator.g4 by ANTLR 4.7
+package writenlg.antlrgenerated;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+
+/**
+ * This interface defines a complete listener for a parse tree produced by
+ * {@link PhraseCreatorParser}.
+ */
+public interface PhraseCreatorListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#writeDocument}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteDocument(PhraseCreatorParser.WriteDocumentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#writeDocument}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteDocument(PhraseCreatorParser.WriteDocumentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#concept}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcept(PhraseCreatorParser.ConceptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#concept}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcept(PhraseCreatorParser.ConceptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#conceptType}.
+	 * @param ctx the parse tree
+	 */
+	void enterConceptType(PhraseCreatorParser.ConceptTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#conceptType}.
+	 * @param ctx the parse tree
+	 */
+	void exitConceptType(PhraseCreatorParser.ConceptTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#phraseSpecifications}.
+	 * @param ctx the parse tree
+	 */
+	void enterPhraseSpecifications(PhraseCreatorParser.PhraseSpecificationsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#phraseSpecifications}.
+	 * @param ctx the parse tree
+	 */
+	void exitPhraseSpecifications(PhraseCreatorParser.PhraseSpecificationsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#phraseSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterPhraseSpecification(PhraseCreatorParser.PhraseSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#phraseSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitPhraseSpecification(PhraseCreatorParser.PhraseSpecificationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#subject}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubject(PhraseCreatorParser.SubjectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#subject}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubject(PhraseCreatorParser.SubjectContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#predicate}.
+	 * @param ctx the parse tree
+	 */
+	void enterPredicate(PhraseCreatorParser.PredicateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#predicate}.
+	 * @param ctx the parse tree
+	 */
+	void exitPredicate(PhraseCreatorParser.PredicateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#assignments}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignments(PhraseCreatorParser.AssignmentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#assignments}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignments(PhraseCreatorParser.AssignmentsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment(PhraseCreatorParser.AssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment(PhraseCreatorParser.AssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(PhraseCreatorParser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(PhraseCreatorParser.IdentifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(PhraseCreatorParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(PhraseCreatorParser.ExpressionContext ctx);
+}

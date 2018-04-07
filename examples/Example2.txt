@@ -1,0 +1,24 @@
+Document
+Section
+Paragraph
+Sentence
+Clause
+Subject	:	I
+Verb	:	drink	
+Object	:	coffee
+Sentence
+Clause
+Subject	:	you
+Verb	:	drink	
+Object	:	tea
+Paragraph
+Sentence
+Clause
+Subject	:	he
+Verb	:	boil
+Object	:	the red kettle
+Sentence
+Clause
+Subject	:	she
+Verb	:	warm
+Object	:	the teapot

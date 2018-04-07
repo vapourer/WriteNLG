@@ -1,0 +1,14 @@
+Concept=MAXIMUM
+PhraseSpecification
+Subject
+NOUN	:	I
+Predicate
+VERB	:	drink	
+NOUN	:	coffee
+Concept=MINIMUM
+PhraseSpecification
+Subject
+NOUN	:	you
+Predicate
+VERB	:	drink	
+NOUN	:	tea

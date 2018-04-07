@@ -1,0 +1,12 @@
+Sentence
+Clause
+Subject	:	I
+Verb	:	drink	
+Object	:	coffee
+Clause
+Features
+complementiser=because
+Subject	:	I
+Verb	:	like	
+Object	:	it
+

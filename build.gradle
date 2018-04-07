@@ -1,0 +1,57 @@
+apply plugin: 'java'
+apply plugin: 'antlr'
+apply plugin: 'eclipse'
+
+version = 0.1
+sourceCompatibility = 1.8
+
+String antlrOutputDirectory = 'src/main/java/writenlg/antlrgenerated'
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'writenlg.control.WriteNlg'
+	}
+}
+
+dependencies
+{
+    compile files('lib/simplenlg-v4.4.2.jar')
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+    antlr 'org.antlr:antlr4:4.7'
+    testCompile ('junit:junit:4.12')
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
+	testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+task cleanGeneratedJavaFiles(type: Delete) {
+	delete "$antlrOutputDirectory"
+}
+
+generateGrammarSource {
+    outputDirectory = file("$antlrOutputDirectory")
+}
+
+task copyLibraries(type: Copy) {
+    from "lib"
+    into "build/libs"
+}
+
+task copyBatch(type: Copy) {
+	from "batch"
+	into "build"
+}
+
+task deployWriteNlg(dependsOn: [
+	clean,
+	cleanGeneratedJavaFiles,
+	compileJava,
+	jar,
+    copyLibraries,
+	copyBatch,
+	test]) {
+}

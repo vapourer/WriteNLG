@@ -1,0 +1,1 @@
+java -cp libs/*;log4j-api-2.10.0.jar;log4j-core-2.10.0.jar writenlg.control.WriteNlg log4j2Configuration.xml WriteNLG.properties ../examples/Deaths2016To2017.csv

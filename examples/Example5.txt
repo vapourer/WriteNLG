@@ -1,0 +1,28 @@
+Section	SectionTitle=Drinks
+Paragraph
+Sentence
+Clause
+Subject	:	I
+Verb	:	drink	
+Object	:	coffee
+Sentence
+Clause
+Subject	:	you
+Verb	:	drink	
+Object	:	tea
+Paragraph
+Sentence
+Clause
+Features
+tense=past
+Subject	:	he
+Verb	:	boil
+Object	:	the red kettle
+Sentence
+Clause
+Features
+tense=past
+Subject	:	she
+Verb	:	warm
+Object	:	the tea pot
+
