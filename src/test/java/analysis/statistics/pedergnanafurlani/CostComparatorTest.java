@@ -1,12 +1,11 @@
 package analysis.statistics.pedergnanafurlani;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.ibm.icu.util.Calendar;
 
 import analysis.graph.Point;
 import analysis.graph.Segment;

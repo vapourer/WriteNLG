@@ -2,11 +2,10 @@ package analysis.graph;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Calendar;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.ibm.icu.util.Calendar;
 
 public class SegmentTest
 {
