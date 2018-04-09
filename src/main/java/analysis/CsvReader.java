@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package analysis;
 
 /**
@@ -9,6 +12,7 @@ public class CsvReader
 
 	/**
 	 * Creates a new CsvReader according to numbersAsCsv.
+	 * 
 	 * @param numbersAsCsv
 	 */
 	public CsvReader(final String numbersAsCsv)
@@ -18,6 +22,7 @@ public class CsvReader
 
 	/**
 	 * Processes a String which represents a set of comma separated values.
+	 * 
 	 * @return an int array
 	 */
 	public int[] processCsv()

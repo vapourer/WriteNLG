@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package analysis.statistics.pedergnanafurlani;
 
 import java.util.Comparator;
