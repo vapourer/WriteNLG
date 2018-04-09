@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.regulator;
 
 import java.util.HashMap;
@@ -12,6 +15,7 @@ public class Substitutions
 
 	/**
 	 * Adds a substitution to this Map.
+	 * 
 	 * @param placeHolder
 	 * @param substitute
 	 */
@@ -27,6 +31,7 @@ public class Substitutions
 
 	/**
 	 * Returns a copy of this Substitutions Map.
+	 * 
 	 * @return
 	 */
 	public Map<String, String> getSubstitutions()

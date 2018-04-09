@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.simplenlg;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ public class Paragraph implements DocumentGenerator
 
 	/**
 	 * Adds a sentence to this paragraph.
+	 * 
 	 * @param sentence
 	 */
 	public void addSentence(final Sentence sentence)
@@ -49,6 +53,7 @@ public class Paragraph implements DocumentGenerator
 
 	/**
 	 * Returns this Paragraph as a SimpleNlg DocumentElement.
+	 * 
 	 * @return Paragraph
 	 */
 	public DocumentElement getAsDocumentElement()

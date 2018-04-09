@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.simplenlg;
 
 /**
@@ -12,6 +15,7 @@ public enum ElementCategory
 
 	/**
 	 * ElementCategory constructor
+	 * 
 	 * @param level
 	 */
 	ElementCategory(final int level)
@@ -21,6 +25,7 @@ public enum ElementCategory
 
 	/**
 	 * Used during ANTLR parsing before submitting to SimpleNlg processing.
+	 * 
 	 * @return the level of this ElementCategory
 	 */
 	public int getLevel()

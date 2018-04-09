@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.simplenlg;
 
 import java.util.ArrayList;
@@ -66,6 +69,7 @@ public class Sentence implements DocumentGenerator
 
 	/**
 	 * Adds a clause to this Sentence.
+	 * 
 	 * @param clause
 	 */
 	public void addClause(final Clause clause)
@@ -75,6 +79,7 @@ public class Sentence implements DocumentGenerator
 
 	/**
 	 * Returns this Sentence as an NLGElement.
+	 * 
 	 * @return NLGElement
 	 */
 	public NLGElement getAsNLGElement()
@@ -84,6 +89,7 @@ public class Sentence implements DocumentGenerator
 
 	/**
 	 * Gets the String representing the conjunction associated with this Sentence.
+	 * 
 	 * @return String
 	 */
 	public String getConjunction()
@@ -93,6 +99,7 @@ public class Sentence implements DocumentGenerator
 
 	/**
 	 * Sets the conjunction associated with this Sentence.
+	 * 
 	 * @param conjunction
 	 */
 	public void setConjunction(final String conjunction)

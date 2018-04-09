@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.simplenlg;
 
 import java.util.HashMap;
@@ -40,29 +43,29 @@ public class SimpleClause extends Clause
 		{
 			switch (eachPartOfSpeech)
 			{
-			case SUBJECT:
-				this.specification.setSubject(this.assignments.get(eachPartOfSpeech));
-				break;
-			case VERB:
-				this.specification.setVerb(this.assignments.get(eachPartOfSpeech));
-				break;
-			case OBJECT:
-				this.specification.setObject(this.assignments.get(eachPartOfSpeech));
-				break;
-			case INDIRECT_OBJECT:
-				this.specification.setIndirectObject(this.assignments.get(eachPartOfSpeech));
-				break;
-			case COMPLEMENT:
-				this.specification.addComplement(this.assignments.get(eachPartOfSpeech));
-				break;
-			case MODIFIER:
-				this.specification.addModifier(this.assignments.get(eachPartOfSpeech));
-				break;
-			case ARTICLE:
-				this.specification.setDeterminer(this.assignments.get(eachPartOfSpeech));
-				break;
-			default:
-				throw new RuntimeException("Supplied enumeration value has not been implemented");
+				case SUBJECT:
+					this.specification.setSubject(this.assignments.get(eachPartOfSpeech));
+					break;
+				case VERB:
+					this.specification.setVerb(this.assignments.get(eachPartOfSpeech));
+					break;
+				case OBJECT:
+					this.specification.setObject(this.assignments.get(eachPartOfSpeech));
+					break;
+				case INDIRECT_OBJECT:
+					this.specification.setIndirectObject(this.assignments.get(eachPartOfSpeech));
+					break;
+				case COMPLEMENT:
+					this.specification.addComplement(this.assignments.get(eachPartOfSpeech));
+					break;
+				case MODIFIER:
+					this.specification.addModifier(this.assignments.get(eachPartOfSpeech));
+					break;
+				case ARTICLE:
+					this.specification.setDeterminer(this.assignments.get(eachPartOfSpeech));
+					break;
+				default:
+					throw new RuntimeException("Supplied enumeration value has not been implemented");
 			}
 		}
 
@@ -86,6 +89,7 @@ public class SimpleClause extends Clause
 
 	/**
 	 * Adds an assignment.
+	 * 
 	 * @param identifier
 	 * @param expression
 	 */
@@ -95,7 +99,8 @@ public class SimpleClause extends Clause
 	}
 
 	/**
-	 * Gets the SPhraseSpec for this SimpleClause.                                                                                   
+	 * Gets the SPhraseSpec for this SimpleClause.
+	 * 
 	 * @return SPhraseSpec
 	 */
 	public SPhraseSpec getSpecification()
@@ -128,7 +133,7 @@ public class SimpleClause extends Clause
 	{
 		this.tense = tense;
 	}
-	
+
 	/**
 	 * Returns this Specification as an NLGElement
 	 */

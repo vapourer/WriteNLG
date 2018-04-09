@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.simplenlg;
 
 import java.util.ArrayList;
@@ -51,6 +54,7 @@ public class Document implements DocumentGenerator
 
 	/**
 	 * Adds a section to this Document.
+	 * 
 	 * @param section
 	 */
 	public void addSection(final Section section)
@@ -60,6 +64,7 @@ public class Document implements DocumentGenerator
 
 	/**
 	 * Returns this Document as a DocumentElement.
+	 * 
 	 * @return DocumentElement
 	 */
 	public DocumentElement getAsDocumentElement()
@@ -69,6 +74,7 @@ public class Document implements DocumentGenerator
 
 	/**
 	 * Returns the title of this Document.
+	 * 
 	 * @return String
 	 */
 	public String getTitle()
@@ -78,6 +84,7 @@ public class Document implements DocumentGenerator
 
 	/**
 	 * Sets the title of this Document.
+	 * 
 	 * @param title
 	 */
 	public void setTitle(final String title)

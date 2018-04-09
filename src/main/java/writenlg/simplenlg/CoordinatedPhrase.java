@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.simplenlg;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class CoordinatedPhrase extends Clause
 
 	/**
 	 * Returns this CoordinatedPhraseElement
+	 * 
 	 * @return the coordinatedPhraseElement
 	 */
 	public CoordinatedPhraseElement getCoordinatedPhraseElement()

@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package writenlg.simplenlg;
 
 import java.util.List;
@@ -66,6 +69,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a new CoordinatedPhraseElement.
+	 * 
 	 * @return CoordinatedPhraseElement
 	 */
 	public CoordinatedPhraseElement createCoordinatedPhraseElement()
@@ -75,6 +79,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a DocumentElement representing a SimpleNlg sentence.
+	 * 
 	 * @return DocumentElement
 	 */
 	public DocumentElement createSentence()
@@ -84,6 +89,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a DocumentElement representing a SimpleNlg sentence based on the input clause parameter.
+	 * 
 	 * @param clause
 	 * @return DocumentElement
 	 */
@@ -91,9 +97,10 @@ public class SimpleNlg
 	{
 		return this.nlgFactory.createSentence(clause);
 	}
-	
+
 	/**
 	 * Returns a DocumentElement representing a SimpleNlg sentence based on the cannedSentence parameter.
+	 * 
 	 * @param cannedSentence
 	 * @return DocumentElement
 	 */
@@ -104,6 +111,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a paragraph as a new DocumentElement.
+	 * 
 	 * @return DocumentElement
 	 */
 	public DocumentElement createParagraph()
@@ -113,6 +121,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a paragraph as a new DocumentElement based on the element parameter.
+	 * 
 	 * @return DocumentElement
 	 */
 	public DocumentElement createParagraph(final NLGElement element)
@@ -122,6 +131,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a paragraph as a new DocumentElement based on the sentences parameter.
+	 * 
 	 * @return DocumentElement
 	 */
 	public DocumentElement createParagraph(final List<DocumentElement> sentences)
@@ -131,6 +141,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a section as a new DocumentElement based on the title parameter.
+	 * 
 	 * @param title
 	 * @return DocumentElement
 	 */
@@ -141,6 +152,7 @@ public class SimpleNlg
 
 	/**
 	 * Returns a document as a new DocumentElement based on the title parameter.
+	 * 
 	 * @param title
 	 * @return DocumentElement
 	 */
@@ -151,6 +163,7 @@ public class SimpleNlg
 
 	/**
 	 * Realises the input NLGElement.
+	 * 
 	 * @param element
 	 * @return String
 	 */
