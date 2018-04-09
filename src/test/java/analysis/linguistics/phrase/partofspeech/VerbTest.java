@@ -1,3 +1,6 @@
+// Copyright 2018 David Jakes.
+// This program is distributed under the terms of the GNU General Public License.
+
 package analysis.linguistics.phrase.partofspeech;
 
 import java.math.BigDecimal;
@@ -10,7 +13,6 @@ import analysis.constrain.BoundedSoftConstraint;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.MeanBasedSoftConstraintProcessor;
 import analysis.constrain.SoftConstraintGroup;
-import analysis.linguistics.phrase.partofspeech.Verb;
 
 public class VerbTest
 {
