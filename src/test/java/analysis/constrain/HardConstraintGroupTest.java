@@ -57,4 +57,11 @@ public class HardConstraintGroupTest
 		// Assert
 		Assert.assertEquals(valueExpected, valueActual);
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddConstraint_SoftConstraint()
+	{
+		final ConstraintGroup<String> constraints = new HardConstraintGroup<>(new HardConstraintProcessor());
+		constraints.addConstraint(new SoftConstraint<>("Radish", new BigDecimal("1.2")));
+	}
 }
