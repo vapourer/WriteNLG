@@ -64,7 +64,7 @@ public class HardConstraintGroup<E> implements ConstraintGroup<E>
 		}
 		else
 		{
-			LOGGER.info(String.format("HardConstraint expected, %s received. Constraint not added.",
+			LOGGER.error(String.format("HardConstraint expected, %s received. Constraint not added.",
 					constraint.getClass()));
 
 			throw new IllegalArgumentException("HardConstraint expected");

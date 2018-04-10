@@ -39,4 +39,12 @@ public class SoftConstraintGroupTest
 		// Assert
 		Assert.assertTrue(valueExpected.compareTo(valueActual) == 0);
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddConstraint_HardConstraint()
+	{
+		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(
+				new MeanBasedSoftConstraintProcessor(TestConstants.MATH_CONTEXT));
+		constraints.addConstraint(new HardConstraint<>("Radish", new BigDecimal("1")));
+	}
 }
