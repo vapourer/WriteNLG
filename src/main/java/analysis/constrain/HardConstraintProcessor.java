@@ -6,11 +6,18 @@ package analysis.constrain;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class HardConstraintProcessor extends ConstraintProcessor
 {
+	private static final Logger LOGGER = LogManager.getLogger("HardConstraintProcessor.class");
+
 	@Override
 	public <E> BigDecimal evaluate(final Set<? extends Constraint<E>> constraints)
 	{
+		LOGGER.info("Evaluating hard constraints");
+
 		BigDecimal value = new BigDecimal("0");
 		BigDecimal minValue = new BigDecimal("1");
 
@@ -30,6 +37,11 @@ public class HardConstraintProcessor extends ConstraintProcessor
 			}
 		}
 
-		return value.multiply(minValue);
+		BigDecimal returnValue = value.multiply(minValue);
+
+		LOGGER.info(String.format("Hard constraint count: %s; total: %s; minimum value: %s; return value: %s",
+				constraints.size(), value, minValue, returnValue));
+
+		return returnValue;
 	}
 }
