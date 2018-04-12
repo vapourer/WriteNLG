@@ -6,6 +6,9 @@ package analysis.constrain;
 import java.math.BigDecimal;
 import java.util.Set;
 
+/**
+ * Base class for a constraint processor.
+ */
 public abstract class ConstraintProcessor
 {
 	/**

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 /**
- * Container for a set of constraints.
+ * An implementing class serves as a container for a set of constraints.
  *
  * @param <E>
  */

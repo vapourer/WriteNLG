@@ -15,10 +15,10 @@ import org.apache.logging.log4j.Logger;
  */
 public class BoundedSoftConstraint<E> extends SoftConstraint<E>
 {
-	private static final Logger LOGGER = LogManager.getLogger("SoftConstraint.class");
+	private static final Logger LOGGER = LogManager.getLogger("BoundedSoftConstraint.class");
 
 	/**
-	 * Creates a SoftConstraint instance.
+	 * Creates a BoundedSoftConstraint instance.
 	 *
 	 * @param constrainedElement
 	 * @param satisfactionLevel

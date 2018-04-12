@@ -22,6 +22,7 @@ public abstract class Constraint<E>
 	public Constraint(final E constrainedElement)
 	{
 		LOGGER.info("Creating constraint");
+
 		if (constrainedElement == null)
 		{
 			LOGGER.error(String.format("null constrainedElement"));
