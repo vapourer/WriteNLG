@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import analysis.TestConstants;
 
-public class MeanBasedSoftConstraintProcessorTest
+public class SoftConstraintProcessorTest
 {
 	@BeforeClass
 	public static void setupClass()
@@ -25,14 +25,14 @@ public class MeanBasedSoftConstraintProcessorTest
 	public void testEvaluate()
 	{
 		// Arrange
-		final BigDecimal valueExpected = new BigDecimal("0.6667");
+		final BigDecimal valueExpected = new BigDecimal("2.0");
 
 		final Set<SoftConstraint<String>> constraints = new HashSet<>();
 		constraints.add(new SoftConstraint<>("Buttercup", new BigDecimal("0.5")));
 		constraints.add(new SoftConstraint<>("Pansy", new BigDecimal("0.7")));
 		constraints.add(new SoftConstraint<>("Dahlia", new BigDecimal("0.8")));
 
-		final ConstraintProcessor processor = new MeanBasedSoftConstraintProcessor(TestConstants.MATH_CONTEXT);
+		final ConstraintProcessor processor = new SoftConstraintProcessor();
 
 		// Act
 		final BigDecimal valueActual = processor.evaluate(constraints);

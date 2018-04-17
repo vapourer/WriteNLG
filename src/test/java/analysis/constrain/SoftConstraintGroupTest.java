@@ -23,10 +23,9 @@ public class SoftConstraintGroupTest
 	public void testGetValue()
 	{
 		// Arrange
-		final BigDecimal valueExpected = new BigDecimal("0.44");
+		final BigDecimal valueExpected = new BigDecimal("2.2");
 
-		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(
-				new MeanBasedSoftConstraintProcessor(TestConstants.MATH_CONTEXT));
+		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(new SoftConstraintProcessor());
 		constraints.addConstraint(new SoftConstraint<>("Buttercup", new BigDecimal("0.3")));
 		constraints.addConstraint(new SoftConstraint<>("Pansy", new BigDecimal("0.7")));
 		constraints.addConstraint(new SoftConstraint<>("Daffodil", new BigDecimal("0.2")));
@@ -43,8 +42,7 @@ public class SoftConstraintGroupTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddConstraint_HardConstraint()
 	{
-		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(
-				new MeanBasedSoftConstraintProcessor(TestConstants.MATH_CONTEXT));
+		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(new SoftConstraintProcessor());
 		constraints.addConstraint(new HardConstraint<>("Radish", new BigDecimal("1")));
 	}
 }

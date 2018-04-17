@@ -13,9 +13,6 @@ import analysis.TestConstants;
 
 public class BoundedSoftConstraintTest
 {
-	private static final BigDecimal LOWER_BOUND = new BigDecimal("0");
-	private static final BigDecimal UPPER_BOUND = new BigDecimal("1");
-
 	@BeforeClass
 	public static void setupClass()
 	{
@@ -25,27 +22,29 @@ public class BoundedSoftConstraintTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_NullConstrainedProperty()
 	{
-		new BoundedSoftConstraint<String>(null, new BigDecimal("0.5"), LOWER_BOUND, UPPER_BOUND);
+		new BoundedSoftConstraint<String>(null, new BigDecimal("0.5"), TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS,
+				TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_NullSatisfactionLevel()
 	{
-		new BoundedSoftConstraint<>("Test: NullSatisfactionLevel", null, LOWER_BOUND, UPPER_BOUND);
+		new BoundedSoftConstraint<>("Test: NullSatisfactionLevel", null,
+				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_SatisfactionLevelJustBelowLowerBound()
 	{
-		new BoundedSoftConstraint<>("Test: SatisfactionLevelJustBelowLowerBound", new BigDecimal("-0.999"), LOWER_BOUND,
-				UPPER_BOUND);
+		new BoundedSoftConstraint<>("Test: SatisfactionLevelJustBelowLowerBound", new BigDecimal("-0.999"),
+				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_SatisfactionLevelJustAboveUpperBound()
 	{
-		new BoundedSoftConstraint<>("Test: SatisfactionLevelJustAboveUpperBound", new BigDecimal("1.001"), LOWER_BOUND,
-				UPPER_BOUND);
+		new BoundedSoftConstraint<>("Test: SatisfactionLevelJustAboveUpperBound", new BigDecimal("1.001"),
+				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS);
 	}
 
 	@Test
@@ -56,7 +55,8 @@ public class BoundedSoftConstraintTest
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("0.5");
 
 		final BoundedSoftConstraint<String> constraint = new BoundedSoftConstraint<>(
-				"Test: SatisfactionLevelMidwayBetweenBounds", new BigDecimal("0.5"), LOWER_BOUND, UPPER_BOUND);
+				"Test: SatisfactionLevelMidwayBetweenBounds", new BigDecimal("0.5"),
+				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS);
 
 		// Act
 		final String constrainedPropertyActual = constraint.getConstrainedElement();
@@ -75,7 +75,8 @@ public class BoundedSoftConstraintTest
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("0.001");
 
 		final BoundedSoftConstraint<String> constraint = new BoundedSoftConstraint<>(
-				"Test: SatisfactionLevelJustAboveLowerBound", new BigDecimal("0.001"), LOWER_BOUND, UPPER_BOUND);
+				"Test: SatisfactionLevelJustAboveLowerBound", new BigDecimal("0.001"),
+				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS);
 
 		// Act
 		final String constrainedPropertyActual = constraint.getConstrainedElement();
@@ -94,7 +95,8 @@ public class BoundedSoftConstraintTest
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("0.999");
 
 		final BoundedSoftConstraint<String> constraint = new BoundedSoftConstraint<>(
-				"Test: SatisfactionLevelJustBelowUpperBound", new BigDecimal("0.999"), LOWER_BOUND, UPPER_BOUND);
+				"Test: SatisfactionLevelJustBelowUpperBound", new BigDecimal("0.999"),
+				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS);
 
 		// Act
 		final String constrainedPropertyActual = constraint.getConstrainedElement();

@@ -4,22 +4,20 @@
 package analysis.constrain;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Set;
 
-public class MeanBasedSoftConstraintProcessor extends ConstraintProcessor
-{
-	private final MathContext context;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-	public MeanBasedSoftConstraintProcessor(final String mathContext)
-	{
-		this.context = new MathContext(mathContext);
-	}
+public class SoftConstraintProcessor extends ConstraintProcessor
+{
+	private static final Logger LOGGER = LogManager.getLogger("SoftConstraintProcessor.class");
 
 	@Override
 	public <E> BigDecimal evaluate(final Set<? extends Constraint<E>> constraints)
 	{
-		final BigDecimal elementCount = new BigDecimal(constraints.size());
+		LOGGER.info("Evaluating soft constraints");
+
 		BigDecimal value = new BigDecimal("0");
 
 		for (final Constraint<E> constraint : constraints)
@@ -30,6 +28,6 @@ public class MeanBasedSoftConstraintProcessor extends ConstraintProcessor
 			}
 		}
 
-		return value.divide(elementCount, this.context);
+		return value;
 	}
 }

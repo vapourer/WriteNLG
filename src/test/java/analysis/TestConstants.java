@@ -3,6 +3,8 @@
 
 package analysis;
 
+import java.math.BigDecimal;
+
 public class TestConstants
 {
 	public static final String LOG4J2_CONFIGURATION_FILE_PATH = "log4j2Configuration.xml";
@@ -12,4 +14,6 @@ public class TestConstants
 
 	public static final int ROUNDING_PARAMETER_FOR_DATE_COMPARISON = 7;
 	public static final String MATH_CONTEXT = "precision=4 roundingMode=HALF_UP";
+	public static final BigDecimal LOWER_BOUND_FOR_CONSTRAINTS_TESTS = new BigDecimal("0");
+	public static final BigDecimal UPPER_BOUND_FOR_CONSTRAINTS_TESTS = new BigDecimal("1");
 }

@@ -35,6 +35,11 @@ public class HardConstraintProcessor extends ConstraintProcessor
 
 				value = value.add(newValue);
 			}
+			else
+			{
+				LOGGER.error(String.format("Not a hard constraint: %s", constraint.getConstrainedElement()));
+				throw new IllegalArgumentException("This processor is for  hard constraints only");
+			}
 		}
 
 		BigDecimal returnValue = value.multiply(minValue);

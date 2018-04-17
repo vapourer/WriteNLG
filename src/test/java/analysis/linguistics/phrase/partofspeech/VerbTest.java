@@ -8,11 +8,10 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Test;
 
-import analysis.TestConstants;
 import analysis.constrain.BoundedSoftConstraint;
 import analysis.constrain.ConstraintGroup;
-import analysis.constrain.MeanBasedSoftConstraintProcessor;
 import analysis.constrain.SoftConstraintGroup;
+import analysis.constrain.SoftConstraintProcessor;
 
 public class VerbTest
 {
@@ -20,10 +19,9 @@ public class VerbTest
 	public void testCalculateSatisfactionLevel()
 	{
 		// Arrange
-		final BigDecimal satisfactionLevelExpected = new BigDecimal("0.7");
+		final BigDecimal satisfactionLevelExpected = new BigDecimal("1.4");
 
-		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(
-				new MeanBasedSoftConstraintProcessor(TestConstants.MATH_CONTEXT));
+		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(new SoftConstraintProcessor());
 
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Too slow", new BigDecimal("0.6"),
 				new BigDecimal("0"), new BigDecimal("1")));

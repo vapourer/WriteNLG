@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import analysis.TestConstants;
 
-public class HardConstraintProcessorTest
+public class BooleanConstraintProcessorTest
 {
 	@BeforeClass
 	public static void setupClass()
@@ -24,16 +24,15 @@ public class HardConstraintProcessorTest
 	@Test
 	public void testEvaluate_AllConstraintsPositive()
 	{
-		// Arrange
-		final BigDecimal valueExpected = new BigDecimal("4");
+		final BigDecimal valueExpected = new BigDecimal("1");
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Cabbage", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Courgette", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Onion", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Parsnip", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Lettuce", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Tomato", new BigDecimal("1")));
 
-		final ConstraintProcessor processor = new HardConstraintProcessor();
+		final ConstraintProcessor processor = new BooleanConstraintProcessor();
 
 		// Act
 		final BigDecimal valueActual = processor.evaluate(constraints);
@@ -49,12 +48,12 @@ public class HardConstraintProcessorTest
 		final BigDecimal valueExpected = new BigDecimal("0");
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Cabbage", new BigDecimal("0")));
-		constraints.add(new HardConstraint<>("Courgette", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Onion", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Parsnip", new BigDecimal("0")));
+		constraints.add(new HardConstraint<>("Lettuce", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Tomato", new BigDecimal("1")));
 
-		final ConstraintProcessor processor = new HardConstraintProcessor();
+		final ConstraintProcessor processor = new BooleanConstraintProcessor();
 
 		// Act
 		final BigDecimal valueActual = processor.evaluate(constraints);
@@ -68,13 +67,13 @@ public class HardConstraintProcessorTest
 	{
 		// Arrange
 		final Set<Constraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.add(new BoundedSoftConstraint<String>("Cabbage", new BigDecimal("0.5"),
+		constraints.add(new HardConstraint<>("Onion", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Parsnip", new BigDecimal("1")));
+		constraints.add(new BoundedSoftConstraint<String>("Lettuce", new BigDecimal("0.5"),
 				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS));
-		constraints.add(new HardConstraint<>("Courgette", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Tomato", new BigDecimal("1")));
 
-		final ConstraintProcessor processor = new HardConstraintProcessor();
+		final ConstraintProcessor processor = new BooleanConstraintProcessor();
 
 		// Act
 		processor.evaluate(constraints);
