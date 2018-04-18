@@ -28,9 +28,9 @@ public class SoftConstraintProcessorTest
 		final BigDecimal valueExpected = new BigDecimal("2.0");
 
 		final Set<SoftConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new SoftConstraint<>("Buttercup", new BigDecimal("0.5")));
-		constraints.add(new SoftConstraint<>("Pansy", new BigDecimal("0.7")));
-		constraints.add(new SoftConstraint<>("Dahlia", new BigDecimal("0.8")));
+		constraints.add(new SoftConstraint<>("Buttercup", new SatisfactionLevel(new BigDecimal("0.5"))));
+		constraints.add(new SoftConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"))));
+		constraints.add(new SoftConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"))));
 
 		final ConstraintProcessor processor = new SoftConstraintProcessor();
 

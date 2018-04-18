@@ -27,7 +27,7 @@ public class BooleanConstraintProcessor extends ConstraintProcessor
 		{
 			if (constraint instanceof HardConstraint)
 			{
-				value = value.multiply(constraint.getSatisfactionLevel());
+				value = value.multiply(constraint.getSatisfactionLevel().getLevel());
 			}
 			else
 			{

@@ -26,12 +26,12 @@ public class HardConstraintGroupTest
 		final BigDecimal valueExpected = new BigDecimal("6");
 
 		final ConstraintGroup<String> constraints = new HardConstraintGroup<>(new HardConstraintProcessor());
-		constraints.addConstraint(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Cabbage", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Courgette", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Potato", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Carrot", new BigDecimal("1")));
+		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Potato", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(new BigDecimal("1"))));
 
 		// Act
 		final BigDecimal valueActual = constraints.getValue();
@@ -47,12 +47,12 @@ public class HardConstraintGroupTest
 		final BigDecimal valueExpected = new BigDecimal("0");
 
 		final ConstraintGroup<String> constraints = new HardConstraintGroup<>(new HardConstraintProcessor());
-		constraints.addConstraint(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Cabbage", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Courgette", new BigDecimal("1")));
-		constraints.addConstraint(new HardConstraint<>("Potato", new BigDecimal("0")));
-		constraints.addConstraint(new HardConstraint<>("Carrot", new BigDecimal("1")));
+		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Potato", new SatisfactionLevel(new BigDecimal("0"))));
+		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(new BigDecimal("1"))));
 
 		// Act
 		final BigDecimal valueActual = constraints.getValue();
@@ -65,6 +65,6 @@ public class HardConstraintGroupTest
 	public void testAddConstraint_SoftConstraint()
 	{
 		final ConstraintGroup<String> constraints = new HardConstraintGroup<>(new HardConstraintProcessor());
-		constraints.addConstraint(new SoftConstraint<>("Radish", new BigDecimal("1.2")));
+		constraints.addConstraint(new SoftConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1.2"))));
 	}
 }

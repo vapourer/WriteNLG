@@ -3,10 +3,8 @@
 
 package analysis.constrain;
 
-import java.math.BigDecimal;
-
 /**
- * A WeightedConstraint for use with applicable constraint processorsh.
+ * A WeightedConstraint for use with applicable constraint processors.
  * 
  * @param <E>
  */
@@ -24,7 +22,7 @@ public class WeightedConstraint<E> extends Constraint<E>
 	}
 
 	@Override
-	public BigDecimal getSatisfactionLevel()
+	public SatisfactionLevel getSatisfactionLevel()
 	{
 		// TODO Auto-generated method stub
 		return null;

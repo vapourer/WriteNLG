@@ -26,11 +26,11 @@ public class SoftConstraintGroupTest
 		final BigDecimal valueExpected = new BigDecimal("2.2");
 
 		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(new SoftConstraintProcessor());
-		constraints.addConstraint(new SoftConstraint<>("Buttercup", new BigDecimal("0.3")));
-		constraints.addConstraint(new SoftConstraint<>("Pansy", new BigDecimal("0.7")));
-		constraints.addConstraint(new SoftConstraint<>("Daffodil", new BigDecimal("0.2")));
-		constraints.addConstraint(new SoftConstraint<>("Dandelion", new BigDecimal("0.4")));
-		constraints.addConstraint(new SoftConstraint<>("Daisy", new BigDecimal("0.6")));
+		constraints.addConstraint(new SoftConstraint<>("Buttercup", new SatisfactionLevel(new BigDecimal("0.3"))));
+		constraints.addConstraint(new SoftConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"))));
+		constraints.addConstraint(new SoftConstraint<>("Daffodil", new SatisfactionLevel(new BigDecimal("0.2"))));
+		constraints.addConstraint(new SoftConstraint<>("Dandelion", new SatisfactionLevel(new BigDecimal("0.4"))));
+		constraints.addConstraint(new SoftConstraint<>("Daisy", new SatisfactionLevel(new BigDecimal("0.6"))));
 
 		// Act
 		final BigDecimal valueActual = constraints.getValue();
@@ -43,6 +43,6 @@ public class SoftConstraintGroupTest
 	public void testAddConstraint_HardConstraint()
 	{
 		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(new SoftConstraintProcessor());
-		constraints.addConstraint(new HardConstraint<>("Radish", new BigDecimal("1")));
+		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
 	}
 }

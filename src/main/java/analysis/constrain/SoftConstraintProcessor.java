@@ -24,7 +24,7 @@ public class SoftConstraintProcessor extends ConstraintProcessor
 		{
 			if (constraint instanceof SoftConstraint)
 			{
-				value = value.add(constraint.getSatisfactionLevel());
+				value = value.add(constraint.getSatisfactionLevel().getLevel());
 			}
 		}
 

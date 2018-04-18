@@ -26,7 +26,7 @@ public class HardConstraintProcessor extends ConstraintProcessor
 			if (constraint instanceof HardConstraint)
 			{
 				final HardConstraint<E> hardConstraint = (HardConstraint<E>) constraint;
-				final BigDecimal newValue = hardConstraint.getSatisfactionLevel();
+				final BigDecimal newValue = hardConstraint.getSatisfactionLevel().getLevel();
 
 				if (newValue.compareTo(minValue) < 0)
 				{

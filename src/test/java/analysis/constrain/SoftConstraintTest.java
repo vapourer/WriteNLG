@@ -22,7 +22,7 @@ public class SoftConstraintTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_NullConstrainedProperty()
 	{
-		new SoftConstraint<String>(null, new BigDecimal("0.5"));
+		new SoftConstraint<String>(null, new SatisfactionLevel(new BigDecimal("0.5")));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -38,11 +38,12 @@ public class SoftConstraintTest
 		final String constrainedPropertyExpected = "Test: Success";
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("0.5");
 
-		final SoftConstraint<String> constraint = new SoftConstraint<>("Test: Success", new BigDecimal("0.5"));
+		final SoftConstraint<String> constraint = new SoftConstraint<>("Test: Success",
+				new SatisfactionLevel(new BigDecimal("0.5")));
 
 		// Act
 		final String constrainedPropertyActual = constraint.getConstrainedElement();
-		final BigDecimal satisfactionLevelActual = constraint.getSatisfactionLevel();
+		final BigDecimal satisfactionLevelActual = constraint.getSatisfactionLevel().getLevel();
 
 		// Assert
 		Assert.assertEquals(constrainedPropertyExpected, constrainedPropertyActual);

@@ -23,15 +23,16 @@ public class BoundedSoftConstraint<E> extends SoftConstraint<E>
 	 * @param constrainedElement
 	 * @param satisfactionLevel
 	 */
-	public BoundedSoftConstraint(final E constrainedElement, final BigDecimal satisfactionLevel,
+	public BoundedSoftConstraint(final E constrainedElement, final SatisfactionLevel satisfactionLevel,
 			final BigDecimal lowerBound, final BigDecimal upperBound)
 	{
 		super(constrainedElement, satisfactionLevel);
 
-		if (satisfactionLevel.compareTo(lowerBound) < 0 || satisfactionLevel.compareTo(upperBound) > 0)
+		if (satisfactionLevel.getLevel().compareTo(lowerBound) < 0
+				|| satisfactionLevel.getLevel().compareTo(upperBound) > 0)
 		{
-			LOGGER.error(String.format("satisfactionLevel outside zero to one bounds"));
-			throw new IllegalArgumentException("satisfactionLevel must be a value between " + lowerBound.toString()
+			LOGGER.error(String.format("Satisfaction level outside zero to one bounds"));
+			throw new IllegalArgumentException("Satisfaction level must be a value between " + lowerBound.toString()
 					+ " and " + upperBound + " inclusive");
 		}
 	}

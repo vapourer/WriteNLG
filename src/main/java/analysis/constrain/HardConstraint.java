@@ -8,11 +8,16 @@ import java.math.BigDecimal;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Container for a hard constraint.
+ * 
+ * @param <E>
+ */
 public class HardConstraint<E> extends Constraint<E>
 {
 	private static final Logger LOGGER = LogManager.getLogger("HardConstraint.class");
 
-	private final BigDecimal satisfactionLevel;
+	private final SatisfactionLevel satisfactionLevel;
 
 	/**
 	 * Creates a HardConstraint instance.
@@ -20,14 +25,14 @@ public class HardConstraint<E> extends Constraint<E>
 	 * @param constrainedElement
 	 * @param satisfactionLevel
 	 */
-	public HardConstraint(final E constrainedElement, final BigDecimal satisfactionLevel)
+	public HardConstraint(final E constrainedElement, final SatisfactionLevel satisfactionLevel)
 	{
 		super(constrainedElement);
 
-		if (satisfactionLevel == null || (satisfactionLevel.compareTo(new BigDecimal("0")) != 0
-				&& satisfactionLevel.compareTo(new BigDecimal("1")) != 0))
+		if (satisfactionLevel == null || (satisfactionLevel.getLevel().compareTo(new BigDecimal("0")) != 0
+				&& satisfactionLevel.getLevel().compareTo(new BigDecimal("1")) != 0))
 		{
-			LOGGER.error(String.format("satisfactionLevel was %s but must be 0 or 1", satisfactionLevel));
+			LOGGER.error(String.format("satisfactionLevel was %s but must evaluate to 0 or 1", satisfactionLevel));
 			throw new IllegalArgumentException("satisfactionLevel must be 0 or 1");
 		}
 
@@ -40,7 +45,7 @@ public class HardConstraint<E> extends Constraint<E>
 	 * @return the satisfactionLevel
 	 */
 	@Override
-	public BigDecimal getSatisfactionLevel()
+	public SatisfactionLevel getSatisfactionLevel()
 	{
 		return this.satisfactionLevel;
 	}

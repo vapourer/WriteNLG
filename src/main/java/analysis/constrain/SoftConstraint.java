@@ -3,8 +3,6 @@
 
 package analysis.constrain;
 
-import java.math.BigDecimal;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +10,7 @@ public class SoftConstraint<E> extends Constraint<E>
 {
 	private static final Logger LOGGER = LogManager.getLogger("SoftConstraint.class");
 
-	private final BigDecimal satisfactionLevel;
+	private final SatisfactionLevel satisfactionLevel;
 
 	/**
 	 * Creates a SoftConstraint instance.
@@ -20,7 +18,7 @@ public class SoftConstraint<E> extends Constraint<E>
 	 * @param constrainedElement
 	 * @param satisfactionLevel
 	 */
-	public SoftConstraint(final E constrainedElement, final BigDecimal satisfactionLevel)
+	public SoftConstraint(final E constrainedElement, final SatisfactionLevel satisfactionLevel)
 	{
 		super(constrainedElement);
 
@@ -31,7 +29,7 @@ public class SoftConstraint<E> extends Constraint<E>
 		}
 
 		LOGGER.info(String.format("constrainedElement = %s\tsatisfactionLevel = %s", constrainedElement,
-				satisfactionLevel));
+				satisfactionLevel.getLevel()));
 		this.satisfactionLevel = satisfactionLevel;
 	}
 
@@ -39,7 +37,7 @@ public class SoftConstraint<E> extends Constraint<E>
 	 * @return the satisfactionLevel
 	 */
 	@Override
-	public BigDecimal getSatisfactionLevel()
+	public SatisfactionLevel getSatisfactionLevel()
 	{
 		return this.satisfactionLevel;
 	}

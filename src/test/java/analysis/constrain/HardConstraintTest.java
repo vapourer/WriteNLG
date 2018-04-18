@@ -22,7 +22,7 @@ public class HardConstraintTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_NullConstrainedProperty()
 	{
-		new HardConstraint<String>(null, new BigDecimal("0"));
+		new HardConstraint<String>(null, new SatisfactionLevel(new BigDecimal("0")));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -34,7 +34,7 @@ public class HardConstraintTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_InadmissibleSatisfactionLevel()
 	{
-		new HardConstraint<>("Test: InadmissibleSatisfactionLevel", new BigDecimal("0.5"));
+		new HardConstraint<>("Test: InadmissibleSatisfactionLevel", new SatisfactionLevel(new BigDecimal("0.5")));
 	}
 
 	@Test
@@ -44,11 +44,12 @@ public class HardConstraintTest
 		final String constrainedPropertyExpected = "Test: Success";
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("1");
 
-		final HardConstraint<String> constraint = new HardConstraint<>("Test: Success", new BigDecimal("1"));
+		final HardConstraint<String> constraint = new HardConstraint<>("Test: Success",
+				new SatisfactionLevel(new BigDecimal("1")));
 
 		// Act
 		final String constrainedPropertyActual = constraint.getConstrainedElement();
-		final BigDecimal satisfactionLevelActual = constraint.getSatisfactionLevel();
+		final BigDecimal satisfactionLevelActual = constraint.getSatisfactionLevel().getLevel();
 
 		// Assert
 		Assert.assertEquals(constrainedPropertyExpected, constrainedPropertyActual);

@@ -51,4 +51,15 @@ public class SatisfactionLevel
 	{
 		return weighting;
 	}
+
+	/**
+	 * @param object
+	 * @return string represents level and weighting
+	 */
+	@Override
+	public String toString()
+	{
+		return String.format("level: %s * weighting: %s = %s", this.level, this.weighting,
+				this.level.multiply(this.weighting));
+	}
 }

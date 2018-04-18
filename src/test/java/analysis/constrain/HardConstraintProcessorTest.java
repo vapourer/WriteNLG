@@ -28,10 +28,10 @@ public class HardConstraintProcessorTest
 		final BigDecimal valueExpected = new BigDecimal("4");
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Cabbage", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Courgette", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
 
 		final ConstraintProcessor processor = new HardConstraintProcessor();
 
@@ -49,10 +49,10 @@ public class HardConstraintProcessorTest
 		final BigDecimal valueExpected = new BigDecimal("0");
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Cabbage", new BigDecimal("0")));
-		constraints.add(new HardConstraint<>("Courgette", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("0"))));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
 
 		final ConstraintProcessor processor = new HardConstraintProcessor();
 
@@ -68,11 +68,11 @@ public class HardConstraintProcessorTest
 	{
 		// Arrange
 		final Set<Constraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new BigDecimal("1")));
-		constraints.add(new HardConstraint<>("Turnip", new BigDecimal("1")));
-		constraints.add(new BoundedSoftConstraint<String>("Cabbage", new BigDecimal("0.5"),
+		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new BoundedSoftConstraint<String>("Cabbage", new SatisfactionLevel(new BigDecimal("0.5")),
 				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS));
-		constraints.add(new HardConstraint<>("Courgette", new BigDecimal("1")));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
 
 		final ConstraintProcessor processor = new HardConstraintProcessor();
 
