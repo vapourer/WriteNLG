@@ -10,12 +10,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Returns 1 if all have satisfactionLevel = 1; otherwise returns 0
+ * Returns 1 if all constraints have satisfactionLevel = 1; otherwise returns 0
  */
 public class BooleanConstraintProcessor extends ConstraintProcessor
 {
 	private static final Logger LOGGER = LogManager.getLogger("BooleanConstraintProcessor.class");
 
+	/**
+	 * Evaluates submitted hard constraints as booleans.
+	 */
 	@Override
 	public <E> BigDecimal evaluate(Set<? extends Constraint<E>> constraints)
 	{
@@ -32,7 +35,7 @@ public class BooleanConstraintProcessor extends ConstraintProcessor
 			else
 			{
 				LOGGER.error(String.format("Not a hard constraint: %s", constraint.getConstrainedElement()));
-				throw new IllegalArgumentException("This processor is for  hard constraints only");
+				throw new IllegalArgumentException("This processor is for hard constraints only");
 			}
 		}
 

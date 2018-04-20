@@ -29,14 +29,14 @@ public class HardConstraint<E> extends Constraint<E>
 	{
 		super(constrainedElement);
 
-		if (satisfactionLevel == null || (satisfactionLevel.getLevel().compareTo(new BigDecimal("0")) != 0
-				&& satisfactionLevel.getLevel().compareTo(new BigDecimal("1")) != 0))
+		if (satisfactionLevel == null || (satisfactionLevel.getWeightedLevel().compareTo(new BigDecimal("0")) != 0
+				&& satisfactionLevel.getWeightedLevel().compareTo(new BigDecimal("1")) != 0))
 		{
-			LOGGER.error(String.format("satisfactionLevel was %s but must evaluate to 0 or 1", satisfactionLevel));
-			throw new IllegalArgumentException("satisfactionLevel must be 0 or 1");
+			LOGGER.error(String.format("Weighted satisfaction level was %s but must be 0 or 1", satisfactionLevel));
+			throw new IllegalArgumentException("Weighted satisfaction level must be 0 or 1");
 		}
 
-		LOGGER.info(String.format("constrainedElement = %s\tsatisfactionLevel = %s", constrainedElement,
+		LOGGER.info(String.format("constrainedElement = %s, satisfactionLevel = %s", constrainedElement,
 				satisfactionLevel));
 		this.satisfactionLevel = satisfactionLevel;
 	}

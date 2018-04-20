@@ -5,14 +5,20 @@ package analysis.constrain;
 
 import java.math.BigDecimal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Represents the SatisfactionLevel element of a constraint. Weighting defaults to 1, but can be set for use in a
  * weighted constraint.
  */
 public class SatisfactionLevel
 {
+	private static final Logger LOGGER = LogManager.getLogger("SatisfactionLevel.class");
+
 	private final BigDecimal level;
 	private final BigDecimal weighting;
+	private final BigDecimal weightedLevel;
 
 	/**
 	 * Creates a SatisfactionLevel instance with default weighting (1).
@@ -22,6 +28,7 @@ public class SatisfactionLevel
 	public SatisfactionLevel(BigDecimal level)
 	{
 		this(level, new BigDecimal("1"));
+		LOGGER.info("Default weighting");
 	}
 
 	/**
@@ -34,6 +41,8 @@ public class SatisfactionLevel
 	{
 		this.level = level;
 		this.weighting = weighting;
+		this.weightedLevel = this.level.multiply(this.weighting);
+		LOGGER.info("New satisfaction level (" + toString() + ")");
 	}
 
 	/**
@@ -53,13 +62,21 @@ public class SatisfactionLevel
 	}
 
 	/**
+	 * @return the weightedLevel
+	 */
+	public BigDecimal getWeightedLevel()
+	{
+		return weightedLevel;
+	}
+
+	/**
 	 * @param object
 	 * @return string represents level and weighting
 	 */
 	@Override
 	public String toString()
 	{
-		return String.format("level: %s * weighting: %s = %s", this.level, this.weighting,
-				this.level.multiply(this.weighting));
+		return String.format("level: %s, weighting: %s, weightedLevel: %s", this.level, this.weighting,
+				this.weightedLevel);
 	}
 }
