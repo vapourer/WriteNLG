@@ -3,9 +3,16 @@
 
 package analysis.constrain;
 
+import java.math.BigDecimal;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Representation of a soft constraint.
+ * 
+ * @param <E>
+ */
 public class SoftConstraint<E> extends Constraint<E>
 {
 	private static final Logger LOGGER = LogManager.getLogger("SoftConstraint.class");
@@ -28,16 +35,29 @@ public class SoftConstraint<E> extends Constraint<E>
 			throw new IllegalArgumentException("satisfactionLevel must not be null");
 		}
 
-		LOGGER.info(String.format("constrainedElement = %s\tsatisfactionLevel = %s", constrainedElement,
-				satisfactionLevel.getLevel()));
 		this.satisfactionLevel = satisfactionLevel;
+		LOGGER.info(toString());
+	}
+
+	/**
+	 * @return the weighted satisfaction level
+	 */
+	@Override
+	public BigDecimal getSatisfactionLevelAsValue()
+	{
+		return this.satisfactionLevel.getWeightedLevel();
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s, satisfactionLevel = %s", super.toString(), this.satisfactionLevel);
 	}
 
 	/**
 	 * @return the satisfactionLevel
 	 */
-	@Override
-	public SatisfactionLevel getSatisfactionLevel()
+	protected SatisfactionLevel getSatisfactionLevel()
 	{
 		return this.satisfactionLevel;
 	}

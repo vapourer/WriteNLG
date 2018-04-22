@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Container for a hard constraint.
+ * Representation of a hard constraint.
  * 
  * @param <E>
  */
@@ -36,17 +36,22 @@ public class HardConstraint<E> extends Constraint<E>
 			throw new IllegalArgumentException("Weighted satisfaction level must be 0 or 1");
 		}
 
-		LOGGER.info(String.format("constrainedElement = %s, satisfactionLevel = %s", constrainedElement,
-				satisfactionLevel));
 		this.satisfactionLevel = satisfactionLevel;
+		LOGGER.info(toString());
 	}
 
 	/**
-	 * @return the satisfactionLevel
+	 * @return the weighted satisfaction level
 	 */
 	@Override
-	public SatisfactionLevel getSatisfactionLevel()
+	public BigDecimal getSatisfactionLevelAsValue()
 	{
-		return this.satisfactionLevel;
+		return this.satisfactionLevel.getWeightedLevel();
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s, satisfactionLevel = %s", super.toString(), this.satisfactionLevel);
 	}
 }

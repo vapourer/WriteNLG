@@ -13,7 +13,7 @@ public class CostComparator implements Comparator<SegmentPair>
 {
 	/**
 	 * Returns -1, 0, or 1 as the cost of segmentPair1 is numerically less than, equal
-	 * to, or greater than segmentPair2.
+	 * to, or greater than that of segmentPair2.
 	 */
 	@Override
 	public int compare(SegmentPair segmentPair1, SegmentPair segmentPair2)

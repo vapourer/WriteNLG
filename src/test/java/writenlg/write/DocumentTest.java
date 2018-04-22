@@ -5,9 +5,13 @@ package writenlg.write;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CodePointCharStream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import analysis.TestConstants;
 import writenlg.expertinput.LexerParser;
 import writenlg.expertinput.WriterLexerParser;
 import writenlg.expertinput.listener.WriterListener;
@@ -15,9 +19,20 @@ import writenlg.simplenlg.DocumentGenerator;
 
 public class DocumentTest
 {
+	private static Logger LOGGER;
+
+	@BeforeClass
+	public static void setupClass()
+	{
+		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("DocumentTest.class");
+	}
+
 	@Test
 	public void testDocumentOneSectionTwoParagraphs()
 	{
+		LOGGER.info("Test: testDocumentOneSectionTwoParagraphs");
+
 		// Arrange
 		final String outputExpected = "Document\nDrinks\nI drink coffee. You drink tea.\n\nHe boils the red kettle. She warms the tea pot.\n\n";
 

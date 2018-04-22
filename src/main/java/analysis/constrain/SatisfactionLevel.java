@@ -42,6 +42,7 @@ public class SatisfactionLevel
 		this.level = level;
 		this.weighting = weighting;
 		this.weightedLevel = this.level.multiply(this.weighting);
+
 		LOGGER.info("New satisfaction level (" + toString() + ")");
 	}
 

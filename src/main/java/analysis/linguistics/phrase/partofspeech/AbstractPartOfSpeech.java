@@ -56,7 +56,7 @@ public abstract class AbstractPartOfSpeech<E>
 	 */
 	public BigDecimal calculateSatisfactionLevel()
 	{
-		return this.constraintGroup.getValue();
+		return this.constraintGroup.evaluate();
 	}
 
 	/**

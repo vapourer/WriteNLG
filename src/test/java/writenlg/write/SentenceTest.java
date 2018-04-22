@@ -5,9 +5,13 @@ package writenlg.write;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CodePointCharStream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import analysis.TestConstants;
 import writenlg.expertinput.LexerParser;
 import writenlg.expertinput.WriterLexerParser;
 import writenlg.expertinput.listener.WriterListener;
@@ -15,9 +19,20 @@ import writenlg.simplenlg.DocumentGenerator;
 
 public class SentenceTest
 {
+	private static Logger LOGGER;
+
+	@BeforeClass
+	public static void setupClass()
+	{
+		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("SentenceTest.class");
+	}
+
 	@Test
 	public void testSentenceTwoClauses()
 	{
+		LOGGER.info("Test: testSentenceTwoClauses");
+
 		// Arrange
 		final String outputExpected = "I drink coffee and you drink tea.";
 
@@ -39,6 +54,8 @@ public class SentenceTest
 	@Test
 	public void testSentenceThreeClauses()
 	{
+		LOGGER.info("Test: testSentenceThreeClauses");
+
 		// Arrange
 		final String outputExpected = "I drink coffee, you drink tea and she drinks orange juice.";
 
@@ -60,6 +77,8 @@ public class SentenceTest
 	@Test
 	public void testSentenceThreeClausesSetConjunction()
 	{
+		LOGGER.info("Test: testSentenceThreeClausesSetConjunction");
+
 		// Arrange
 		final String outputExpected = "I drink coffee, you drink tea but she drinks orange juice.";
 
@@ -82,6 +101,8 @@ public class SentenceTest
 	@Test
 	public void testSentenceMainAndSubordinateClauses()
 	{
+		LOGGER.info("Test: testSentenceMainAndSubordinateClauses");
+
 		// Arrange
 		final String outputExpected = "I drink coffee because I like it.";
 

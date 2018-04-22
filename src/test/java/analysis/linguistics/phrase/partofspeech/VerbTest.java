@@ -5,9 +5,13 @@ package analysis.linguistics.phrase.partofspeech;
 
 import java.math.BigDecimal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import analysis.TestConstants;
 import analysis.constrain.BoundedSoftConstraint;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SatisfactionLevel;
@@ -16,9 +20,20 @@ import analysis.constrain.SoftConstraintProcessor;
 
 public class VerbTest
 {
+	private static Logger LOGGER;
+
+	@BeforeClass
+	public static void setupClass()
+	{
+		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("VerbTest.class");
+	}
+
 	@Test
 	public void testCalculateSatisfactionLevel()
 	{
+		LOGGER.info("Test: testCalculateSatisfactionLevel");
+
 		// Arrange
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("1.4");
 

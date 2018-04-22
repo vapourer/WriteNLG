@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,15 +17,20 @@ import analysis.TestConstants;
 
 public class HardConstraintProcessorTest
 {
+	private static Logger LOGGER;
+
 	@BeforeClass
 	public static void setupClass()
 	{
 		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("HardConstraintProcessorTest.class");
 	}
 
 	@Test
 	public void testEvaluate_AllConstraintsPositive()
 	{
+		LOGGER.info("Test: testEvaluate_AllConstraintsPositive");
+
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("4");
 
@@ -45,6 +52,8 @@ public class HardConstraintProcessorTest
 	@Test
 	public void testEvaluate_OneNegativeConstraint()
 	{
+		LOGGER.info("Test: testEvaluate_OneNegativeConstraint");
+
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("0");
 
@@ -66,6 +75,8 @@ public class HardConstraintProcessorTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testEvaluate_IncludesSoftConstraint()
 	{
+		LOGGER.info("Test: testEvaluate_IncludesSoftConstraint");
+
 		// Arrange
 		final Set<Constraint<String>> constraints = new HashSet<>();
 		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));

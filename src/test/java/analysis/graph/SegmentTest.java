@@ -7,14 +7,30 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Calendar;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import analysis.TestConstants;
 
 public class SegmentTest
 {
+	private static Logger LOGGER;
+
+	@BeforeClass
+	public static void setupClass()
+	{
+		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("SegmentTest.class");
+	}
+
 	@Test
 	public void testGetEuclideanDistance_IntegerResult()
 	{
+		LOGGER.info("Test: testGetEuclideanDistance_IntegerResult");
+
 		// Arrange
 		final BigDecimal euclideanDistanceExpected = new BigDecimal("5");
 		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"));
@@ -38,6 +54,8 @@ public class SegmentTest
 	@Test
 	public void testGetEuclideanDistance_FloatingPointResult()
 	{
+		LOGGER.info("Test: testGetEuclideanDistance_FloatingPointResult");
+
 		// Arrange
 		final BigDecimal euclideanDistanceExpected = new BigDecimal("7.2111");
 		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"));

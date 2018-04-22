@@ -5,6 +5,8 @@ package analysis.constrain;
 
 import java.math.BigDecimal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,15 +15,20 @@ import analysis.TestConstants;
 
 public class SoftConstraintGroupTest
 {
+	private static Logger LOGGER;
+
 	@BeforeClass
 	public static void setupClass()
 	{
 		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("SoftConstraintGroupTest.class");
 	}
 
 	@Test
 	public void testGetValue()
 	{
+		LOGGER.info("Test: testGetValue");
+
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("2.2");
 
@@ -33,7 +40,7 @@ public class SoftConstraintGroupTest
 		constraints.addConstraint(new SoftConstraint<>("Daisy", new SatisfactionLevel(new BigDecimal("0.6"))));
 
 		// Act
-		final BigDecimal valueActual = constraints.getValue();
+		final BigDecimal valueActual = constraints.evaluate();
 
 		// Assert
 		Assert.assertTrue(valueExpected.compareTo(valueActual) == 0);
@@ -42,6 +49,8 @@ public class SoftConstraintGroupTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddConstraint_HardConstraint()
 	{
+		LOGGER.info("Test: testAddConstraint_HardConstraint");
+
 		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(new SoftConstraintProcessor());
 		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
 	}

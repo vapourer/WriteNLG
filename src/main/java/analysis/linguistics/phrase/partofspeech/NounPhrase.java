@@ -37,7 +37,7 @@ public class NounPhrase<E> extends AbstractPartOfSpeech<E>
 		for (final Constraint<E> constraint : constraints)
 		{
 			LOGGER.info(String.format("Constraint for %s: %s, with satisfaction level: %s", getText(),
-					constraint.getConstrainedElement(), constraint.getSatisfactionLevel()));
+					constraint.getConstrainedElement(), constraint.getSatisfactionLevelAsValue()));
 		}
 	}
 }

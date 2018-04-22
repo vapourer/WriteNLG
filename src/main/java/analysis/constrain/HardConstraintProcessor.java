@@ -9,10 +9,18 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Returns the count of the included constraints, if all have satisfactionLevel = 1; otherwise returns 0.
+ */
 public class HardConstraintProcessor extends ConstraintProcessor
 {
 	private static final Logger LOGGER = LogManager.getLogger("HardConstraintProcessor.class");
 
+	/**
+	 * Evaluates submitted hard constraints.
+	 * 
+	 * @return BigDecimal 0 if any have satisfactionLevel = 0, otherwise the count of the included constraints
+	 */
 	@Override
 	public <E> BigDecimal evaluate(final Set<? extends Constraint<E>> constraints)
 	{
@@ -26,7 +34,7 @@ public class HardConstraintProcessor extends ConstraintProcessor
 			if (constraint instanceof HardConstraint)
 			{
 				final HardConstraint<E> hardConstraint = (HardConstraint<E>) constraint;
-				final BigDecimal newValue = hardConstraint.getSatisfactionLevel().getLevel();
+				final BigDecimal newValue = hardConstraint.getSatisfactionLevelAsValue();
 
 				if (newValue.compareTo(minValue) < 0)
 				{
@@ -44,7 +52,7 @@ public class HardConstraintProcessor extends ConstraintProcessor
 
 		BigDecimal returnValue = value.multiply(minValue);
 
-		LOGGER.info(String.format("Hard constraint count: %s; total: %s; minimum value: %s; return value: %s",
+		LOGGER.info(String.format("Hard constraint count: %s; values totalled: %s; minimum value: %s; return value: %s",
 				constraints.size(), value, minValue, returnValue));
 
 		return returnValue;

@@ -6,14 +6,30 @@ package analysis.graph;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import analysis.TestConstants;
 
 public class GraphUtilitiesTest
 {
+	private static Logger LOGGER;
+
+	@BeforeClass
+	public static void setupClass()
+	{
+		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("GraphUtilitiesTest.class");
+	}
+
 	@Test
 	public void testCalculateEuclideanDistance_IntegerResult()
 	{
+		LOGGER.info("Test: testCalculateEuclideanDistance_IntegerResult");
+
 		// Arrange
 		BigDecimal resultExpected = new BigDecimal("5");
 
@@ -30,6 +46,8 @@ public class GraphUtilitiesTest
 	@Test
 	public void testCalculateEuclideanDistance_FloatingPointResult()
 	{
+		LOGGER.info("Test: testCalculateEuclideanDistance_FloatingPointResult");
+
 		// Arrange
 		BigDecimal resultExpected = new BigDecimal("6.40312");
 

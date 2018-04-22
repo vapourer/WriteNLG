@@ -3,29 +3,38 @@
 
 package analysis.constrain;
 
+import java.math.BigDecimal;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * A WeightedConstraint for use with applicable constraint processors.
  * 
  * @param <E>
  */
-public class WeightedConstraint<E> extends Constraint<E>
+public class WeightedConstraint<E> extends SoftConstraint<E>
 {
+	private static final Logger LOGGER = LogManager.getLogger("WeightedConstraint.class");
+
 	/**
 	 * Creates a WeightedConstraint instance.
 	 * 
 	 * @param constrainedElement
+	 * @param satisfactionLevel
 	 */
-	public WeightedConstraint(E constrainedElement)
+	public WeightedConstraint(final E constrainedElement, final SatisfactionLevel satisfactionLevel)
 	{
-		super(constrainedElement);
-		// TODO Auto-generated constructor stub
+		super(constrainedElement, satisfactionLevel);
+
+		LOGGER.info(String.format("WeightedConstraint created (%s)", toString()));
 	}
 
-	@Override
-	public SatisfactionLevel getSatisfactionLevel()
+	/**
+	 * @return the weighting for this constraint.
+	 */
+	public BigDecimal getWeighting()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return super.getSatisfactionLevel().getWeighting();
 	}
-
 }

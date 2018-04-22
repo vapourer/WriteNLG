@@ -21,7 +21,6 @@ public class HardConstraintGroup<E> implements ConstraintGroup<E>
 
 	private final Set<HardConstraint<E>> constraints;
 	private final ConstraintProcessor processor;
-	private BigDecimal value;
 
 	/**
 	 * Creates a HardConstraintGroup instance.
@@ -32,13 +31,12 @@ public class HardConstraintGroup<E> implements ConstraintGroup<E>
 	{
 		this.constraints = new HashSet<>();
 		this.processor = processor;
-		this.value = new BigDecimal("0");
 
 		LOGGER.info("HardConstraintGroup created, using " + processor.getClass());
 	}
 
 	/**
-	 * @return a copy of the Set of HardConstraint instances.
+	 * @return a copy of this Set of HardConstraint instances.
 	 */
 	@Override
 	public Set<? extends Constraint<E>> getConstraints()
@@ -47,7 +45,7 @@ public class HardConstraintGroup<E> implements ConstraintGroup<E>
 	}
 
 	/**
-	 * Adds a constraint to the set of hard constraints.
+	 * Adds a constraint to this set of hard constraints.
 	 *
 	 * @param constraint
 	 */
@@ -57,10 +55,8 @@ public class HardConstraintGroup<E> implements ConstraintGroup<E>
 		if (constraint instanceof HardConstraint)
 		{
 			this.constraints.add((HardConstraint<E>) constraint);
-			this.value = this.processor.evaluate(this.constraints);
 
-			LOGGER.info(String.format("Constraint added: constrainedElement = %s, satisfactionLevel = %s.",
-					constraint.getConstrainedElement().toString(), constraint.getSatisfactionLevel().toString()));
+			LOGGER.info(String.format("Hard constraint added (%s).", constraint));
 		}
 		else
 		{
@@ -72,11 +68,11 @@ public class HardConstraintGroup<E> implements ConstraintGroup<E>
 	}
 
 	/**
-	 * @return the value
+	 * @return the value of this HardConstraintGroup.
 	 */
 	@Override
-	public BigDecimal getValue()
+	public BigDecimal evaluate()
 	{
-		return this.value;
+		return this.processor.evaluate(this.constraints);
 	}
 }

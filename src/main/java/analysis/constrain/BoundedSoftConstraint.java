@@ -17,6 +17,9 @@ public class BoundedSoftConstraint<E> extends SoftConstraint<E>
 {
 	private static final Logger LOGGER = LogManager.getLogger("BoundedSoftConstraint.class");
 
+	private final BigDecimal lowerBound;
+	private final BigDecimal upperBound;
+
 	/**
 	 * Creates a BoundedSoftConstraint instance.
 	 *
@@ -28,12 +31,25 @@ public class BoundedSoftConstraint<E> extends SoftConstraint<E>
 	{
 		super(constrainedElement, satisfactionLevel);
 
-		if (satisfactionLevel.getLevel().compareTo(lowerBound) < 0
-				|| satisfactionLevel.getLevel().compareTo(upperBound) > 0)
+		this.lowerBound = lowerBound;
+		this.upperBound = upperBound;
+
+		if (satisfactionLevel.getWeightedLevel().compareTo(this.lowerBound) < 0
+				|| satisfactionLevel.getWeightedLevel().compareTo(this.upperBound) > 0)
 		{
-			LOGGER.error(String.format("Satisfaction level outside zero to one bounds"));
-			throw new IllegalArgumentException("Satisfaction level must be a value between " + lowerBound.toString()
-					+ " and " + upperBound + " inclusive");
+			LOGGER.error(String.format("Satisfaction weighted level not within bounds"));
+
+			throw new IllegalArgumentException(
+					String.format("Satisfaction weighted level must be a value between %s and %s inclusive",
+							this.lowerBound, this.upperBound));
 		}
+
+		LOGGER.info(toString());
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s, lower bound: %s, upper bound %s", super.toString(), this.lowerBound, this.upperBound);
 	}
 }

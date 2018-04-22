@@ -13,9 +13,20 @@ import java.util.Set;
  */
 public interface ConstraintGroup<E>
 {
+	/**
+	 * @return this set of constraints.
+	 */
 	Set<? extends Constraint<E>> getConstraints();
 
+	/**
+	 * Add constraint to this ConstraintGroup.
+	 * 
+	 * @param constraint
+	 */
 	void addConstraint(Constraint<E> constraint);
 
-	BigDecimal getValue();
+	/**
+	 * @return the value of this ConstraintGroup.
+	 */
+	BigDecimal evaluate();
 }

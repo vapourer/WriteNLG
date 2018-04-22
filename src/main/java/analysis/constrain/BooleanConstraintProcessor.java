@@ -18,6 +18,8 @@ public class BooleanConstraintProcessor extends ConstraintProcessor
 
 	/**
 	 * Evaluates submitted hard constraints as booleans.
+	 * 
+	 * @return BigDecimal 0 for false, 1 for true
 	 */
 	@Override
 	public <E> BigDecimal evaluate(Set<? extends Constraint<E>> constraints)
@@ -30,7 +32,7 @@ public class BooleanConstraintProcessor extends ConstraintProcessor
 		{
 			if (constraint instanceof HardConstraint)
 			{
-				value = value.multiply(constraint.getSatisfactionLevel().getLevel());
+				value = value.multiply(constraint.getSatisfactionLevelAsValue());
 			}
 			else
 			{

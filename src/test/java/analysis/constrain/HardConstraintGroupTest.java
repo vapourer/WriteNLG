@@ -5,6 +5,8 @@ package analysis.constrain;
 
 import java.math.BigDecimal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,15 +15,20 @@ import analysis.TestConstants;
 
 public class HardConstraintGroupTest
 {
+	private static Logger LOGGER;
+
 	@BeforeClass
 	public static void setupClass()
 	{
 		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("HardConstraintGroupTest.class");
 	}
 
 	@Test
 	public void testGetValue_Positive()
 	{
+		LOGGER.info("Test: testGetValue_Positive");
+
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("6");
 
@@ -34,7 +41,7 @@ public class HardConstraintGroupTest
 		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(new BigDecimal("1"))));
 
 		// Act
-		final BigDecimal valueActual = constraints.getValue();
+		final BigDecimal valueActual = constraints.evaluate();
 
 		// Assert
 		Assert.assertEquals(valueExpected, valueActual);
@@ -43,6 +50,8 @@ public class HardConstraintGroupTest
 	@Test
 	public void testGetValue_Zero()
 	{
+		LOGGER.info("Test: testGetValue_Zero");
+
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("0");
 
@@ -55,7 +64,7 @@ public class HardConstraintGroupTest
 		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(new BigDecimal("1"))));
 
 		// Act
-		final BigDecimal valueActual = constraints.getValue();
+		final BigDecimal valueActual = constraints.evaluate();
 
 		// Assert
 		Assert.assertEquals(valueExpected, valueActual);
@@ -64,6 +73,8 @@ public class HardConstraintGroupTest
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddConstraint_SoftConstraint()
 	{
+		LOGGER.info("Test: testAddConstraint_SoftConstraint");
+
 		final ConstraintGroup<String> constraints = new HardConstraintGroup<>(new HardConstraintProcessor());
 		constraints.addConstraint(new SoftConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1.2"))));
 	}

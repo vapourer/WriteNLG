@@ -6,10 +6,14 @@ package analysis.statistics.pedergnanafurlani;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import analysis.TestConstants;
 import analysis.graph.Point;
 import analysis.graph.Segment;
 
@@ -20,8 +24,17 @@ public class CostComparatorTest
 	private final static Point POINT_3 = new Point(new BigDecimal("2"), new BigDecimal("2"));
 	private final static Point POINT_4 = new Point(new BigDecimal("5"), new BigDecimal("6"));
 
+	private static Logger LOGGER;
+
 	private Calendar calendar;
 	private SegmentPair pair1;
+
+	@BeforeClass
+	public static void setupClass()
+	{
+		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("TimeSeriesTest.class");
+	}
 
 	@Before
 	public void setupTest()
@@ -48,6 +61,8 @@ public class CostComparatorTest
 	@Test
 	public void testCompare_Equals()
 	{
+		LOGGER.info("Test: testCompare_Equals");
+
 		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
 		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
 		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
@@ -77,6 +92,8 @@ public class CostComparatorTest
 	@Test
 	public void testCompare_DoesNotEqual_Segment1Point1()
 	{
+		LOGGER.info("Test: testCompare_DoesNotEqual_Segment1Point1");
+
 		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("3"));
 		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
 		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
@@ -106,6 +123,8 @@ public class CostComparatorTest
 	@Test
 	public void testCompare_DoesNotEqual_Segment2Point2()
 	{
+		LOGGER.info("Test: testCompare_DoesNotEqual_Segment2Point2");
+
 		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
 		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
 		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
@@ -135,6 +154,8 @@ public class CostComparatorTest
 	@Test
 	public void testCompare_LessThan()
 	{
+		LOGGER.info("Test: testCompare_LessThan");
+
 		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
 		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
 		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
@@ -164,6 +185,8 @@ public class CostComparatorTest
 	@Test
 	public void testCompare_GreaterThan()
 	{
+		LOGGER.info("Test: testCompare_GreaterThan");
+
 		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
 		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
 		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));

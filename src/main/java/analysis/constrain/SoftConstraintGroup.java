@@ -10,23 +10,34 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Container for a group of related soft constraints.
+ * 
+ * @param <E>
+ */
 public class SoftConstraintGroup<E> implements ConstraintGroup<E>
 {
 	private static final Logger LOGGER = LogManager.getLogger("SoftConstraintGroup.class");
 
 	private final Set<SoftConstraint<E>> constraints;
 	private final ConstraintProcessor processor;
-	private BigDecimal value;
 
+	/**
+	 * Creates a SoftConstraintGroup instance.
+	 * 
+	 * @param processor
+	 */
 	public SoftConstraintGroup(final ConstraintProcessor processor)
 	{
 		this.constraints = new HashSet<>();
 		this.processor = processor;
-		this.value = new BigDecimal("0");
 
 		LOGGER.info("SoftConstraintGroup created, using " + processor.getClass());
 	}
 
+	/**
+	 * @return a copy of this Set of SoftConstraint instances.
+	 */
 	@Override
 	public Set<? extends Constraint<E>> getConstraints()
 	{
@@ -34,7 +45,7 @@ public class SoftConstraintGroup<E> implements ConstraintGroup<E>
 	}
 
 	/**
-	 * Adds a constraint to the set of soft constraints.
+	 * Adds a constraint to this set of soft constraints.
 	 *
 	 * @param constraint
 	 */
@@ -44,10 +55,8 @@ public class SoftConstraintGroup<E> implements ConstraintGroup<E>
 		if (constraint instanceof SoftConstraint)
 		{
 			this.constraints.add((SoftConstraint<E>) constraint);
-			this.value = this.processor.evaluate(this.constraints);
 
-			LOGGER.info(String.format("Constraint added: constrainedElement = %s, satisfactionLevel = %s.",
-					constraint.getConstrainedElement().toString(), constraint.getSatisfactionLevel().toString()));
+			LOGGER.info(String.format("Soft constraint added (%s).", constraint));
 		}
 		else
 		{
@@ -59,11 +68,11 @@ public class SoftConstraintGroup<E> implements ConstraintGroup<E>
 	}
 
 	/**
-	 * @return the value
+	 * @return the value of this SoftConstraintGroup.
 	 */
 	@Override
-	public BigDecimal getValue()
+	public BigDecimal evaluate()
 	{
-		return this.value;
+		return this.processor.evaluate(this.constraints);
 	}
 }

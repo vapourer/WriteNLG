@@ -8,7 +8,10 @@ import java.util.Calendar;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
@@ -16,9 +19,20 @@ import analysis.graph.TimeSeries;
 
 public class CentredMovingAverageTest
 {
+	private static Logger LOGGER;
+
+	@BeforeClass
+	public static void setupClass()
+	{
+		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("CentredMovingAverageTest.class");
+	}
+
 	@Test
 	public void testSmoothGraph()
 	{
+		LOGGER.info("Test: testSmoothGraph");
+
 		// Arrange
 		SortedMap<Long, BigDecimal> smoothedGraphExpected = createSmoothedGraphExpected();
 		Long[] timesExpected = smoothedGraphExpected.keySet().toArray(new Long[0]);

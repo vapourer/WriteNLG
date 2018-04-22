@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,15 +17,20 @@ import analysis.TestConstants;
 
 public class SoftConstraintProcessorTest
 {
+	private static Logger LOGGER;
+
 	@BeforeClass
 	public static void setupClass()
 	{
 		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
+		LOGGER = LogManager.getLogger("SoftConstraintProcessorTest.class");
 	}
 
 	@Test
 	public void testEvaluate()
 	{
+		LOGGER.info("Test: testEvaluate");
+
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("2.0");
 

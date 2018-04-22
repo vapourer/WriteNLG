@@ -3,6 +3,8 @@
 
 package analysis.constrain;
 
+import java.math.BigDecimal;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +17,12 @@ public abstract class Constraint<E>
 
 	private final E constrainedElement;
 
-	public abstract SatisfactionLevel getSatisfactionLevel();
+	/**
+	 * Returns the level * weighting of the SatisfactionLevel.
+	 * 
+	 * @return the weighted satisfaction level
+	 */
+	public abstract BigDecimal getSatisfactionLevelAsValue();
 
 	public Constraint(final E constrainedElement)
 	{
@@ -36,5 +43,11 @@ public abstract class Constraint<E>
 	public E getConstrainedElement()
 	{
 		return this.constrainedElement;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Constrained element = " + this.constrainedElement.toString();
 	}
 }
