@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.Concept;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SoftConstraintGroup;
-import analysis.constrain.SoftConstraintProcessor;
+import analysis.constrain.WeightedAdditionConstraintProcessor;
 import analysis.linguistics.phrase.PhraseSpecification;
 import analysis.linguistics.phrase.Predicate;
 import analysis.linguistics.phrase.SentencePart;
@@ -117,7 +117,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void exitAssignment(final PhraseCreatorParser.AssignmentContext context)
 	{
-		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(new SoftConstraintProcessor());
+		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(new WeightedAdditionConstraintProcessor());
 
 		final String expression = context.expression().getText();
 		final PartOfSpeech partOfSpeech = Enum.valueOf(PartOfSpeech.class, context.identifier().getText());

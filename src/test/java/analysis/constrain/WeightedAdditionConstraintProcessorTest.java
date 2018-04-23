@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import analysis.TestConstants;
 
-public class SoftConstraintProcessorTest
+public class WeightedAdditionConstraintProcessorTest
 {
 	private static Logger LOGGER;
 
@@ -23,13 +23,13 @@ public class SoftConstraintProcessorTest
 	public static void setupClass()
 	{
 		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
-		LOGGER = LogManager.getLogger("SoftConstraintProcessorTest.class");
+		LOGGER = LogManager.getLogger("WeightedAdditionConstraintProcessorTest.class");
 	}
 
 	@Test
-	public void testEvaluate()
+	public void testEvaluate_DefaultWeightings()
 	{
-		LOGGER.info("Test: testEvaluate");
+		LOGGER.info("Test: testEvaluate_DefaultWeightings");
 
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("2.0");
@@ -39,7 +39,32 @@ public class SoftConstraintProcessorTest
 		constraints.add(new SoftConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"))));
 		constraints.add(new SoftConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"))));
 
-		final ConstraintProcessor processor = new SoftConstraintProcessor();
+		final ConstraintProcessor processor = new WeightedAdditionConstraintProcessor();
+
+		// Act
+		final BigDecimal valueActual = processor.evaluate(constraints);
+
+		// Assert
+		Assert.assertEquals(valueExpected, valueActual);
+	}
+
+	@Test
+	public void testEvaluate_VariedWeightings()
+	{
+		LOGGER.info("Test: testEvaluate_VariedWeightings");
+
+		// Arrange
+		final BigDecimal valueExpected = new BigDecimal("6.1");
+
+		final Set<SoftConstraint<String>> constraints = new HashSet<>();
+		constraints.add(
+				new SoftConstraint<>("Buttercup", new SatisfactionLevel(new BigDecimal("0.5"), new BigDecimal("3"))));
+		constraints
+				.add(new SoftConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("2"))));
+		constraints
+				.add(new SoftConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("4"))));
+
+		final ConstraintProcessor processor = new WeightedAdditionConstraintProcessor();
 
 		// Act
 		final BigDecimal valueActual = processor.evaluate(constraints);

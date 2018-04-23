@@ -16,7 +16,7 @@ import analysis.constrain.BoundedSoftConstraint;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SatisfactionLevel;
 import analysis.constrain.SoftConstraintGroup;
-import analysis.constrain.SoftConstraintProcessor;
+import analysis.constrain.WeightedAdditionConstraintProcessor;
 
 public class VerbTest
 {
@@ -37,7 +37,7 @@ public class VerbTest
 		// Arrange
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("1.4");
 
-		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(new SoftConstraintProcessor());
+		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(new WeightedAdditionConstraintProcessor());
 
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Too slow",
 				new SatisfactionLevel(new BigDecimal("0.6")), new BigDecimal("0"), new BigDecimal("1")));

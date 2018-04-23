@@ -9,9 +9,9 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SoftConstraintProcessor extends ConstraintProcessor
+public class WeightedAdditionConstraintProcessor extends ConstraintProcessor
 {
-	private static final Logger LOGGER = LogManager.getLogger("SoftConstraintProcessor.class");
+	private static final Logger LOGGER = LogManager.getLogger("WeightedAdditionConstraintProcessor.class");
 
 	@Override
 	public <E> BigDecimal evaluate(final Set<? extends Constraint<E>> constraints)
