@@ -72,4 +72,25 @@ public class WeightedAdditionConstraintProcessorTest
 		// Assert
 		Assert.assertEquals(valueExpected, valueActual);
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testEvaluate_IncludesHardConstraint()
+	{
+		LOGGER.info("Test: testEvaluate_IncludesHardConstraint");
+
+		// Arrange
+		final Set<Constraint<String>> constraints = new HashSet<>();
+		constraints.add(
+				new SoftConstraint<>("Buttercup", new SatisfactionLevel(new BigDecimal("0.5"), new BigDecimal("3"))));
+		constraints
+				.add(new SoftConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("2"))));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints
+				.add(new SoftConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("4"))));
+
+		final ConstraintProcessor processor = new WeightedAdditionConstraintProcessor();
+
+		// Act
+		processor.evaluate(constraints);
+	}
 }

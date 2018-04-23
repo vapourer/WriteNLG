@@ -46,7 +46,7 @@ public class HardConstraintProcessor extends ConstraintProcessor
 			else
 			{
 				LOGGER.error(String.format("Not a hard constraint: %s", constraint.getConstrainedElement()));
-				throw new IllegalArgumentException("This processor is for  hard constraints only");
+				throw new IllegalArgumentException("This processor is for hard constraints only");
 			}
 		}
 

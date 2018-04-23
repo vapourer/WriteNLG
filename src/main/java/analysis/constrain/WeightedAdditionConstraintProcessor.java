@@ -16,7 +16,7 @@ public class WeightedAdditionConstraintProcessor extends ConstraintProcessor
 	@Override
 	public <E> BigDecimal evaluate(final Set<? extends Constraint<E>> constraints)
 	{
-		LOGGER.info("Evaluating soft constraints");
+		LOGGER.info("Evaluating soft constraints using weighted addition");
 
 		BigDecimal value = new BigDecimal("0");
 
@@ -26,7 +26,15 @@ public class WeightedAdditionConstraintProcessor extends ConstraintProcessor
 			{
 				value = value.add(constraint.getSatisfactionLevelAsValue());
 			}
+			else
+			{
+				LOGGER.error(String.format("Not a soft constraint: %s", constraint.getConstrainedElement()));
+				throw new IllegalArgumentException("This processor is for soft constraints only");
+			}
 		}
+
+		LOGGER.info(
+				String.format("Soft constraint count: %s; weighted values totalled: %s", constraints.size(), value));
 
 		return value;
 	}
