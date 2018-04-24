@@ -18,6 +18,11 @@ public class Segmenter implements Segmentation
 {
 	private final SortedMap<Long, BigDecimal> timeSeries;
 
+	/**
+	 * Creates a Segmenter instance.
+	 * 
+	 * @param timeSeries
+	 */
 	public Segmenter(final SortedMap<Long, BigDecimal> timeSeries)
 	{
 		this.timeSeries = timeSeries;

@@ -4,6 +4,9 @@
 package analysis.graph;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+
+import writenlg.control.WriteNlgProperties;
 
 /**
  * A line connecting two points on a two-dimensional line-graph.
@@ -15,8 +18,8 @@ public class Segment
 	private BigDecimal euclideanDistance;
 	private BigDecimal xDistance;
 	private BigDecimal yDistance;
-	private Long period;
-	private int timeSlices;
+	private BigDecimal gradient;
+	private Slope slope;
 
 	/**
 	 * Creates a Segment instance.
@@ -78,7 +81,7 @@ public class Segment
 	/**
 	 * @return the xDistance
 	 */
-	public BigDecimal getxDistance()
+	public BigDecimal getXDistance()
 	{
 		if (this.xDistance == null)
 		{
@@ -91,7 +94,7 @@ public class Segment
 	/**
 	 * @return the yDistance
 	 */
-	public BigDecimal getyDistance()
+	public BigDecimal getYDistance()
 	{
 		if (this.yDistance == null)
 		{
@@ -102,32 +105,48 @@ public class Segment
 	}
 
 	/**
-	 * @return the period
+	 * @return the gradient
 	 */
-	public Long getPeriod()
+	public BigDecimal getGradient()
 	{
-		if (this.yDistance == null)
+		if (this.gradient == null)
 		{
-			this.yDistance = this.point2.getY().subtract(this.point1.getY());
+			String mathContextConfiguration = WriteNlgProperties.getInstance().getProperty("MathContext");
+			MathContext context = new MathContext(mathContextConfiguration);
+			this.gradient = getYDistance().divide(getXDistance(), context);
 		}
 
-		return this.period;
+		return gradient;
 	}
 
 	/**
-	 * @return the timeSlices
+	 * @return the slope
 	 */
-	public int getTimeSlices()
+	public Slope getSlope()
 	{
-		return this.timeSlices;
+		if (this.slope == null)
+		{
+			setSlopeFromGradient();
+		}
+
+		return this.slope;
 	}
 
-	/**
-	 * @param timeSlices
-	 *            the timeSlices to set
-	 */
-	public void setTimeSlices(final int timeSlices)
+	private void setSlopeFromGradient()
 	{
-		this.timeSlices = timeSlices;
+		BigDecimal zero = new BigDecimal("0");
+
+		if (getGradient().compareTo(zero) > 0)
+		{
+			this.slope = Slope.ASCENDING;
+		}
+		else if (getGradient().compareTo(zero) < 0)
+		{
+			this.slope = Slope.DESCENDING;
+		}
+		else
+		{
+			this.slope = Slope.FLAT;
+		}
 	}
 }

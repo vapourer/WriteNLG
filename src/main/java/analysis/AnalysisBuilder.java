@@ -5,6 +5,7 @@ package analysis;
 
 import java.util.List;
 
+import analysis.graph.Point;
 import analysis.graph.Segment;
 
 /**
@@ -12,9 +13,8 @@ import analysis.graph.Segment;
  */
 public class AnalysisBuilder
 {
-	private double maximum;
-	private double minimum;
-	private double mean;
+	private Point pointWithMaximumValue;
+	private Point pointWithMinimumValue;
 	private List<Segment> segments;
 
 	/**
@@ -24,58 +24,41 @@ public class AnalysisBuilder
 	 */
 	public Analysis createAnalysis()
 	{
-		return new Analysis(this.maximum, this.minimum, this.mean, this.segments);
+		return new Analysis(this.pointWithMaximumValue, this.pointWithMinimumValue, this.segments);
 	}
 
 	/**
-	 * @return the maximum
+	 * @return the pointWithMaximumValue
 	 */
-	public double getMaximum()
+	public Point getPointWithMaximumValue()
 	{
-		return this.maximum;
+		return pointWithMaximumValue;
 	}
 
 	/**
-	 * @param maximum
-	 *            the maximum to set
+	 * @param pointWithMaximumValue
+	 *            the pointWithMaximumValue to set
 	 */
-	public void setMaximum(final double maximum)
+	public void setPointWithMaximumValue(Point pointWithMaximumValue)
 	{
-		this.maximum = maximum;
+		this.pointWithMaximumValue = pointWithMaximumValue;
 	}
 
 	/**
-	 * @return the minimum
+	 * @return the pointWithMinimumValue
 	 */
-	public double getMinimum()
+	public Point getPointWithMinimumValue()
 	{
-		return this.minimum;
+		return pointWithMinimumValue;
 	}
 
 	/**
-	 * @param minimum
-	 *            the minimum to set
+	 * @param pointWithMinimumValue
+	 *            the pointWithMinimumValue to set
 	 */
-	public void setMinimum(final double minimum)
+	public void setPointWithMinimumValue(Point pointWithMinimumValue)
 	{
-		this.minimum = minimum;
-	}
-
-	/**
-	 * @return the mean
-	 */
-	public double getMean()
-	{
-		return this.mean;
-	}
-
-	/**
-	 * @param mean
-	 *            the mean to set
-	 */
-	public void setMean(final double mean)
-	{
-		this.mean = mean;
+		this.pointWithMinimumValue = pointWithMinimumValue;
 	}
 
 	/**

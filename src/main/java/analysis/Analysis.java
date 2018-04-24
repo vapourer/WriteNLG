@@ -3,90 +3,48 @@
 
 package analysis;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+import analysis.graph.Point;
 import analysis.graph.Segment;
 
+/**
+ * Container for analyses, based on selected statistical algorithms.
+ */
 public class Analysis
 {
-	private final double maximum;
-	private final double minimum;
-	private final double mean;
-	private BigDecimal maximumAsBigDecimal;
-	private BigDecimal minimumAsBigDecimal;
-	private BigDecimal meanAsBigDecimal;
+	private final Point pointWithMaximumValue;
+	private final Point pointWithMinimumValue;
 	private final List<Segment> segments;
 
-	public Analysis(final double maximum, final double minimum, final double mean, final List<Segment> segments)
+	/**
+	 * Creates an Analysis instance.
+	 * 
+	 * @param pointWithMaximumValue
+	 * @param pointWithMinimumValue
+	 * @param segments
+	 */
+	public Analysis(final Point pointWithMaximumValue, final Point pointWithMinimumValue, final List<Segment> segments)
 	{
-		this.maximum = maximum;
-		this.minimum = minimum;
-		this.mean = mean;
+		this.pointWithMaximumValue = pointWithMaximumValue;
+		this.pointWithMinimumValue = pointWithMinimumValue;
 		this.segments = segments;
 	}
 
 	/**
-	 * @return the maximum
+	 * @return the pointWithMaximumValue
 	 */
-	public double getMaximum()
+	public Point getPointWithMaximumValue()
 	{
-		return this.maximum;
+		return pointWithMaximumValue;
 	}
 
 	/**
-	 * @return the maximumAsBigDecimal
+	 * @return the pointWithMinimumValue
 	 */
-	public BigDecimal getMaximumAsBigDecimal()
+	public Point getPointWithMinimumValue()
 	{
-		if (this.maximumAsBigDecimal == null)
-		{
-			this.maximumAsBigDecimal = new BigDecimal(this.maximum);
-		}
-
-		return this.maximumAsBigDecimal;
-	}
-
-	/**
-	 * @return the minimum
-	 */
-	public double getMinimum()
-	{
-		return this.minimum;
-	}
-
-	/**
-	 * @return the minimumAsBigDecimal
-	 */
-	public BigDecimal getMinimumAsBigDecimal()
-	{
-		if (this.minimumAsBigDecimal == null)
-		{
-			this.minimumAsBigDecimal = new BigDecimal(this.minimum);
-		}
-
-		return this.minimumAsBigDecimal;
-	}
-
-	/**
-	 * @return the mean
-	 */
-	public double getMean()
-	{
-		return this.mean;
-	}
-
-	/**
-	 * @return the meanAsBigDecimal
-	 */
-	public BigDecimal getMeanAsBigDecimal()
-	{
-		if (this.meanAsBigDecimal == null)
-		{
-			this.meanAsBigDecimal = new BigDecimal(this.mean);
-		}
-
-		return this.meanAsBigDecimal;
+		return pointWithMinimumValue;
 	}
 
 	/**

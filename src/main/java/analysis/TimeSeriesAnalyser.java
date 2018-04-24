@@ -3,8 +3,6 @@
 
 package analysis;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 import analysis.graph.Segment;
@@ -12,7 +10,8 @@ import analysis.graph.Segmenter;
 import analysis.graph.TimeSeries;
 import analysis.interfaces.Analyser;
 import analysis.interfaces.Segmentation;
-import writenlg.regulator.Regulatory;
+import analysis.statistics.Maximum;
+import analysis.statistics.Minimum;
 
 /**
  * Analyses input data and maps processed information to placeholder tokens.
@@ -20,21 +19,19 @@ import writenlg.regulator.Regulatory;
  */
 public class TimeSeriesAnalyser implements Analyser
 {
-	Regulatory regulator;
-	private final BigDecimal[] series;
-	private final double[] rawData;
+	private final TimeSeries timeSeries;
+
+	// Regulatory regulator;
+	// private final BigDecimal[] series;
 	List<Segment> segments;
 
-	public TimeSeriesAnalyser(final Regulatory regulator, final TimeSeries timeSeries)
+	// public TimeSeriesAnalyser(final Regulatory regulator, final TimeSeries timeSeries)
+	public TimeSeriesAnalyser(final TimeSeries timeSeries)
 	{
-		this.regulator = regulator;
-		this.series = timeSeries.getSeries().values().toArray(new BigDecimal[0]);
-		this.rawData = new double[this.series.length];
+		// this.regulator = regulator;
+		// this.series = timeSeries.getSeries().values().toArray(new BigDecimal[0]);
 
-		for (int i = 0; i < this.series.length; i++)
-		{
-			this.rawData[i] = this.series[i].doubleValue();
-		}
+		this.timeSeries = timeSeries;
 
 		final Segmentation segmenter = new Segmenter(timeSeries.getSeries());
 		this.segments = segmenter.createSegments();
@@ -53,9 +50,9 @@ public class TimeSeriesAnalyser implements Analyser
 		// Double.toString(Arrays.stream(this.rawData).average().getAsDouble()));
 
 		final AnalysisBuilder builder = new AnalysisBuilder();
-		builder.setMaximum(Arrays.stream(this.rawData).max().getAsDouble());
-		builder.setMinimum(Arrays.stream(this.rawData).min().getAsDouble());
-		builder.setMean(Arrays.stream(this.rawData).average().getAsDouble());
+		builder.setPointWithMaximumValue(new Maximum(this.timeSeries).calculate());
+		builder.setPointWithMinimumValue(new Minimum(this.timeSeries).calculate());
+		builder.setSegments(this.segments);
 		return builder.createAnalysis();
 	}
 }
