@@ -10,7 +10,6 @@ import java.util.AbstractQueue;
 import java.util.Date;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Properties;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -19,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.graph.Segment;
 import analysis.interfaces.Smoothing;
+import writenlg.control.WriteNlgProperties;
 
 /**
  * An implementation of a bottom-up piecewise linear function.
@@ -34,18 +34,14 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 
 	/**
 	 * Creates a BottomUpPiecewiseLinearFunction instance.
-	 *
-	 * @param timeSeries
-	 *            A SortedMap containing a time series to be segmented using a
-	 *            bottom-up piecewise linear function.
-	 * @param pointCount
-	 *            The target point count.
+	 * 
+	 * @param segments
 	 */
-	public BottomUpPiecewiseLinearFunction(final List<Segment> segments, final Properties properties)
+	public BottomUpPiecewiseLinearFunction(final List<Segment> segments)
 	{
 		this.segments = segments;
-		this.dateFormatter = new SimpleDateFormat(properties.getProperty("DateFormat"));
-		this.maximumError = new BigDecimal(properties.getProperty("MaximumError"));
+		this.dateFormatter = new SimpleDateFormat(WriteNlgProperties.getInstance().getProperty("DateFormat"));
+		this.maximumError = new BigDecimal(WriteNlgProperties.getInstance().getProperty("MaximumError"));
 		this.timeSeriesSmoothed = new TreeMap<>();
 
 		LOGGER.info("BottomUpPiecewiseLinearFunction object created");

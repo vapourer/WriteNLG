@@ -5,11 +5,14 @@ package analysis;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import analysis.graph.Segment;
 import analysis.graph.Segmenter;
 import analysis.graph.TimeSeries;
-import analysis.interfaces.Analyser;
 import analysis.interfaces.Segmentation;
+import analysis.interfaces.TimeSeriesAnalysis;
 import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
 
@@ -17,8 +20,10 @@ import analysis.statistics.Minimum;
  * Analyses input data and maps processed information to placeholder tokens.
  * Placeholders and algorithms used for analysis are domain specific.
  */
-public class TimeSeriesAnalyser implements Analyser
+public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 {
+	private static final Logger LOGGER = LogManager.getLogger("TimeSeriesAnalyser.class");
+
 	private final TimeSeries timeSeries;
 
 	// Regulatory regulator;
@@ -35,6 +40,8 @@ public class TimeSeriesAnalyser implements Analyser
 
 		final Segmentation segmenter = new Segmenter(timeSeries.getSeries());
 		this.segments = segmenter.createSegments();
+
+		LOGGER.info("TimeSeriesAnalyser created");
 	}
 
 	/**
@@ -42,17 +49,18 @@ public class TimeSeriesAnalyser implements Analyser
 	 * in the regulator.
 	 */
 	@Override
-	public Analysis analyse()
+	public TimeSeriesDerivedInformation analyse()
 	{
+		LOGGER.info("Building statistical analysis");
 		// this.regulator.mapPlaceHolder("@Maximum", Double.toString(Arrays.stream(this.rawData).max().getAsDouble()));
 		// this.regulator.mapPlaceHolder("@Minimum", Double.toString(Arrays.stream(this.rawData).min().getAsDouble()));
 		// this.regulator.mapPlaceHolder("@Average",
 		// Double.toString(Arrays.stream(this.rawData).average().getAsDouble()));
 
-		final AnalysisBuilder builder = new AnalysisBuilder();
+		final TimeSeriesDerivedInformationBuilder builder = new TimeSeriesDerivedInformationBuilder();
 		builder.setPointWithMaximumValue(new Maximum(this.timeSeries).calculate());
 		builder.setPointWithMinimumValue(new Minimum(this.timeSeries).calculate());
 		builder.setSegments(this.segments);
-		return builder.createAnalysis();
+		return builder.createTimeSeriesDerivedInformation();
 	}
 }

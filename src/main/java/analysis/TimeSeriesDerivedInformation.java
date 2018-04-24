@@ -9,22 +9,23 @@ import analysis.graph.Point;
 import analysis.graph.Segment;
 
 /**
- * Container for analyses, based on selected statistical algorithms.
+ * Container for analysis of a time series, based on selected statistical algorithms.
  */
-public class Analysis
+public class TimeSeriesDerivedInformation
 {
 	private final Point pointWithMaximumValue;
 	private final Point pointWithMinimumValue;
 	private final List<Segment> segments;
 
 	/**
-	 * Creates an Analysis instance.
+	 * Creates an TimeSeriesDerivedInformation instance.
 	 * 
 	 * @param pointWithMaximumValue
 	 * @param pointWithMinimumValue
 	 * @param segments
 	 */
-	public Analysis(final Point pointWithMaximumValue, final Point pointWithMinimumValue, final List<Segment> segments)
+	public TimeSeriesDerivedInformation(final Point pointWithMaximumValue, final Point pointWithMinimumValue,
+			final List<Segment> segments)
 	{
 		this.pointWithMaximumValue = pointWithMaximumValue;
 		this.pointWithMinimumValue = pointWithMinimumValue;

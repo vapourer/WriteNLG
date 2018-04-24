@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.interfaces.LineGraphAnalysis;
 import analysis.linguistics.phrase.PhraseSpecification;
 import simplenlg.phrasespec.SPhraseSpec;
 import writenlg.expertinput.LexerParser;
@@ -22,15 +23,19 @@ public class PhraseCreatorController extends Controller
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseCreatorController.class");
 
+	private LineGraphAnalysis lineGraphAnalysis;
+
 	/**
 	 * Creates a PhraseCreatorController instance.
 	 *
 	 * @param charStream
 	 * @param properties
 	 */
-	public PhraseCreatorController()
+	public PhraseCreatorController(LineGraphAnalysis lineGraphAnalysis)
 	{
 		super(WriteNlgProperties.getInstance().getProperty("AntlrInputPhraseCreator"));
+
+		this.lineGraphAnalysis = lineGraphAnalysis;
 		LOGGER.info("PhraseCreatorController created");
 	}
 

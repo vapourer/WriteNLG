@@ -9,30 +9,22 @@ import analysis.graph.Point;
 import analysis.graph.Segment;
 
 /**
- * Builder for the Analysis class.
+ * Builder for the TimeSeriesDerivedInformation class.
  */
-public class AnalysisBuilder
+public class TimeSeriesDerivedInformationBuilder
 {
 	private Point pointWithMaximumValue;
 	private Point pointWithMinimumValue;
 	private List<Segment> segments;
 
 	/**
-	 * Creates a new Analysis instance.
+	 * Creates a new TimeSeriesDerivedInformation instance.
 	 *
-	 * @return Analysis
+	 * @return TimeSeriesDerivedInformation
 	 */
-	public Analysis createAnalysis()
+	public TimeSeriesDerivedInformation createTimeSeriesDerivedInformation()
 	{
-		return new Analysis(this.pointWithMaximumValue, this.pointWithMinimumValue, this.segments);
-	}
-
-	/**
-	 * @return the pointWithMaximumValue
-	 */
-	public Point getPointWithMaximumValue()
-	{
-		return pointWithMaximumValue;
+		return new TimeSeriesDerivedInformation(this.pointWithMaximumValue, this.pointWithMinimumValue, this.segments);
 	}
 
 	/**
@@ -45,28 +37,12 @@ public class AnalysisBuilder
 	}
 
 	/**
-	 * @return the pointWithMinimumValue
-	 */
-	public Point getPointWithMinimumValue()
-	{
-		return pointWithMinimumValue;
-	}
-
-	/**
 	 * @param pointWithMinimumValue
 	 *            the pointWithMinimumValue to set
 	 */
 	public void setPointWithMinimumValue(Point pointWithMinimumValue)
 	{
 		this.pointWithMinimumValue = pointWithMinimumValue;
-	}
-
-	/**
-	 * @return the segments
-	 */
-	public List<Segment> getSegments()
-	{
-		return this.segments;
 	}
 
 	/**

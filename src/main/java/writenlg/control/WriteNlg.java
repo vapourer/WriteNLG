@@ -14,9 +14,11 @@ import java.util.SortedMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.LineGraphAnalyser;
 import analysis.graph.LineGraph;
 import analysis.graph.Segmenter;
 import analysis.graph.TimeSeries;
+import analysis.interfaces.LineGraphAnalysis;
 import analysis.interfaces.MovingAverage;
 import analysis.interfaces.Segmentation;
 import analysis.interfaces.Smoothing;
@@ -74,7 +76,8 @@ public class WriteNlg
 		switch (antlrGrammar)
 		{
 			case PHRASE_CREATOR:
-				controller = new PhraseCreatorController();
+				LineGraphAnalysis lineGraphAnalysis = new LineGraphAnalyser(lineGraph);
+				controller = new PhraseCreatorController(lineGraphAnalysis);
 				break;
 			case WRITER:
 				controller = new WriterController();
@@ -116,8 +119,7 @@ public class WriteNlg
 		System.out.println();
 	}
 
-	private static void outputBottomUpPiecewiseLinearFunctionResult(final LineGraph lineGraph,
-			final Properties properties)
+	private static void outputBottomUpPiecewiseLinearFunctionResult(final LineGraph lineGraph)
 	{
 		final List<TimeSeries> timeSeriesGroup = lineGraph.getTimeSeriesGroup();
 
@@ -133,13 +135,14 @@ public class WriteNlg
 			// eachTimeSeries.getTimeSeries(), properties);
 
 			final Smoothing bottomUpPiecewiseLinearFunction = new BottomUpPiecewiseLinearFunction(
-					segmenter.createSegments(), properties);
+					segmenter.createSegments());
 
 			final SortedMap<Long, BigDecimal> timeSeriesSegmented = bottomUpPiecewiseLinearFunction.smoothGraph();
 
 			System.out.println(eachTimeSeries.getTimeLegend() + "\t" + eachTimeSeries.getSeriesLegend());
 
-			final DateFormat dateFormatter = new SimpleDateFormat(properties.getProperty("DateFormat"));
+			final DateFormat dateFormatter = new SimpleDateFormat(
+					WriteNlgProperties.getInstance().getProperty("DateFormat"));
 
 			for (final Long eachTime : timeSeriesSegmented.keySet())
 			{
@@ -151,7 +154,7 @@ public class WriteNlg
 		}
 	}
 
-	private static void outputCentredMovingAverageResult(final LineGraph lineGraph, final Properties properties)
+	private static void outputCentredMovingAverageResult(final LineGraph lineGraph)
 	{
 		final List<TimeSeries> timeSeriesGroup = lineGraph.getTimeSeriesGroup();
 
@@ -162,13 +165,14 @@ public class WriteNlg
 			System.out.println(eachTimeSeries.getSeriesLegend());
 
 			final MovingAverage centredMovingAverage = new CentredMovingAverage(eachTimeSeries.getSeries(),
-					Integer.parseInt(properties.getProperty("MovingAverageWindow")));
+					Integer.parseInt(WriteNlgProperties.getInstance().getProperty("MovingAverageWindow")));
 
 			final SortedMap<Long, BigDecimal> timeSeriesSmoothed = centredMovingAverage.averageGraph();
 
 			System.out.println(eachTimeSeries.getTimeLegend() + "\t" + eachTimeSeries.getSeriesLegend());
 
-			final DateFormat dateFormatter = new SimpleDateFormat(properties.getProperty("DateFormat"));
+			final DateFormat dateFormatter = new SimpleDateFormat(
+					WriteNlgProperties.getInstance().getProperty("DateFormat"));
 
 			for (final Long eachTime : timeSeriesSmoothed.keySet())
 			{
@@ -235,7 +239,7 @@ public class WriteNlg
 	// System.out.println("Integrated approach based on ANTLR input");
 	//
 	// final Regulator regulator = new Regulator();
-	// final Analyser analyser = new TimeSeriesAnalyser(regulator, numbersAsStringBuilder.toString());
+	// final TimeSeriesAnalysis analyser = new TimeSeriesAnalyser(regulator, numbersAsStringBuilder.toString());
 	// analyser.analyse();
 	//
 	// final LexerParser writerLexerParser = new WriterLexerParser(antlrInput);
