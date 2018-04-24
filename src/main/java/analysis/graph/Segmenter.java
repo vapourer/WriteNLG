@@ -35,9 +35,9 @@ public class Segmenter implements Segmentation
 
 		for (int i = 0; i < segmentCount; i++)
 		{
-			final Point point1 = new Point(new BigDecimal(i), this.timeSeries.get(times[i]));
-			final Point point2 = new Point(new BigDecimal(i + 1), this.timeSeries.get(times[i + 1]));
-			segments.add(new Segment(point1, point2, times[i], times[i + 1]));
+			final Point point1 = new Point(new BigDecimal(i), this.timeSeries.get(times[i]), times[i]);
+			final Point point2 = new Point(new BigDecimal(i + 1), this.timeSeries.get(times[i + 1]), times[i + 1]);
+			segments.add(new Segment(point1, point2));
 		}
 
 		return segments;

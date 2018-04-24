@@ -5,6 +5,7 @@ package analysis.graph;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Calendar;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,8 +34,11 @@ public class GraphUtilitiesTest
 		// Arrange
 		BigDecimal resultExpected = new BigDecimal("5");
 
-		Point point1 = new Point(new BigDecimal("0"), new BigDecimal("0"));
-		Point point2 = new Point(new BigDecimal("3"), new BigDecimal("4"));
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2018, 3, 1);
+		Point point1 = new Point(new BigDecimal("0"), new BigDecimal("0"), Long.valueOf(calendar.getTimeInMillis()));
+		calendar.set(2018, 3, 2);
+		Point point2 = new Point(new BigDecimal("3"), new BigDecimal("4"), Long.valueOf(calendar.getTimeInMillis()));
 
 		// Act
 		BigDecimal resultActual = GraphUtilities.calculateEuclideanDistance(point1, point2);
@@ -51,8 +55,11 @@ public class GraphUtilitiesTest
 		// Arrange
 		BigDecimal resultExpected = new BigDecimal("6.40312");
 
-		Point point1 = new Point(new BigDecimal("0"), new BigDecimal("0"));
-		Point point2 = new Point(new BigDecimal("4"), new BigDecimal("5"));
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2018, 3, 1);
+		Point point1 = new Point(new BigDecimal("0"), new BigDecimal("0"), Long.valueOf(calendar.getTimeInMillis()));
+		calendar.set(2018, 3, 2);
+		Point point2 = new Point(new BigDecimal("4"), new BigDecimal("5"), Long.valueOf(calendar.getTimeInMillis()));
 
 		// Act
 		BigDecimal resultActual = GraphUtilities.calculateEuclideanDistance(point1, point2);

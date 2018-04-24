@@ -3,8 +3,6 @@
 
 package writenlg.control;
 
-import java.util.Properties;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,13 +20,10 @@ public class WriterController extends Controller
 
 	/**
 	 * Creates a WriterController instance.
-	 *
-	 * @param charStream
-	 * @param properties
 	 */
-	public WriterController(final Properties properties)
+	public WriterController()
 	{
-		super(properties.getProperty("AntlrInputWriter"), properties);
+		super(WriteNlgProperties.getInstance().getProperty("AntlrInputWriter"));
 		LOGGER.info("WriterController created");
 	}
 

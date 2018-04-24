@@ -19,11 +19,6 @@ import analysis.graph.Segment;
 
 public class CostComparatorTest
 {
-	private final static Point POINT_1 = new Point(new BigDecimal("1"), new BigDecimal("1"));
-	private final static Point POINT_2 = new Point(new BigDecimal("4"), new BigDecimal("5"));
-	private final static Point POINT_3 = new Point(new BigDecimal("2"), new BigDecimal("2"));
-	private final static Point POINT_4 = new Point(new BigDecimal("5"), new BigDecimal("6"));
-
 	private static Logger LOGGER;
 
 	private Calendar calendar;
@@ -43,18 +38,22 @@ public class CostComparatorTest
 
 		this.calendar.set(2018, 4, 1);
 		final Long date1a = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1a);
 
 		this.calendar.set(2018, 4, 2);
 		final Long date2a = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point2 = new Point(new BigDecimal("4"), new BigDecimal("5"), date2a);
 
 		this.calendar.set(2018, 4, 8);
 		final Long date1b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point3 = new Point(new BigDecimal("2"), new BigDecimal("2"), date1b);
 
 		this.calendar.set(2018, 4, 9);
 		final Long date2b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point4 = new Point(new BigDecimal("5"), new BigDecimal("6"), date2b);
 
-		final Segment segment1 = new Segment(POINT_1, POINT_2, date1a, date1b);
-		final Segment segment2 = new Segment(POINT_3, POINT_4, date2a, date2b);
+		final Segment segment1 = new Segment(point1, point2);
+		final Segment segment2 = new Segment(point3, point4);
 		this.pair1 = new SegmentPair(segment1, segment2);
 	}
 
@@ -63,25 +62,24 @@ public class CostComparatorTest
 	{
 		LOGGER.info("Test: testCompare_Equals");
 
-		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
-		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
-		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
-		final Point point8 = new Point(new BigDecimal("6"), new BigDecimal("7"));
-
 		this.calendar.set(2018, 4, 3);
 		final Long date3a = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"), date3a);
 
 		this.calendar.set(2018, 4, 4);
 		final Long date4a = Long.valueOf(this.calendar.getTimeInMillis());
+		Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"), date4a);
 
 		this.calendar.set(2018, 4, 10);
 		final Long date3b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"), date3b);
 
 		this.calendar.set(2018, 4, 11);
 		final Long date4b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point8 = new Point(new BigDecimal("6"), new BigDecimal("7"), date4b);
 
-		final Segment segment3 = new Segment(point5, point6, date3a, date3b);
-		final Segment segment4 = new Segment(point7, point8, date4a, date4b);
+		final Segment segment3 = new Segment(point5, point6);
+		final Segment segment4 = new Segment(point7, point8);
 
 		final SegmentPair pair2 = new SegmentPair(segment3, segment4);
 
@@ -94,25 +92,24 @@ public class CostComparatorTest
 	{
 		LOGGER.info("Test: testCompare_DoesNotEqual_Segment1Point1");
 
-		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("3"));
-		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
-		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
-		final Point point8 = new Point(new BigDecimal("6"), new BigDecimal("7"));
-
 		this.calendar.set(2018, 4, 3);
 		final Long date3a = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("3"), date3a);
 
 		this.calendar.set(2018, 4, 4);
 		final Long date4a = Long.valueOf(this.calendar.getTimeInMillis());
+		Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"), date4a);
 
 		this.calendar.set(2018, 4, 10);
 		final Long date3b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"), date3b);
 
 		this.calendar.set(2018, 4, 11);
 		final Long date4b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point8 = new Point(new BigDecimal("6"), new BigDecimal("7"), date4b);
 
-		final Segment segment3 = new Segment(point5, point6, date3a, date3b);
-		final Segment segment4 = new Segment(point7, point8, date4a, date4b);
+		final Segment segment3 = new Segment(point5, point6);
+		final Segment segment4 = new Segment(point7, point8);
 
 		final SegmentPair pair2 = new SegmentPair(segment3, segment4);
 
@@ -125,25 +122,24 @@ public class CostComparatorTest
 	{
 		LOGGER.info("Test: testCompare_DoesNotEqual_Segment2Point2");
 
-		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
-		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
-		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
-		final Point point8 = new Point(new BigDecimal("6"), new BigDecimal("8"));
-
 		this.calendar.set(2018, 4, 3);
 		final Long date3a = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"), date3a);
 
 		this.calendar.set(2018, 4, 4);
 		final Long date4a = Long.valueOf(this.calendar.getTimeInMillis());
+		Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"), date4a);
 
 		this.calendar.set(2018, 4, 10);
 		final Long date3b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"), date3b);
 
 		this.calendar.set(2018, 4, 11);
 		final Long date4b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point8 = new Point(new BigDecimal("6"), new BigDecimal("8"), date4b);
 
-		final Segment segment3 = new Segment(point5, point6, date3a, date3b);
-		final Segment segment4 = new Segment(point7, point8, date4a, date4b);
+		final Segment segment3 = new Segment(point5, point6);
+		final Segment segment4 = new Segment(point7, point8);
 
 		final SegmentPair pair2 = new SegmentPair(segment3, segment4);
 
@@ -156,25 +152,24 @@ public class CostComparatorTest
 	{
 		LOGGER.info("Test: testCompare_LessThan");
 
-		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
-		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
-		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
-		final Point point8 = new Point(new BigDecimal("5"), new BigDecimal("6"));
-
 		this.calendar.set(2018, 4, 3);
 		final Long date3a = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"), date3a);
 
 		this.calendar.set(2018, 4, 4);
 		final Long date4a = Long.valueOf(this.calendar.getTimeInMillis());
+		Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"), date4a);
 
 		this.calendar.set(2018, 4, 10);
 		final Long date3b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"), date3b);
 
 		this.calendar.set(2018, 4, 11);
 		final Long date4b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point8 = new Point(new BigDecimal("5"), new BigDecimal("6"), date4b);
 
-		final Segment segment3 = new Segment(point5, point6, date3a, date3b);
-		final Segment segment4 = new Segment(point7, point8, date4a, date4b);
+		final Segment segment3 = new Segment(point5, point6);
+		final Segment segment4 = new Segment(point7, point8);
 
 		final SegmentPair pair2 = new SegmentPair(segment3, segment4);
 
@@ -187,25 +182,24 @@ public class CostComparatorTest
 	{
 		LOGGER.info("Test: testCompare_GreaterThan");
 
-		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"));
-		final Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"));
-		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"));
-		final Point point8 = new Point(new BigDecimal("9"), new BigDecimal("10"));
-
 		this.calendar.set(2018, 4, 3);
 		final Long date3a = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point5 = new Point(new BigDecimal("2"), new BigDecimal("2"), date3a);
 
 		this.calendar.set(2018, 4, 4);
 		final Long date4a = Long.valueOf(this.calendar.getTimeInMillis());
+		Point point6 = new Point(new BigDecimal("5"), new BigDecimal("6"), date4a);
 
 		this.calendar.set(2018, 4, 10);
 		final Long date3b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point7 = new Point(new BigDecimal("3"), new BigDecimal("3"), date3b);
 
 		this.calendar.set(2018, 4, 11);
 		final Long date4b = Long.valueOf(this.calendar.getTimeInMillis());
+		final Point point8 = new Point(new BigDecimal("9"), new BigDecimal("10"), date4b);
 
-		final Segment segment3 = new Segment(point5, point6, date3a, date3b);
-		final Segment segment4 = new Segment(point7, point8, date4a, date4b);
+		final Segment segment3 = new Segment(point5, point6);
+		final Segment segment4 = new Segment(point7, point8);
 
 		final SegmentPair pair2 = new SegmentPair(segment3, segment4);
 

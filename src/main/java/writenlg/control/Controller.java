@@ -3,8 +3,6 @@
 
 package writenlg.control;
 
-import java.util.Properties;
-
 import org.antlr.v4.runtime.CharStream;
 
 import io.AntlrInputReader;
@@ -15,7 +13,6 @@ import io.AntlrInputReader;
  */
 public abstract class Controller
 {
-	private final Properties properties;
 	private final CharStream charStream;
 
 	public abstract String process();
@@ -25,18 +22,9 @@ public abstract class Controller
 	 *
 	 * @param charStream
 	 */
-	public Controller(final String antlrFilePath, final Properties properties)
+	public Controller(final String antlrFilePath)
 	{
 		this.charStream = new AntlrInputReader(antlrFilePath).getAntlrInputFromFile();
-		this.properties = properties;
-	}
-
-	/**
-	 * @return the properties
-	 */
-	protected Properties getProperties()
-	{
-		return this.properties;
 	}
 
 	/**

@@ -40,7 +40,7 @@ public class CentredMovingAverageTest
 		TimeSeries timeSeries = new TimeSeries(TestConstants.TIMES_FOR_MOVING_AVERAGE_TEST,
 				TestConstants.VALUES_FOR_MOVING_AVERAGE_TEST);
 
-		CentredMovingAverage centredMovingAverage = new CentredMovingAverage(timeSeries.getTimeSeries(), 5);
+		CentredMovingAverage centredMovingAverage = new CentredMovingAverage(timeSeries.getSeries(), 5);
 
 		// Act
 		SortedMap<Long, BigDecimal> smoothedGraphActual = centredMovingAverage.averageGraph();

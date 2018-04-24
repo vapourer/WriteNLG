@@ -6,7 +6,6 @@ package writenlg.expertinput.listener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,7 +32,6 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseCreatorListener.class");
 
-	private final Properties properties;
 	private final List<PhraseSpecification> phraseSpecifications;
 	private final Map<String, String> substitutions;
 	private Concept concept;
@@ -45,14 +43,13 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	/**
 	 * Creates a PhraseCreator instance.
 	 */
-	public PhraseCreatorListener(final Properties properties)
+	public PhraseCreatorListener()
 	{
-		this(properties, new Substitutions());
+		this(new Substitutions());
 	}
 
-	public PhraseCreatorListener(final Properties properties, final Substitutions substitutions)
+	public PhraseCreatorListener(final Substitutions substitutions)
 	{
-		this.properties = properties;
 		this.phraseSpecifications = new ArrayList<>();
 		this.substitutions = substitutions.getSubstitutions();
 		this.sentencePart = SentencePart.SUBJECT;
@@ -117,7 +114,8 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void exitAssignment(final PhraseCreatorParser.AssignmentContext context)
 	{
-		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(new WeightedAdditionConstraintProcessor());
+		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(
+				new WeightedAdditionConstraintProcessor());
 
 		final String expression = context.expression().getText();
 		final PartOfSpeech partOfSpeech = Enum.valueOf(PartOfSpeech.class, context.identifier().getText());

@@ -1,14 +1,14 @@
 Concept=MAXIMUM
 PhraseSpecification
 Subject
-NOUN	:	I
+NOUN	:	maximum
 Predicate
-VERB	:	drink	
-NOUN	:	coffee
+VERB	:	be	
+NOUN	:	@@Maximum@@
 Concept=MINIMUM
 PhraseSpecification
 Subject
-NOUN	:	you
+NOUN	:	minimum
 Predicate
-VERB	:	drink	
-NOUN	:	tea
+VERB	:	be	
+NOUN	:	@@Minimum@@

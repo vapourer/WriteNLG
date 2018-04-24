@@ -28,7 +28,7 @@ public class TimeSeriesAnalyser implements Analyser
 	public TimeSeriesAnalyser(final Regulatory regulator, final TimeSeries timeSeries)
 	{
 		this.regulator = regulator;
-		this.series = timeSeries.getTimeSeries().values().toArray(new BigDecimal[0]);
+		this.series = timeSeries.getSeries().values().toArray(new BigDecimal[0]);
 		this.rawData = new double[this.series.length];
 
 		for (int i = 0; i < this.series.length; i++)
@@ -36,18 +36,9 @@ public class TimeSeriesAnalyser implements Analyser
 			this.rawData[i] = this.series[i].doubleValue();
 		}
 
-		final Segmentation segmenter = new Segmenter(timeSeries.getTimeSeries());
+		final Segmentation segmenter = new Segmenter(timeSeries.getSeries());
 		this.segments = segmenter.createSegments();
-
-		// final CsvReader csvReader = new CsvReader(numbersAsString);
-		// this.rawData = csvReader.processCsv();
 	}
-
-	// TODO: Move to a new TimeSeriesAnalyser class.
-	// public Analyser(final Regulatory regulator, final LineGraph lineGraph)
-	// {
-	// this.regulator = regulator;
-	// }
 
 	/**
 	 * Maps information derived from processed raw data to placeholders and stores

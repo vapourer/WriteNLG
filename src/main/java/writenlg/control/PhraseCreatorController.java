@@ -4,7 +4,6 @@
 package writenlg.control;
 
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,9 +28,9 @@ public class PhraseCreatorController extends Controller
 	 * @param charStream
 	 * @param properties
 	 */
-	public PhraseCreatorController(final Properties properties)
+	public PhraseCreatorController()
 	{
-		super(properties.getProperty("AntlrInputPhraseCreator"), properties);
+		super(WriteNlgProperties.getInstance().getProperty("AntlrInputPhraseCreator"));
 		LOGGER.info("PhraseCreatorController created");
 	}
 
@@ -44,7 +43,7 @@ public class PhraseCreatorController extends Controller
 		LOGGER.info("Starting the PhraseCreator process");
 
 		final LexerParser lexerParser = new PhraseCreatorLexerParser(getCharStream());
-		final PhraseCreatorListener listener = new PhraseCreatorListener(getProperties());
+		final PhraseCreatorListener listener = new PhraseCreatorListener();
 		lexerParser.walkParseTree(listener);
 
 		final List<PhraseSpecification> phraseSpecifications = listener.getPhraseSpecifications();

@@ -65,7 +65,7 @@ public class LineGraph
 		{
 			LOGGER.info(String.format("Time series %s", this.timeSeriesGroup.indexOf(eachTimeSeries) + 1));
 			LOGGER.info(String.format("%s\t%s", eachTimeSeries.getSeriesLegend(), eachTimeSeries.getTimeLegend()));
-			log(eachTimeSeries.getTimeSeries());
+			log(eachTimeSeries.getSeries());
 			LOGGER.info(
 					String.format("Time series %s output complete", this.timeSeriesGroup.indexOf(eachTimeSeries) + 1));
 		}

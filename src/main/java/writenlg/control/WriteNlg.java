@@ -31,7 +31,6 @@ public class WriteNlg
 
 	public static void main(final String[] args)
 	{
-		Properties properties = null;
 		LineGraph lineGraph = null;
 
 		int loadError = 0;
@@ -43,7 +42,7 @@ public class WriteNlg
 			LOGGER.info("Starting WriteNlg application - logger initialised");
 
 			loadError = 1;
-			properties = new PropertyReader(args[1]).loadProperties();
+			WriteNlgProperties.createInstance(args[1]);
 
 			loadError = 2;
 			final TimeSeriesReader timeSeriesReader = new TimeSeriesReader(args[2]);
@@ -68,24 +67,26 @@ public class WriteNlg
 			}
 		}
 
-		final AntlrGrammar antlrGrammar = Enum.valueOf(AntlrGrammar.class, properties.getProperty("AntlrGrammar"));
+		final AntlrGrammar antlrGrammar = Enum.valueOf(AntlrGrammar.class,
+				WriteNlgProperties.getInstance().getProperty("AntlrGrammar"));
 		Controller controller = null;
 
 		switch (antlrGrammar)
 		{
 			case PHRASE_CREATOR:
-				controller = new PhraseCreatorController(properties);
+				controller = new PhraseCreatorController();
 				break;
 			case WRITER:
-				controller = new WriterController(properties);
+				controller = new WriterController();
 				break;
 		}
 
+		System.out.println();
 		System.out.println(controller.process());
 
-		outputMultipleTimeSeries(lineGraph, properties);
-		outputBottomUpPiecewiseLinearFunctionResult(lineGraph, properties);
-		outputCentredMovingAverageResult(lineGraph, properties);
+		// outputMultipleTimeSeries(lineGraph, properties);
+		// outputBottomUpPiecewiseLinearFunctionResult(lineGraph, properties);
+		// outputCentredMovingAverageResult(lineGraph, properties);
 		// outputAntlrGeneratedText();
 	}
 
@@ -99,7 +100,7 @@ public class WriteNlg
 
 		for (final TimeSeries timeSeries : timeSeriesGroup)
 		{
-			final SortedMap<Long, BigDecimal> graph = timeSeries.getTimeSeries();
+			final SortedMap<Long, BigDecimal> graph = timeSeries.getSeries();
 
 			System.out.println(timeSeries.getTimeLegend() + "\t" + timeSeries.getSeriesLegend());
 
@@ -126,7 +127,7 @@ public class WriteNlg
 		{
 			System.out.println(eachTimeSeries.getSeriesLegend());
 
-			final Segmentation segmenter = new Segmenter(eachTimeSeries.getTimeSeries());
+			final Segmentation segmenter = new Segmenter(eachTimeSeries.getSeries());
 
 			// final Smoothing bottomUpPiecewiseLinearFunction = new BottomUpPiecewiseLinearFunction(
 			// eachTimeSeries.getTimeSeries(), properties);
@@ -160,7 +161,7 @@ public class WriteNlg
 		{
 			System.out.println(eachTimeSeries.getSeriesLegend());
 
-			final MovingAverage centredMovingAverage = new CentredMovingAverage(eachTimeSeries.getTimeSeries(),
+			final MovingAverage centredMovingAverage = new CentredMovingAverage(eachTimeSeries.getSeries(),
 					Integer.parseInt(properties.getProperty("MovingAverageWindow")));
 
 			final SortedMap<Long, BigDecimal> timeSeriesSmoothed = centredMovingAverage.averageGraph();

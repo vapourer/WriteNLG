@@ -13,7 +13,7 @@ import java.util.TreeMap;
  */
 public class TimeSeries
 {
-	private final SortedMap<Long, BigDecimal> timeSeries = new TreeMap<>();
+	private final SortedMap<Long, BigDecimal> series = new TreeMap<>();
 	private final String timeLegend;
 	private final String seriesLegend;
 
@@ -38,7 +38,7 @@ public class TimeSeries
 			calendar.set(Integer.parseInt(dateAsString[2]), Integer.parseInt(dateAsString[1]) - 1,
 					Integer.parseInt(dateAsString[0]));
 			final Long date = Long.valueOf(calendar.getTimeInMillis());
-			this.timeSeries.put(date, new BigDecimal(valuesAsStrings[i]));
+			this.series.put(date, new BigDecimal(valuesAsStrings[i]));
 		}
 	}
 
@@ -59,10 +59,10 @@ public class TimeSeries
 	}
 
 	/**
-	 * @return the timeSeries
+	 * @return the series
 	 */
-	public SortedMap<Long, BigDecimal> getTimeSeries()
+	public SortedMap<Long, BigDecimal> getSeries()
 	{
-		return new TreeMap<>(this.timeSeries);
+		return new TreeMap<>(this.series);
 	}
 }

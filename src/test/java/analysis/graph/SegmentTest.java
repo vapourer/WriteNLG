@@ -33,8 +33,6 @@ public class SegmentTest
 
 		// Arrange
 		final BigDecimal euclideanDistanceExpected = new BigDecimal("5");
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"));
-		final Point point2 = new Point(new BigDecimal("4"), new BigDecimal("5"));
 
 		final Calendar calendar = Calendar.getInstance();
 		calendar.set(2018, 4, 1);
@@ -42,7 +40,10 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Segment segment = new Segment(point1, point2, date1, date2);
+		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1);
+		final Point point2 = new Point(new BigDecimal("4"), new BigDecimal("5"), date2);
+
+		final Segment segment = new Segment(point1, point2);
 
 		// Act
 		final BigDecimal euclideanDistanceActual = segment.getEuclideanDistance();
@@ -58,8 +59,6 @@ public class SegmentTest
 
 		// Arrange
 		final BigDecimal euclideanDistanceExpected = new BigDecimal("7.2111");
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"));
-		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("7"));
 
 		final Calendar calendar = Calendar.getInstance();
 		calendar.set(2018, 4, 1);
@@ -67,7 +66,10 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Segment segment = new Segment(point1, point2, date1, date2);
+		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1);
+		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("7"), date2);
+
+		final Segment segment = new Segment(point1, point2);
 
 		// Act
 		final BigDecimal euclideanDistanceActual = segment.getEuclideanDistance();

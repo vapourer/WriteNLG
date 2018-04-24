@@ -66,7 +66,7 @@ public class TimeSeriesTest
 
 		// Act
 		TimeSeries timeSeries = new TimeSeries(times, values);
-		SortedMap<Long, BigDecimal> timeSeriesActual = timeSeries.getTimeSeries();
+		SortedMap<Long, BigDecimal> timeSeriesActual = timeSeries.getSeries();
 		Long[] timesActual = timeSeriesActual.keySet().toArray(new Long[0]);
 
 		// Assert

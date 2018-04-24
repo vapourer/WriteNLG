@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 public class TestConstants
 {
+	public static final String WRITE_NLG_PROPERTIES_FILE_PATH = "WriteNLG.properties";
 	public static final String LOG4J2_CONFIGURATION_FILE_PATH = "log4j2Configuration.xml";
 
 	public static final String TIMES_FOR_MOVING_AVERAGE_TEST = "Week ended,06/1/2017,13/1/2017,20/1/2017,27/1/2017,03/2/2017,10/2/2017,17/2/2017,24/2/2017,03/3/2017,10/3/2017,17/3/2017,24/3/2017,31/3/2017,07/4/2017,14/4/2017,21/4/2017,28/4/2017,05/5/2017,12/5/2017,19/5/2017,26/5/2017,02/6/2017,09/6/2017,16/6/2017,23/6/2017,30/6/2017";

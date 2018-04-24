@@ -42,8 +42,7 @@ public class SegmentPair
 	 */
 	public Segment convert()
 	{
-		return new Segment(this.segment1.getPoint1(), this.segment2.getPoint2(), this.segment1.getStartTime(),
-				this.segment2.getEndTime());
+		return new Segment(this.segment1.getPoint1(), this.segment2.getPoint2());
 	}
 
 	/**

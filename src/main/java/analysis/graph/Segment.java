@@ -12,8 +12,6 @@ public class Segment
 {
 	private final Point point1;
 	private final Point point2;
-	private final Long startTime;
-	private final Long endTime;
 	private BigDecimal euclideanDistance;
 	private BigDecimal xDistance;
 	private BigDecimal yDistance;
@@ -25,14 +23,11 @@ public class Segment
 	 *
 	 * @param point1
 	 * @param point2
-	 * @param startTime
 	 */
-	public Segment(final Point point1, final Point point2, final Long startTime, final Long endTime)
+	public Segment(final Point point1, final Point point2)
 	{
 		this.point1 = point1;
 		this.point2 = point2;
-		this.startTime = startTime;
-		this.endTime = endTime;
 	}
 
 	/**
@@ -56,7 +51,15 @@ public class Segment
 	 */
 	public Long getStartTime()
 	{
-		return this.startTime;
+		return point1.getDate();
+	}
+
+	/**
+	 * @return the endTime
+	 */
+	public Long getEndTime()
+	{
+		return point2.getDate();
 	}
 
 	/**
@@ -126,13 +129,5 @@ public class Segment
 	public void setTimeSlices(final int timeSlices)
 	{
 		this.timeSlices = timeSlices;
-	}
-
-	/**
-	 * @return the endTime
-	 */
-	public Long getEndTime()
-	{
-		return endTime;
 	}
 }

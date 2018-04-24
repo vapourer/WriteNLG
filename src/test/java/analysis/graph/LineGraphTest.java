@@ -105,8 +105,8 @@ public class LineGraphTest
 		final TimeSeries timeSeries1Actual = timeSeriesGroup.get(0);
 		final TimeSeries timeSeries2Actual = timeSeriesGroup.get(1);
 
-		Long[] times1Actual = timeSeries1Actual.getTimeSeries().keySet().toArray(new Long[0]);
-		Long[] times2Actual = timeSeries2Actual.getTimeSeries().keySet().toArray(new Long[0]);
+		Long[] times1Actual = timeSeries1Actual.getSeries().keySet().toArray(new Long[0]);
+		Long[] times2Actual = timeSeries2Actual.getSeries().keySet().toArray(new Long[0]);
 
 		// Assert
 		Assert.assertEquals(timeLegendExpected, timeSeries1Actual.getTimeLegend());
@@ -120,7 +120,7 @@ public class LineGraphTest
 		}
 
 		Assert.assertArrayEquals(timeSeries1Expected.values().toArray(new BigDecimal[0]),
-				timeSeries1Actual.getTimeSeries().values().toArray(new BigDecimal[0]));
+				timeSeries1Actual.getSeries().values().toArray(new BigDecimal[0]));
 
 		Assert.assertEquals(timeLegendExpected, timeSeries2Actual.getTimeLegend());
 		Assert.assertEquals(seriesLegend2Expected, timeSeries2Actual.getSeriesLegend());
@@ -133,6 +133,6 @@ public class LineGraphTest
 		}
 
 		Assert.assertArrayEquals(timeSeries2Expected.values().toArray(new BigDecimal[0]),
-				timeSeries2Actual.getTimeSeries().values().toArray(new BigDecimal[0]));
+				timeSeries2Actual.getSeries().values().toArray(new BigDecimal[0]));
 	}
 }
