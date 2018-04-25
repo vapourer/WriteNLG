@@ -3,17 +3,17 @@
 
 package analysis.interfaces;
 
-import analysis.TimeSeriesDerivedInformation;
+import analysis.TimeSeriesWithDerivedInformation;
 
 /**
- * Analyses input data which represents a time series, and stores results in a TimeSeriesDerivedInformation object.
+ * Analyses input data which represents a time series, and stores results in a TimeSeriesWithDerivedInformation object.
  */
 public interface TimeSeriesAnalysis
 {
 	/**
-	 * Analyses input time series, storing results in a TimeSeriesDerivedInformation object.
+	 * Analyses input time series, storing results in a TimeSeriesWithDerivedInformation object.
 	 * 
-	 * @return TimeSeriesDerivedInformation
+	 * @return TimeSeriesWithDerivedInformation
 	 */
-	TimeSeriesDerivedInformation analyse();
+	TimeSeriesWithDerivedInformation analyse();
 }

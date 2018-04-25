@@ -129,7 +129,7 @@ public class WriteNlg
 		{
 			System.out.println(eachTimeSeries.getSeriesLegend());
 
-			final Segmentation segmenter = new Segmenter(eachTimeSeries.getSeries());
+			final Segmentation segmenter = new Segmenter(eachTimeSeries);
 
 			// final Smoothing bottomUpPiecewiseLinearFunction = new BottomUpPiecewiseLinearFunction(
 			// eachTimeSeries.getTimeSeries(), properties);

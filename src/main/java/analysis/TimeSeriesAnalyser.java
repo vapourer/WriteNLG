@@ -17,7 +17,8 @@ import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
 
 /**
- * Analyses a TimeSeries instance, from which derived information is stored in a TimeSeriesDerivedInformation instance.
+ * Analyses a TimeSeries instance, from which derived information is stored in a TimeSeriesWithDerivedInformation
+ * instance.
  */
 public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 {
@@ -35,23 +36,24 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 	{
 		this.timeSeries = timeSeries;
 
-		final Segmentation segmenter = new Segmenter(timeSeries.getSeries());
+		final Segmentation segmenter = new Segmenter(timeSeries);
 		this.segments = segmenter.createSegments();
 
 		LOGGER.info("TimeSeriesAnalyser created");
 	}
 
 	/**
-	 * Analyses this TimeSeries, and stores derived information in a TimeSeriesDerivedInformation instance, via a
+	 * Analyses this TimeSeries, and stores derived information in a TimeSeriesWithDerivedInformation instance, via a
 	 * builder.
 	 */
 	@Override
-	public TimeSeriesDerivedInformation analyse()
+	public TimeSeriesWithDerivedInformation analyse()
 	{
 		LOGGER.info(String.format("Building statistical analysis for %s", this.timeSeries.getSeriesLegend()));
 
-		final TimeSeriesDerivedInformationBuilder builder = new TimeSeriesDerivedInformationBuilder();
+		final TimeSeriesWithDerivedInformationBuilder builder = new TimeSeriesWithDerivedInformationBuilder();
 
+		builder.setTimeSeries(this.timeSeries);
 		builder.setPointWithMaximumValue(new Maximum(this.timeSeries).calculate());
 		builder.setPointWithMinimumValue(new Minimum(this.timeSeries).calculate());
 		builder.setSegments(this.segments);

@@ -9,15 +9,7 @@ package writenlg.substitution;
 public interface Mapper
 {
 	/**
-	 * Maps substitutions to placeholders.
-	 * 
-	 * @param placeHolder
-	 * @param substitute
+	 * Maps values to placeholders.
 	 */
-	void mapPlaceHolder(String placeHolder, String substitute);
-
-	/**
-	 * @return Substitutions
-	 */
-	// Substitutions getSubstitutions();
+	void mapValuesToPlaceHolders();
 }

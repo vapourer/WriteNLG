@@ -3,50 +3,53 @@
 
 package writenlg.substitution;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-import analysis.LineGraphDerivedInformation;
-import analysis.graph.TimeSeries;
+import analysis.LineGraphWithDerivedInformation;
+import analysis.TimeSeriesWithDerivedInformation;
 
 /**
  * Manages globalSubstitutions for use during parsing.
  */
 public class Substitutor implements Mapper
 {
-	private final LineGraphDerivedInformation lineGraphDerivedInformation;
+	private final LineGraphWithDerivedInformation lineGraphWithDerivedInformation;
 	private final Substitutions globalSubstitutions;
-	private final Map<TimeSeries, Substitutions> seriesSubstitutions;
+	private final List<TimeSeriesMapping> timeSeriesMappings;
 
 	/**
 	 * Creates a Substitutor instance.
 	 */
-	public Substitutor(final LineGraphDerivedInformation lineGraphDerivedInformation)
+	public Substitutor(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation)
 	{
-		this.lineGraphDerivedInformation = lineGraphDerivedInformation;
+		this.lineGraphWithDerivedInformation = lineGraphWithDerivedInformation;
 		this.globalSubstitutions = new Substitutions();
-		this.seriesSubstitutions = new HashMap<>();
-	}
-
-	public void mapPlaceHolders()
-	{
-		mapPlaceHolder("@@Maximum@@", lineGraphDerivedInformation.getTimeSeriesDerivedInformation().get(0)
-				.getPointWithMaximumValue().getY().toString());
-
-		mapPlaceHolder("@@Minimum@@", lineGraphDerivedInformation.getTimeSeriesDerivedInformation().get(0)
-				.getPointWithMinimumValue().getY().toString());
+		this.timeSeriesMappings = new ArrayList<>();
 	}
 
 	/**
-	 * Maps globalSubstitutions to placeholders.
+	 * Maps substitutions to place-holders.
 	 * 
 	 * @param placeHolder
 	 * @param substitute
 	 */
 	@Override
-	public void mapPlaceHolder(final String placeHolder, final String substitute)
+	public void mapValuesToPlaceHolders()
 	{
-		this.globalSubstitutions.addSubstitution(placeHolder, substitute);
+		List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation = lineGraphWithDerivedInformation
+				.getTimeSeriesDerivedInformation();
+
+		for (TimeSeriesWithDerivedInformation eachTimeSeriesWithDerivedInformation : timeSeriesWithDerivedInformation)
+		{
+			Substitutions substitutions = new Substitutions();
+			substitutions.addSubstitution("@@Maximum@@",
+					eachTimeSeriesWithDerivedInformation.getPointWithMaximumValue().getY().toString());
+			substitutions.addSubstitution("@@Minimum@@",
+					eachTimeSeriesWithDerivedInformation.getPointWithMinimumValue().getY().toString());
+			this.timeSeriesMappings
+					.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation.getTimeSeries(), substitutions));
+		}
 	}
 
 	/**
@@ -57,4 +60,11 @@ public class Substitutor implements Mapper
 		return globalSubstitutions;
 	}
 
+	/**
+	 * @return the timeSeriesMappings
+	 */
+	public List<TimeSeriesMapping> getTimeSeriesMappings()
+	{
+		return new ArrayList<>(this.timeSeriesMappings);
+	}
 }

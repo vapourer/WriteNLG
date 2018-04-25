@@ -7,29 +7,40 @@ import java.util.List;
 
 import analysis.graph.Point;
 import analysis.graph.Segment;
+import analysis.graph.TimeSeries;
 
 /**
  * Container for analysis of a time series, based on selected statistical algorithms.
  */
-public class TimeSeriesDerivedInformation
+public class TimeSeriesWithDerivedInformation
 {
+	private final TimeSeries timeSeries;
 	private final Point pointWithMaximumValue;
 	private final Point pointWithMinimumValue;
 	private final List<Segment> segments;
 
 	/**
-	 * Creates an TimeSeriesDerivedInformation instance.
+	 * Creates an TimeSeriesWithDerivedInformation instance.
 	 * 
 	 * @param pointWithMaximumValue
 	 * @param pointWithMinimumValue
 	 * @param segments
 	 */
-	public TimeSeriesDerivedInformation(final Point pointWithMaximumValue, final Point pointWithMinimumValue,
-			final List<Segment> segments)
+	public TimeSeriesWithDerivedInformation(final TimeSeries timeSeries, final Point pointWithMaximumValue,
+			final Point pointWithMinimumValue, final List<Segment> segments)
 	{
+		this.timeSeries = timeSeries;
 		this.pointWithMaximumValue = pointWithMaximumValue;
 		this.pointWithMinimumValue = pointWithMinimumValue;
 		this.segments = segments;
+	}
+
+	/**
+	 * @return the timeSeries
+	 */
+	public TimeSeries getTimeSeries()
+	{
+		return timeSeries;
 	}
 
 	/**

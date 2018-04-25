@@ -17,6 +17,7 @@ import writenlg.expertinput.PhraseCreatorLexerParser;
 import writenlg.expertinput.listener.PhraseCreatorListener;
 import writenlg.simplenlg.SimpleNlg;
 import writenlg.substitution.Substitutor;
+import writenlg.substitution.TimeSeriesMapping;
 
 /**
  * Processes input data using linguistic rules based on the PhraseCreator ANTLR grammar.
@@ -38,6 +39,7 @@ public class PhraseCreatorController extends Controller
 		super(WriteNlgProperties.getInstance().getProperty("AntlrInputPhraseCreator"));
 
 		this.lineGraphAnalysis = lineGraphAnalysis;
+
 		LOGGER.info("PhraseCreatorController created");
 	}
 
@@ -55,30 +57,36 @@ public class PhraseCreatorController extends Controller
 
 		final List<PhraseSpecification> phraseSpecifications = listener.getPhraseSpecifications();
 
-		final StringBuilder builder = new StringBuilder();
+		Substitutor substitutor = new Substitutor(lineGraphAnalysis.analyse());
+		substitutor.mapValuesToPlaceHolders();
+
+		List<TimeSeriesMapping> timeSeriesMappings = substitutor.getTimeSeriesMappings();
 
 		final SimpleNlg simpleNlg = SimpleNlg.getInstance();
+		String summary = "";
 
-		for (final PhraseSpecification phraseSpecification : phraseSpecifications)
+		for (TimeSeriesMapping eachTimeSeriesMapping : timeSeriesMappings)
 		{
-			final SPhraseSpec clause = simpleNlg.createClause();
-			clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());
-			clause.setVerb(phraseSpecification.getPredicate().getVerb().getText());
-			clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
-			builder.append(simpleNlg.realise(clause));
-			builder.append(System.lineSeparator());
-		}
+			final StringBuilder builder = new StringBuilder();
 
-		String summary = builder.toString();
+			for (final PhraseSpecification phraseSpecification : phraseSpecifications)
+			{
+				final SPhraseSpec clause = simpleNlg.createClause();
+				clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());
+				clause.setVerb(phraseSpecification.getPredicate().getVerb().getText());
+				clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
+				builder.append(simpleNlg.realise(clause));
+				builder.append(System.lineSeparator());
+			}
 
-		Substitutor substitutor = new Substitutor(lineGraphAnalysis.analyse());
-		substitutor.mapPlaceHolders();
+			summary += builder.toString();
 
-		Map<String, String> substitutions = substitutor.getGlobalSubstitutions().getSubstitutions();
+			Map<String, String> substitutions = eachTimeSeriesMapping.getSubstitutions().getSubstitutions();
 
-		for (final String eachPlaceHolder : substitutions.keySet())
-		{
-			summary = summary.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+			for (final String eachPlaceHolder : substitutions.keySet())
+			{
+				summary = summary.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+			}
 		}
 
 		return summary;

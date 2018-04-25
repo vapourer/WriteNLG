@@ -3,19 +3,19 @@
 
 package analysis.interfaces;
 
-import analysis.LineGraphDerivedInformation;
+import analysis.LineGraphWithDerivedInformation;
 
 /**
  * Analyses input data which represents multiple time series depicted on a line graph. Results are stored in a
- * LineGraphDerivedInformation object.
+ * LineGraphWithDerivedInformation object.
  */
 public interface LineGraphAnalysis
 {
 	/**
-	 * Collects TimeSeriesDerivedInformation instances from TimeSeriesAnalysis analyse calls, for further analysis and
+	 * Collects TimeSeriesWithDerivedInformation instances from TimeSeriesAnalysis analyse calls, for further analysis and
 	 * comparison.
 	 * 
-	 * @return LineGraphDerivedInformation
+	 * @return LineGraphWithDerivedInformation
 	 */
-	LineGraphDerivedInformation analyse();
+	LineGraphWithDerivedInformation analyse();
 }

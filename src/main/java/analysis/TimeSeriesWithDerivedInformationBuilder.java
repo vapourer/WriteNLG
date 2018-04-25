@@ -7,24 +7,36 @@ import java.util.List;
 
 import analysis.graph.Point;
 import analysis.graph.Segment;
+import analysis.graph.TimeSeries;
 
 /**
- * Builder for the TimeSeriesDerivedInformation class.
+ * Builder for the TimeSeriesWithDerivedInformation class.
  */
-public class TimeSeriesDerivedInformationBuilder
+public class TimeSeriesWithDerivedInformationBuilder
 {
+	private TimeSeries timeSeries;
 	private Point pointWithMaximumValue;
 	private Point pointWithMinimumValue;
 	private List<Segment> segments;
 
 	/**
-	 * Creates a new TimeSeriesDerivedInformation instance.
+	 * Creates a new TimeSeriesWithDerivedInformation instance.
 	 *
-	 * @return TimeSeriesDerivedInformation
+	 * @return TimeSeriesWithDerivedInformation
 	 */
-	public TimeSeriesDerivedInformation createTimeSeriesDerivedInformation()
+	public TimeSeriesWithDerivedInformation createTimeSeriesDerivedInformation()
 	{
-		return new TimeSeriesDerivedInformation(this.pointWithMaximumValue, this.pointWithMinimumValue, this.segments);
+		return new TimeSeriesWithDerivedInformation(this.timeSeries, this.pointWithMaximumValue,
+				this.pointWithMinimumValue, this.segments);
+	}
+
+	/**
+	 * @param timeSeries
+	 *            the timeSeries to set
+	 */
+	public void setTimeSeries(TimeSeries timeSeries)
+	{
+		this.timeSeries = timeSeries;
 	}
 
 	/**

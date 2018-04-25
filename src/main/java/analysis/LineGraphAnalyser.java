@@ -15,7 +15,8 @@ import analysis.interfaces.LineGraphAnalysis;
 import analysis.interfaces.TimeSeriesAnalysis;
 
 /**
- * Analyses a LineGraph instance, from which derived information is stored in a LineGraphDerivedInformation instance.
+ * Analyses a LineGraph instance, from which derived information is stored in a LineGraphWithDerivedInformation
+ * instance.
  */
 public class LineGraphAnalyser implements LineGraphAnalysis
 {
@@ -36,28 +37,29 @@ public class LineGraphAnalyser implements LineGraphAnalysis
 	}
 
 	/**
-	 * Collects TimeSeriesDerivedInformation instances from TimeSeriesAnalysis analyse calls, for further analysis and
+	 * Collects TimeSeriesWithDerivedInformation instances from TimeSeriesAnalysis analyse calls, for further analysis
+	 * and
 	 * comparison.
 	 * 
-	 * @return LineGraphDerivedInformation
+	 * @return LineGraphWithDerivedInformation
 	 */
 	@Override
-	public LineGraphDerivedInformation analyse()
+	public LineGraphWithDerivedInformation analyse()
 	{
-		LOGGER.info("Analysing LineGraph and building LineGraphDerivedInformation");
+		LOGGER.info("Analysing LineGraph and building LineGraphWithDerivedInformation");
 
-		List<TimeSeriesDerivedInformation> timeSeriesDerivedInformation = new ArrayList<>();
+		List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation = new ArrayList<>();
 
 		List<TimeSeries> timeSeriesGroup = this.graph.getTimeSeriesGroup();
 
 		for (TimeSeries eachTimeSeries : timeSeriesGroup)
 		{
 			TimeSeriesAnalysis timeSeriesAnalysis = new TimeSeriesAnalyser(eachTimeSeries);
-			timeSeriesDerivedInformation.add(timeSeriesAnalysis.analyse());
+			timeSeriesWithDerivedInformation.add(timeSeriesAnalysis.analyse());
 		}
 
-		LineGraphDerivedInformationBuilder builder = new LineGraphDerivedInformationBuilder();
-		builder.setTimeSeriesDerivedInformation(timeSeriesDerivedInformation);
+		LineGraphWithDerivedInformationBuilder builder = new LineGraphWithDerivedInformationBuilder();
+		builder.setTimeSeriesWithDerivedInformation(timeSeriesWithDerivedInformation);
 		return builder.createLineGraphDerivedInformation();
 	}
 }
