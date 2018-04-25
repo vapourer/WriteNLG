@@ -238,7 +238,7 @@ public class WriteNlg
 	// System.out.println();
 	// System.out.println("Integrated approach based on ANTLR input");
 	//
-	// final Regulator regulator = new Regulator();
+	// final Substitutor regulator = new Substitutor();
 	// final TimeSeriesAnalysis analyser = new TimeSeriesAnalyser(regulator, numbersAsStringBuilder.toString());
 	// analyser.analyse();
 	//

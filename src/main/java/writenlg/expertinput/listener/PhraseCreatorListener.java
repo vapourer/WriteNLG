@@ -23,7 +23,7 @@ import analysis.linguistics.phrase.partofspeech.PartOfSpeech;
 import analysis.linguistics.phrase.partofspeech.Verb;
 import writenlg.antlrgenerated.PhraseCreatorBaseListener;
 import writenlg.antlrgenerated.PhraseCreatorParser;
-import writenlg.regulator.Substitutions;
+import writenlg.substitution.Substitutions;
 
 /**
  * PhraseCreator BaseListener overrides specific to PhraseCreator.

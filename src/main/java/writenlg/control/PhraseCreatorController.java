@@ -4,6 +4,7 @@
 package writenlg.control;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +16,7 @@ import writenlg.expertinput.LexerParser;
 import writenlg.expertinput.PhraseCreatorLexerParser;
 import writenlg.expertinput.listener.PhraseCreatorListener;
 import writenlg.simplenlg.SimpleNlg;
+import writenlg.substitution.Substitutor;
 
 /**
  * Processes input data using linguistic rules based on the PhraseCreator ANTLR grammar.
@@ -67,7 +69,19 @@ public class PhraseCreatorController extends Controller
 			builder.append(System.lineSeparator());
 		}
 
-		return builder.toString();
+		String summary = builder.toString();
+
+		Substitutor substitutor = new Substitutor(lineGraphAnalysis.analyse());
+		substitutor.mapPlaceHolders();
+
+		Map<String, String> substitutions = substitutor.getGlobalSubstitutions().getSubstitutions();
+
+		for (final String eachPlaceHolder : substitutions.keySet())
+		{
+			summary = summary.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+		}
+
+		return summary;
 	}
 
 }

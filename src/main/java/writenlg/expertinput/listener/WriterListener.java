@@ -11,7 +11,6 @@ import java.util.Map;
 import simplenlg.features.Tense;
 import writenlg.antlrgenerated.WriterBaseListener;
 import writenlg.antlrgenerated.WriterParser;
-import writenlg.regulator.Substitutions;
 import writenlg.simplenlg.CoordinatedPhrase;
 import writenlg.simplenlg.Document;
 import writenlg.simplenlg.DocumentGenerator;
@@ -20,6 +19,7 @@ import writenlg.simplenlg.Paragraph;
 import writenlg.simplenlg.Section;
 import writenlg.simplenlg.Sentence;
 import writenlg.simplenlg.SimpleClause;
+import writenlg.substitution.Substitutions;
 
 /**
  * WriterBaseListener overrides specific to Writer.

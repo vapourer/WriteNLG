@@ -17,25 +17,22 @@ import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
 
 /**
- * Analyses input data and maps processed information to placeholder tokens.
- * Placeholders and algorithms used for analysis are domain specific.
+ * Analyses a TimeSeries instance, from which derived information is stored in a TimeSeriesDerivedInformation instance.
  */
 public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 {
 	private static final Logger LOGGER = LogManager.getLogger("TimeSeriesAnalyser.class");
 
 	private final TimeSeries timeSeries;
-
-	// Regulatory regulator;
-	// private final BigDecimal[] series;
 	List<Segment> segments;
 
-	// public TimeSeriesAnalyser(final Regulatory regulator, final TimeSeries timeSeries)
+	/**
+	 * Creates a new TimeSeriesAnalyser instance.
+	 * 
+	 * @param timeSeries
+	 */
 	public TimeSeriesAnalyser(final TimeSeries timeSeries)
 	{
-		// this.regulator = regulator;
-		// this.series = timeSeries.getSeries().values().toArray(new BigDecimal[0]);
-
 		this.timeSeries = timeSeries;
 
 		final Segmentation segmenter = new Segmenter(timeSeries.getSeries());
@@ -45,22 +42,20 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 	}
 
 	/**
-	 * Maps information derived from processed raw data to placeholders and stores
-	 * in the regulator.
+	 * Analyses this TimeSeries, and stores derived information in a TimeSeriesDerivedInformation instance, via a
+	 * builder.
 	 */
 	@Override
 	public TimeSeriesDerivedInformation analyse()
 	{
-		LOGGER.info("Building statistical analysis");
-		// this.regulator.mapPlaceHolder("@Maximum", Double.toString(Arrays.stream(this.rawData).max().getAsDouble()));
-		// this.regulator.mapPlaceHolder("@Minimum", Double.toString(Arrays.stream(this.rawData).min().getAsDouble()));
-		// this.regulator.mapPlaceHolder("@Average",
-		// Double.toString(Arrays.stream(this.rawData).average().getAsDouble()));
+		LOGGER.info(String.format("Building statistical analysis for %s", this.timeSeries.getSeriesLegend()));
 
 		final TimeSeriesDerivedInformationBuilder builder = new TimeSeriesDerivedInformationBuilder();
+
 		builder.setPointWithMaximumValue(new Maximum(this.timeSeries).calculate());
 		builder.setPointWithMinimumValue(new Minimum(this.timeSeries).calculate());
 		builder.setSegments(this.segments);
+
 		return builder.createTimeSeriesDerivedInformation();
 	}
 }
