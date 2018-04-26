@@ -3,10 +3,13 @@
 
 package analysis;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.SortedMap;
 
 import analysis.graph.Point;
 import analysis.graph.Segment;
+import analysis.graph.Slope;
 import analysis.graph.TimeSeries;
 import analysis.time.TimeSlice;
 
@@ -20,6 +23,8 @@ public class TimeSeriesWithDerivedInformationBuilder
 	private Point pointWithMinimumValue;
 	private List<Segment> segments;
 	private TimeSlice timeSlice;
+	private SortedMap<Long, BigDecimal> timeSeriesSmoothed;
+	private Slope directionOfLongestSegment;
 
 	/**
 	 * Creates a new TimeSeriesWithDerivedInformation instance.
@@ -29,7 +34,8 @@ public class TimeSeriesWithDerivedInformationBuilder
 	public TimeSeriesWithDerivedInformation createTimeSeriesDerivedInformation()
 	{
 		return new TimeSeriesWithDerivedInformation(this.timeSeries, this.pointWithMaximumValue,
-				this.pointWithMinimumValue, this.segments, this.timeSlice);
+				this.pointWithMinimumValue, this.segments, this.timeSlice, this.timeSeriesSmoothed,
+				this.directionOfLongestSegment);
 	}
 
 	/**
@@ -75,5 +81,23 @@ public class TimeSeriesWithDerivedInformationBuilder
 	public void setTimeSlice(TimeSlice timeSlice)
 	{
 		this.timeSlice = timeSlice;
+	}
+
+	/**
+	 * @param timeSeriesSmoothed
+	 *            the timeSeriesSmoothed to set
+	 */
+	public void setTimeSeriesSmoothed(SortedMap<Long, BigDecimal> timeSeriesSmoothed)
+	{
+		this.timeSeriesSmoothed = timeSeriesSmoothed;
+	}
+
+	/**
+	 * @param directionOfLongestSegment
+	 *            the directionOfLongestSegment to set
+	 */
+	public void setDirectionOfLongestSegment(Slope directionOfLongestSegment)
+	{
+		this.directionOfLongestSegment = directionOfLongestSegment;
 	}
 }

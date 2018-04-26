@@ -10,12 +10,12 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesWithDerivedInformation;
 
 /**
- * Manages globalSubstitutions for use during parsing.
+ * Manages globalMappings for use during parsing.
  */
 public class Substitutor implements Mapper
 {
 	private final LineGraphWithDerivedInformation lineGraphWithDerivedInformation;
-	private final Substitutions globalSubstitutions;
+	private final Substitutions globalMappings;
 	private final List<TimeSeriesMapping> timeSeriesMappings;
 
 	/**
@@ -24,7 +24,7 @@ public class Substitutor implements Mapper
 	public Substitutor(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation)
 	{
 		this.lineGraphWithDerivedInformation = lineGraphWithDerivedInformation;
-		this.globalSubstitutions = new Substitutions();
+		this.globalMappings = new Substitutions();
 		this.timeSeriesMappings = new ArrayList<>();
 	}
 
@@ -50,16 +50,18 @@ public class Substitutor implements Mapper
 					eachTimeSeriesWithDerivedInformation.getPointWithMaximumValue().getY().toString());
 			substitutions.addSubstitution("@@Minimum@@",
 					eachTimeSeriesWithDerivedInformation.getPointWithMinimumValue().getY().toString());
+			substitutions.addSubstitution("@@Direction@@",
+					eachTimeSeriesWithDerivedInformation.getDirectionOfLongestSegment().toString());
 			this.timeSeriesMappings.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation, substitutions));
 		}
 	}
 
 	/**
-	 * @return the globalSubstitutions
+	 * @return the globalMappings
 	 */
-	public Substitutions getGlobalSubstitutions()
+	public Substitutions getGlobalMappings()
 	{
-		return globalSubstitutions;
+		return globalMappings;
 	}
 
 	/**

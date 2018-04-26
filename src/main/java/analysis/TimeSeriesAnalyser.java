@@ -12,11 +12,13 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.graph.Segment;
 import analysis.graph.Segmenter;
+import analysis.graph.Slope;
 import analysis.graph.TimeSeries;
 import analysis.interfaces.Segmentation;
 import analysis.interfaces.TimeSeriesAnalysis;
 import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
+import analysis.statistics.pedergnanafurlani.BottomUpPiecewiseLinearFunction;
 import analysis.time.TimeSlice;
 
 /**
@@ -62,6 +64,12 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		builder.setSegments(this.segments);
 		builder.setTimeSlice(calculateTimeSlice());
 
+		SortedMap<Long, BigDecimal> timeSeriesSmoothed = new BottomUpPiecewiseLinearFunction(this.segments)
+				.smoothGraph();
+
+		builder.setTimeSeriesSmoothed(timeSeriesSmoothed);
+		builder.setDirectionOfLongestSegment(calculateDirectionOfLongestSegment(timeSeriesSmoothed));
+
 		return builder.createTimeSeriesDerivedInformation();
 	}
 
@@ -70,5 +78,22 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		SortedMap<Long, BigDecimal> series = this.timeSeries.getSeries();
 		Long[] times = series.keySet().toArray(new Long[0]);
 		return new TimeSlice(times[0], times[1]);
+	}
+
+	private Slope calculateDirectionOfLongestSegment(final SortedMap<Long, BigDecimal> timeSeriesSmoothed)
+	{
+		final Segmentation segmenter = new Segmenter(timeSeriesSmoothed, this.timeSeries.getSeriesLegend());
+		Segment[] smoothedSegments = segmenter.createSegments().toArray(new Segment[0]);
+		Segment longestSegment = smoothedSegments[0];
+
+		for (int i = 1; i < smoothedSegments.length; i++)
+		{
+			if (smoothedSegments[i].getXDistance().compareTo(longestSegment.getXDistance()) > 0)
+			{
+				longestSegment = smoothedSegments[i];
+			}
+		}
+
+		return longestSegment.getSlope();
 	}
 }

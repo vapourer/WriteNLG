@@ -27,12 +27,26 @@ public class Segmenter implements Segmentation
 	/**
 	 * Creates a Segmenter instance.
 	 * 
-	 * @param timeSeries
+	 * @param series
 	 */
-	public Segmenter(final TimeSeries timeSeries)
+	public Segmenter(final TimeSeries series)
 	{
-		this.timeSeries = timeSeries.getSeries();
-		this.seriesLegend = timeSeries.getSeriesLegend();
+		this.timeSeries = series.getSeries();
+		this.seriesLegend = series.getSeriesLegend();
+
+		LOGGER.info(String.format("Segmenter created for %s", this.seriesLegend));
+	}
+
+	/**
+	 * Creates a Segmenter instance.
+	 * 
+	 * @param timeSeries
+	 * @param seriesLegend
+	 */
+	public Segmenter(final SortedMap<Long, BigDecimal> timeSeries, String seriesLegend)
+	{
+		this.timeSeries = timeSeries;
+		this.seriesLegend = seriesLegend;
 
 		LOGGER.info(String.format("Segmenter created for %s", this.seriesLegend));
 	}
