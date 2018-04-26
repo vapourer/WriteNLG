@@ -9,10 +9,16 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Evaluates a Set of soft constraints using weighted addition.
+ */
 public class WeightedAdditionConstraintProcessor extends ConstraintProcessor
 {
 	private static final Logger LOGGER = LogManager.getLogger("WeightedAdditionConstraintProcessor.class");
 
+	/**
+	 * @return SUM(satisfaction level * weighting) for constraints
+	 */
 	@Override
 	public <E> BigDecimal evaluate(final Set<? extends Constraint<E>> constraints)
 	{
