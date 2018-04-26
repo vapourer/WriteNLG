@@ -44,6 +44,8 @@ public class Substitutor implements Mapper
 		{
 			Substitutions substitutions = new Substitutions();
 			substitutions.addSubstitution("@@SeriesLegend@@", eachTimeSeriesWithDerivedInformation.getSeriesLegend());
+			substitutions.addSubstitution("@@TimeSlice@@",
+					eachTimeSeriesWithDerivedInformation.getTimeSlice().toString());
 			substitutions.addSubstitution("@@Maximum@@",
 					eachTimeSeriesWithDerivedInformation.getPointWithMaximumValue().getY().toString());
 			substitutions.addSubstitution("@@Minimum@@",

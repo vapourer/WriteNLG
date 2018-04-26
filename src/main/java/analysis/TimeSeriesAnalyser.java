@@ -3,7 +3,9 @@
 
 package analysis;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.SortedMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +17,7 @@ import analysis.interfaces.Segmentation;
 import analysis.interfaces.TimeSeriesAnalysis;
 import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
+import analysis.time.TimeSlice;
 
 /**
  * Analyses a TimeSeries instance, from which derived information is stored in a TimeSeriesWithDerivedInformation
@@ -57,7 +60,15 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		builder.setPointWithMaximumValue(new Maximum(this.timeSeries).calculate());
 		builder.setPointWithMinimumValue(new Minimum(this.timeSeries).calculate());
 		builder.setSegments(this.segments);
+		builder.setTimeSlice(calculateTimeSlice());
 
 		return builder.createTimeSeriesDerivedInformation();
+	}
+
+	private TimeSlice calculateTimeSlice()
+	{
+		SortedMap<Long, BigDecimal> series = this.timeSeries.getSeries();
+		Long[] times = series.keySet().toArray(new Long[0]);
+		return new TimeSlice(times[0], times[1]);
 	}
 }

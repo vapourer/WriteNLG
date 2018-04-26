@@ -10,6 +10,7 @@ import java.util.SortedMap;
 import analysis.graph.Point;
 import analysis.graph.Segment;
 import analysis.graph.TimeSeries;
+import analysis.time.TimeSlice;
 
 /**
  * Container for analysis of a time series, based on selected statistical algorithms.
@@ -20,6 +21,7 @@ public class TimeSeriesWithDerivedInformation
 	private final Point pointWithMaximumValue;
 	private final Point pointWithMinimumValue;
 	private final List<Segment> segments;
+	private final TimeSlice timeSlice;
 
 	/**
 	 * Creates an TimeSeriesWithDerivedInformation instance.
@@ -29,12 +31,13 @@ public class TimeSeriesWithDerivedInformation
 	 * @param segments
 	 */
 	public TimeSeriesWithDerivedInformation(final TimeSeries timeSeries, final Point pointWithMaximumValue,
-			final Point pointWithMinimumValue, final List<Segment> segments)
+			final Point pointWithMinimumValue, final List<Segment> segments, final TimeSlice timeSlice)
 	{
 		this.timeSeries = timeSeries;
 		this.pointWithMaximumValue = pointWithMaximumValue;
 		this.pointWithMinimumValue = pointWithMinimumValue;
 		this.segments = segments;
+		this.timeSlice = timeSlice;
 	}
 
 	/**
@@ -91,5 +94,13 @@ public class TimeSeriesWithDerivedInformation
 	public SortedMap<Long, BigDecimal> getSeries()
 	{
 		return timeSeries.getSeries();
+	}
+
+	/**
+	 * @return the timeSlice
+	 */
+	public TimeSlice getTimeSlice()
+	{
+		return timeSlice;
 	}
 }

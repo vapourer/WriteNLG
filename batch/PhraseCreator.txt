@@ -68,7 +68,7 @@ NOUN		:	turning point
 Concept=TIME_SLICE
 PhraseSpecification
 Subject
-NOUN		:	interval
+NOUN		:	time interval
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@TimeSlice@@

@@ -8,6 +8,7 @@ import java.util.List;
 import analysis.graph.Point;
 import analysis.graph.Segment;
 import analysis.graph.TimeSeries;
+import analysis.time.TimeSlice;
 
 /**
  * Builder for the TimeSeriesWithDerivedInformation class.
@@ -18,6 +19,7 @@ public class TimeSeriesWithDerivedInformationBuilder
 	private Point pointWithMaximumValue;
 	private Point pointWithMinimumValue;
 	private List<Segment> segments;
+	private TimeSlice timeSlice;
 
 	/**
 	 * Creates a new TimeSeriesWithDerivedInformation instance.
@@ -27,7 +29,7 @@ public class TimeSeriesWithDerivedInformationBuilder
 	public TimeSeriesWithDerivedInformation createTimeSeriesDerivedInformation()
 	{
 		return new TimeSeriesWithDerivedInformation(this.timeSeries, this.pointWithMaximumValue,
-				this.pointWithMinimumValue, this.segments);
+				this.pointWithMinimumValue, this.segments, this.timeSlice);
 	}
 
 	/**
@@ -64,5 +66,14 @@ public class TimeSeriesWithDerivedInformationBuilder
 	public void setSegments(final List<Segment> segments)
 	{
 		this.segments = segments;
+	}
+
+	/**
+	 * @param timeSlice
+	 *            the timeSlice to set
+	 */
+	public void setTimeSlice(TimeSlice timeSlice)
+	{
+		this.timeSlice = timeSlice;
 	}
 }
