@@ -47,8 +47,7 @@ public class Substitutor implements Mapper
 					eachTimeSeriesWithDerivedInformation.getPointWithMaximumValue().getY().toString());
 			substitutions.addSubstitution("@@Minimum@@",
 					eachTimeSeriesWithDerivedInformation.getPointWithMinimumValue().getY().toString());
-			this.timeSeriesMappings
-					.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation.getTimeSeries(), substitutions));
+			this.timeSeriesMappings.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation, substitutions));
 		}
 	}
 

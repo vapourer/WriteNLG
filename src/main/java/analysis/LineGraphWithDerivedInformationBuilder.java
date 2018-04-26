@@ -5,11 +5,14 @@ package analysis;
 
 import java.util.List;
 
+import analysis.graph.LineGraph;
+
 /**
  * Builder for the LineGraphWithDerivedInformation class.
  */
 public class LineGraphWithDerivedInformationBuilder
 {
+	private LineGraph lineGraph;
 	private List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation;
 
 	/**
@@ -19,7 +22,7 @@ public class LineGraphWithDerivedInformationBuilder
 	 */
 	public LineGraphWithDerivedInformation createLineGraphDerivedInformation()
 	{
-		return new LineGraphWithDerivedInformation(timeSeriesWithDerivedInformation);
+		return new LineGraphWithDerivedInformation(this.lineGraph, this.timeSeriesWithDerivedInformation);
 	}
 
 	/**
@@ -30,5 +33,14 @@ public class LineGraphWithDerivedInformationBuilder
 			List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation)
 	{
 		this.timeSeriesWithDerivedInformation = timeSeriesWithDerivedInformation;
+	}
+
+	/**
+	 * @param lineGraph
+	 *            the lineGraph to set
+	 */
+	public void setLineGraph(LineGraph lineGraph)
+	{
+		this.lineGraph = lineGraph;
 	}
 }

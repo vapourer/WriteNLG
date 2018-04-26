@@ -3,7 +3,9 @@
 
 package analysis;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.SortedMap;
 
 import analysis.graph.Point;
 import analysis.graph.Segment;
@@ -65,5 +67,29 @@ public class TimeSeriesWithDerivedInformation
 	public List<Segment> getSegments()
 	{
 		return segments;
+	}
+
+	/**
+	 * @return the timeLegend
+	 */
+	public String getTimeLegend()
+	{
+		return timeSeries.getTimeLegend();
+	}
+
+	/**
+	 * @return the seriesLegend
+	 */
+	public String getSeriesLegend()
+	{
+		return timeSeries.getSeriesLegend();
+	}
+
+	/**
+	 * @return the series
+	 */
+	public SortedMap<Long, BigDecimal> getSeries()
+	{
+		return timeSeries.getSeries();
 	}
 }

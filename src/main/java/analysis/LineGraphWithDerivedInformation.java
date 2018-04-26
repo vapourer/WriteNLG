@@ -6,11 +6,15 @@ package analysis;
 import java.util.ArrayList;
 import java.util.List;
 
+import analysis.graph.LineGraph;
+import analysis.graph.TimeSeries;
+
 /**
  * Container for analyses and comparison of multiple time series, based on selected statistical algorithms.
  */
 public class LineGraphWithDerivedInformation
 {
+	private final LineGraph lineGraph;
 	private final List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation;
 
 	/**
@@ -18,8 +22,10 @@ public class LineGraphWithDerivedInformation
 	 * 
 	 * @param timeSeriesWithDerivedInformation
 	 */
-	public LineGraphWithDerivedInformation(List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation)
+	public LineGraphWithDerivedInformation(final LineGraph lineGraph,
+			List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation)
 	{
+		this.lineGraph = lineGraph;
 		this.timeSeriesWithDerivedInformation = timeSeriesWithDerivedInformation;
 	}
 
@@ -29,5 +35,13 @@ public class LineGraphWithDerivedInformation
 	public List<TimeSeriesWithDerivedInformation> getTimeSeriesDerivedInformation()
 	{
 		return new ArrayList<>(this.timeSeriesWithDerivedInformation);
+	}
+
+	/**
+	 * @return the timeSeriesGroup
+	 */
+	public List<TimeSeries> getTimeSeriesGroup()
+	{
+		return lineGraph.getTimeSeriesGroup();
 	}
 }

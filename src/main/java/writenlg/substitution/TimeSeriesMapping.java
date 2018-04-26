@@ -3,41 +3,44 @@
 
 package writenlg.substitution;
 
-import analysis.graph.TimeSeries;
+import java.util.Map;
+
+import analysis.TimeSeriesWithDerivedInformation;
 
 /**
  * Container for Substitutions for this TimeSeries.
  */
 public class TimeSeriesMapping
 {
-	private final TimeSeries timeSeries;
+	private final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation;
 	private final Substitutions substitutions;
 
 	/**
 	 * Creates a new TimeSeriesMapping instance.
 	 * 
-	 * @param timeSeries
+	 * @param timeSeriesWithDerivedInformation
 	 * @param substitutions
 	 */
-	public TimeSeriesMapping(final TimeSeries timeSeries, Substitutions substitutions)
+	public TimeSeriesMapping(final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation,
+			final Substitutions substitutions)
 	{
-		this.timeSeries = timeSeries;
+		this.timeSeriesWithDerivedInformation = timeSeriesWithDerivedInformation;
 		this.substitutions = substitutions;
 	}
 
 	/**
-	 * @return the timeSeries
+	 * @return the timeSeriesWithDerivedInformation
 	 */
-	public TimeSeries getTimeSeries()
+	public TimeSeriesWithDerivedInformation getTimeSeriesWithDerivedInformation()
 	{
-		return timeSeries;
+		return timeSeriesWithDerivedInformation;
 	}
 
 	/**
 	 * @return the substitutions
 	 */
-	public Substitutions getSubstitutions()
+	public Map<String, String> getSubstitutions()
 	{
-		return substitutions;
+		return this.substitutions.getSubstitutions();
 	}
 }

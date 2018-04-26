@@ -59,6 +59,7 @@ public class LineGraphAnalyser implements LineGraphAnalysis
 		}
 
 		LineGraphWithDerivedInformationBuilder builder = new LineGraphWithDerivedInformationBuilder();
+		builder.setLineGraph(this.graph);
 		builder.setTimeSeriesWithDerivedInformation(timeSeriesWithDerivedInformation);
 		return builder.createLineGraphDerivedInformation();
 	}

@@ -81,7 +81,7 @@ public class PhraseCreatorController extends Controller
 
 			summary += builder.toString();
 
-			Map<String, String> substitutions = eachTimeSeriesMapping.getSubstitutions().getSubstitutions();
+			Map<String, String> substitutions = eachTimeSeriesMapping.getSubstitutions();
 
 			for (final String eachPlaceHolder : substitutions.keySet())
 			{
