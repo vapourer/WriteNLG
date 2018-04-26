@@ -43,6 +43,7 @@ public class Substitutor implements Mapper
 		for (TimeSeriesWithDerivedInformation eachTimeSeriesWithDerivedInformation : timeSeriesWithDerivedInformation)
 		{
 			Substitutions substitutions = new Substitutions();
+			substitutions.addSubstitution("@@SeriesLegend@@", eachTimeSeriesWithDerivedInformation.getSeriesLegend());
 			substitutions.addSubstitution("@@Maximum@@",
 					eachTimeSeriesWithDerivedInformation.getPointWithMaximumValue().getY().toString());
 			substitutions.addSubstitution("@@Minimum@@",

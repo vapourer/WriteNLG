@@ -18,6 +18,7 @@ import analysis.linguistics.phrase.PhraseSpecification;
 import analysis.linguistics.phrase.Predicate;
 import analysis.linguistics.phrase.SentencePart;
 import analysis.linguistics.phrase.Subject;
+import analysis.linguistics.phrase.partofspeech.Complement;
 import analysis.linguistics.phrase.partofspeech.NounPhrase;
 import analysis.linguistics.phrase.partofspeech.PartOfSpeech;
 import analysis.linguistics.phrase.partofspeech.Verb;
@@ -156,6 +157,8 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 				break;
 			case PRONOUN:
 				break;
+			case COMPLEMENT:
+				break;
 			default:
 				break;
 		}
@@ -187,6 +190,10 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 			case PREPOSITION:
 				break;
 			case PRONOUN:
+				break;
+			case COMPLEMENT:
+				this.predicate.setComplement(new Complement<>(expression, constraintGroup));
+				LOGGER.info(String.format("New Complement added to Predicate: %s", expression));
 				break;
 			default:
 				break;

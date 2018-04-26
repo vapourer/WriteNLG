@@ -43,16 +43,16 @@ public class TimeSeriesTest
 		final Calendar calendar = Calendar.getInstance();
 
 		calendar.set(Integer.parseInt("17"), Integer.parseInt("01") - 1, Integer.parseInt("06"));
-		Long date1 = calendar.getTimeInMillis();
+		Long date1 = Long.valueOf(calendar.getTimeInMillis());
 
 		calendar.set(Integer.parseInt("17"), Integer.parseInt("01") - 1, Integer.parseInt("13"));
-		Long date2 = calendar.getTimeInMillis();
+		Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
 		calendar.set(Integer.parseInt("17"), Integer.parseInt("01") - 1, Integer.parseInt("20"));
-		Long date3 = calendar.getTimeInMillis();
+		Long date3 = Long.valueOf(calendar.getTimeInMillis());
 
 		calendar.set(Integer.parseInt("17"), Integer.parseInt("01") - 1, Integer.parseInt("27"));
-		Long date4 = calendar.getTimeInMillis();
+		Long date4 = Long.valueOf(calendar.getTimeInMillis());
 
 		timeSeriesExpected.put(date1, new BigDecimal("11991"));
 		timeSeriesExpected.put(date2, new BigDecimal("13715"));

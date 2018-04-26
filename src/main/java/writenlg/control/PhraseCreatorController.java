@@ -74,7 +74,17 @@ public class PhraseCreatorController extends Controller
 				final SPhraseSpec clause = simpleNlg.createClause();
 				clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());
 				clause.setVerb(phraseSpecification.getPredicate().getVerb().getText());
-				clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
+
+				if (phraseSpecification.getPredicate().getNounPhrase() != null)
+				{
+					clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
+				}
+
+				if (phraseSpecification.getPredicate().getComplement() != null)
+				{
+					clause.setComplement(phraseSpecification.getPredicate().getComplement().getText());
+				}
+
 				builder.append(simpleNlg.realise(clause));
 				builder.append(System.lineSeparator());
 			}
@@ -91,5 +101,4 @@ public class PhraseCreatorController extends Controller
 
 		return summary;
 	}
-
 }

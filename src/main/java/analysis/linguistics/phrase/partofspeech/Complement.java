@@ -1,6 +1,3 @@
-// Copyright 2018 David Jakes.
-// This program is distributed under the terms of the GNU General Public License.
-
 package analysis.linguistics.phrase.partofspeech;
 
 import java.util.Set;
@@ -12,24 +9,25 @@ import analysis.constrain.Constraint;
 import analysis.constrain.ConstraintGroup;
 
 /**
- * Represents a noun phrase. Extends AbstractPartOfSpeech, which holds a constraintGroup of type E from which a value
+ * Represents a complement element of a predicate. Extends AbstractPartOfSpeech, which holds a constraintGroup of type E
+ * from which a value
  * can be calculated for a given context.
  */
-public class NounPhrase<E> extends AbstractPartOfSpeech<E>
+public class Complement<E> extends AbstractPartOfSpeech<E>
 {
-	private static final Logger LOGGER = LogManager.getLogger("NounPhrase.class");
+	private static final Logger LOGGER = LogManager.getLogger("Complement.class");
 
 	/**
-	 * Creates a NounPhrase instance.
-	 *
+	 * Creates a Complement instance.
+	 * 
 	 * @param text
 	 * @param constraintGroup
 	 */
-	public NounPhrase(final String text, final ConstraintGroup<E> constraintGroup)
+	public Complement(String text, ConstraintGroup<E> constraintGroup)
 	{
 		super(text, constraintGroup);
 
-		LOGGER.info("New NounPhrase created: " + getText());
+		LOGGER.info("New Verb created: " + getText());
 
 		final Set<? extends Constraint<E>> constraints = getConstraintGroup().getConstraints();
 

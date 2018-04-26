@@ -6,6 +6,7 @@ package analysis.linguistics.phrase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.linguistics.phrase.partofspeech.Complement;
 import analysis.linguistics.phrase.partofspeech.NounPhrase;
 import analysis.linguistics.phrase.partofspeech.Verb;
 
@@ -15,6 +16,7 @@ public class Predicate<E>
 
 	private Verb<E> verb;
 	private NounPhrase<E> nounPhrase;
+	private Complement<E> complement;
 
 	public Predicate()
 	{
@@ -55,5 +57,23 @@ public class Predicate<E>
 	{
 		this.nounPhrase = nounPhrase;
 		LOGGER.info(String.format("New NounPhrase added: %s", this.nounPhrase.getText()));
+	}
+
+	/**
+	 * @return the complement
+	 */
+	public Complement<E> getComplement()
+	{
+		return complement;
+	}
+
+	/**
+	 * @param complement
+	 *            the complement to set
+	 */
+	public void setComplement(Complement<E> complement)
+	{
+		this.complement = complement;
+		LOGGER.info(String.format("New Complement added: %s", this.complement.getText()));
 	}
 }

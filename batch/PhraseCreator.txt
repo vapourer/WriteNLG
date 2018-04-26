@@ -1,14 +1,74 @@
+Concept=SERIES_LEGEND
+PhraseSpecification
+Subject
+NOUN		:	title
+Predicate
+VERB		:	be
+COMPLEMENT	:	@@SeriesLegend@@
 Concept=MAXIMUM
 PhraseSpecification
 Subject
-NOUN	:	maximum
+NOUN		:	maximum
 Predicate
-VERB	:	be	
-NOUN	:	@@Maximum@@
+VERB		:	be
+COMPLEMENT	:	@@Maximum@@
 Concept=MINIMUM
 PhraseSpecification
 Subject
-NOUN	:	minimum
+NOUN		:	minimum
 Predicate
-VERB	:	be	
-NOUN	:	@@Minimum@@
+VERB		:	be
+COMPLEMENT	:	@@Minimum@@
+Concept=RISING_TREND
+PhraseSpecification
+Subject
+NOUN		:	@@SeriesLegend@@
+Predicate
+VERB		:	rise
+Concept=DESCENDING_TREND
+PhraseSpecification
+Subject
+NOUN		:	@@SeriesLegend@@
+Predicate
+VERB		:	fall
+Concept=MULTIPLE_TRENDS
+PhraseSpecification
+Subject
+NOUN		:	@@SeriesLegend@@
+Predicate
+VERB		:	have
+NOUN		:	multiple trend
+Concept=LONGEST_TREND
+PhraseSpecification
+Subject
+NOUN		:	longest trend
+Predicate
+VERB		:	be
+COMPLEMENT	:	@@Direction@@
+Concept=LINES_CROSS
+PhraseSpecification
+Subject
+NOUN		:	line
+Predicate
+VERB		:	cross
+Concept=SPIKES
+PhraseSpecification
+Subject
+NOUN		:	@@SeriesLegend@@
+Predicate
+VERB		:	have
+NOUN		:	spike
+Concept=TURNING_POINTS
+PhraseSpecification
+Subject
+NOUN		:	@@SeriesLegend@@
+Predicate
+VERB		:	have
+NOUN		:	turning point
+Concept=TIME_SLICE
+PhraseSpecification
+Subject
+NOUN		:	interval
+Predicate
+VERB		:	be
+COMPLEMENT	:	@@TimeSlice@@

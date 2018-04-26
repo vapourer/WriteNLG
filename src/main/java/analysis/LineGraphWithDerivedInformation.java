@@ -16,6 +16,7 @@ public class LineGraphWithDerivedInformation
 {
 	private final LineGraph lineGraph;
 	private final List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation;
+	private final int timeSeriesCount;
 
 	/**
 	 * Create a new LineGraphWithDerivedInformation instance.
@@ -23,10 +24,11 @@ public class LineGraphWithDerivedInformation
 	 * @param timeSeriesWithDerivedInformation
 	 */
 	public LineGraphWithDerivedInformation(final LineGraph lineGraph,
-			List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation)
+			List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation, final int timeSeriesCount)
 	{
 		this.lineGraph = lineGraph;
 		this.timeSeriesWithDerivedInformation = timeSeriesWithDerivedInformation;
+		this.timeSeriesCount = timeSeriesCount;
 	}
 
 	/**
@@ -43,5 +45,13 @@ public class LineGraphWithDerivedInformation
 	public List<TimeSeries> getTimeSeriesGroup()
 	{
 		return lineGraph.getTimeSeriesGroup();
+	}
+
+	/**
+	 * @return the timeSeriesCount
+	 */
+	public int getTimeSeriesCount()
+	{
+		return timeSeriesCount;
 	}
 }

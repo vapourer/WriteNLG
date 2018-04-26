@@ -51,6 +51,8 @@ CONCEPT_TYPE			:	'MAXIMUM'
 						|	'LINES_CROSS'
 						|	'SPIKES'
 						|	'TURNING_POINTS'
+						|	'SERIES_LEGEND'
+						|	'TIME_SLICE'
 						;
 						
 PHRASE_SPECIFICATION	:	'PhraseSpecification'
@@ -71,6 +73,7 @@ PART_OF_SPEECH			:	'NOUN'
 						|	'PREPOSITION'
 						|	'CONJUNCTION'
 						|	'INTERJECTION'
+						|	'COMPLEMENT'
 						;
 					
 NUMERIC					:	[0-9]+
