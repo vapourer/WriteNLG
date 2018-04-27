@@ -40,7 +40,7 @@ public abstract class AbstractPartOfSpeech<E>
 	}
 
 	/**
-	 * Add a constraint for this NounPhrase.
+	 * Add a constraint for this part of speech.
 	 *
 	 * @param constraint
 	 */
@@ -50,7 +50,7 @@ public abstract class AbstractPartOfSpeech<E>
 	}
 
 	/**
-	 * Calculates the overall satisfaction level for this NounPhrase.
+	 * Calculates the overall satisfaction level for this part of speech.
 	 *
 	 * @return BigDecimal
 	 */

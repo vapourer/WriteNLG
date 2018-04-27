@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.interfaces.ContentDeterminer;
 import analysis.interfaces.LineGraphAnalysis;
 import analysis.linguistics.phrase.PhraseSpecification;
 import simplenlg.phrasespec.SPhraseSpec;
@@ -55,7 +56,9 @@ public class PhraseCreatorController extends Controller
 		final PhraseCreatorListener listener = new PhraseCreatorListener();
 		lexerParser.walkParseTree(listener);
 
-		final List<PhraseSpecification> phraseSpecifications = listener.getPhraseSpecifications();
+		// final List<PhraseSpecification> phraseSpecifications = listener.getPhraseSpecifications();
+
+		final ContentDeterminer contentDeterminer = listener.getContentDeterminer();
 
 		Substitutor substitutor = new Substitutor(lineGraphAnalysis.analyse());
 		substitutor.mapValuesToPlaceHolders();
@@ -69,7 +72,9 @@ public class PhraseCreatorController extends Controller
 		{
 			final StringBuilder builder = new StringBuilder();
 
-			for (final PhraseSpecification phraseSpecification : phraseSpecifications)
+			// for (final PhraseSpecification phraseSpecification : phraseSpecifications)
+			for (final PhraseSpecification phraseSpecification : contentDeterminer.getSelectedConcepts().get(0)
+					.getPhraseSpecifications())
 			{
 				final SPhraseSpec clause = simpleNlg.createClause();
 				clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());

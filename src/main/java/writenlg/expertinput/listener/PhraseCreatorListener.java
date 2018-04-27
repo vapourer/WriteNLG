@@ -14,6 +14,8 @@ import analysis.Concept;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SoftConstraintGroup;
 import analysis.constrain.WeightedAdditionConstraintProcessor;
+import analysis.interfaces.ContentDeterminer;
+import analysis.linguistics.contentdetermination.ContentDetermination;
 import analysis.linguistics.phrase.PhraseSpecification;
 import analysis.linguistics.phrase.Predicate;
 import analysis.linguistics.phrase.SentencePart;
@@ -33,13 +35,14 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseCreatorListener.class");
 
-	private final List<PhraseSpecification> phraseSpecifications;
+	private List<PhraseSpecification> phraseSpecifications;
 	private final Map<String, String> substitutions;
 	private Concept concept;
 	private PhraseSpecification phraseSpecification;
 	private SentencePart sentencePart;
 	private Subject<String> subject;
 	private Predicate<String> predicate;
+	private final ContentDeterminer contentDeterminer;
 
 	/**
 	 * Creates a PhraseCreator instance.
@@ -54,6 +57,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		this.phraseSpecifications = new ArrayList<>();
 		this.substitutions = substitutions.getSubstitutions();
 		this.sentencePart = SentencePart.SUBJECT;
+		this.contentDeterminer = new ContentDetermination();
 	}
 
 	@Override
@@ -66,7 +70,8 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void exitConcept(final PhraseCreatorParser.ConceptContext context)
 	{
-
+		this.contentDeterminer.addConcept(this.concept, this.phraseSpecifications);
+		phraseSpecifications = new ArrayList<>();
 	}
 
 	@Override
@@ -206,5 +211,13 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	public List<PhraseSpecification> getPhraseSpecifications()
 	{
 		return new ArrayList<>(this.phraseSpecifications);
+	}
+
+	/**
+	 * @return the contentDeterminer
+	 */
+	public ContentDeterminer getContentDeterminer()
+	{
+		return contentDeterminer;
 	}
 }
