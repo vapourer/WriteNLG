@@ -15,6 +15,7 @@ import analysis.graph.Segmenter;
 import analysis.graph.Slope;
 import analysis.graph.TimeSeries;
 import analysis.interfaces.Segmentation;
+import analysis.interfaces.Smoothing;
 import analysis.interfaces.TimeSeriesAnalysis;
 import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
@@ -64,11 +65,11 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		builder.setSegments(this.segments);
 		builder.setTimeSlice(calculateTimeSlice());
 
-		SortedMap<Long, BigDecimal> timeSeriesSmoothed = new BottomUpPiecewiseLinearFunction(this.segments)
-				.smoothGraph();
-
+		Smoothing smoothing = new BottomUpPiecewiseLinearFunction(this.segments);
+		SortedMap<Long, BigDecimal> timeSeriesSmoothed = smoothing.getTimeSeriesSmoothed();
 		builder.setTimeSeriesSmoothed(timeSeriesSmoothed);
-		builder.setDirectionOfLongestSegment(calculateDirectionOfLongestSegment(timeSeriesSmoothed));
+		builder.setDirectionOfLongestSegment(
+				calculateDirectionOfLongestSegment(smoothing.getSmoothedSegments().toArray(new Segment[0])));
 
 		return builder.createTimeSeriesDerivedInformation();
 	}
@@ -80,10 +81,8 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		return new TimeSlice(times[0], times[1]);
 	}
 
-	private Slope calculateDirectionOfLongestSegment(final SortedMap<Long, BigDecimal> timeSeriesSmoothed)
+	private Slope calculateDirectionOfLongestSegment(final Segment[] smoothedSegments)
 	{
-		final Segmentation segmenter = new Segmenter(timeSeriesSmoothed, this.timeSeries.getSeriesLegend());
-		Segment[] smoothedSegments = segmenter.createSegments().toArray(new Segment[0]);
 		Segment longestSegment = smoothedSegments[0];
 
 		for (int i = 1; i < smoothedSegments.length; i++)

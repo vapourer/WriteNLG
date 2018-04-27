@@ -8,5 +8,20 @@ package analysis.graph;
  */
 public enum Slope
 {
-	ASCENDING, DESCENDING, FLAT,
+	ASCENDING("ascending"), DESCENDING("descending"), FLAT("flat");
+
+	final private String textualForm;
+
+	private Slope(final String text)
+	{
+		this.textualForm = text;
+	}
+
+	/**
+	 * @return the textualForm
+	 */
+	public String getTextualForm()
+	{
+		return textualForm;
+	}
 }

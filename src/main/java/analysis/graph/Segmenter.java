@@ -29,24 +29,10 @@ public class Segmenter implements Segmentation
 	 * 
 	 * @param series
 	 */
-	public Segmenter(final TimeSeries series)
+	public Segmenter(final TimeSeries timeSeries)
 	{
-		this.timeSeries = series.getSeries();
-		this.seriesLegend = series.getSeriesLegend();
-
-		LOGGER.info(String.format("Segmenter created for %s", this.seriesLegend));
-	}
-
-	/**
-	 * Creates a Segmenter instance.
-	 * 
-	 * @param timeSeries
-	 * @param seriesLegend
-	 */
-	public Segmenter(final SortedMap<Long, BigDecimal> timeSeries, String seriesLegend)
-	{
-		this.timeSeries = timeSeries;
-		this.seriesLegend = seriesLegend;
+		this.timeSeries = timeSeries.getSeries();
+		this.seriesLegend = timeSeries.getSeriesLegend();
 
 		LOGGER.info(String.format("Segmenter created for %s", this.seriesLegend));
 	}
@@ -67,9 +53,10 @@ public class Segmenter implements Segmentation
 		{
 			final Point point1 = new Point(new BigDecimal(i), this.timeSeries.get(times[i]), times[i]);
 			final Point point2 = new Point(new BigDecimal(i + 1), this.timeSeries.get(times[i + 1]), times[i + 1]);
-			segments.add(new Segment(point1, point2));
+			Segment segment = new Segment(point1, point2);
+			segments.add(segment);
 
-			LOGGER.info(String.format("New segment created (point1 = %s; point2 = %s)", point1, point2));
+			LOGGER.info(String.format("New segment created (%s)", segment));
 		}
 
 		return segments;

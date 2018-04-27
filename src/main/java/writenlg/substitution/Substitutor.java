@@ -51,7 +51,7 @@ public class Substitutor implements Mapper
 			substitutions.addSubstitution("@@Minimum@@",
 					eachTimeSeriesWithDerivedInformation.getPointWithMinimumValue().getY().toString());
 			substitutions.addSubstitution("@@Direction@@",
-					eachTimeSeriesWithDerivedInformation.getDirectionOfLongestSegment().toString());
+					eachTimeSeriesWithDerivedInformation.getDirectionOfLongestSegment().getTextualForm());
 			this.timeSeriesMappings.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation, substitutions));
 		}
 	}

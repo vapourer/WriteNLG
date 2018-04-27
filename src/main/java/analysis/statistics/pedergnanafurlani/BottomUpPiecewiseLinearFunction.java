@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.AbstractQueue;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -29,6 +30,7 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 
 	private final List<Segment> segments;
 	private final SortedMap<Long, BigDecimal> timeSeriesSmoothed;
+	private final List<Segment> smoothedSegments;
 	private final BigDecimal maximumError;
 	private final DateFormat dateFormatter;
 
@@ -43,9 +45,30 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 		this.dateFormatter = new SimpleDateFormat(WriteNlgProperties.getInstance().getProperty("DateFormat"));
 		this.maximumError = new BigDecimal(WriteNlgProperties.getInstance().getProperty("MaximumError"));
 		this.timeSeriesSmoothed = new TreeMap<>();
+		this.smoothedSegments = new ArrayList<>();
 
 		LOGGER.info("BottomUpPiecewiseLinearFunction object created");
 		LOGGER.info(String.format("BottomUpPiecewiseLinearFunction maximum error = %s", this.maximumError.toString()));
+
+		smoothGraph();
+	}
+
+	/**
+	 * @return the timeSeriesSmoothed
+	 */
+	@Override
+	public SortedMap<Long, BigDecimal> getTimeSeriesSmoothed()
+	{
+		return new TreeMap<>(this.timeSeriesSmoothed);
+	}
+
+	/**
+	 * @return the smoothedSegments
+	 */
+	@Override
+	public List<Segment> getSmoothedSegments()
+	{
+		return new ArrayList<>(this.smoothedSegments);
 	}
 
 	/**
@@ -55,8 +78,7 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 	 * @return a TreeMap of a segmented time series with the sequence of times as
 	 *         key set.
 	 */
-	@Override
-	public SortedMap<Long, BigDecimal> smoothGraph()
+	private void smoothGraph()
 	{
 		final AbstractQueue<SegmentPair> queue = new PriorityQueue<>(new CostComparator());
 		final int segmentPairCount = this.segments.size() - 1;
@@ -120,25 +142,37 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 			cheapestSegmentPair = queue.peek();
 		}
 
-		populateTimeSeriesSmoothed(queue);
+		populateSmoothedCollections(queue);
 
 		logSegmentation();
-
-		return this.timeSeriesSmoothed;
 	}
 
-	private void populateTimeSeriesSmoothed(final AbstractQueue<SegmentPair> queue)
+	private void populateSmoothedCollections(final AbstractQueue<SegmentPair> queue)
 	{
+		LOGGER.info("Populating collections of smoothed time series data");
+
 		// TODO: explore whether the algorithm might be made more concise here.
 		for (final SegmentPair segmentPair : queue)
 		{
-			final Long startTime1 = segmentPair.getSegment1().getStartTime();
-			final BigDecimal value1 = segmentPair.getSegment1().getPoint1().getY();
-			this.timeSeriesSmoothed.put(startTime1, value1);
+			Segment segment1 = segmentPair.getSegment1();
+			this.smoothedSegments.add(segment1);
+			LOGGER.info(String.format("Added segment to List - %s", segment1));
 
-			final Long startTime2 = segmentPair.getSegment2().getStartTime();
-			final BigDecimal value2 = segmentPair.getSegment2().getPoint1().getY();
+			Segment segment2 = segmentPair.getSegment2();
+			this.smoothedSegments.add(segment2);
+			LOGGER.info(String.format("Added segment to List - %s", segment2));
+
+			final Long startTime1 = segment1.getStartTime();
+			final BigDecimal value1 = segment1.getPoint1().getY();
+			this.timeSeriesSmoothed.put(startTime1, value1);
+			final String formattedStartTime1 = this.dateFormatter.format(new Date(startTime1));
+			LOGGER.info(String.format("Added time/value pair to SortedMap (%s, %s)", formattedStartTime1, value1));
+
+			final Long startTime2 = segment2.getStartTime();
+			final BigDecimal value2 = segment2.getPoint1().getY();
 			this.timeSeriesSmoothed.put(startTime2, value2);
+			final String formattedStartTime2 = this.dateFormatter.format(new Date(startTime2));
+			LOGGER.info(String.format("Added time/value pair to SortedMap (%s, %s)", formattedStartTime2, value2));
 		}
 
 		final Segment lastSegment = this.segments.get(this.segments.size() - 1);

@@ -149,4 +149,15 @@ public class Segment
 			this.slope = Slope.FLAT;
 		}
 	}
+
+	@Override
+	public String toString()
+	{
+		MathContext context = new MathContext(WriteNlgProperties.getInstance().getProperty("MathContext"));
+
+		return String.format(
+				"Point 1 = %s; Point 2 = %s; Euclidean distance = %s; x distance = %s; y distance = %s; Gradient = %s; Slope = %s",
+				this.point1, this.point2, getEuclideanDistance().round(context), getXDistance(), getYDistance(),
+				getGradient(), getSlope().getTextualForm());
+	}
 }
