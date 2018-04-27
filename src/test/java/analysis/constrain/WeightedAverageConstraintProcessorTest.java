@@ -33,10 +33,13 @@ public class WeightedAverageConstraintProcessorTest
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("0.7");
 
-		final Set<WeightedConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new WeightedConstraint<>("Buttercup", new SatisfactionLevel(new BigDecimal("0.6"))));
-		constraints.add(new WeightedConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"))));
-		constraints.add(new WeightedConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"))));
+		final Set<BoundedWeightedConstraint<String>> constraints = new HashSet<>();
+		constraints.add(new BoundedWeightedConstraint<>("Buttercup", new SatisfactionLevel(new BigDecimal("0.6")),
+				new BigDecimal("0"), new BigDecimal("1")));
+		constraints.add(new BoundedWeightedConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7")),
+				new BigDecimal("0"), new BigDecimal("1")));
+		constraints.add(new BoundedWeightedConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8")),
+				new BigDecimal("0"), new BigDecimal("1")));
 
 		final ConstraintProcessor processor = new WeightedAverageConstraintProcessor();
 
@@ -55,13 +58,16 @@ public class WeightedAverageConstraintProcessorTest
 		// Arrange
 		final BigDecimal valueExpected = new BigDecimal("0.7");
 
-		final Set<WeightedConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new WeightedConstraint<>("Buttercup",
-				new SatisfactionLevel(new BigDecimal("0.5"), new BigDecimal("3"))));
-		constraints.add(
-				new WeightedConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("2"))));
-		constraints.add(
-				new WeightedConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("4"))));
+		final Set<BoundedWeightedConstraint<String>> constraints = new HashSet<>();
+		constraints.add(new BoundedWeightedConstraint<>("Buttercup",
+				new SatisfactionLevel(new BigDecimal("0.5"), new BigDecimal("3")), new BigDecimal("0"),
+				new BigDecimal("1")));
+		constraints.add(new BoundedWeightedConstraint<>("Pansy",
+				new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("2")), new BigDecimal("0"),
+				new BigDecimal("1")));
+		constraints.add(new BoundedWeightedConstraint<>("Dahlia",
+				new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("4")), new BigDecimal("0"),
+				new BigDecimal("1")));
 
 		final ConstraintProcessor processor = new WeightedAverageConstraintProcessor();
 
@@ -79,13 +85,16 @@ public class WeightedAverageConstraintProcessorTest
 
 		// Arrange
 		final Set<Constraint<String>> constraints = new HashSet<>();
-		constraints.add(new WeightedConstraint<>("Buttercup",
-				new SatisfactionLevel(new BigDecimal("0.5"), new BigDecimal("3"))));
-		constraints.add(
-				new WeightedConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("2"))));
+		constraints.add(new BoundedWeightedConstraint<>("Buttercup",
+				new SatisfactionLevel(new BigDecimal("0.5"), new BigDecimal("3")), new BigDecimal("0"),
+				new BigDecimal("1")));
+		constraints.add(new BoundedWeightedConstraint<>("Pansy",
+				new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("2")), new BigDecimal("0"),
+				new BigDecimal("1")));
 		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(
-				new WeightedConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("4"))));
+		constraints.add(new BoundedWeightedConstraint<>("Dahlia",
+				new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("4")), new BigDecimal("0"),
+				new BigDecimal("1")));
 
 		final ConstraintProcessor processor = new WeightedAverageConstraintProcessor();
 

@@ -32,14 +32,14 @@ public class WeightedAverageConstraintProcessor extends ConstraintProcessor
 
 		for (final Constraint<E> constraint : constraints)
 		{
-			if (constraint instanceof WeightedConstraint)
+			if (constraint instanceof BoundedWeightedConstraint)
 			{
 				totalledValues = totalledValues.add(constraint.getSatisfactionLevelAsValue());
-				totalledWeightings = totalledWeightings.add(((WeightedConstraint<E>) constraint).getWeighting());
+				totalledWeightings = totalledWeightings.add(((BoundedWeightedConstraint<E>) constraint).getWeighting());
 			}
 			else
 			{
-				LOGGER.error(String.format("Not a WeightedConstraint: %s", constraint.getConstrainedElement()));
+				LOGGER.error(String.format("Not a BoundedWeightedConstraint: %s", constraint.getConstrainedElement()));
 				throw new IllegalArgumentException("This processor is for weighted constraints only");
 			}
 		}

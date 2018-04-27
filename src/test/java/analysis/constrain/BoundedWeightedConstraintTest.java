@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import analysis.TestConstants;
 
-public class WeightedConstraintTest
+public class BoundedWeightedConstraintTest
 {
 	private static Logger LOGGER;
 
@@ -18,7 +18,7 @@ public class WeightedConstraintTest
 	public static void setupClass()
 	{
 		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
-		LOGGER = LogManager.getLogger("WeightedConstraintTest.class");
+		LOGGER = LogManager.getLogger("BoundedWeightedConstraintTest.class");
 	}
 
 	@Test
@@ -27,10 +27,11 @@ public class WeightedConstraintTest
 		LOGGER.info("Test: testGetWeighting");
 
 		// Arrange
-		BigDecimal weightingExpected = new BigDecimal("0.4");
+		BigDecimal weightingExpected = new BigDecimal("5");
 
-		WeightedConstraint<String> constraint = new WeightedConstraint<String>("Yellowhammer",
-				new SatisfactionLevel(new BigDecimal("3"), new BigDecimal("0.4")));
+		BoundedWeightedConstraint<String> constraint = new BoundedWeightedConstraint<String>("Yellowhammer",
+				new SatisfactionLevel(new BigDecimal("0.2"), new BigDecimal("5")), new BigDecimal("0"),
+				new BigDecimal("1"));
 
 		// Act
 		BigDecimal weightingActual = constraint.getWeighting();
@@ -47,8 +48,9 @@ public class WeightedConstraintTest
 		// Arrange
 		BigDecimal weightedLevelExpected = new BigDecimal("1.2");
 
-		Constraint<String> constraint = new WeightedConstraint<String>("Yellowhammer",
-				new SatisfactionLevel(new BigDecimal("3"), new BigDecimal("0.4")));
+		Constraint<String> constraint = new BoundedWeightedConstraint<String>("Yellowhammer",
+				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("3")), new BigDecimal("0"),
+				new BigDecimal("1"));
 
 		// Act
 		BigDecimal weightedLevelActual = constraint.getSatisfactionLevelAsValue();

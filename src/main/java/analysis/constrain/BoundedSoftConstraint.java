@@ -34,14 +34,14 @@ public class BoundedSoftConstraint<E> extends SoftConstraint<E>
 		this.lowerBound = lowerBound;
 		this.upperBound = upperBound;
 
-		if (satisfactionLevel.getWeightedLevel().compareTo(this.lowerBound) < 0
-				|| satisfactionLevel.getWeightedLevel().compareTo(this.upperBound) > 0)
+		if (satisfactionLevel.getLevel().compareTo(this.lowerBound) < 0
+				|| satisfactionLevel.getLevel().compareTo(this.upperBound) > 0)
 		{
-			LOGGER.error(String.format("Satisfaction weighted level not within bounds"));
+			LOGGER.error(String.format("Satisfaction level not within bounds"));
 
 			throw new IllegalArgumentException(
-					String.format("Satisfaction weighted level must be a value between %s and %s inclusive",
-							this.lowerBound, this.upperBound));
+					String.format("Satisfaction level must be a value between %s and %s inclusive", this.lowerBound,
+							this.upperBound));
 		}
 
 		LOGGER.info(toString());
