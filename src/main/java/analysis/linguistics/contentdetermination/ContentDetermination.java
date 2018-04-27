@@ -8,16 +8,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import analysis.Concept;
+import analysis.GlobalConcept;
+import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.BooleanConstraintProcessor;
+import analysis.constrain.BoundedWeightedConstraint;
 import analysis.constrain.Constraint;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.HardConstraint;
 import analysis.constrain.HardConstraintGroup;
 import analysis.constrain.SatisfactionLevel;
+import analysis.constrain.SoftConstraintGroup;
+import analysis.constrain.WeightedAverageConstraintProcessor;
 import analysis.interfaces.ContentDeterminer;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
-import analysis.linguistics.contentdetermination.concepts.SeriesLegend;
+import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
 import writenlg.control.WriteNlgProperties;
 
@@ -26,44 +31,83 @@ import writenlg.control.WriteNlgProperties;
  */
 public class ContentDetermination implements ContentDeterminer
 {
-	private final List<AbstractConcept> concepts;
+	private final List<AbstractConcept> globalConcepts;
+	private final List<AbstractConcept> timeSeriesSpecificConcepts;
 	private int targetConceptCount;
 	private BigDecimal constraintGuillotine;
 
 	public ContentDetermination()
 	{
-		this.concepts = new ArrayList<>();
+		this.globalConcepts = new ArrayList<>();
+		this.timeSeriesSpecificConcepts = new ArrayList<>();
 		this.targetConceptCount = Integer.parseInt(WriteNlgProperties.getInstance().getProperty("TargetConceptCount"));
 		this.constraintGuillotine = new BigDecimal(
 				WriteNlgProperties.getInstance().getProperty("ConceptConstraintGuillotine"));
+		// this.constraintGuillotine = new BigDecimal("0");
 	}
 
 	/**
-	 * Creates a new AbstractConcept implementation according to concept, and adds it to this AbstractConcept List.
+	 * Creates a new AbstractConcept implementation according to globalConcept, and adds it to this
+	 * global concept List.
 	 * 
-	 * @param concept
+	 * @param globalConcept
+	 * @param phraseSpecifications
+	 */
+	public void addGlobalConcept(GlobalConcept globalConcept, List<PhraseSpecification> phraseSpecifications)
+	{
+		switch (globalConcept)
+		{
+			case CONSISTENT_DISTANCE_APART:
+				break;
+			case LINES_CROSS:
+				break;
+			case LINES_MEET:
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Creates a new AbstractConcept implementation according to timeSeriesSpecificConcept, and adds it to this
+	 * time series specific List.
+	 * 
+	 * @param timeSeriesSpecificConcept
 	 * @param phraseSpecifications
 	 */
 	@Override
-	public void addConcept(Concept concept, List<PhraseSpecification> phraseSpecifications)
+	public void addTimeSeriesSpecificConcept(final TimeSeriesSpecificConcept timeSeriesSpecificConcept,
+			final List<PhraseSpecification> phraseSpecifications, final BigDecimal weighting)
 	{
-		switch (concept)
+		switch (timeSeriesSpecificConcept)
 		{
 			case SERIES_LEGEND:
-				ConstraintGroup<String> constraints = new HardConstraintGroup<>(new BooleanConstraintProcessor());
-				Constraint<String> requiredConstraint = new HardConstraint<String>("Required",
+				ConstraintGroup<String> seriesLegendConstraints = new HardConstraintGroup<>(
+						new BooleanConstraintProcessor());
+				Constraint<String> requiredSeriesLevelConstraint = new HardConstraint<String>("Required",
 						new SatisfactionLevel(new BigDecimal("1")));
-				constraints.addConstraint(requiredConstraint);
-				SeriesLegend seriesLegend = new SeriesLegend(phraseSpecifications, constraints);
-				concepts.add(seriesLegend);
+				seriesLegendConstraints.addConstraint(requiredSeriesLevelConstraint);
+				SeriesLegendConcept seriesLegendConcept = new SeriesLegendConcept(phraseSpecifications,
+						seriesLegendConstraints);
+				timeSeriesSpecificConcepts.add(seriesLegendConcept);
 				break;
 			case DESCENDING_TREND:
-				break;
-			case LINES_CROSS:
 				break;
 			case LONGEST_TREND:
 				break;
 			case MAXIMUM:
+				ConstraintGroup<String> maximumConstraints = new SoftConstraintGroup<>(
+						new WeightedAverageConstraintProcessor());
+				Constraint<String> testMaximumConstraint1 = new BoundedWeightedConstraint<>("Maximum test constraint 1",
+						new SatisfactionLevel(new BigDecimal("0.6"), weighting), new BigDecimal("0"),
+						new BigDecimal("1"));
+				maximumConstraints.addConstraint(testMaximumConstraint1);
+				Constraint<String> testMaximumConstraint2 = new BoundedWeightedConstraint<>("Maximum test constraint 2",
+						new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("4")), new BigDecimal("0"),
+						new BigDecimal("1"));
+				maximumConstraints.addConstraint(testMaximumConstraint2);
+				MaximumConcept maximumConcept = new MaximumConcept(phraseSpecifications, maximumConstraints);
+				timeSeriesSpecificConcepts.add(maximumConcept);
 				break;
 			case MINIMUM:
 				break;
@@ -83,7 +127,7 @@ public class ContentDetermination implements ContentDeterminer
 	}
 
 	/**
-	 * @return the selected concepts
+	 * @return the selected timeSeriesSpecificConcepts
 	 */
 	@Override
 	public List<AbstractConcept> getSelectedConcepts()
@@ -95,7 +139,7 @@ public class ContentDetermination implements ContentDeterminer
 	{
 		List<AbstractConcept> rationalisedConcepts = new ArrayList<>();
 
-		List<AbstractConcept> conceptsCopy = this.concepts;
+		List<AbstractConcept> conceptsCopy = this.timeSeriesSpecificConcepts;
 		Collections.sort(conceptsCopy, Collections.reverseOrder(new ConceptSatisfactionLevelComparator()));
 
 		for (AbstractConcept eachConcept : conceptsCopy)

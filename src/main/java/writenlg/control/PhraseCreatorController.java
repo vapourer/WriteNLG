@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.interfaces.ContentDeterminer;
 import analysis.interfaces.LineGraphAnalysis;
+import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
 import simplenlg.phrasespec.SPhraseSpec;
 import writenlg.expertinput.LexerParser;
@@ -56,8 +57,6 @@ public class PhraseCreatorController extends Controller
 		final PhraseCreatorListener listener = new PhraseCreatorListener();
 		lexerParser.walkParseTree(listener);
 
-		// final List<PhraseSpecification> phraseSpecifications = listener.getPhraseSpecifications();
-
 		final ContentDeterminer contentDeterminer = listener.getContentDeterminer();
 
 		Substitutor substitutor = new Substitutor(lineGraphAnalysis.analyse());
@@ -72,26 +71,27 @@ public class PhraseCreatorController extends Controller
 		{
 			final StringBuilder builder = new StringBuilder();
 
-			// for (final PhraseSpecification phraseSpecification : phraseSpecifications)
-			for (final PhraseSpecification phraseSpecification : contentDeterminer.getSelectedConcepts().get(0)
-					.getPhraseSpecifications())
+			for (AbstractConcept eachConcept : contentDeterminer.getSelectedConcepts())
 			{
-				final SPhraseSpec clause = simpleNlg.createClause();
-				clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());
-				clause.setVerb(phraseSpecification.getPredicate().getVerb().getText());
-
-				if (phraseSpecification.getPredicate().getNounPhrase() != null)
+				for (final PhraseSpecification phraseSpecification : eachConcept.getPhraseSpecifications())
 				{
-					clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
-				}
+					final SPhraseSpec clause = simpleNlg.createClause();
+					clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());
+					clause.setVerb(phraseSpecification.getPredicate().getVerb().getText());
 
-				if (phraseSpecification.getPredicate().getComplement() != null)
-				{
-					clause.setComplement(phraseSpecification.getPredicate().getComplement().getText());
-				}
+					if (phraseSpecification.getPredicate().getNounPhrase() != null)
+					{
+						clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
+					}
 
-				builder.append(simpleNlg.realise(clause));
-				builder.append(System.lineSeparator());
+					if (phraseSpecification.getPredicate().getComplement() != null)
+					{
+						clause.setComplement(phraseSpecification.getPredicate().getComplement().getText());
+					}
+
+					builder.append(simpleNlg.realise(clause));
+					builder.append(System.lineSeparator());
+				}
 			}
 
 			summary += builder.toString();

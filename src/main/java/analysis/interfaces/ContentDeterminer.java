@@ -3,9 +3,10 @@
 
 package analysis.interfaces;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import analysis.Concept;
+import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
 
@@ -17,10 +18,11 @@ public interface ContentDeterminer
 	/**
 	 * Creates a new AbstractConcept implementation according to concept, and adds it to an AbstractConcept List.
 	 * 
-	 * @param concept
+	 * @param timeSeriesSpecificConcept
 	 * @param phraseSpecifications
 	 */
-	void addConcept(Concept concept, List<PhraseSpecification> phraseSpecifications);
+	void addTimeSeriesSpecificConcept(TimeSeriesSpecificConcept timeSeriesSpecificConcept,
+			List<PhraseSpecification> phraseSpecifications, final BigDecimal weighting);
 
 	List<AbstractConcept> getSelectedConcepts();
 }

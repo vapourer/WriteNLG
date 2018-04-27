@@ -1,71 +1,72 @@
-Concept=SERIES_LEGEND
+TimeSeriesConcept=SERIES_LEGEND
 PhraseSpecification
 Subject
 NOUN		:	title
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@SeriesLegend@@
-Concept=MAXIMUM
+TimeSeriesConcept=MAXIMUM
+Weighting=3
 PhraseSpecification
 Subject
 NOUN		:	maximum
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@Maximum@@
-Concept=MINIMUM
+TimeSeriesConcept=MINIMUM
 PhraseSpecification
 Subject
 NOUN		:	minimum
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@Minimum@@
-Concept=RISING_TREND
+TimeSeriesConcept=RISING_TREND
 PhraseSpecification
 Subject
 NOUN		:	@@SeriesLegend@@
 Predicate
 VERB		:	rise
-Concept=DESCENDING_TREND
+TimeSeriesConcept=DESCENDING_TREND
 PhraseSpecification
 Subject
 NOUN		:	@@SeriesLegend@@
 Predicate
 VERB		:	fall
-Concept=MULTIPLE_TRENDS
+TimeSeriesConcept=MULTIPLE_TRENDS
 PhraseSpecification
 Subject
 NOUN		:	@@SeriesLegend@@
 Predicate
 VERB		:	have
 NOUN		:	multiple trend
-Concept=LONGEST_TREND
+TimeSeriesConcept=LONGEST_TREND
 PhraseSpecification
 Subject
 NOUN		:	longest trend
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@Direction@@
-Concept=LINES_CROSS
+GlobalConcept=LINES_CROSS
 PhraseSpecification
 Subject
 NOUN		:	line
 Predicate
 VERB		:	cross
-Concept=SPIKES
+TimeSeriesConcept=SPIKES
 PhraseSpecification
 Subject
 NOUN		:	@@SeriesLegend@@
 Predicate
 VERB		:	have
 NOUN		:	spike
-Concept=TURNING_POINTS
+TimeSeriesConcept=TURNING_POINTS
 PhraseSpecification
 Subject
 NOUN		:	@@SeriesLegend@@
 Predicate
 VERB		:	have
 NOUN		:	turning point
-Concept=TIME_SLICE
+TimeSeriesConcept=TIME_SLICE
 PhraseSpecification
 Subject
 NOUN		:	time interval

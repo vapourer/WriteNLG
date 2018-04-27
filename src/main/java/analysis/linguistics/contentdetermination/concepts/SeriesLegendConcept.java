@@ -13,14 +13,14 @@ import analysis.linguistics.phrase.PhraseSpecification;
  * 
  * @param <E>
  */
-public class SeriesLegend extends AbstractConcept
+public class SeriesLegendConcept extends AbstractConcept
 {
 	/**
-	 * Creates a new SeriesLegend instance.
+	 * Creates a new SeriesLegendConcept instance.
 	 * 
 	 * @param constraintGroup
 	 */
-	public SeriesLegend(final List<PhraseSpecification> phraseSpecifications, ConstraintGroup<String> constraintGroup)
+	public SeriesLegendConcept(final List<PhraseSpecification> phraseSpecifications, ConstraintGroup<String> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
 	}

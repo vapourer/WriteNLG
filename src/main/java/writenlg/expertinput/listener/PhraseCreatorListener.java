@@ -3,14 +3,14 @@
 
 package writenlg.expertinput.listener;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import analysis.Concept;
+import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SoftConstraintGroup;
 import analysis.constrain.WeightedAdditionConstraintProcessor;
@@ -35,14 +35,15 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseCreatorListener.class");
 
+	private final ContentDeterminer contentDeterminer;
+
 	private List<PhraseSpecification> phraseSpecifications;
-	private final Map<String, String> substitutions;
-	private Concept concept;
+	private TimeSeriesSpecificConcept timeSeriesSpecificConcept;
 	private PhraseSpecification phraseSpecification;
 	private SentencePart sentencePart;
 	private Subject<String> subject;
 	private Predicate<String> predicate;
-	private final ContentDeterminer contentDeterminer;
+	private BigDecimal weighting;
 
 	/**
 	 * Creates a PhraseCreator instance.
@@ -55,23 +56,63 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	public PhraseCreatorListener(final Substitutions substitutions)
 	{
 		this.phraseSpecifications = new ArrayList<>();
-		this.substitutions = substitutions.getSubstitutions();
 		this.sentencePart = SentencePart.SUBJECT;
 		this.contentDeterminer = new ContentDetermination();
+		this.weighting = new BigDecimal("1");
 	}
 
 	@Override
 	public void enterConcept(final PhraseCreatorParser.ConceptContext context)
 	{
-		this.concept = Enum.valueOf(Concept.class, context.conceptType().getText());
-		LOGGER.info(String.format("Concept: %s", this.concept));
+
 	}
 
 	@Override
 	public void exitConcept(final PhraseCreatorParser.ConceptContext context)
 	{
-		this.contentDeterminer.addConcept(this.concept, this.phraseSpecifications);
+
+	}
+
+	@Override
+	public void enterTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext context)
+	{
+		this.timeSeriesSpecificConcept = Enum.valueOf(TimeSeriesSpecificConcept.class,
+				context.timeSeriesConceptType().getText());
+		LOGGER.info(String.format("TimeSeriesSpecificConcept: %s", this.timeSeriesSpecificConcept));
+	}
+
+	@Override
+	public void exitTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext context)
+	{
+		this.contentDeterminer.addTimeSeriesSpecificConcept(this.timeSeriesSpecificConcept, this.phraseSpecifications,
+				this.weighting);
+		this.weighting = new BigDecimal("1");
 		phraseSpecifications = new ArrayList<>();
+	}
+
+	@Override
+	public void enterWeighting(PhraseCreatorParser.WeightingContext context)
+	{
+
+	}
+
+	@Override
+	public void exitWeighting(PhraseCreatorParser.WeightingContext context)
+	{
+		this.weighting = new BigDecimal(context.weightingValue().getText());
+		LOGGER.info(String.format("Weighting = %s", this.weighting));
+	}
+
+	@Override
+	public void enterWeightingValue(PhraseCreatorParser.WeightingValueContext context)
+	{
+
+	}
+
+	@Override
+	public void exitWeightingValue(PhraseCreatorParser.WeightingValueContext context)
+	{
+
 	}
 
 	@Override
@@ -203,14 +244,6 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 			default:
 				break;
 		}
-	}
-
-	/**
-	 * @return the phraseSpecifications
-	 */
-	public List<PhraseSpecification> getPhraseSpecifications()
-	{
-		return new ArrayList<>(this.phraseSpecifications);
 	}
 
 	/**
