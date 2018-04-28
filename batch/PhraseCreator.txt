@@ -6,7 +6,8 @@ Predicate
 VERB		:	be
 COMPLEMENT	:	@@SeriesLegend@@
 TimeSeriesConcept=MAXIMUM
-Weighting=3
+Constraints
+TestConstraint	:	3
 PhraseSpecification
 Subject
 NOUN		:	maximum

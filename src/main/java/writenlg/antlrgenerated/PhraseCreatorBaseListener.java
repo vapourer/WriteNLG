@@ -40,13 +40,49 @@ public class PhraseCreatorBaseListener implements PhraseCreatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConceptType(PhraseCreatorParser.ConceptTypeContext ctx) { }
+	@Override public void enterGlobalConcept(PhraseCreatorParser.GlobalConceptContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConceptType(PhraseCreatorParser.ConceptTypeContext ctx) { }
+	@Override public void exitGlobalConcept(PhraseCreatorParser.GlobalConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGlobalConceptType(PhraseCreatorParser.GlobalConceptTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGlobalConceptType(PhraseCreatorParser.GlobalConceptTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTimeSeriesConceptType(PhraseCreatorParser.TimeSeriesConceptTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTimeSeriesConceptType(PhraseCreatorParser.TimeSeriesConceptTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -71,6 +107,54 @@ public class PhraseCreatorBaseListener implements PhraseCreatorListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPhraseSpecification(PhraseCreatorParser.PhraseSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstraints(PhraseCreatorParser.ConstraintsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstraints(PhraseCreatorParser.ConstraintsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWeighting(PhraseCreatorParser.WeightingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWeighting(PhraseCreatorParser.WeightingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstraint(PhraseCreatorParser.ConstraintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstraint(PhraseCreatorParser.ConstraintContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

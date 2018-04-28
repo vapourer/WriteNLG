@@ -28,15 +28,45 @@ public interface PhraseCreatorListener extends ParseTreeListener {
 	 */
 	void exitConcept(PhraseCreatorParser.ConceptContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#conceptType}.
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#globalConcept}.
 	 * @param ctx the parse tree
 	 */
-	void enterConceptType(PhraseCreatorParser.ConceptTypeContext ctx);
+	void enterGlobalConcept(PhraseCreatorParser.GlobalConceptContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#conceptType}.
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#globalConcept}.
 	 * @param ctx the parse tree
 	 */
-	void exitConceptType(PhraseCreatorParser.ConceptTypeContext ctx);
+	void exitGlobalConcept(PhraseCreatorParser.GlobalConceptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#globalConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void enterGlobalConceptType(PhraseCreatorParser.GlobalConceptTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#globalConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void exitGlobalConceptType(PhraseCreatorParser.GlobalConceptTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#timeSeriesConcept}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#timeSeriesConcept}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#timeSeriesConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimeSeriesConceptType(PhraseCreatorParser.TimeSeriesConceptTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#timeSeriesConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimeSeriesConceptType(PhraseCreatorParser.TimeSeriesConceptTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PhraseCreatorParser#phraseSpecifications}.
 	 * @param ctx the parse tree
@@ -57,6 +87,46 @@ public interface PhraseCreatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPhraseSpecification(PhraseCreatorParser.PhraseSpecificationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#constraints}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstraints(PhraseCreatorParser.ConstraintsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#constraints}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstraints(PhraseCreatorParser.ConstraintsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#constraintWeighting}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#constraintWeighting}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#weighting}.
+	 * @param ctx the parse tree
+	 */
+	void enterWeighting(PhraseCreatorParser.WeightingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#weighting}.
+	 * @param ctx the parse tree
+	 */
+	void exitWeighting(PhraseCreatorParser.WeightingContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#constraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstraint(PhraseCreatorParser.ConstraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#constraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstraint(PhraseCreatorParser.ConstraintContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PhraseCreatorParser#subject}.
 	 * @param ctx the parse tree

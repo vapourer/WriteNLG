@@ -43,6 +43,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	private SentencePart sentencePart;
 	private Subject<String> subject;
 	private Predicate<String> predicate;
+	private String constraint;
 	private BigDecimal weighting;
 
 	/**
@@ -58,6 +59,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		this.phraseSpecifications = new ArrayList<>();
 		this.sentencePart = SentencePart.SUBJECT;
 		this.contentDeterminer = new ContentDetermination();
+		this.constraint = "";
 		this.weighting = new BigDecimal("1");
 	}
 
@@ -99,20 +101,40 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void exitWeighting(PhraseCreatorParser.WeightingContext context)
 	{
-		this.weighting = new BigDecimal(context.weightingValue().getText());
-		LOGGER.info(String.format("Weighting = %s", this.weighting));
-	}
-
-	@Override
-	public void enterWeightingValue(PhraseCreatorParser.WeightingValueContext context)
-	{
 
 	}
 
 	@Override
-	public void exitWeightingValue(PhraseCreatorParser.WeightingValueContext context)
+	public void enterConstraints(PhraseCreatorParser.ConstraintsContext context)
 	{
+	}
 
+	@Override
+	public void exitConstraints(PhraseCreatorParser.ConstraintsContext context)
+	{
+	}
+
+	@Override
+	public void enterConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext context)
+	{
+	}
+
+	@Override
+	public void exitConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext context)
+	{
+		this.constraint = context.constraint().getText();
+		this.weighting = new BigDecimal(context.weighting().getText());
+		LOGGER.info(String.format("Constraint = %s; weighting = %s", this.constraint, this.weighting));
+	}
+
+	@Override
+	public void enterConstraint(PhraseCreatorParser.ConstraintContext context)
+	{
+	}
+
+	@Override
+	public void exitConstraint(PhraseCreatorParser.ConstraintContext context)
+	{
 	}
 
 	@Override

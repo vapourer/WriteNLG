@@ -12,13 +12,13 @@ concept						:	globalConcept
 							|	timeSeriesConcept
 							;
 
-globalConcept				:	GLOBAL_CONCEPT '=' globalConceptType weighting? NEW_LINE phraseSpecifications
+globalConcept				:	GLOBAL_CONCEPT '=' globalConceptType (NEW_LINE constraints)* NEW_LINE phraseSpecifications
 							;
 						
 globalConceptType			:	GLOBAL_CONCEPT_TYPE
 							;
 						
-timeSeriesConcept			:	TIME_SERIES_CONCEPT '=' timeSeriesConceptType (NEW_LINE weighting)? NEW_LINE phraseSpecifications
+timeSeriesConcept			:	TIME_SERIES_CONCEPT '=' timeSeriesConceptType (NEW_LINE constraints)* NEW_LINE phraseSpecifications
 							;
 						
 timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
@@ -27,13 +27,19 @@ timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
 phraseSpecifications		:	(phraseSpecification NEW_LINE)* phraseSpecification
 							;
 					
-phraseSpecification			:	PHRASE_SPECIFICATION weighting? NEW_LINE subject NEW_LINE predicate
+phraseSpecification			:	PHRASE_SPECIFICATION (NEW_LINE constraints)* NEW_LINE subject NEW_LINE predicate
 							;
 							
-weighting					:	WEIGHTING '=' weightingValue
+constraints					:	CONSTRAINTS (NEW_LINE constraintWeighting)+
 							;
 							
-weightingValue				:	WEIGHTING_VALUE
+constraintWeighting			:	constraint ':' weighting
+							;
+							
+weighting					:	WEIGHTING
+							;
+							
+constraint					:	STRING
 							;
 						
 subject						:	SUBJECT NEW_LINE assignments
@@ -60,11 +66,11 @@ GLOBAL_CONCEPT				:	'GlobalConcept'
 
 TIME_SERIES_CONCEPT			:	'TimeSeriesConcept'
 							;
-
-WEIGHTING					:	'Weighting'
-							;
 							
-WEIGHTING_VALUE				:	[1-5]
+CONSTRAINTS					:	'Constraints'
+							;
+
+WEIGHTING					:	[1-5]
 							;
 							
 GLOBAL_CONCEPT_TYPE			:	'CONSISTENT_DISTANCE_APART'
