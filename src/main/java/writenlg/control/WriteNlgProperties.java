@@ -82,7 +82,13 @@ public class WriteNlgProperties
 		LOGGER.info(String.format("Property AntlrInputPhraseCreator = %s",
 				this.properties.getProperty("AntlrInputPhraseCreator")));
 		LOGGER.info(String.format("Property AntlrInputWriter = %s", this.properties.getProperty("AntlrInputWriter")));
+		LOGGER.info(String.format("Property AntlrInputConstraints = %s",
+				this.properties.getProperty("AntlrInputConstraints")));
 		LOGGER.info(String.format("Property DateFormat = %s", this.properties.getProperty("DateFormat")));
+		LOGGER.info(
+				String.format("Property TargetConceptCount = %s", this.properties.getProperty("TargetConceptCount")));
+		LOGGER.info(String.format("Property ConceptConstraintThreshold = %s",
+				this.properties.getProperty("ConceptConstraintThreshold")));
 	}
 
 	/**

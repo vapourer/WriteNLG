@@ -34,15 +34,15 @@ public class ContentDetermination implements ContentDeterminer
 	private final List<AbstractConcept> globalConcepts;
 	private final List<AbstractConcept> timeSeriesSpecificConcepts;
 	private int targetConceptCount;
-	private BigDecimal constraintGuillotine;
+	private BigDecimal constraintThreshold;
 
 	public ContentDetermination()
 	{
 		this.globalConcepts = new ArrayList<>();
 		this.timeSeriesSpecificConcepts = new ArrayList<>();
 		this.targetConceptCount = Integer.parseInt(WriteNlgProperties.getInstance().getProperty("TargetConceptCount"));
-		this.constraintGuillotine = new BigDecimal(
-				WriteNlgProperties.getInstance().getProperty("ConceptConstraintGuillotine"));
+		this.constraintThreshold = new BigDecimal(
+				WriteNlgProperties.getInstance().getProperty("ConceptConstraintThreshold"));
 		// this.constraintGuillotine = new BigDecimal("0");
 	}
 
@@ -145,7 +145,7 @@ public class ContentDetermination implements ContentDeterminer
 		for (AbstractConcept eachConcept : conceptsCopy)
 		{
 			if (rationalisedConcepts.size() <= this.targetConceptCount
-					&& eachConcept.calculateSatisfactionLevel().compareTo(constraintGuillotine) >= 0)
+					&& eachConcept.calculateSatisfactionLevel().compareTo(constraintThreshold) >= 0)
 			{
 				rationalisedConcepts.add(eachConcept);
 			}
