@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import analysis.LineGraphAnalyser;
+import analysis.constrain.Constraints;
 import analysis.graph.LineGraph;
 import analysis.interfaces.LineGraphAnalysis;
 import io.AntlrGrammar;
@@ -61,6 +62,7 @@ public class WriteNlg
 		switch (antlrGrammar)
 		{
 			case PHRASE_CREATOR:
+				Constraints.createInstance(WriteNlgProperties.getInstance().getProperty("AntlrInputConstraints"));
 				LineGraphAnalysis lineGraphAnalysis = new LineGraphAnalyser(lineGraph);
 				controller = new PhraseCreatorController(lineGraphAnalysis);
 				break;

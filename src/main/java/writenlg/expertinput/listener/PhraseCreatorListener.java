@@ -29,7 +29,7 @@ import writenlg.antlrgenerated.PhraseCreatorParser;
 import writenlg.substitution.Substitutions;
 
 /**
- * PhraseCreator BaseListener overrides specific to PhraseCreator.
+ * PhraseCreatorBaseListener overrides specific to PhraseCreator.
  */
 public class PhraseCreatorListener extends PhraseCreatorBaseListener
 {

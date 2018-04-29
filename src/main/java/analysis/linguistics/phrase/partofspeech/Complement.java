@@ -27,7 +27,7 @@ public class Complement<E> extends AbstractPartOfSpeech<E>
 	{
 		super(text, constraintGroup);
 
-		LOGGER.info("New Verb created: " + getText());
+		LOGGER.info("New Complement created: " + getText());
 
 		final Set<? extends Constraint<E>> constraints = getConstraintGroup().getConstraints();
 

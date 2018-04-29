@@ -20,7 +20,7 @@ public abstract class LexerParser
 
 	private final CommonTokenStream tokens;
 
-	protected abstract ParseTree writeDocument(CommonTokenStream tokens);
+	protected abstract ParseTree createParseTree(CommonTokenStream tokens);
 
 	/**
 	 * Creates a LexerParser instance.
@@ -39,7 +39,7 @@ public abstract class LexerParser
 	 */
 	public void walkParseTree(final ParseTreeListener listener)
 	{
-		final ParseTree tree = writeDocument(this.tokens);
+		final ParseTree tree = createParseTree(this.tokens);
 		LOGGER.info("ParseTree created");
 
 		LOGGER.info("Commencing ParseTree walk");

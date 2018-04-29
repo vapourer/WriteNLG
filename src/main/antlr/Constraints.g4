@@ -8,13 +8,22 @@ grammar Constraints;
 constraintConfiguration		:	(concept NEW_LINE)* concept
 							;
 							
-concept						:	CONCEPT NEW_LINE (constraint NEW_LINE)* constraint
+concept						:	CONCEPT_TYPE (NEW_LINE constraint)* NEW_LINE constraint
 							;
 							
-constraint					:	constraintName '=' value ('(' weighting ')')?
+constraint					:	constraintName '=' value
 							;
 							
-CONCEPT						:	'MAXIMUM'
+constraintName				:	CONSTRAINT_NAME
+							;
+							
+value						:	VALUE
+							;
+							
+// weighting					:	WEIGHTING
+//							;
+							
+CONCEPT_TYPE				:	'MAXIMUM'
 							|	'MINIMUM'
 							|	'RISING_TREND'
 							|	'DESCENDING_TREND'
@@ -28,25 +37,26 @@ CONCEPT						:	'MAXIMUM'
 							|	'LINES_CROSS'
 							|	'LINES_MEET'
 							;
-
-constraintName				:	STRING
+							
+CONSTRAINT_NAME				:	'TestConstraint2'
+							|	'TestConstraint3'
+							|	'TestConstraint4'
 							;
 							
-value						:	VALUE
-							;
+// VALUE						:	DIGIT
+//							;
 							
-weighting					:	WEIGHTING
-							;
-							
-VALUE						:	DIGIT+ '.' DIGIT*
-							|	'.' DIGIT+
-							;
+// VALUE						:	DIGIT+ '.' DIGIT*
+// 							|	'.' DIGIT+
+//							;
 							
 WEIGHTING					:	[1-5]
 							;
+							
 
-STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*
-							;
+
+// STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*
+// 							;
 							
 DIGIT						:	[0-9]
 							;

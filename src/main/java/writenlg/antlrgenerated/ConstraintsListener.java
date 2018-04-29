@@ -57,14 +57,4 @@ public interface ConstraintsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValue(ConstraintsParser.ValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ConstraintsParser#weighting}.
-	 * @param ctx the parse tree
-	 */
-	void enterWeighting(ConstraintsParser.WeightingContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ConstraintsParser#weighting}.
-	 * @param ctx the parse tree
-	 */
-	void exitWeighting(ConstraintsParser.WeightingContext ctx);
 }

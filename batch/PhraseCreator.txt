@@ -21,6 +21,12 @@ NOUN		:	minimum
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@Minimum@@
+PhraseSpecification
+Subject
+NOUN		:	lowest
+Predicate
+VERB		:	be
+COMPLEMENT	:	@@Minimum@@
 TimeSeriesConcept=RISING_TREND
 PhraseSpecification
 Subject

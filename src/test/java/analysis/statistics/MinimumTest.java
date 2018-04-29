@@ -4,6 +4,7 @@
 package analysis.statistics;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Calendar;
 
 import org.apache.logging.log4j.LogManager;
@@ -34,6 +35,8 @@ public class MinimumTest
 	{
 		LOGGER.info("Test: testCalculate");
 
+		MathContext context = new MathContext(TestConstants.ROUNDING_PARAMETER_FOR_DATE_COMPARISON);
+
 		// Arrange
 		final BigDecimal xExpected = new BigDecimal("0");
 		final BigDecimal yExpected = new BigDecimal("11991");
@@ -54,6 +57,9 @@ public class MinimumTest
 		// Assert
 		Assert.assertTrue(xExpected.compareTo(pointWithMinimumValueActual.getX()) == 0);
 		Assert.assertTrue(yExpected.compareTo(pointWithMinimumValueActual.getY()) == 0);
-		Assert.assertEquals(dateExpected, pointWithMinimumValueActual.getDate());
+
+		BigDecimal dateExpectedRounded = new BigDecimal(dateExpected.longValue()).round(context);
+		BigDecimal dateActualRounded = new BigDecimal(pointWithMinimumValueActual.getDate()).round(context);
+		Assert.assertTrue(dateExpectedRounded.compareTo(dateActualRounded) == 0);
 	}
 }

@@ -31,7 +31,7 @@ public class WriterLexerParser extends LexerParser
 	}
 
 	@Override
-	protected ParseTree writeDocument(final CommonTokenStream tokens)
+	protected ParseTree createParseTree(final CommonTokenStream tokens)
 	{
 		return new WriterParser(tokens).writeDocument();
 	}
