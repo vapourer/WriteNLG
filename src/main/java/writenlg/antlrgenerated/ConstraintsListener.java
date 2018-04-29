@@ -98,15 +98,15 @@ public interface ConstraintsListener extends ParseTreeListener {
 	 */
 	void exitConstraintName(ConstraintsParser.ConstraintNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ConstraintsParser#value}.
+	 * Enter a parse tree produced by {@link ConstraintsParser#initialValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterValue(ConstraintsParser.ValueContext ctx);
+	void enterInitialValue(ConstraintsParser.InitialValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ConstraintsParser#value}.
+	 * Exit a parse tree produced by {@link ConstraintsParser#initialValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitValue(ConstraintsParser.ValueContext ctx);
+	void exitInitialValue(ConstraintsParser.InitialValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ConstraintsParser#weighting}.
 	 * @param ctx the parse tree

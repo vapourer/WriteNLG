@@ -88,36 +88,6 @@ public interface PhraseCreatorListener extends ParseTreeListener {
 	 */
 	void exitPhraseSpecification(PhraseCreatorParser.PhraseSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#constraints}.
-	 * @param ctx the parse tree
-	 */
-	void enterConstraints(PhraseCreatorParser.ConstraintsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#constraints}.
-	 * @param ctx the parse tree
-	 */
-	void exitConstraints(PhraseCreatorParser.ConstraintsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#constraintWeighting}.
-	 * @param ctx the parse tree
-	 */
-	void enterConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#constraintWeighting}.
-	 * @param ctx the parse tree
-	 */
-	void exitConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#weighting}.
-	 * @param ctx the parse tree
-	 */
-	void enterWeighting(PhraseCreatorParser.WeightingContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#weighting}.
-	 * @param ctx the parse tree
-	 */
-	void exitWeighting(PhraseCreatorParser.WeightingContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PhraseCreatorParser#constraint}.
 	 * @param ctx the parse tree
 	 */

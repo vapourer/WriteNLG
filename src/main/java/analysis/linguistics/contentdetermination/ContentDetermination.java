@@ -43,7 +43,6 @@ public class ContentDetermination implements ContentDeterminer
 		this.targetConceptCount = Integer.parseInt(WriteNlgProperties.getInstance().getProperty("TargetConceptCount"));
 		this.constraintThreshold = new BigDecimal(
 				WriteNlgProperties.getInstance().getProperty("ConceptConstraintThreshold"));
-		// this.constraintGuillotine = new BigDecimal("0");
 	}
 
 	/**
@@ -57,11 +56,9 @@ public class ContentDetermination implements ContentDeterminer
 	{
 		switch (globalConcept)
 		{
-			case CONSISTENT_DISTANCE_APART:
-				break;
 			case LINES_CROSS:
 				break;
-			case LINES_MEET:
+			case LINES_DO_NOT_CROSS:
 				break;
 			default:
 				break;
@@ -77,7 +74,7 @@ public class ContentDetermination implements ContentDeterminer
 	 */
 	@Override
 	public void addTimeSeriesSpecificConcept(final TimeSeriesSpecificConcept timeSeriesSpecificConcept,
-			final List<PhraseSpecification> phraseSpecifications, final BigDecimal weighting)
+			final List<PhraseSpecification> phraseSpecifications)
 	{
 		switch (timeSeriesSpecificConcept)
 		{
@@ -93,13 +90,11 @@ public class ContentDetermination implements ContentDeterminer
 				break;
 			case DESCENDING_TREND:
 				break;
-			case LONGEST_TREND:
-				break;
 			case MAXIMUM:
 				ConstraintGroup<String> maximumConstraints = new SoftConstraintGroup<>(
 						new WeightedAverageConstraintProcessor());
 				Constraint<String> testMaximumConstraint1 = new BoundedWeightedConstraint<>("Maximum test constraint 1",
-						new SatisfactionLevel(new BigDecimal("0.6"), weighting), new BigDecimal("0"),
+						new SatisfactionLevel(new BigDecimal("0.6"), new BigDecimal("3")), new BigDecimal("0"),
 						new BigDecimal("1"));
 				maximumConstraints.addConstraint(testMaximumConstraint1);
 				Constraint<String> testMaximumConstraint2 = new BoundedWeightedConstraint<>("Maximum test constraint 2",
@@ -111,15 +106,9 @@ public class ContentDetermination implements ContentDeterminer
 				break;
 			case MINIMUM:
 				break;
-			case MULTIPLE_TRENDS:
-				break;
 			case RISING_TREND:
 				break;
-			case SPIKES:
-				break;
 			case TIME_SLICE:
-				break;
-			case TURNING_POINTS:
 				break;
 			default:
 				break;

@@ -12,13 +12,13 @@ concept						:	globalConcept
 							|	timeSeriesConcept
 							;
 
-globalConcept				:	GLOBAL_CONCEPT '=' globalConceptType (NEW_LINE constraints)* NEW_LINE phraseSpecifications
+globalConcept				:	GLOBAL_CONCEPT '=' globalConceptType NEW_LINE phraseSpecifications
 							;
 						
 globalConceptType			:	GLOBAL_CONCEPT_TYPE
 							;
 						
-timeSeriesConcept			:	TIME_SERIES_CONCEPT '=' timeSeriesConceptType (NEW_LINE constraints)* NEW_LINE phraseSpecifications
+timeSeriesConcept			:	TIME_SERIES_CONCEPT '=' timeSeriesConceptType NEW_LINE phraseSpecifications
 							;
 						
 timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
@@ -27,16 +27,7 @@ timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
 phraseSpecifications		:	(phraseSpecification NEW_LINE)* phraseSpecification
 							;
 					
-phraseSpecification			:	PHRASE_SPECIFICATION (NEW_LINE constraints)* NEW_LINE subject NEW_LINE predicate
-							;
-							
-constraints					:	CONSTRAINTS (NEW_LINE constraintWeighting)+
-							;
-							
-constraintWeighting			:	constraint ':' weighting
-							;
-							
-weighting					:	WEIGHTING
+phraseSpecification			:	PHRASE_SPECIFICATION NEW_LINE subject NEW_LINE predicate
 							;
 							
 constraint					:	STRING
@@ -67,25 +58,14 @@ GLOBAL_CONCEPT				:	'GlobalConcept'
 TIME_SERIES_CONCEPT			:	'TimeSeriesConcept'
 							;
 							
-CONSTRAINTS					:	'Constraints'
-							;
-
-WEIGHTING					:	[1-5]
-							;
-							
-GLOBAL_CONCEPT_TYPE			:	'CONSISTENT_DISTANCE_APART'
-							|	'LINES_CROSS'
-							|	'LINES_MEET'
+GLOBAL_CONCEPT_TYPE			:	'LINES_CROSS'
+							|	'LINES_DO_NOT_CROSS'
 							;
 							
 TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'MINIMUM'
 							|	'RISING_TREND'
 							|	'DESCENDING_TREND'
-							|	'MULTIPLE_TRENDS'
-							|	'LONGEST_TREND'
-							|	'SPIKES'
-							|	'TURNING_POINTS'
 							|	'SERIES_LEGEND'
 							|	'TIME_SLICE'
 							;
@@ -111,10 +91,7 @@ PART_OF_SPEECH				:	'NOUN'
 							|	'COMPLEMENT'
 							;
 					
-NUMERIC						:	[0-9]+
-							;
-					
-STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*
+STRING						:	[a-zA-Z0-9][a-zA-Z0-9]*
 							;
 
 NEW_LINE					:	('\r'? '\n')

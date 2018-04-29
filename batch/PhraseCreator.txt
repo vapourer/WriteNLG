@@ -1,3 +1,15 @@
+GlobalConcept=LINES_CROSS
+PhraseSpecification
+Subject
+NOUN		:	line
+Predicate
+VERB		:	cross
+GlobalConcept=LINES_DO_NOT_CROSS
+PhraseSpecification
+Subject
+NOUN		:	line
+Predicate
+VERB		:	do not cross
 TimeSeriesConcept=SERIES_LEGEND
 PhraseSpecification
 Subject
@@ -6,8 +18,6 @@ Predicate
 VERB		:	be
 COMPLEMENT	:	@@SeriesLegend@@
 TimeSeriesConcept=MAXIMUM
-Constraints
-TestConstraint	:	3
 PhraseSpecification
 Subject
 NOUN		:	maximum
@@ -18,12 +28,6 @@ TimeSeriesConcept=MINIMUM
 PhraseSpecification
 Subject
 NOUN		:	minimum
-Predicate
-VERB		:	be
-COMPLEMENT	:	@@Minimum@@
-PhraseSpecification
-Subject
-NOUN		:	lowest
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@Minimum@@
@@ -39,40 +43,6 @@ Subject
 NOUN		:	@@SeriesLegend@@
 Predicate
 VERB		:	fall
-TimeSeriesConcept=MULTIPLE_TRENDS
-PhraseSpecification
-Subject
-NOUN		:	@@SeriesLegend@@
-Predicate
-VERB		:	have
-NOUN		:	multiple trend
-TimeSeriesConcept=LONGEST_TREND
-PhraseSpecification
-Subject
-NOUN		:	longest trend
-Predicate
-VERB		:	be
-COMPLEMENT	:	@@Direction@@
-GlobalConcept=LINES_CROSS
-PhraseSpecification
-Subject
-NOUN		:	line
-Predicate
-VERB		:	cross
-TimeSeriesConcept=SPIKES
-PhraseSpecification
-Subject
-NOUN		:	@@SeriesLegend@@
-Predicate
-VERB		:	have
-NOUN		:	spike
-TimeSeriesConcept=TURNING_POINTS
-PhraseSpecification
-Subject
-NOUN		:	@@SeriesLegend@@
-Predicate
-VERB		:	have
-NOUN		:	turning point
 TimeSeriesConcept=TIME_SLICE
 PhraseSpecification
 Subject

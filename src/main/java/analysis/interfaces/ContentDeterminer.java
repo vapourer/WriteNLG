@@ -3,7 +3,6 @@
 
 package analysis.interfaces;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import analysis.TimeSeriesSpecificConcept;
@@ -22,7 +21,7 @@ public interface ContentDeterminer
 	 * @param phraseSpecifications
 	 */
 	void addTimeSeriesSpecificConcept(TimeSeriesSpecificConcept timeSeriesSpecificConcept,
-			List<PhraseSpecification> phraseSpecifications, final BigDecimal weighting);
+			List<PhraseSpecification> phraseSpecifications);
 
 	List<AbstractConcept> getSelectedConcepts();
 }

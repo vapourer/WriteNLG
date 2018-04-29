@@ -112,42 +112,6 @@ public class PhraseCreatorBaseListener implements PhraseCreatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConstraints(PhraseCreatorParser.ConstraintsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitConstraints(PhraseCreatorParser.ConstraintsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitConstraintWeighting(PhraseCreatorParser.ConstraintWeightingContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterWeighting(PhraseCreatorParser.WeightingContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitWeighting(PhraseCreatorParser.WeightingContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterConstraint(PhraseCreatorParser.ConstraintContext ctx) { }
 	/**
 	 * {@inheritDoc}

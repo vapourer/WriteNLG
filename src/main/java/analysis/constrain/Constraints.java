@@ -11,6 +11,8 @@ import org.antlr.v4.runtime.CharStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.GlobalConcept;
+import analysis.TimeSeriesSpecificConcept;
 import io.AntlrInputReader;
 import writenlg.expertinput.LexerParser;
 
@@ -20,7 +22,8 @@ public class Constraints
 
 	private static Constraints INSTANCE;
 
-	private final Map<String, ConstraintConfiguration> constraintConfigurations;
+	private final Map<GlobalConcept, Map<String, ConstraintConfiguration>> constraintConfigurationsForGlobalConcepts;
+	private final Map<TimeSeriesSpecificConcept, Map<String, ConstraintConfiguration>> constraintConfigurationsForTimeSeriesSpecificConcepts;
 
 	/**
 	 * Creates a Constraints instance.
@@ -57,30 +60,83 @@ public class Constraints
 
 	private Constraints()
 	{
-		constraintConfigurations = new HashMap<>();
+		this.constraintConfigurationsForGlobalConcepts = new HashMap<>();
+		this.constraintConfigurationsForTimeSeriesSpecificConcepts = new HashMap<>();
 		LOGGER.info("Constraints instance created");
 	}
 
 	/**
 	 * Creates a new ConstraintConfiguration instance, and adds it to this Map of ConstraintConfiguration instances.
 	 * 
+	 * @param concept
 	 * @param name
 	 * @param value
 	 * @param weighting
 	 */
-	public void addConstraint(final String name, final BigDecimal value, final BigDecimal weighting)
+	public void addConstraintConfigurationForGlobalConcept(final GlobalConcept concept, final String name,
+			final BigDecimal value, final BigDecimal weighting)
 	{
 		ConstraintConfiguration configuration = new ConstraintConfiguration(value, weighting);
-		constraintConfigurations.put(name, configuration);
-		LOGGER.info(String.format("Constraint configuration loaded for %s: %s", name, configuration));
+
+		if (this.constraintConfigurationsForGlobalConcepts.containsKey(concept))
+		{
+			this.constraintConfigurationsForGlobalConcepts.get(concept).put(name, configuration);
+		}
+		else
+		{
+			Map<String, ConstraintConfiguration> constraintConfigurations = new HashMap<>();
+			constraintConfigurations.put(name, configuration);
+			this.constraintConfigurationsForGlobalConcepts.put(concept, constraintConfigurations);
+		}
+
+		LOGGER.info(
+				String.format("Global constraint configuration loaded for %s: %s - %s", concept, name, configuration));
 	}
 
 	/**
+	 * Creates a new ConstraintConfiguration instance, and adds it to this Map of ConstraintConfiguration instances.
+	 * 
+	 * @param concept
 	 * @param name
-	 * @return the ConstraintConfiguration associated with name
+	 * @param value
+	 * @param weighting
 	 */
-	public ConstraintConfiguration getConfiguration(String name)
+	public void addConstraintConfigurationForTimeSeriesSpecificConcept(final TimeSeriesSpecificConcept concept,
+			final String name, final BigDecimal value, final BigDecimal weighting)
 	{
-		return constraintConfigurations.get(name);
+		ConstraintConfiguration configuration = new ConstraintConfiguration(value, weighting);
+
+		if (this.constraintConfigurationsForTimeSeriesSpecificConcepts.containsKey(concept))
+		{
+			this.constraintConfigurationsForTimeSeriesSpecificConcepts.get(concept).put(name, configuration);
+		}
+		else
+		{
+			Map<String, ConstraintConfiguration> constraintConfigurations = new HashMap<>();
+			constraintConfigurations.put(name, configuration);
+			this.constraintConfigurationsForTimeSeriesSpecificConcepts.put(concept, constraintConfigurations);
+		}
+
+		LOGGER.info(String.format("Time series specific constraint configuration loaded for %s: %s - %s", concept, name,
+				configuration));
+	}
+
+	/**
+	 * @param concept
+	 * @return the Map<String, ConstraintConfiguration> associated with concept
+	 */
+	public Map<String, ConstraintConfiguration> getConstraintConfigurationsForGlobalConcept(final GlobalConcept concept)
+	{
+		return this.constraintConfigurationsForGlobalConcepts.get(concept);
+	}
+
+	/**
+	 * @param concept
+	 * @return the Map<String, ConstraintConfiguration> associated with concept
+	 */
+	public Map<String, ConstraintConfiguration> getConfigurationsForTimeSeriesSpecificConcept(
+			final TimeSeriesSpecificConcept concept)
+	{
+		return this.constraintConfigurationsForTimeSeriesSpecificConcepts.get(concept);
 	}
 }

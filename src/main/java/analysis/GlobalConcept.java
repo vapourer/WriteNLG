@@ -8,5 +8,5 @@ package analysis;
  */
 public enum GlobalConcept
 {
-	CONSISTENT_DISTANCE_APART, LINES_CROSS, LINES_MEET,
+	LINES_CROSS, LINES_DO_NOT_CROSS,
 }

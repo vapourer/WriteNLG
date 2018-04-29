@@ -124,13 +124,13 @@ public class ConstraintsBaseListener implements ConstraintsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValue(ConstraintsParser.ValueContext ctx) { }
+	@Override public void enterInitialValue(ConstraintsParser.InitialValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValue(ConstraintsParser.ValueContext ctx) { }
+	@Override public void exitInitialValue(ConstraintsParser.InitialValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -71,103 +71,10 @@ public class WriteNlg
 				break;
 		}
 
+		String output = controller.process();
+
+		LOGGER.info(output);
 		System.out.println();
-		System.out.println(controller.process());
-
-		// outputMultipleTimeSeries(lineGraph);
-		// outputBottomUpPiecewiseLinearFunctionResult(lineGraph);
-		// outputCentredMovingAverageResult(lineGraph, properties);
+		System.out.println(output);
 	}
-
-	// private static void outputMultipleTimeSeries(final LineGraph lineGraph)
-	// {
-	// System.out.println();
-	// System.out.println("Datasets");
-	//
-	// final DateFormat dateFormatter = new SimpleDateFormat(
-	// WriteNlgProperties.getInstance().getProperty("DateFormat"));
-	// final List<TimeSeries> timeSeriesGroup = lineGraph.getTimeSeriesGroup();
-	//
-	// for (final TimeSeries timeSeries : timeSeriesGroup)
-	// {
-	// final SortedMap<Long, BigDecimal> graph = timeSeries.getSeries();
-	//
-	// System.out.println(timeSeries.getTimeLegend() + "\t" + timeSeries.getSeriesLegend());
-	//
-	// for (final Long eachTime : graph.keySet())
-	// {
-	// final String formattedDate = dateFormatter.format(new Date(eachTime));
-	// System.out.println(formattedDate + "\t" + graph.get(eachTime));
-	// }
-	//
-	// System.out.println();
-	// }
-	//
-	// System.out.println();
-	// }
-	//
-	// private static void outputBottomUpPiecewiseLinearFunctionResult(final LineGraph lineGraph)
-	// {
-	// final List<TimeSeries> timeSeriesGroup = lineGraph.getTimeSeriesGroup();
-	//
-	// System.out.println("BottomUpPiecewiseLinearFunction");
-	//
-	// for (final TimeSeries eachTimeSeries : timeSeriesGroup)
-	// {
-	// System.out.println(eachTimeSeries.getSeriesLegend());
-	//
-	// final Segmentation segmenter = new Segmenter(eachTimeSeries);
-	//
-	// // final Smoothing bottomUpPiecewiseLinearFunction = new BottomUpPiecewiseLinearFunction(
-	// // eachTimeSeries.getTimeSeries(), properties);
-	//
-	// final Smoothing bottomUpPiecewiseLinearFunction = new BottomUpPiecewiseLinearFunction(
-	// segmenter.createSegments());
-	//
-	// final SortedMap<Long, BigDecimal> timeSeriesSegmented = bottomUpPiecewiseLinearFunction.smoothGraph();
-	//
-	// System.out.println(eachTimeSeries.getTimeLegend() + "\t" + eachTimeSeries.getSeriesLegend());
-	//
-	// final DateFormat dateFormatter = new SimpleDateFormat(
-	// WriteNlgProperties.getInstance().getProperty("DateFormat"));
-	//
-	// for (final Long eachTime : timeSeriesSegmented.keySet())
-	// {
-	// final String formattedDate = dateFormatter.format(new Date(eachTime));
-	// System.out.println(formattedDate + "\t" + timeSeriesSegmented.get(eachTime));
-	// }
-	//
-	// System.out.println();
-	// }
-	// }
-	//
-	// private static void outputCentredMovingAverageResult(final LineGraph lineGraph)
-	// {
-	// final List<TimeSeries> timeSeriesGroup = lineGraph.getTimeSeriesGroup();
-	//
-	// System.out.println("CentredMovingAverage");
-	//
-	// for (final TimeSeries eachTimeSeries : timeSeriesGroup)
-	// {
-	// System.out.println(eachTimeSeries.getSeriesLegend());
-	//
-	// final MovingAverage centredMovingAverage = new CentredMovingAverage(eachTimeSeries.getSeries(),
-	// Integer.parseInt(WriteNlgProperties.getInstance().getProperty("MovingAverageWindow")));
-	//
-	// final SortedMap<Long, BigDecimal> timeSeriesSmoothed = centredMovingAverage.averageGraph();
-	//
-	// System.out.println(eachTimeSeries.getTimeLegend() + "\t" + eachTimeSeries.getSeriesLegend());
-	//
-	// final DateFormat dateFormatter = new SimpleDateFormat(
-	// WriteNlgProperties.getInstance().getProperty("DateFormat"));
-	//
-	// for (final Long eachTime : timeSeriesSmoothed.keySet())
-	// {
-	// final String formattedDate = dateFormatter.format(new Date(eachTime));
-	// System.out.println(formattedDate + "\t" + timeSeriesSmoothed.get(eachTime));
-	// }
-	//
-	// System.out.println();
-	// }
-	// }
 }
