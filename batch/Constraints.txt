@@ -1,5 +1,5 @@
-MAXIMUM
-TestConstraint2=6
-TestConstraint3=5
-SERIES_LEGEND
-TestConstraint4=7
+TimeSeriesConcept=MAXIMUM
+TestConstraint1=0.6 (3)
+TestConstraint2=0.5
+TimeSeriesConcept=SERIES_LEGEND
+TestConstraint4=0.7 (4)

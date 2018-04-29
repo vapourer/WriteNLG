@@ -44,6 +44,6 @@ public class ConstraintConfiguration
 	@Override
 	public String toString()
 	{
-		return String.format("%s(%s)", this.value, this.weighting);
+		return String.format("%s (%s)", this.value, this.weighting);
 	}
 }

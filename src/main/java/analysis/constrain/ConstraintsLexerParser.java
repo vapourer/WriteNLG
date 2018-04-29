@@ -34,6 +34,6 @@ public class ConstraintsLexerParser extends LexerParser
 	@Override
 	protected ParseTree createParseTree(CommonTokenStream tokens)
 	{
-		return new ConstraintsParser(tokens).concept();
+		return new ConstraintsParser(tokens).constraintConfiguration();
 	}
 }

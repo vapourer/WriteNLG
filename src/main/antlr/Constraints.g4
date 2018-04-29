@@ -7,23 +7,50 @@ grammar Constraints;
 
 constraintConfiguration		:	(concept NEW_LINE)* concept
 							;
-							
-concept						:	CONCEPT_TYPE (NEW_LINE constraint)* NEW_LINE constraint
+						
+concept						:	globalConcept
+							|	timeSeriesConcept
+							;
+
+globalConcept				:	GLOBAL_CONCEPT '=' globalConceptType  NEW_LINE constraints
+							;
+						
+globalConceptType			:	GLOBAL_CONCEPT_TYPE
+							;
+						
+timeSeriesConcept			:	TIME_SERIES_CONCEPT '=' timeSeriesConceptType NEW_LINE constraints
+							;
+						
+timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
 							;
 							
-constraint					:	constraintName '=' value
+constraints					:	(constraint NEW_LINE)* constraint
 							;
 							
-constraintName				:	CONSTRAINT_NAME
+constraint					:	constraintName '=' value ('(' weighting ')')?
+							;
+							
+constraintName				:	STRING
 							;
 							
 value						:	VALUE
 							;
 							
-// weighting					:	WEIGHTING
-//							;
+weighting					:	WEIGHTING
+							;
+
+GLOBAL_CONCEPT				:	'GlobalConcept'
+							;
+
+TIME_SERIES_CONCEPT			:	'TimeSeriesConcept'
+							;
+
+GLOBAL_CONCEPT_TYPE			:	'CONSISTENT_DISTANCE_APART'
+							|	'LINES_CROSS'
+							|	'LINES_MEET'
+							;
 							
-CONCEPT_TYPE				:	'MAXIMUM'
+TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'MINIMUM'
 							|	'RISING_TREND'
 							|	'DESCENDING_TREND'
@@ -33,33 +60,28 @@ CONCEPT_TYPE				:	'MAXIMUM'
 							|	'TURNING_POINTS'
 							|	'SERIES_LEGEND'
 							|	'TIME_SLICE'
-							|	'CONSISTENT_DISTANCE_APART'
-							|	'LINES_CROSS'
-							|	'LINES_MEET'
 							;
 							
-CONSTRAINT_NAME				:	'TestConstraint2'
-							|	'TestConstraint3'
-							|	'TestConstraint4'
-							;
+// CONSTRAINT_NAME				:	'TestConstraint2'
+// 							|	'TestConstraint3'
+// 							|	'TestConstraint4'
+//							;
 							
 // VALUE						:	DIGIT
 //							;
 							
-// VALUE						:	DIGIT+ '.' DIGIT*
-// 							|	'.' DIGIT+
-//							;
+VALUE						:	DIGIT+ '.' DIGIT*
+ 							|	'.' DIGIT+
+							;
 							
 WEIGHTING					:	[1-5]
-							;
-							
+ 							;
 
-
-// STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*
-// 							;
+STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*
+ 							;
 							
 DIGIT						:	[0-9]
-							;
+ 							;
 
 NEW_LINE					:	('\r'? '\n')
 							;

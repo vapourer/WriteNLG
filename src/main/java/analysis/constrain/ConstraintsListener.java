@@ -32,10 +32,8 @@ public class ConstraintsListener extends ConstraintsBaseListener
 		LOGGER.info("exitConstraint");
 		final String constraintName = context.constraintName().getText();
 		final BigDecimal value = new BigDecimal(context.value().getText());
-		// final BigDecimal weighting = context.weighting() == null ? new BigDecimal("1")
-		// : new BigDecimal(context.weighting().getText());
-
-		final BigDecimal weighting = new BigDecimal("1");
+		final BigDecimal weighting = context.weighting() == null ? new BigDecimal("1")
+				: new BigDecimal(context.weighting().getText());
 
 		Constraints.getInstance().addConstraint(constraintName, value, weighting);
 		LOGGER.info(String.format("Constraint configuration loaded for %s: %s", constraintName,

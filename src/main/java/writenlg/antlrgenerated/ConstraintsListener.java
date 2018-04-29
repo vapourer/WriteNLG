@@ -28,6 +28,56 @@ public interface ConstraintsListener extends ParseTreeListener {
 	 */
 	void exitConcept(ConstraintsParser.ConceptContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#globalConcept}.
+	 * @param ctx the parse tree
+	 */
+	void enterGlobalConcept(ConstraintsParser.GlobalConceptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#globalConcept}.
+	 * @param ctx the parse tree
+	 */
+	void exitGlobalConcept(ConstraintsParser.GlobalConceptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#globalConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void enterGlobalConceptType(ConstraintsParser.GlobalConceptTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#globalConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void exitGlobalConceptType(ConstraintsParser.GlobalConceptTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#timeSeriesConcept}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimeSeriesConcept(ConstraintsParser.TimeSeriesConceptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#timeSeriesConcept}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimeSeriesConcept(ConstraintsParser.TimeSeriesConceptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#timeSeriesConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimeSeriesConceptType(ConstraintsParser.TimeSeriesConceptTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#timeSeriesConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimeSeriesConceptType(ConstraintsParser.TimeSeriesConceptTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#constraints}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstraints(ConstraintsParser.ConstraintsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#constraints}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstraints(ConstraintsParser.ConstraintsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ConstraintsParser#constraint}.
 	 * @param ctx the parse tree
 	 */
@@ -57,4 +107,14 @@ public interface ConstraintsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValue(ConstraintsParser.ValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#weighting}.
+	 * @param ctx the parse tree
+	 */
+	void enterWeighting(ConstraintsParser.WeightingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#weighting}.
+	 * @param ctx the parse tree
+	 */
+	void exitWeighting(ConstraintsParser.WeightingContext ctx);
 }
