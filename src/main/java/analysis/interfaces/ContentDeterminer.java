@@ -5,6 +5,7 @@ package analysis.interfaces;
 
 import java.util.List;
 
+import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
@@ -14,6 +15,8 @@ import analysis.linguistics.phrase.PhraseSpecification;
  */
 public interface ContentDeterminer
 {
+	void addGlobalConcept(GlobalConcept globalConcept, List<PhraseSpecification> phraseSpecifications);
+
 	/**
 	 * Creates a new AbstractConcept implementation according to concept, and adds it to an AbstractConcept List.
 	 * 

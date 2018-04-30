@@ -76,7 +76,7 @@ CONSTRAINT_NAME				:	'LinesCross'
 							|	'TimeSliceRequired'
 							;
 							
-INITIAL_VALUE				:	DIGIT+ '.' DIGIT*
+INITIAL_VALUE				:	DIGIT+ '.' DIGIT+
  							|	'.' DIGIT+
 							;
 							

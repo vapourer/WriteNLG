@@ -9,17 +9,17 @@ import analysis.constrain.ConstraintGroup;
 import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
- * Representation of a time series legend.
+ * Representation of a lines not crossing concept.
  */
-public class SeriesLegendConcept extends AbstractConcept
+public class LinesDoNotCrossConcept extends AbstractConcept
 {
 	/**
-	 * Creates a new SeriesLegendConcept instance.
+	 * Creates a new LinesDoNotCrossConcept instance.
 	 * 
 	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
-	public SeriesLegendConcept(final List<PhraseSpecification> phraseSpecifications,
+	public LinesDoNotCrossConcept(List<PhraseSpecification> phraseSpecifications,
 			ConstraintGroup<String> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);

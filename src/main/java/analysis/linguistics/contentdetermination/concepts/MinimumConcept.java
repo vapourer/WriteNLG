@@ -9,18 +9,17 @@ import analysis.constrain.ConstraintGroup;
 import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
- * Representation of a time series legend.
+ * Representation of a time series minimum.
  */
-public class SeriesLegendConcept extends AbstractConcept
+public class MinimumConcept extends AbstractConcept
 {
 	/**
-	 * Creates a new SeriesLegendConcept instance.
+	 * Creates a new MinimumConcept instance.
 	 * 
 	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
-	public SeriesLegendConcept(final List<PhraseSpecification> phraseSpecifications,
-			ConstraintGroup<String> constraintGroup)
+	public MinimumConcept(List<PhraseSpecification> phraseSpecifications, ConstraintGroup<String> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
 	}

@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SoftConstraintGroup;
@@ -36,8 +37,9 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 
 	private final ContentDeterminer contentDeterminer;
 
-	private List<PhraseSpecification> phraseSpecifications;
+	private GlobalConcept globalConcept;
 	private TimeSeriesSpecificConcept timeSeriesSpecificConcept;
+	private List<PhraseSpecification> phraseSpecifications;
 	private PhraseSpecification phraseSpecification;
 	private SentencePart sentencePart;
 	private Subject<String> subject;
@@ -59,6 +61,20 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	}
 
 	@Override
+	public void enterGlobalConcept(PhraseCreatorParser.GlobalConceptContext context)
+	{
+		this.globalConcept = Enum.valueOf(GlobalConcept.class, context.globalConceptType().getText());
+		LOGGER.info(String.format("GlobalConcept: %s", this.globalConcept));
+	}
+
+	@Override
+	public void exitGlobalConcept(PhraseCreatorParser.GlobalConceptContext context)
+	{
+		this.contentDeterminer.addGlobalConcept(this.globalConcept, this.phraseSpecifications);
+		this.phraseSpecifications = new ArrayList<>();
+	}
+
+	@Override
 	public void enterTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext context)
 	{
 		this.timeSeriesSpecificConcept = Enum.valueOf(TimeSeriesSpecificConcept.class,
@@ -70,7 +86,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	public void exitTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext context)
 	{
 		this.contentDeterminer.addTimeSeriesSpecificConcept(this.timeSeriesSpecificConcept, this.phraseSpecifications);
-		phraseSpecifications = new ArrayList<>();
+		this.phraseSpecifications = new ArrayList<>();
 	}
 
 	@Override

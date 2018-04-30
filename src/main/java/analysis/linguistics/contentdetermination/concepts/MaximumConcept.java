@@ -10,14 +10,13 @@ import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
  * Representation of a time series maximum.
- * 
- * @param <E>
  */
 public class MaximumConcept extends AbstractConcept
 {
 	/**
-	 * Creates a new SeriesLegendConcept instance.
+	 * Creates a new MaximumConcept instance.
 	 * 
+	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
 	public MaximumConcept(final List<PhraseSpecification> phraseSpecifications, ConstraintGroup<String> constraintGroup)

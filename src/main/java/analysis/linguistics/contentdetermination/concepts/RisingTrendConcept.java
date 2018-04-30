@@ -9,18 +9,17 @@ import analysis.constrain.ConstraintGroup;
 import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
- * Representation of a time series legend.
+ * Representation of a time series rising trend.
  */
-public class SeriesLegendConcept extends AbstractConcept
+public class RisingTrendConcept extends AbstractConcept
 {
 	/**
-	 * Creates a new SeriesLegendConcept instance.
+	 * Creates a new RisingTrendConcept instance.
 	 * 
 	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
-	public SeriesLegendConcept(final List<PhraseSpecification> phraseSpecifications,
-			ConstraintGroup<String> constraintGroup)
+	public RisingTrendConcept(List<PhraseSpecification> phraseSpecifications, ConstraintGroup<String> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
 	}

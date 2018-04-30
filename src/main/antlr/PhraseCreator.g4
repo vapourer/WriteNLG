@@ -91,7 +91,7 @@ PART_OF_SPEECH				:	'NOUN'
 							|	'COMPLEMENT'
 							;
 					
-STRING						:	[a-zA-Z0-9][a-zA-Z0-9]*
+STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*
 							;
 
 NEW_LINE					:	('\r'? '\n')
