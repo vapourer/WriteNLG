@@ -101,7 +101,6 @@ public class PhraseCreatorController extends Controller
 			for (final String eachPlaceHolder : substitutions.keySet())
 			{
 				summary = summary.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
-				LOGGER.info(summary);
 			}
 		}
 
