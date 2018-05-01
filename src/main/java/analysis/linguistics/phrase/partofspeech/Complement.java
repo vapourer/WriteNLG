@@ -37,4 +37,9 @@ public class Complement<E> extends AbstractPartOfSpeech<E>
 					constraint.getConstrainedElement(), constraint.getSatisfactionLevelAsValue()));
 		}
 	}
+
+	public void replaceAll(String regex, String substitution)
+	{
+		super.getText().replaceAll(regex, substitution);
+	}
 }

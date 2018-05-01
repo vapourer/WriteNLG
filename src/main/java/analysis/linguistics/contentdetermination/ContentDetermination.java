@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.BooleanConstraintProcessor;
@@ -21,6 +24,8 @@ import analysis.constrain.SoftConstraintGroup;
 import analysis.constrain.WeightedAverageConstraintProcessor;
 import analysis.interfaces.ContentDeterminer;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
+import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
+import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
 import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
@@ -31,6 +36,8 @@ import writenlg.control.WriteNlgProperties;
  */
 public class ContentDetermination implements ContentDeterminer
 {
+	private static final Logger LOGGER = LogManager.getLogger("ContentDetermination.class");
+
 	private final List<AbstractConcept> globalConcepts;
 	private final List<AbstractConcept> timeSeriesSpecificConcepts;
 	private int targetConceptCount;
@@ -52,13 +59,34 @@ public class ContentDetermination implements ContentDeterminer
 	 * @param globalConcept
 	 * @param phraseSpecifications
 	 */
+	@Override
 	public void addGlobalConcept(GlobalConcept globalConcept, List<PhraseSpecification> phraseSpecifications)
 	{
 		switch (globalConcept)
 		{
 			case LINES_CROSS:
+				// ConstraintGroup<String> linesCrossConstraints = new SoftConstraintGroup<>(
+				// new WeightedAverageConstraintProcessor());
+				ConstraintGroup<String> linesCrossConstraints = new HardConstraintGroup<>(
+						new BooleanConstraintProcessor());
+				Constraint<String> hardConstraint1 = new HardConstraint<String>("Required",
+						new SatisfactionLevel(new BigDecimal("1")));
+				linesCrossConstraints.addConstraint(hardConstraint1);
+				LinesCrossConcept linesCrossConcept = new LinesCrossConcept(phraseSpecifications,
+						linesCrossConstraints);
+				this.globalConcepts.add(linesCrossConcept);
 				break;
 			case LINES_DO_NOT_CROSS:
+				// ConstraintGroup<String> linesDoNotCrossConstraints = new SoftConstraintGroup<>(
+				// new WeightedAverageConstraintProcessor());
+				ConstraintGroup<String> linesDoNotCrossConstraints = new HardConstraintGroup<>(
+						new BooleanConstraintProcessor());
+				Constraint<String> hardConstraint2 = new HardConstraint<String>("Required",
+						new SatisfactionLevel(new BigDecimal("1")));
+				linesDoNotCrossConstraints.addConstraint(hardConstraint2);
+				LinesDoNotCrossConcept linesDoNotCrossConcept = new LinesDoNotCrossConcept(phraseSpecifications,
+						linesDoNotCrossConstraints);
+				this.globalConcepts.add(linesDoNotCrossConcept);
 				break;
 			default:
 				break;
@@ -86,7 +114,7 @@ public class ContentDetermination implements ContentDeterminer
 				seriesLegendConstraints.addConstraint(requiredSeriesLevelConstraint);
 				SeriesLegendConcept seriesLegendConcept = new SeriesLegendConcept(phraseSpecifications,
 						seriesLegendConstraints);
-				timeSeriesSpecificConcepts.add(seriesLegendConcept);
+				this.timeSeriesSpecificConcepts.add(seriesLegendConcept);
 				break;
 			case DESCENDING_TREND:
 				break;
@@ -102,7 +130,7 @@ public class ContentDetermination implements ContentDeterminer
 						new BigDecimal("1"));
 				maximumConstraints.addConstraint(testMaximumConstraint2);
 				MaximumConcept maximumConcept = new MaximumConcept(phraseSpecifications, maximumConstraints);
-				timeSeriesSpecificConcepts.add(maximumConcept);
+				this.timeSeriesSpecificConcepts.add(maximumConcept);
 				break;
 			case MINIMUM:
 				break;
@@ -128,11 +156,17 @@ public class ContentDetermination implements ContentDeterminer
 	{
 		List<AbstractConcept> rationalisedConcepts = new ArrayList<>();
 
-		List<AbstractConcept> conceptsCopy = this.timeSeriesSpecificConcepts;
+		List<AbstractConcept> conceptsCopy = this.globalConcepts;
+		conceptsCopy.addAll(timeSeriesSpecificConcepts);
+
+		// List<AbstractConcept> conceptsCopy = this.timeSeriesSpecificConcepts;
 		Collections.sort(conceptsCopy, Collections.reverseOrder(new ConceptSatisfactionLevelComparator()));
 
 		for (AbstractConcept eachConcept : conceptsCopy)
 		{
+			LOGGER.info(String.format("Stickleback concept: %s %s",
+					eachConcept.getPhraseSpecifications().get(0).getSubject().getNounPhrase().getText(),
+					eachConcept.getPhraseSpecifications().get(0).getPredicate().getVerb().getText()));
 			if (rationalisedConcepts.size() <= this.targetConceptCount
 					&& eachConcept.calculateSatisfactionLevel().compareTo(constraintThreshold) >= 0)
 			{
