@@ -15,7 +15,7 @@ import analysis.constrain.ConstraintGroup;
  * Represents a verb. Extends AbstractPartOfSpeech, which holds a constraintGroup of type E from which a value can be
  * calculated for a given context.
  */
-public class Verb<E> extends AbstractPartOfSpeech<E>
+public class Verb extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("Verb.class");
 
@@ -25,15 +25,15 @@ public class Verb<E> extends AbstractPartOfSpeech<E>
 	 * @param text
 	 * @param constraintGroup
 	 */
-	public Verb(final String text, final ConstraintGroup<E> constraintGroup)
+	public Verb(final String text, final ConstraintGroup<String> constraintGroup)
 	{
 		super(text, constraintGroup);
 
 		LOGGER.info("New Verb created: " + getText());
 
-		final Set<? extends Constraint<E>> constraints = getConstraintGroup().getConstraints();
+		final Set<? extends Constraint<String>> constraints = getConstraintGroup().getConstraints();
 
-		for (final Constraint<E> constraint : constraints)
+		for (final Constraint<String> constraint : constraints)
 		{
 			LOGGER.info(String.format("Constraint for %s: %s, with satisfaction level: %s", getText(),
 					constraint.getConstrainedElement(), constraint.getSatisfactionLevelAsValue()));

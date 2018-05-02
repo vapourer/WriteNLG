@@ -15,7 +15,7 @@ import analysis.constrain.ConstraintGroup;
  * Represents a noun phrase. Extends AbstractPartOfSpeech, which holds a constraintGroup of type E from which a value
  * can be calculated for a given context.
  */
-public class NounPhrase<E> extends AbstractPartOfSpeech<E>
+public class NounPhrase extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("NounPhrase.class");
 
@@ -25,18 +25,30 @@ public class NounPhrase<E> extends AbstractPartOfSpeech<E>
 	 * @param text
 	 * @param constraintGroup
 	 */
-	public NounPhrase(final String text, final ConstraintGroup<E> constraintGroup)
+	public NounPhrase(final String text, final ConstraintGroup<String> constraintGroup)
 	{
 		super(text, constraintGroup);
 
 		LOGGER.info("New NounPhrase created: " + getText());
 
-		final Set<? extends Constraint<E>> constraints = getConstraintGroup().getConstraints();
+		final Set<? extends Constraint<String>> constraints = getConstraintGroup().getConstraints();
 
-		for (final Constraint<E> constraint : constraints)
+		for (final Constraint<String> constraint : constraints)
 		{
 			LOGGER.info(String.format("Constraint for %s: %s, with satisfaction level: %s", getText(),
 					constraint.getConstrainedElement(), constraint.getSatisfactionLevelAsValue()));
 		}
+	}
+
+	/**
+	 * Returns this text with placeholders replaced by analysis derived information.
+	 * 
+	 * @param regex
+	 * @param substitution
+	 * @return
+	 */
+	public String replaceAll(String regex, String substitution)
+	{
+		return super.getText().replaceAll(regex, substitution);
 	}
 }

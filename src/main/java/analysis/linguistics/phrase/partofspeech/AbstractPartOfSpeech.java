@@ -14,10 +14,10 @@ import analysis.constrain.ConstraintGroup;
  *
  * @param <E>
  */
-public abstract class AbstractPartOfSpeech<E>
+public abstract class AbstractPartOfSpeech
 {
 	private final String text;
-	private final ConstraintGroup<E> constraintGroup;
+	private final ConstraintGroup<String> constraintGroup;
 
 	/**
 	 * Creates an AbstractPartOfSpeech instance.
@@ -25,7 +25,7 @@ public abstract class AbstractPartOfSpeech<E>
 	 * @param text
 	 * @param constraintGroup
 	 */
-	public AbstractPartOfSpeech(final String text, final ConstraintGroup<E> constraintGroup)
+	public AbstractPartOfSpeech(final String text, final ConstraintGroup<String> constraintGroup)
 	{
 		this.text = text;
 		this.constraintGroup = constraintGroup;
@@ -44,7 +44,7 @@ public abstract class AbstractPartOfSpeech<E>
 	 *
 	 * @param constraint
 	 */
-	public void addConstraint(final Constraint<E> constraint)
+	public void addConstraint(final Constraint<String> constraint)
 	{
 		this.constraintGroup.addConstraint(constraint);
 	}
@@ -62,7 +62,7 @@ public abstract class AbstractPartOfSpeech<E>
 	/**
 	 * @return the constraintGroup
 	 */
-	protected ConstraintGroup<E> getConstraintGroup()
+	public ConstraintGroup<String> getConstraintGroup()
 	{
 		return this.constraintGroup;
 	}

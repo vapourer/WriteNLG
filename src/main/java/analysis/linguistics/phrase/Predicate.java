@@ -10,13 +10,13 @@ import analysis.linguistics.phrase.partofspeech.Complement;
 import analysis.linguistics.phrase.partofspeech.NounPhrase;
 import analysis.linguistics.phrase.partofspeech.Verb;
 
-public class Predicate<E>
+public class Predicate
 {
 	private static final Logger LOGGER = LogManager.getLogger("Predicate.class");
 
-	private Verb<E> verb;
-	private NounPhrase<E> nounPhrase;
-	private Complement<E> complement;
+	private Verb verb;
+	private NounPhrase nounPhrase;
+	private Complement complement;
 
 	public Predicate()
 	{
@@ -26,7 +26,7 @@ public class Predicate<E>
 	/**
 	 * @return the verb
 	 */
-	public Verb<E> getVerb()
+	public Verb getVerb()
 	{
 		return this.verb;
 	}
@@ -35,7 +35,7 @@ public class Predicate<E>
 	 * @param verb
 	 *            the verb to set
 	 */
-	public void setVerb(final Verb<E> verb)
+	public void setVerb(final Verb verb)
 	{
 		this.verb = verb;
 		LOGGER.info(String.format("New Verb added: %s", this.verb.getText()));
@@ -44,7 +44,7 @@ public class Predicate<E>
 	/**
 	 * @return the nounPhrase
 	 */
-	public NounPhrase<E> getNounPhrase()
+	public NounPhrase getNounPhrase()
 	{
 		return this.nounPhrase;
 	}
@@ -53,7 +53,7 @@ public class Predicate<E>
 	 * @param nounPhrase
 	 *            the nounPhrase to set
 	 */
-	public void setNounPhrase(final NounPhrase<E> nounPhrase)
+	public void setNounPhrase(final NounPhrase nounPhrase)
 	{
 		this.nounPhrase = nounPhrase;
 		LOGGER.info(String.format("New NounPhrase added: %s", this.nounPhrase.getText()));
@@ -62,7 +62,7 @@ public class Predicate<E>
 	/**
 	 * @return the complement
 	 */
-	public Complement<E> getComplement()
+	public Complement getComplement()
 	{
 		return complement;
 	}
@@ -71,7 +71,7 @@ public class Predicate<E>
 	 * @param complement
 	 *            the complement to set
 	 */
-	public void setComplement(Complement<E> complement)
+	public void setComplement(Complement complement)
 	{
 		this.complement = complement;
 		LOGGER.info(String.format("New Complement added: %s", this.complement.getText()));

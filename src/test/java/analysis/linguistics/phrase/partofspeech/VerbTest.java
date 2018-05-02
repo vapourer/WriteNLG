@@ -37,14 +37,15 @@ public class VerbTest
 		// Arrange
 		final BigDecimal satisfactionLevelExpected = new BigDecimal("1.4");
 
-		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(new WeightedAdditionConstraintProcessor());
+		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(
+				new WeightedAdditionConstraintProcessor());
 
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Too slow",
 				new SatisfactionLevel(new BigDecimal("0.6")), new BigDecimal("0"), new BigDecimal("1")));
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Speed merchant",
 				new SatisfactionLevel(new BigDecimal("0.8")), new BigDecimal("0"), new BigDecimal("1")));
 
-		final Verb<String> verb = new Verb<>("hurtle", constraintGroup);
+		final Verb verb = new Verb("hurtle", constraintGroup);
 
 		// Act
 		final BigDecimal satisfactionLevelActual = verb.calculateSatisfactionLevel();

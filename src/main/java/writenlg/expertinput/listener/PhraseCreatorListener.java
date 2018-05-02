@@ -42,8 +42,8 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	private List<PhraseSpecification> phraseSpecifications;
 	private PhraseSpecification phraseSpecification;
 	private SentencePart sentencePart;
-	private Subject<String> subject;
-	private Predicate<String> predicate;
+	private Subject subject;
+	private Predicate predicate;
 
 	/**
 	 * Creates a PhraseCreator instance.
@@ -108,7 +108,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void enterSubject(final PhraseCreatorParser.SubjectContext context)
 	{
-		this.subject = new Subject<>();
+		this.subject = new Subject();
 		this.sentencePart = SentencePart.SUBJECT;
 		LOGGER.info("New Subject created");
 	}
@@ -116,7 +116,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void enterPredicate(final PhraseCreatorParser.PredicateContext context)
 	{
-		this.predicate = new Predicate<>();
+		this.predicate = new Predicate();
 		this.sentencePart = SentencePart.PREDICATE;
 		LOGGER.info("New Predicate created");
 	}
@@ -147,7 +147,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		switch (partOfSpeech)
 		{
 			case NOUN:
-				this.subject.setNounPhrase(new NounPhrase<>(expression, constraintGroup));
+				this.subject.setNounPhrase(new NounPhrase(expression, constraintGroup));
 				LOGGER.info(String.format("New NounPhrase added to Subject: %s", expression));
 				break;
 			case VERB:
@@ -179,11 +179,11 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		switch (partOfSpeech)
 		{
 			case NOUN:
-				this.predicate.setNounPhrase(new NounPhrase<>(expression, constraintGroup));
+				this.predicate.setNounPhrase(new NounPhrase(expression, constraintGroup));
 				LOGGER.info(String.format("New NounPhrase added to Predicate: %s", expression));
 				break;
 			case VERB:
-				this.predicate.setVerb(new Verb<>(expression, constraintGroup));
+				this.predicate.setVerb(new Verb(expression, constraintGroup));
 				LOGGER.info(String.format("New Verb added to Predicate: %s", expression));
 				break;
 			case ADJECTIVE:
@@ -201,7 +201,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 			case PRONOUN:
 				break;
 			case COMPLEMENT:
-				this.predicate.setComplement(new Complement<>(expression, constraintGroup));
+				this.predicate.setComplement(new Complement(expression, constraintGroup));
 				LOGGER.info(String.format("New Complement added to Predicate: %s", expression));
 				break;
 			default:

@@ -13,7 +13,7 @@ import analysis.constrain.ConstraintGroup;
  * from which a value
  * can be calculated for a given context.
  */
-public class Complement<E> extends AbstractPartOfSpeech<E>
+public class Complement<E> extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("Complement.class");
 
@@ -23,23 +23,30 @@ public class Complement<E> extends AbstractPartOfSpeech<E>
 	 * @param text
 	 * @param constraintGroup
 	 */
-	public Complement(String text, ConstraintGroup<E> constraintGroup)
+	public Complement(String text, ConstraintGroup<String> constraintGroup)
 	{
 		super(text, constraintGroup);
 
 		LOGGER.info("New Complement created: " + getText());
 
-		final Set<? extends Constraint<E>> constraints = getConstraintGroup().getConstraints();
+		final Set<? extends Constraint<String>> constraints = getConstraintGroup().getConstraints();
 
-		for (final Constraint<E> constraint : constraints)
+		for (final Constraint<String> constraint : constraints)
 		{
 			LOGGER.info(String.format("Constraint for %s: %s, with satisfaction level: %s", getText(),
 					constraint.getConstrainedElement(), constraint.getSatisfactionLevelAsValue()));
 		}
 	}
 
-	public void replaceAll(String regex, String substitution)
+	/**
+	 * Returns this text with placeholders replaced by analysis derived information.
+	 * 
+	 * @param regex
+	 * @param substitution
+	 * @return
+	 */
+	public String replaceAll(String regex, String substitution)
 	{
-		super.getText().replaceAll(regex, substitution);
+		return super.getText().replaceAll(regex, substitution);
 	}
 }

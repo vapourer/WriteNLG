@@ -10,8 +10,8 @@ public class PhraseSpecification
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseSpecification.class");
 
-	private Subject<String> subject;
-	private Predicate<String> predicate;
+	private Subject subject;
+	private Predicate predicate;
 
 	public PhraseSpecification()
 	{
@@ -21,7 +21,7 @@ public class PhraseSpecification
 	/**
 	 * @return the subject
 	 */
-	public Subject<String> getSubject()
+	public Subject getSubject()
 	{
 		return this.subject;
 	}
@@ -30,7 +30,7 @@ public class PhraseSpecification
 	 * @param subject
 	 *            the subject to set
 	 */
-	public void setSubject(final Subject<String> subject)
+	public void setSubject(final Subject subject)
 	{
 		this.subject = subject;
 	}
@@ -38,7 +38,7 @@ public class PhraseSpecification
 	/**
 	 * @return the predicate
 	 */
-	public Predicate<String> getPredicate()
+	public Predicate getPredicate()
 	{
 		return this.predicate;
 	}
@@ -47,7 +47,7 @@ public class PhraseSpecification
 	 * @param predicate
 	 *            the predicate to set
 	 */
-	public void setPredicate(final Predicate<String> predicate)
+	public void setPredicate(final Predicate predicate)
 	{
 		this.predicate = predicate;
 	}
