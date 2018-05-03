@@ -71,10 +71,10 @@ public class NounPhraseTest
 		constraintGroup.addConstraint(new SoftConstraint<>("Radishes are red",
 				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("2"))));
 
-		final NounPhrase complement = new NounPhrase("@@onion@@", constraintGroup);
+		final NounPhrase nounPhrase = new NounPhrase("@@onion@@", constraintGroup);
 
 		// Act
-		String textActual = complement.replaceAll("@@onion@@", "5678");
+		String textActual = nounPhrase.replaceAll("@@onion@@", "5678");
 
 		// Assert
 		Assert.assertEquals(textExpected, textActual);

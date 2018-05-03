@@ -3,6 +3,8 @@
 
 package analysis.linguistics.phrase;
 
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -50,5 +52,16 @@ public class PhraseSpecification
 	public void setPredicate(final Predicate predicate)
 	{
 		this.predicate = predicate;
+	}
+
+	/**
+	 * Replaces placeholders with values drawn from statistical analysis.
+	 * 
+	 * @param substitutions
+	 */
+	public void substitutePlaceholders(Map<String, String> substitutions)
+	{
+		this.subject.substitutePlaceholders(substitutions);
+		this.predicate.substitutePlaceholders(substitutions);
 	}
 }

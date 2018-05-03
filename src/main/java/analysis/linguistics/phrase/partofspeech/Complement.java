@@ -13,7 +13,7 @@ import analysis.constrain.ConstraintGroup;
  * from which a value
  * can be calculated for a given context.
  */
-public class Complement<E> extends AbstractPartOfSpeech
+public class Complement extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("Complement.class");
 

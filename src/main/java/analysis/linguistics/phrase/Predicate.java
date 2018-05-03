@@ -3,6 +3,8 @@
 
 package analysis.linguistics.phrase;
 
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -75,5 +77,37 @@ public class Predicate
 	{
 		this.complement = complement;
 		LOGGER.info(String.format("New Complement added: %s", this.complement.getText()));
+	}
+
+	/**
+	 * Replaces placeholders with values drawn from statistical analysis.
+	 * 
+	 * @param substitutions
+	 */
+	public void substitutePlaceholders(Map<String, String> substitutions)
+	{
+		if (this.nounPhrase != null)
+		{
+			String nounPhaseText = this.nounPhrase.getText();
+
+			for (final String eachPlaceHolder : substitutions.keySet())
+			{
+				nounPhaseText = nounPhaseText.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+			}
+
+			this.nounPhrase = new NounPhrase(nounPhaseText, this.nounPhrase.getConstraintGroup());
+		}
+
+		if (this.complement != null)
+		{
+			String complementText = this.complement.getText();
+
+			for (final String eachPlaceHolder : substitutions.keySet())
+			{
+				complementText = complementText.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+			}
+
+			this.complement = new Complement(complementText, this.complement.getConstraintGroup());
+		}
 	}
 }

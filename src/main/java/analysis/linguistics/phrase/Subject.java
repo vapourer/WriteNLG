@@ -39,6 +39,11 @@ public class Subject
 		LOGGER.info(String.format("New NounPhrase added: %s", this.nounPhrase.getText()));
 	}
 
+	/**
+	 * Replaces placeholders with values drawn from statistical analysis.
+	 * 
+	 * @param substitutions
+	 */
 	public void substitutePlaceholders(Map<String, String> substitutions)
 	{
 		String nounPhaseText = this.nounPhrase.getText();
