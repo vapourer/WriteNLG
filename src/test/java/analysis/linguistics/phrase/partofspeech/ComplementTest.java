@@ -73,7 +73,7 @@ public class ComplementTest
 		final Complement complement = new Complement("@@radish@@", constraintGroup);
 
 		// Act
-		String textActual = complement.replaceAll("@@radish@@", "1234");
+		String textActual = complement.replaceAll("@@radish@@", "1234").getText();
 
 		// Assert
 		Assert.assertEquals(textExpected, textActual);

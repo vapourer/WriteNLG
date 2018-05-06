@@ -5,6 +5,9 @@ package writenlg.substitution;
 
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import analysis.TimeSeriesWithDerivedInformation;
 
 /**
@@ -12,6 +15,8 @@ import analysis.TimeSeriesWithDerivedInformation;
  */
 public class TimeSeriesMapping
 {
+	private static final Logger LOGGER = LogManager.getLogger("TimeSeriesMapping.class");
+
 	private final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation;
 	private final Substitutions substitutions;
 
@@ -26,6 +31,15 @@ public class TimeSeriesMapping
 	{
 		this.timeSeriesWithDerivedInformation = timeSeriesWithDerivedInformation;
 		this.substitutions = substitutions;
+
+		LOGGER.info(
+				String.format("TimeSeriesMapping created for %s", timeSeriesWithDerivedInformation.getSeriesLegend()));
+
+		for (String placeHolder : substitutions.getSubstitutions().keySet())
+		{
+			LOGGER.info(String.format("%s substituted for %s", substitutions.getSubstitutions().get(placeHolder),
+					placeHolder));
+		}
 	}
 
 	/**

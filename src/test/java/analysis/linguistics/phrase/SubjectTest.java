@@ -57,8 +57,8 @@ public class SubjectTest
 		subject.setNounPhrase(nounPhrase);
 
 		// Act
-		subject.substitutePlaceholders(substitutions);
-		String nounPhraseTextActual = subject.getNounPhrase().getText();
+		Subject updatedSubject = subject.substitutePlaceholders(substitutions);
+		String nounPhraseTextActual = updatedSubject.getNounPhrase().getText();
 
 		// Assert
 		Assert.assertEquals(nounPhraseTextExpected, nounPhraseTextActual);

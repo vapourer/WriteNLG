@@ -47,8 +47,8 @@ public class NounPhrase extends AbstractPartOfSpeech
 	 * @param substitution
 	 * @return
 	 */
-	public String replaceAll(String regex, String substitution)
+	public NounPhrase replaceAll(String regex, String substitution)
 	{
-		return super.getText().replaceAll(regex, substitution);
+		return new NounPhrase(getText().replaceAll(regex, substitution), this.getConstraintGroup());
 	}
 }

@@ -9,13 +9,13 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.Concepts;
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SoftConstraintGroup;
 import analysis.constrain.WeightedAdditionConstraintProcessor;
-import analysis.interfaces.ContentDeterminer;
-import analysis.linguistics.contentdetermination.ContentDetermination;
+import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.phrase.PhraseSpecification;
 import analysis.linguistics.phrase.Predicate;
 import analysis.linguistics.phrase.SentencePart;
@@ -26,7 +26,7 @@ import analysis.linguistics.phrase.partofspeech.PartOfSpeech;
 import analysis.linguistics.phrase.partofspeech.Verb;
 import writenlg.antlrgenerated.PhraseCreatorBaseListener;
 import writenlg.antlrgenerated.PhraseCreatorParser;
-import writenlg.substitution.Substitutions;
+import writenlg.substitution.Substitutor;
 
 /**
  * PhraseCreatorBaseListener overrides specific to PhraseCreator.
@@ -35,7 +35,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseCreatorListener.class");
 
-	private final ContentDeterminer contentDeterminer;
+	private final ConceptLoader concepts;
 
 	private GlobalConcept globalConcept;
 	private TimeSeriesSpecificConcept timeSeriesSpecificConcept;
@@ -47,17 +47,14 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 
 	/**
 	 * Creates a PhraseCreator instance.
+	 * 
+	 * @param substitutor
 	 */
-	public PhraseCreatorListener()
-	{
-		this(new Substitutions());
-	}
-
-	public PhraseCreatorListener(final Substitutions substitutions)
+	public PhraseCreatorListener(final Substitutor substitutor)
 	{
 		this.phraseSpecifications = new ArrayList<>();
 		this.sentencePart = SentencePart.SUBJECT;
-		this.contentDeterminer = new ContentDetermination();
+		this.concepts = new Concepts(substitutor);
 	}
 
 	@Override
@@ -70,7 +67,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void exitGlobalConcept(PhraseCreatorParser.GlobalConceptContext context)
 	{
-		this.contentDeterminer.addGlobalConcept(this.globalConcept, this.phraseSpecifications);
+		this.concepts.addGlobalConcept(this.globalConcept, this.phraseSpecifications);
 		this.phraseSpecifications = new ArrayList<>();
 	}
 
@@ -85,7 +82,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void exitTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext context)
 	{
-		this.contentDeterminer.addTimeSeriesSpecificConcept(this.timeSeriesSpecificConcept, this.phraseSpecifications);
+		this.concepts.addTimeSeriesSpecificConcept(this.timeSeriesSpecificConcept, this.phraseSpecifications);
 		this.phraseSpecifications = new ArrayList<>();
 	}
 
@@ -210,10 +207,10 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	}
 
 	/**
-	 * @return the contentDeterminer
+	 * @return the concepts
 	 */
-	public ContentDeterminer getContentDeterminer()
+	public ConceptLoader getConcepts()
 	{
-		return contentDeterminer;
+		return this.concepts;
 	}
 }

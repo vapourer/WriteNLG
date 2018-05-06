@@ -12,6 +12,9 @@ import analysis.linguistics.phrase.partofspeech.Complement;
 import analysis.linguistics.phrase.partofspeech.NounPhrase;
 import analysis.linguistics.phrase.partofspeech.Verb;
 
+/**
+ * Represents the predicate component of a sentence.
+ */
 public class Predicate
 {
 	private static final Logger LOGGER = LogManager.getLogger("Predicate.class");
@@ -20,9 +23,29 @@ public class Predicate
 	private NounPhrase nounPhrase;
 	private Complement complement;
 
+	/**
+	 * Creates a new Predicate instance.
+	 */
 	public Predicate()
 	{
 		LOGGER.info("New Predicate created");
+	}
+
+	/**
+	 * Creates a new Predicate instance.
+	 * 
+	 * @param verb
+	 * @param nounPhrase
+	 * @param complement
+	 */
+	public Predicate(final Verb verb, final NounPhrase nounPhrase, final Complement complement)
+	{
+		this.verb = verb;
+		this.nounPhrase = nounPhrase;
+		this.complement = complement;
+
+		LOGGER.info(String.format("New Predicate created: verb = %s; nounPhrase = %s; complement = %s", this.verb,
+				this.nounPhrase, this.complement));
 	}
 
 	/**
@@ -84,30 +107,33 @@ public class Predicate
 	 * 
 	 * @param substitutions
 	 */
-	public void substitutePlaceholders(Map<String, String> substitutions)
+	public Predicate substitutePlaceholders(Map<String, String> substitutions)
 	{
+		NounPhrase replacementNounPhrase = null;
+		Complement replacementComplement = null;
+
 		if (this.nounPhrase != null)
 		{
-			String nounPhaseText = this.nounPhrase.getText();
+			replacementNounPhrase = new NounPhrase(this.nounPhrase.getText(), this.nounPhrase.getConstraintGroup());
 
 			for (final String eachPlaceHolder : substitutions.keySet())
 			{
-				nounPhaseText = nounPhaseText.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+				replacementNounPhrase = replacementNounPhrase.replaceAll(eachPlaceHolder,
+						substitutions.get(eachPlaceHolder));
 			}
-
-			this.nounPhrase = new NounPhrase(nounPhaseText, this.nounPhrase.getConstraintGroup());
 		}
 
 		if (this.complement != null)
 		{
-			String complementText = this.complement.getText();
+			replacementComplement = new Complement(this.complement.getText(), this.complement.getConstraintGroup());
 
 			for (final String eachPlaceHolder : substitutions.keySet())
 			{
-				complementText = complementText.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+				replacementComplement = replacementComplement.replaceAll(eachPlaceHolder,
+						substitutions.get(eachPlaceHolder));
 			}
-
-			this.complement = new Complement(complementText, this.complement.getConstraintGroup());
 		}
+
+		return new Predicate(this.verb, replacementNounPhrase, replacementComplement);
 	}
 }

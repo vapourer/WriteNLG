@@ -58,8 +58,8 @@ public class PredicateTest
 		predicate.setNounPhrase(nounPhrase);
 
 		// Act
-		predicate.substitutePlaceholders(substitutions);
-		String nounPhraseTextActual = predicate.getNounPhrase().getText();
+		Predicate updatedPredicate = predicate.substitutePlaceholders(substitutions);
+		String nounPhraseTextActual = updatedPredicate.getNounPhrase().getText();
 
 		// Assert
 		Assert.assertEquals(nounPhraseTextExpected, nounPhraseTextActual);
@@ -90,8 +90,8 @@ public class PredicateTest
 		predicate.setComplement(complement);
 
 		// Act
-		predicate.substitutePlaceholders(substitutions);
-		String complementTextActual = predicate.getComplement().getText();
+		Predicate updatedPredicate = predicate.substitutePlaceholders(substitutions);
+		String complementTextActual = updatedPredicate.getComplement().getText();
 
 		// Assert
 		Assert.assertEquals(complementTextExpected, complementTextActual);

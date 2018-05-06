@@ -10,15 +10,32 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.linguistics.phrase.partofspeech.NounPhrase;
 
+/**
+ * Represents the subject component of a sentence.
+ */
 public class Subject
 {
 	private static final Logger LOGGER = LogManager.getLogger("Subject.class");
 
 	private NounPhrase nounPhrase;
 
+	/**
+	 * Creates a new Subject instance.
+	 */
 	public Subject()
 	{
 		LOGGER.info("New Subject created");
+	}
+
+	/**
+	 * Creates a new Subject instance.
+	 * 
+	 * @param nounPhrase
+	 */
+	public Subject(final NounPhrase nounPhrase)
+	{
+		this.nounPhrase = nounPhrase;
+		LOGGER.info(String.format("New Subject created: %s", this.nounPhrase.getText()));
 	}
 
 	/**
@@ -44,15 +61,15 @@ public class Subject
 	 * 
 	 * @param substitutions
 	 */
-	public void substitutePlaceholders(Map<String, String> substitutions)
+	public Subject substitutePlaceholders(Map<String, String> substitutions)
 	{
-		String nounPhaseText = this.nounPhrase.getText();
+		NounPhrase replacement = new NounPhrase(this.nounPhrase.getText(), this.nounPhrase.getConstraintGroup());
 
 		for (final String eachPlaceHolder : substitutions.keySet())
 		{
-			nounPhaseText = nounPhaseText.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+			replacement = replacement.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
 		}
 
-		this.nounPhrase = new NounPhrase(nounPhaseText, this.nounPhrase.getConstraintGroup());
+		return new Subject(replacement);
 	}
 }

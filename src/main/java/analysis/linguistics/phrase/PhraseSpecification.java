@@ -8,6 +8,9 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * A representation of a phrase specification for use with SimpleNLG. Includes fields for Subject and Predicate.
+ */
 public class PhraseSpecification
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseSpecification.class");
@@ -15,8 +18,24 @@ public class PhraseSpecification
 	private Subject subject;
 	private Predicate predicate;
 
+	/**
+	 * Creates a new PhraseSpecification instance.
+	 */
 	public PhraseSpecification()
 	{
+		LOGGER.info("New PhraseSpecification created");
+	}
+
+	/**
+	 * Creates a new PhraseSpecification instance.
+	 * 
+	 * @param subject
+	 * @param predicate
+	 */
+	public PhraseSpecification(final Subject subject, final Predicate predicate)
+	{
+		this.subject = subject;
+		this.predicate = predicate;
 		LOGGER.info("New PhraseSpecification created");
 	}
 
@@ -59,9 +78,10 @@ public class PhraseSpecification
 	 * 
 	 * @param substitutions
 	 */
-	public void substitutePlaceholders(Map<String, String> substitutions)
+	public PhraseSpecification substitutePlaceholders(Map<String, String> substitutions)
 	{
-		this.subject.substitutePlaceholders(substitutions);
-		this.predicate.substitutePlaceholders(substitutions);
+		Subject replacementSubject = this.subject.substitutePlaceholders(substitutions);
+		Predicate replacementPredicate = this.predicate.substitutePlaceholders(substitutions);
+		return new PhraseSpecification(replacementSubject, replacementPredicate);
 	}
 }

@@ -45,8 +45,8 @@ public class Complement extends AbstractPartOfSpeech
 	 * @param substitution
 	 * @return
 	 */
-	public String replaceAll(String regex, String substitution)
+	public Complement replaceAll(String regex, String substitution)
 	{
-		return super.getText().replaceAll(regex, substitution);
+		return new Complement(getText().replaceAll(regex, substitution), this.getConstraintGroup());
 	}
 }

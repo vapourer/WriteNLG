@@ -29,10 +29,10 @@ public class WriteNlg
 			LOGGER = LogManager.getLogger("WriteNlg.class");
 			LOGGER.info("Starting WriteNlg application - logger initialised");
 
-			loadError = 1;
+			loadError++;
 			WriteNlgProperties.createInstance(args[1]);
 
-			loadError = 2;
+			loadError++;
 			final TimeSeriesReader timeSeriesReader = new TimeSeriesReader(args[2]);
 			lineGraph = timeSeriesReader.createLineGraphFromFile();
 			LOGGER.info("Time series data file loaded");

@@ -74,7 +74,7 @@ public class NounPhraseTest
 		final NounPhrase nounPhrase = new NounPhrase("@@onion@@", constraintGroup);
 
 		// Act
-		String textActual = nounPhrase.replaceAll("@@onion@@", "5678");
+		String textActual = nounPhrase.replaceAll("@@onion@@", "5678").getText();
 
 		// Assert
 		Assert.assertEquals(textExpected, textActual);

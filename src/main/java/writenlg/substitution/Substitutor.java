@@ -20,12 +20,16 @@ public class Substitutor implements Mapper
 
 	/**
 	 * Creates a Substitutor instance.
+	 * 
+	 * @param lineGraphWithDerivedInformation
+	 * @param concepts
 	 */
 	public Substitutor(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation)
 	{
 		this.lineGraphWithDerivedInformation = lineGraphWithDerivedInformation;
 		this.globalMappings = new Substitutions();
 		this.timeSeriesMappings = new ArrayList<>();
+		loadMappings();
 	}
 
 	/**
@@ -36,6 +40,27 @@ public class Substitutor implements Mapper
 	 */
 	@Override
 	public void mapValuesToPlaceHolders()
+	{
+
+	}
+
+	/**
+	 * @return the globalMappings
+	 */
+	public Substitutions getGlobalMappings()
+	{
+		return globalMappings;
+	}
+
+	/**
+	 * @return the timeSeriesMappings
+	 */
+	public List<TimeSeriesMapping> getTimeSeriesMappings()
+	{
+		return new ArrayList<>(this.timeSeriesMappings);
+	}
+
+	private void loadMappings()
 	{
 		List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation = lineGraphWithDerivedInformation
 				.getTimeSeriesDerivedInformation();
@@ -54,21 +79,5 @@ public class Substitutor implements Mapper
 					eachTimeSeriesWithDerivedInformation.getDirectionOfLongestSegment().getTextualForm());
 			this.timeSeriesMappings.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation, substitutions));
 		}
-	}
-
-	/**
-	 * @return the globalMappings
-	 */
-	public Substitutions getGlobalMappings()
-	{
-		return globalMappings;
-	}
-
-	/**
-	 * @return the timeSeriesMappings
-	 */
-	public List<TimeSeriesMapping> getTimeSeriesMappings()
-	{
-		return new ArrayList<>(this.timeSeriesMappings);
 	}
 }

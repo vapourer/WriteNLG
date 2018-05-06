@@ -42,5 +42,4 @@ public class WriterController extends Controller
 		final DocumentGenerator documentGenerator = listener.selectDocumentGenerator();
 		return documentGenerator.generate();
 	}
-
 }

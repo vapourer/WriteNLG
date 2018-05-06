@@ -3,6 +3,9 @@
 
 package analysis.linguistics.phrase;
 
+/**
+ * Enum identifies subject and predicate.
+ */
 public enum SentencePart
 {
 	SUBJECT, PREDICATE,

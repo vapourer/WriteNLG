@@ -39,6 +39,12 @@ public abstract class AbstractPartOfSpeech
 		return this.text;
 	}
 
+	@Override
+	public String toString()
+	{
+		return this.text;
+	}
+
 	/**
 	 * Add a constraint for this part of speech.
 	 *

@@ -77,9 +77,9 @@ public class PhraseSpecificationTest
 		phraseSpecification.setPredicate(predicate);
 
 		// Act
-		phraseSpecification.substitutePlaceholders(substitutions);
-		String subjectNounPhraseTextActual = phraseSpecification.getSubject().getNounPhrase().getText();
-		String predicateNounPhraseTextActual = phraseSpecification.getPredicate().getNounPhrase().getText();
+		PhraseSpecification updatedPhraseSpecification = phraseSpecification.substitutePlaceholders(substitutions);
+		String subjectNounPhraseTextActual = updatedPhraseSpecification.getSubject().getNounPhrase().getText();
+		String predicateNounPhraseTextActual = updatedPhraseSpecification.getPredicate().getNounPhrase().getText();
 
 		// Assert
 		Assert.assertEquals(subjectNounPhraseTextExpected, subjectNounPhraseTextActual);
@@ -130,9 +130,9 @@ public class PhraseSpecificationTest
 		phraseSpecification.setPredicate(predicate);
 
 		// Act
-		phraseSpecification.substitutePlaceholders(substitutions);
-		String subjectNounPhraseTextActual = phraseSpecification.getSubject().getNounPhrase().getText();
-		String predicateComplementTextActual = phraseSpecification.getPredicate().getComplement().getText();
+		PhraseSpecification updatedPhraseSpecification = phraseSpecification.substitutePlaceholders(substitutions);
+		String subjectNounPhraseTextActual = updatedPhraseSpecification.getSubject().getNounPhrase().getText();
+		String predicateComplementTextActual = updatedPhraseSpecification.getPredicate().getComplement().getText();
 
 		// Assert
 		Assert.assertEquals(subjectNounPhraseTextExpected, subjectNounPhraseTextActual);
