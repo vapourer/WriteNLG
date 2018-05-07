@@ -8,8 +8,7 @@ import org.antlr.v4.runtime.CharStream;
 import io.AntlrInputReader;
 
 /**
- * Abstract factory class sub-classes of which create an appropriate LexerParser and trigger the associated natural
- * language generation process.
+ * Sub-classes create an appropriate LexerParser and trigger the associated natural language generation process.
  */
 public abstract class Controller
 {

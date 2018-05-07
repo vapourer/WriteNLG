@@ -10,6 +10,13 @@ Subject
 NOUN		:	line
 Predicate
 VERB		:	do not cross
+GlobalConcept=LINES_CROSS_MULTIPLE_TIMES
+PhraseSpecification
+Subject
+NOUN		:	line
+Predicate
+VERB		:	cross
+COMPLEMENT	:	@@CrossCount@@ time
 TimeSeriesConcept=SERIES_LEGEND
 PhraseSpecification
 Subject

@@ -96,7 +96,7 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 		SegmentPair cheapestSegmentPair = queue.peek();
 
 		// TODO: explore whether the algorithm might be made more concise here.
-		while (cheapestSegmentPair.getCost().compareTo(this.maximumError) <= 0)
+		while (cheapestSegmentPair.getCost().compareTo(this.maximumError) <= 0 && queue.size() > 1)
 		{
 			cheapestSegmentPair = queue.poll();
 			SegmentPair nextSegmentPair = null;
