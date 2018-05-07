@@ -8,5 +8,5 @@ package analysis;
  */
 public enum GlobalConcept
 {
-	LINES_CROSS, LINES_DO_NOT_CROSS,
+	LINES_CROSS, LINES_DO_NOT_CROSS, LINES_CROSS_MULTIPLE_TIMES,
 }
