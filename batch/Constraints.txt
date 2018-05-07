@@ -1,5 +1,5 @@
 GlobalConcept=LINES_CROSS
-LinesCross=1.0 (3)
+LinesCross=1.0
 LinesCrossMultipleTimes=1.0
 GlobalConcept=LINES_DO_NOT_CROSS
 LinesDoNotCross=1.0

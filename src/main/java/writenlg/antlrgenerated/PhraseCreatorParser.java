@@ -17,9 +17,9 @@ public class PhraseCreatorParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, GLOBAL_CONCEPT=3, TIME_SERIES_CONCEPT=4, GLOBAL_CONCEPT_TYPE=5, 
-		TIME_SERIES_CONCEPT_TYPE=6, PHRASE_SPECIFICATION=7, SUBJECT=8, PREDICATE=9, 
-		PART_OF_SPEECH=10, STRING=11, NEW_LINE=12, WHITE_SPACE=13, PLACE_HOLDER_MARKER=14;
+		T__0=1, T__1=2, T__2=3, GLOBAL_CONCEPT=4, TIME_SERIES_CONCEPT=5, GLOBAL_CONCEPT_TYPE=6, 
+		TIME_SERIES_CONCEPT_TYPE=7, PHRASE_SPECIFICATION=8, SUBJECT=9, PREDICATE=10, 
+		PART_OF_SPEECH=11, STRING=12, NEW_LINE=13, WHITE_SPACE=14, PLACE_HOLDER_MARKER=15;
 	public static final int
 		RULE_writeDocument = 0, RULE_concept = 1, RULE_globalConcept = 2, RULE_globalConceptType = 3, 
 		RULE_timeSeriesConcept = 4, RULE_timeSeriesConceptType = 5, RULE_phraseSpecifications = 6, 
@@ -33,12 +33,12 @@ public class PhraseCreatorParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'='", "':'", "'GlobalConcept'", "'TimeSeriesConcept'", null, null, 
-		"'PhraseSpecification'", "'Subject'", "'Predicate'", null, null, null, 
-		null, "'@@'"
+		null, "'='", "':'", "' '", "'GlobalConcept'", "'TimeSeriesConcept'", null, 
+		null, "'PhraseSpecification'", "'Subject'", "'Predicate'", null, null, 
+		null, null, "'@@'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, "GLOBAL_CONCEPT", "TIME_SERIES_CONCEPT", "GLOBAL_CONCEPT_TYPE", 
+		null, null, null, null, "GLOBAL_CONCEPT", "TIME_SERIES_CONCEPT", "GLOBAL_CONCEPT_TYPE", 
 		"TIME_SERIES_CONCEPT_TYPE", "PHRASE_SPECIFICATION", "SUBJECT", "PREDICATE", 
 		"PART_OF_SPEECH", "STRING", "NEW_LINE", "WHITE_SPACE", "PLACE_HOLDER_MARKER"
 	};
@@ -791,7 +791,10 @@ public class PhraseCreatorParser extends Parser {
 		public TerminalNode PLACE_HOLDER_MARKER(int i) {
 			return getToken(PhraseCreatorParser.PLACE_HOLDER_MARKER, i);
 		}
-		public TerminalNode STRING() { return getToken(PhraseCreatorParser.STRING, 0); }
+		public List<TerminalNode> STRING() { return getTokens(PhraseCreatorParser.STRING); }
+		public TerminalNode STRING(int i) {
+			return getToken(PhraseCreatorParser.STRING, i);
+		}
 		public ExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -809,8 +812,9 @@ public class PhraseCreatorParser extends Parser {
 	public final ExpressionContext expression() throws RecognitionException {
 		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_expression);
+		int _la;
 		try {
-			setState(106);
+			setState(113);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PLACE_HOLDER_MARKER:
@@ -822,12 +826,28 @@ public class PhraseCreatorParser extends Parser {
 				match(STRING);
 				setState(104);
 				match(PLACE_HOLDER_MARKER);
+				setState(109);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==T__2) {
+					{
+					{
+					setState(105);
+					match(T__2);
+					setState(106);
+					match(STRING);
+					}
+					}
+					setState(111);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 				}
 				break;
 			case STRING:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(105);
+				setState(112);
 				match(STRING);
 				}
 				break;
@@ -847,31 +867,33 @@ public class PhraseCreatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20o\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21v\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
 		"\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\2\7\2$\n\2\f\2"+
 		"\16\2\'\13\2\3\2\3\2\3\3\3\3\5\3-\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5"+
 		"\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\b\3\b\3\b\7\bB\n\b\f\b\16\bE\13\b\3"+
 		"\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\13\3\13\3\13\3\13\3\f\3\f\3\f"+
 		"\3\f\3\r\3\r\3\r\7\r\\\n\r\f\r\16\r_\13\r\3\r\3\r\3\16\3\16\3\16\3\16"+
-		"\3\17\3\17\3\20\3\20\3\20\3\20\5\20m\n\20\3\20\2\2\21\2\4\6\b\n\f\16\20"+
-		"\22\24\26\30\32\34\36\2\2\2d\2%\3\2\2\2\4,\3\2\2\2\6.\3\2\2\2\b\64\3\2"+
-		"\2\2\n\66\3\2\2\2\f<\3\2\2\2\16C\3\2\2\2\20H\3\2\2\2\22N\3\2\2\2\24P\3"+
-		"\2\2\2\26T\3\2\2\2\30]\3\2\2\2\32b\3\2\2\2\34f\3\2\2\2\36l\3\2\2\2 !\5"+
-		"\4\3\2!\"\7\16\2\2\"$\3\2\2\2# \3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2"+
-		"&(\3\2\2\2\'%\3\2\2\2()\5\4\3\2)\3\3\2\2\2*-\5\6\4\2+-\5\n\6\2,*\3\2\2"+
-		"\2,+\3\2\2\2-\5\3\2\2\2./\7\5\2\2/\60\7\3\2\2\60\61\5\b\5\2\61\62\7\16"+
-		"\2\2\62\63\5\16\b\2\63\7\3\2\2\2\64\65\7\7\2\2\65\t\3\2\2\2\66\67\7\6"+
-		"\2\2\678\7\3\2\289\5\f\7\29:\7\16\2\2:;\5\16\b\2;\13\3\2\2\2<=\7\b\2\2"+
-		"=\r\3\2\2\2>?\5\20\t\2?@\7\16\2\2@B\3\2\2\2A>\3\2\2\2BE\3\2\2\2CA\3\2"+
-		"\2\2CD\3\2\2\2DF\3\2\2\2EC\3\2\2\2FG\5\20\t\2G\17\3\2\2\2HI\7\t\2\2IJ"+
-		"\7\16\2\2JK\5\24\13\2KL\7\16\2\2LM\5\26\f\2M\21\3\2\2\2NO\7\r\2\2O\23"+
-		"\3\2\2\2PQ\7\n\2\2QR\7\16\2\2RS\5\30\r\2S\25\3\2\2\2TU\7\13\2\2UV\7\16"+
-		"\2\2VW\5\30\r\2W\27\3\2\2\2XY\5\32\16\2YZ\7\16\2\2Z\\\3\2\2\2[X\3\2\2"+
-		"\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2\2\2_]\3\2\2\2`a\5\32\16\2a\31"+
-		"\3\2\2\2bc\5\34\17\2cd\7\4\2\2de\5\36\20\2e\33\3\2\2\2fg\7\f\2\2g\35\3"+
-		"\2\2\2hi\7\20\2\2ij\7\r\2\2jm\7\20\2\2km\7\r\2\2lh\3\2\2\2lk\3\2\2\2m"+
-		"\37\3\2\2\2\7%,C]l";
+		"\3\17\3\17\3\20\3\20\3\20\3\20\3\20\7\20n\n\20\f\20\16\20q\13\20\3\20"+
+		"\5\20t\n\20\3\20\2\2\21\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36\2\2\2l"+
+		"\2%\3\2\2\2\4,\3\2\2\2\6.\3\2\2\2\b\64\3\2\2\2\n\66\3\2\2\2\f<\3\2\2\2"+
+		"\16C\3\2\2\2\20H\3\2\2\2\22N\3\2\2\2\24P\3\2\2\2\26T\3\2\2\2\30]\3\2\2"+
+		"\2\32b\3\2\2\2\34f\3\2\2\2\36s\3\2\2\2 !\5\4\3\2!\"\7\17\2\2\"$\3\2\2"+
+		"\2# \3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&(\3\2\2\2\'%\3\2\2\2()\5\4"+
+		"\3\2)\3\3\2\2\2*-\5\6\4\2+-\5\n\6\2,*\3\2\2\2,+\3\2\2\2-\5\3\2\2\2./\7"+
+		"\6\2\2/\60\7\3\2\2\60\61\5\b\5\2\61\62\7\17\2\2\62\63\5\16\b\2\63\7\3"+
+		"\2\2\2\64\65\7\b\2\2\65\t\3\2\2\2\66\67\7\7\2\2\678\7\3\2\289\5\f\7\2"+
+		"9:\7\17\2\2:;\5\16\b\2;\13\3\2\2\2<=\7\t\2\2=\r\3\2\2\2>?\5\20\t\2?@\7"+
+		"\17\2\2@B\3\2\2\2A>\3\2\2\2BE\3\2\2\2CA\3\2\2\2CD\3\2\2\2DF\3\2\2\2EC"+
+		"\3\2\2\2FG\5\20\t\2G\17\3\2\2\2HI\7\n\2\2IJ\7\17\2\2JK\5\24\13\2KL\7\17"+
+		"\2\2LM\5\26\f\2M\21\3\2\2\2NO\7\16\2\2O\23\3\2\2\2PQ\7\13\2\2QR\7\17\2"+
+		"\2RS\5\30\r\2S\25\3\2\2\2TU\7\f\2\2UV\7\17\2\2VW\5\30\r\2W\27\3\2\2\2"+
+		"XY\5\32\16\2YZ\7\17\2\2Z\\\3\2\2\2[X\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3"+
+		"\2\2\2^`\3\2\2\2_]\3\2\2\2`a\5\32\16\2a\31\3\2\2\2bc\5\34\17\2cd\7\4\2"+
+		"\2de\5\36\20\2e\33\3\2\2\2fg\7\r\2\2g\35\3\2\2\2hi\7\21\2\2ij\7\16\2\2"+
+		"jo\7\21\2\2kl\7\5\2\2ln\7\16\2\2mk\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2"+
+		"\2pt\3\2\2\2qo\3\2\2\2rt\7\16\2\2sh\3\2\2\2sr\3\2\2\2t\37\3\2\2\2\b%,"+
+		"C]os";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

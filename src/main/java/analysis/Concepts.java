@@ -15,6 +15,8 @@ import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
+import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesAssessor;
+import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
@@ -65,8 +67,18 @@ public class Concepts implements ConceptLoader
 				LinesCrossAssessor linesCrossAssessor = new LinesCrossAssessor(this.lineGraph);
 				linesCrossAssessor.assessConstraints();
 				ConstraintGroup<ConstraintType> linesCrossConstraints = linesCrossAssessor.getLinesCrossConstraints();
-				LinesCrossConcept linesCrossConcept = new LinesCrossConcept(phraseSpecifications,
+
+				final List<PhraseSpecification> linesCrossPhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					linesCrossPhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				LinesCrossConcept linesCrossConcept = new LinesCrossConcept(linesCrossPhraseSpecifications,
 						linesCrossConstraints);
+
 				this.globalConcepts.add(linesCrossConcept);
 				break;
 			case LINES_DO_NOT_CROSS:
@@ -74,11 +86,39 @@ public class Concepts implements ConceptLoader
 				linesDoNotCrossAssessor.assessConstraints();
 				ConstraintGroup<ConstraintType> linesDoNotCrossConstraints = linesDoNotCrossAssessor
 						.getLinesDoNotCrossConstraints();
-				LinesDoNotCrossConcept linesDoNotCrossConcept = new LinesDoNotCrossConcept(phraseSpecifications,
-						linesDoNotCrossConstraints);
+
+				final List<PhraseSpecification> linesDoNotCrossPhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					linesDoNotCrossPhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				LinesDoNotCrossConcept linesDoNotCrossConcept = new LinesDoNotCrossConcept(
+						linesDoNotCrossPhraseSpecifications, linesDoNotCrossConstraints);
+
 				this.globalConcepts.add(linesDoNotCrossConcept);
 				break;
 			case LINES_CROSS_MULTIPLE_TIMES:
+				LinesCrossMultipleTimesAssessor linesCrossMultipleTimesAssessor = new LinesCrossMultipleTimesAssessor(
+						this.lineGraph);
+				linesCrossMultipleTimesAssessor.assessConstraints();
+				ConstraintGroup<ConstraintType> linesCrossMultipleTimesConstraints = linesCrossMultipleTimesAssessor
+						.getLinesCrossMultipleTimesConstraints();
+
+				final List<PhraseSpecification> linesCrossMultipleTimesPhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					linesCrossMultipleTimesPhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				LinesCrossMultipleTimesConcept linesCrossMultipleTimesConcept = new LinesCrossMultipleTimesConcept(
+						linesCrossMultipleTimesPhraseSpecifications, linesCrossMultipleTimesConstraints);
+
+				this.globalConcepts.add(linesCrossMultipleTimesConcept);
 				break;
 			default:
 				break;

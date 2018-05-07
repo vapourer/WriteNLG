@@ -48,7 +48,7 @@ assignment					:	identifier ':' expression
 identifier					:	PART_OF_SPEECH
 							;
 			
-expression					:	PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER
+expression					:	PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER (' ' STRING)*
 							|	STRING
 							;
 						

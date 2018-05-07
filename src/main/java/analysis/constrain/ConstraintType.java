@@ -9,7 +9,7 @@ package analysis.constrain;
 public enum ConstraintType
 {
 	LINES_CROSS("LinesCross"), LINES_CROSS_MULTIPLE_TIMES("LinesCrossMultipleTimes"), LINES_DO_NOT_CROSS(
-			"LinesDoNotCross");
+			"LinesDoNotCross"), LINES_CROSS_ONCE("LinesCrossOnce");
 
 	final private String textualForm;
 
