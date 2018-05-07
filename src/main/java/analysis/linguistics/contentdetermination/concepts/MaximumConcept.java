@@ -6,6 +6,7 @@ package analysis.linguistics.contentdetermination.concepts;
 import java.util.List;
 
 import analysis.constrain.ConstraintGroup;
+import analysis.constrain.ConstraintType;
 import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
@@ -19,7 +20,8 @@ public class MaximumConcept extends AbstractConcept
 	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
-	public MaximumConcept(final List<PhraseSpecification> phraseSpecifications, ConstraintGroup<String> constraintGroup)
+	public MaximumConcept(final List<PhraseSpecification> phraseSpecifications,
+			ConstraintGroup<ConstraintType> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
 	}

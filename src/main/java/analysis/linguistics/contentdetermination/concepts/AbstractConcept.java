@@ -9,6 +9,7 @@ import java.util.List;
 
 import analysis.constrain.Constraint;
 import analysis.constrain.ConstraintGroup;
+import analysis.constrain.ConstraintType;
 import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
@@ -20,7 +21,7 @@ import analysis.linguistics.phrase.PhraseSpecification;
 public abstract class AbstractConcept
 {
 	private final List<PhraseSpecification> phraseSpecifications;
-	private final ConstraintGroup<String> constraintGroup;
+	private final ConstraintGroup<ConstraintType> constraintGroup;
 
 	/**
 	 * Creates an AbstractConcept instance.
@@ -28,7 +29,7 @@ public abstract class AbstractConcept
 	 * @param constraintGroup
 	 */
 	public AbstractConcept(final List<PhraseSpecification> phraseSpecifications,
-			final ConstraintGroup<String> constraintGroup)
+			final ConstraintGroup<ConstraintType> constraintGroup)
 	{
 		this.phraseSpecifications = phraseSpecifications;
 		this.constraintGroup = constraintGroup;
@@ -49,7 +50,7 @@ public abstract class AbstractConcept
 	 *
 	 * @param constraint
 	 */
-	public void addConstraint(final Constraint<String> constraint)
+	public void addConstraint(final Constraint<ConstraintType> constraint)
 	{
 		this.constraintGroup.addConstraint(constraint);
 	}
@@ -67,7 +68,7 @@ public abstract class AbstractConcept
 	/**
 	 * @return the constraintGroup
 	 */
-	protected ConstraintGroup<String> getConstraintGroup()
+	protected ConstraintGroup<ConstraintType> getConstraintGroup()
 	{
 		return this.constraintGroup;
 	}

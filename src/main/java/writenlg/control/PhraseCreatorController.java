@@ -6,6 +6,7 @@ package writenlg.control;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.LineGraphWithDerivedInformation;
 import analysis.interfaces.ConceptLoader;
 import analysis.interfaces.ContentDeterminer;
 import analysis.interfaces.LineGraphAnalysis;
@@ -52,8 +53,9 @@ public class PhraseCreatorController extends Controller
 		LOGGER.info("Starting the PhraseCreator process");
 
 		final LexerParser lexerParser = new PhraseCreatorLexerParser(getCharStream());
-		final Substitutor substitutor = new Substitutor(lineGraphAnalysis.analyse());
-		final PhraseCreatorListener listener = new PhraseCreatorListener(substitutor);
+		LineGraphWithDerivedInformation lineGraph = lineGraphAnalysis.analyse();
+		final Substitutor substitutor = new Substitutor(lineGraph);
+		final PhraseCreatorListener listener = new PhraseCreatorListener(lineGraph, substitutor);
 		lexerParser.walkParseTree(listener);
 
 		final ConceptLoader concepts = listener.getConcepts();

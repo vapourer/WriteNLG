@@ -6,6 +6,9 @@ package writenlg.substitution;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesWithDerivedInformation;
 
@@ -14,6 +17,8 @@ import analysis.TimeSeriesWithDerivedInformation;
  */
 public class Substitutor implements Mapper
 {
+	private static final Logger LOGGER = LogManager.getLogger("Substitutor.class");
+
 	private final LineGraphWithDerivedInformation lineGraphWithDerivedInformation;
 	private final Substitutions globalMappings;
 	private final List<TimeSeriesMapping> timeSeriesMappings;
@@ -33,28 +38,34 @@ public class Substitutor implements Mapper
 	}
 
 	/**
-	 * Maps substitutions to place-holders.
+	 * TODO: current implementation cannot handle more than two time series.
 	 * 
-	 * @param placeHolder
-	 * @param substitute
-	 */
-	@Override
-	public void mapValuesToPlaceHolders()
-	{
-
-	}
-
-	/**
 	 * @return the globalMappings
 	 */
+	@Override
 	public Substitutions getGlobalMappings()
 	{
-		return globalMappings;
+		if (this.lineGraphWithDerivedInformation.getTimeSeriesCount() == 2)
+		{
+			List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation = lineGraphWithDerivedInformation
+					.getTimeSeriesDerivedInformation();
+			int crossingPointCount = this.lineGraphWithDerivedInformation.getCrossingPointCount(
+					timeSeriesWithDerivedInformation.get(0), timeSeriesWithDerivedInformation.get(1));
+			this.globalMappings.addSubstitution("@@CrossCount@@", String.valueOf(crossingPointCount));
+		}
+		else
+		{
+			LOGGER.error("No implementation for more than two time series");
+			throw new RuntimeException("Provision for more than two time series not yet implemented");
+		}
+
+		return this.globalMappings;
 	}
 
 	/**
 	 * @return the timeSeriesMappings
 	 */
+	@Override
 	public List<TimeSeriesMapping> getTimeSeriesMappings()
 	{
 		return new ArrayList<>(this.timeSeriesMappings);

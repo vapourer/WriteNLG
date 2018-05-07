@@ -8,6 +8,7 @@ import java.util.List;
 
 import analysis.graph.LineGraph;
 import analysis.graph.TimeSeries;
+import analysis.statistics.TimeSeriesCross;
 
 /**
  * Container for analyses and comparison of multiple time series, based on selected statistical algorithms.
@@ -53,5 +54,15 @@ public class LineGraphWithDerivedInformation
 	public int getTimeSeriesCount()
 	{
 		return timeSeriesCount;
+	}
+
+	/**
+	 * @param series1
+	 * @param series2
+	 * @return the number of crossing points for a pair of series.
+	 */
+	public int getCrossingPointCount(TimeSeriesWithDerivedInformation series1, TimeSeriesWithDerivedInformation series2)
+	{
+		return new TimeSeriesCross(series1, series2).identifySegmentsWithCrossingPoints().size();
 	}
 }

@@ -3,28 +3,20 @@
 
 package analysis;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import analysis.constrain.BooleanConstraintProcessor;
-import analysis.constrain.BoundedWeightedConstraint;
-import analysis.constrain.Constraint;
 import analysis.constrain.ConstraintGroup;
-import analysis.constrain.HardConstraint;
-import analysis.constrain.HardConstraintGroup;
-import analysis.constrain.SatisfactionLevel;
-import analysis.constrain.SoftConstraintGroup;
-import analysis.constrain.WeightedAverageConstraintProcessor;
+import analysis.constrain.ConstraintType;
 import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
+import analysis.linguistics.contentdetermination.concepts.LinesCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
+import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
-import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
-import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
 import writenlg.substitution.Substitutor;
 import writenlg.substitution.TimeSeriesMapping;
@@ -36,6 +28,7 @@ public class Concepts implements ConceptLoader
 {
 	private static final Logger LOGGER = LogManager.getLogger("Concepts.class");
 
+	private final LineGraphWithDerivedInformation lineGraph;
 	private final Substitutor substitutor;
 
 	private final List<AbstractConcept> globalConcepts;
@@ -44,8 +37,9 @@ public class Concepts implements ConceptLoader
 	/**
 	 * Creates a new Concepts instance.
 	 */
-	public Concepts(final Substitutor substitutor)
+	public Concepts(final LineGraphWithDerivedInformation lineGraph, final Substitutor substitutor)
 	{
+		this.lineGraph = lineGraph;
 		this.substitutor = substitutor;
 
 		this.globalConcepts = new ArrayList<>();
@@ -68,28 +62,23 @@ public class Concepts implements ConceptLoader
 		switch (globalConcept)
 		{
 			case LINES_CROSS:
-				// ConstraintGroup<String> linesCrossConstraints = new SoftConstraintGroup<>(
-				// new WeightedAverageConstraintProcessor());
-				ConstraintGroup<String> linesCrossConstraints = new HardConstraintGroup<>(
-						new BooleanConstraintProcessor());
-				Constraint<String> hardConstraint1 = new HardConstraint<String>("Required",
-						new SatisfactionLevel(new BigDecimal("1")));
-				linesCrossConstraints.addConstraint(hardConstraint1);
+				LinesCrossAssessor linesCrossAssessor = new LinesCrossAssessor(this.lineGraph);
+				linesCrossAssessor.assessConstraints();
+				ConstraintGroup<ConstraintType> linesCrossConstraints = linesCrossAssessor.getLinesCrossConstraints();
 				LinesCrossConcept linesCrossConcept = new LinesCrossConcept(phraseSpecifications,
 						linesCrossConstraints);
 				this.globalConcepts.add(linesCrossConcept);
 				break;
 			case LINES_DO_NOT_CROSS:
-				// ConstraintGroup<String> linesDoNotCrossConstraints = new SoftConstraintGroup<>(
-				// new WeightedAverageConstraintProcessor());
-				ConstraintGroup<String> linesDoNotCrossConstraints = new HardConstraintGroup<>(
-						new BooleanConstraintProcessor());
-				Constraint<String> hardConstraint2 = new HardConstraint<String>("Required",
-						new SatisfactionLevel(new BigDecimal("1")));
-				linesDoNotCrossConstraints.addConstraint(hardConstraint2);
+				LinesDoNotCrossAssessor linesDoNotCrossAssessor = new LinesDoNotCrossAssessor(this.lineGraph);
+				linesDoNotCrossAssessor.assessConstraints();
+				ConstraintGroup<ConstraintType> linesDoNotCrossConstraints = linesDoNotCrossAssessor
+						.getLinesDoNotCrossConstraints();
 				LinesDoNotCrossConcept linesDoNotCrossConcept = new LinesDoNotCrossConcept(phraseSpecifications,
 						linesDoNotCrossConstraints);
 				this.globalConcepts.add(linesDoNotCrossConcept);
+				break;
+			case LINES_CROSS_MULTIPLE_TIMES:
 				break;
 			default:
 				break;
@@ -115,24 +104,25 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
-					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
-
-					ConstraintGroup<String> seriesLegendConstraints = new HardConstraintGroup<>(
-							new BooleanConstraintProcessor());
-					Constraint<String> requiredSeriesLevelConstraint = new HardConstraint<String>("Required",
-							new SatisfactionLevel(new BigDecimal("1")));
-					seriesLegendConstraints.addConstraint(requiredSeriesLevelConstraint);
-
-					for (PhraseSpecification specification : phraseSpecifications)
-					{
-						conceptPhraseSpecifications
-								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
-					}
-
-					SeriesLegendConcept seriesLegendConcept = new SeriesLegendConcept(conceptPhraseSpecifications,
-							seriesLegendConstraints);
-
-					this.timeSeriesSpecificConcepts.add(seriesLegendConcept);
+					// final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+					//
+					// ConstraintGroup<ConstraintType> seriesLegendConstraints = new HardConstraintGroup<>(
+					// new BooleanConstraintProcessor());
+					// Constraint<ConstraintType> requiredSeriesLevelConstraint = new
+					// HardConstraint<ConstraintType>("Required",
+					// new SatisfactionLevel(new BigDecimal("1")));
+					// seriesLegendConstraints.addConstraint(requiredSeriesLevelConstraint);
+					//
+					// for (PhraseSpecification specification : phraseSpecifications)
+					// {
+					// conceptPhraseSpecifications
+					// .add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					// }
+					//
+					// SeriesLegendConcept seriesLegendConcept = new SeriesLegendConcept(conceptPhraseSpecifications,
+					// seriesLegendConstraints);
+					//
+					// this.timeSeriesSpecificConcepts.add(seriesLegendConcept);
 				}
 
 				break;
@@ -144,30 +134,31 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
-					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
-
-					ConstraintGroup<String> maximumConstraints = new SoftConstraintGroup<>(
-							new WeightedAverageConstraintProcessor());
-					Constraint<String> testMaximumConstraint1 = new BoundedWeightedConstraint<>(
-							"Maximum test constraint 1",
-							new SatisfactionLevel(new BigDecimal("0.6"), new BigDecimal("3")), new BigDecimal("0"),
-							new BigDecimal("1"));
-					maximumConstraints.addConstraint(testMaximumConstraint1);
-					Constraint<String> testMaximumConstraint2 = new BoundedWeightedConstraint<>(
-							"Maximum test constraint 2",
-							new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("4")), new BigDecimal("0"),
-							new BigDecimal("1"));
-					maximumConstraints.addConstraint(testMaximumConstraint2);
-
-					for (PhraseSpecification specification : phraseSpecifications)
-					{
-						conceptPhraseSpecifications
-								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
-					}
-
-					MaximumConcept maximumConcept = new MaximumConcept(conceptPhraseSpecifications, maximumConstraints);
-
-					this.timeSeriesSpecificConcepts.add(maximumConcept);
+					// final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+					//
+					// ConstraintGroup<String> maximumConstraints = new SoftConstraintGroup<>(
+					// new WeightedAverageConstraintProcessor());
+					// Constraint<String> testMaximumConstraint1 = new BoundedWeightedConstraint<>(
+					// "Maximum test constraint 1",
+					// new SatisfactionLevel(new BigDecimal("0.6"), new BigDecimal("3")), new BigDecimal("0"),
+					// new BigDecimal("1"));
+					// maximumConstraints.addConstraint(testMaximumConstraint1);
+					// Constraint<String> testMaximumConstraint2 = new BoundedWeightedConstraint<>(
+					// "Maximum test constraint 2",
+					// new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("4")), new BigDecimal("0"),
+					// new BigDecimal("1"));
+					// maximumConstraints.addConstraint(testMaximumConstraint2);
+					//
+					// for (PhraseSpecification specification : phraseSpecifications)
+					// {
+					// conceptPhraseSpecifications
+					// .add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					// }
+					//
+					// MaximumConcept maximumConcept = new MaximumConcept(conceptPhraseSpecifications,
+					// maximumConstraints);
+					//
+					// this.timeSeriesSpecificConcepts.add(maximumConcept);
 				}
 
 				break;

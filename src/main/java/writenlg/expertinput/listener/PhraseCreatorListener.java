@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.Concepts;
 import analysis.GlobalConcept;
+import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.ConstraintGroup;
 import analysis.constrain.SoftConstraintGroup;
@@ -50,11 +51,11 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	 * 
 	 * @param substitutor
 	 */
-	public PhraseCreatorListener(final Substitutor substitutor)
+	public PhraseCreatorListener(final LineGraphWithDerivedInformation lineGraph, final Substitutor substitutor)
 	{
 		this.phraseSpecifications = new ArrayList<>();
 		this.sentencePart = SentencePart.SUBJECT;
-		this.concepts = new Concepts(substitutor);
+		this.concepts = new Concepts(lineGraph, substitutor);
 	}
 
 	@Override

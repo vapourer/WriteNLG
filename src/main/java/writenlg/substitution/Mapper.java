@@ -3,13 +3,20 @@
 
 package writenlg.substitution;
 
+import java.util.List;
+
 /**
  * Manages substitutions for use during parsing.
  */
 public interface Mapper
 {
 	/**
-	 * Maps values to placeholders.
+	 * @return the globalMappings
 	 */
-	void mapValuesToPlaceHolders();
+	Substitutions getGlobalMappings();
+
+	/**
+	 * @return the timeSeriesMappings
+	 */
+	List<TimeSeriesMapping> getTimeSeriesMappings();
 }

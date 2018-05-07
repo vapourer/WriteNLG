@@ -6,6 +6,7 @@ package analysis.linguistics.contentdetermination.concepts;
 import java.util.List;
 
 import analysis.constrain.ConstraintGroup;
+import analysis.constrain.ConstraintType;
 import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
@@ -20,7 +21,7 @@ public class SeriesLegendConcept extends AbstractConcept
 	 * @param constraintGroup
 	 */
 	public SeriesLegendConcept(final List<PhraseSpecification> phraseSpecifications,
-			ConstraintGroup<String> constraintGroup)
+			ConstraintGroup<ConstraintType> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
 	}
