@@ -24,18 +24,25 @@ public class TimeSeriesWithDerivedInformation
 	private final List<Segment> segments;
 	private final TimeSlice timeSlice;
 	private final SortedMap<Long, BigDecimal> timeSeriesSmoothed;
+	private final List<Segment> smoothedSegments;
 	private final Slope directionOfLongestSegment;
 
 	/**
-	 * Creates an TimeSeriesWithDerivedInformation instance.
+	 * Creates a TimeSeriesWithDerivedInformation instance.
 	 * 
+	 * @param timeSeries
 	 * @param pointWithMaximumValue
 	 * @param pointWithMinimumValue
 	 * @param segments
+	 * @param timeSlice
+	 * @param timeSeriesSmoothed
+	 * @param smoothedSegments
+	 * @param directionOfLongestSegment
 	 */
 	public TimeSeriesWithDerivedInformation(final TimeSeries timeSeries, final Point pointWithMaximumValue,
 			final Point pointWithMinimumValue, final List<Segment> segments, final TimeSlice timeSlice,
-			final SortedMap<Long, BigDecimal> timeSeriesSmoothed, final Slope directionOfLongestSegment)
+			final SortedMap<Long, BigDecimal> timeSeriesSmoothed, final List<Segment> smoothedSegments,
+			final Slope directionOfLongestSegment)
 	{
 		this.timeSeries = timeSeries;
 		this.pointWithMaximumValue = pointWithMaximumValue;
@@ -43,6 +50,7 @@ public class TimeSeriesWithDerivedInformation
 		this.segments = segments;
 		this.timeSlice = timeSlice;
 		this.timeSeriesSmoothed = timeSeriesSmoothed;
+		this.smoothedSegments = smoothedSegments;
 		this.directionOfLongestSegment = directionOfLongestSegment;
 	}
 
@@ -124,5 +132,13 @@ public class TimeSeriesWithDerivedInformation
 	public Slope getDirectionOfLongestSegment()
 	{
 		return directionOfLongestSegment;
+	}
+
+	/**
+	 * @return the smoothedSegments
+	 */
+	public List<Segment> getSmoothedSegments()
+	{
+		return smoothedSegments;
 	}
 }

@@ -19,6 +19,8 @@ import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTime
 import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesLegendAssessor;
+import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
 import writenlg.substitution.Substitutor;
 import writenlg.substitution.TimeSeriesMapping;
@@ -64,9 +66,10 @@ public class Concepts implements ConceptLoader
 		switch (globalConcept)
 		{
 			case LINES_CROSS:
-				LinesCrossAssessor linesCrossAssessor = new LinesCrossAssessor(this.lineGraph);
+				final LinesCrossAssessor linesCrossAssessor = new LinesCrossAssessor(this.lineGraph);
 				linesCrossAssessor.assessConstraints();
-				ConstraintGroup<ConstraintType> linesCrossConstraints = linesCrossAssessor.getLinesCrossConstraints();
+				final ConstraintGroup<ConstraintType> linesCrossConstraints = linesCrossAssessor
+						.getLinesCrossConstraints();
 
 				final List<PhraseSpecification> linesCrossPhraseSpecifications = new ArrayList<>();
 
@@ -76,15 +79,15 @@ public class Concepts implements ConceptLoader
 							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
 				}
 
-				LinesCrossConcept linesCrossConcept = new LinesCrossConcept(linesCrossPhraseSpecifications,
+				final LinesCrossConcept linesCrossConcept = new LinesCrossConcept(linesCrossPhraseSpecifications,
 						linesCrossConstraints);
 
 				this.globalConcepts.add(linesCrossConcept);
 				break;
 			case LINES_DO_NOT_CROSS:
-				LinesDoNotCrossAssessor linesDoNotCrossAssessor = new LinesDoNotCrossAssessor(this.lineGraph);
+				final LinesDoNotCrossAssessor linesDoNotCrossAssessor = new LinesDoNotCrossAssessor(this.lineGraph);
 				linesDoNotCrossAssessor.assessConstraints();
-				ConstraintGroup<ConstraintType> linesDoNotCrossConstraints = linesDoNotCrossAssessor
+				final ConstraintGroup<ConstraintType> linesDoNotCrossConstraints = linesDoNotCrossAssessor
 						.getLinesDoNotCrossConstraints();
 
 				final List<PhraseSpecification> linesDoNotCrossPhraseSpecifications = new ArrayList<>();
@@ -95,16 +98,16 @@ public class Concepts implements ConceptLoader
 							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
 				}
 
-				LinesDoNotCrossConcept linesDoNotCrossConcept = new LinesDoNotCrossConcept(
+				final LinesDoNotCrossConcept linesDoNotCrossConcept = new LinesDoNotCrossConcept(
 						linesDoNotCrossPhraseSpecifications, linesDoNotCrossConstraints);
 
 				this.globalConcepts.add(linesDoNotCrossConcept);
 				break;
 			case LINES_CROSS_MULTIPLE_TIMES:
-				LinesCrossMultipleTimesAssessor linesCrossMultipleTimesAssessor = new LinesCrossMultipleTimesAssessor(
+				final LinesCrossMultipleTimesAssessor linesCrossMultipleTimesAssessor = new LinesCrossMultipleTimesAssessor(
 						this.lineGraph);
 				linesCrossMultipleTimesAssessor.assessConstraints();
-				ConstraintGroup<ConstraintType> linesCrossMultipleTimesConstraints = linesCrossMultipleTimesAssessor
+				final ConstraintGroup<ConstraintType> linesCrossMultipleTimesConstraints = linesCrossMultipleTimesAssessor
 						.getLinesCrossMultipleTimesConstraints();
 
 				final List<PhraseSpecification> linesCrossMultipleTimesPhraseSpecifications = new ArrayList<>();
@@ -115,7 +118,7 @@ public class Concepts implements ConceptLoader
 							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
 				}
 
-				LinesCrossMultipleTimesConcept linesCrossMultipleTimesConcept = new LinesCrossMultipleTimesConcept(
+				final LinesCrossMultipleTimesConcept linesCrossMultipleTimesConcept = new LinesCrossMultipleTimesConcept(
 						linesCrossMultipleTimesPhraseSpecifications, linesCrossMultipleTimesConstraints);
 
 				this.globalConcepts.add(linesCrossMultipleTimesConcept);
@@ -144,25 +147,23 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
-					// final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
-					//
-					// ConstraintGroup<ConstraintType> seriesLegendConstraints = new HardConstraintGroup<>(
-					// new BooleanConstraintProcessor());
-					// Constraint<ConstraintType> requiredSeriesLevelConstraint = new
-					// HardConstraint<ConstraintType>("Required",
-					// new SatisfactionLevel(new BigDecimal("1")));
-					// seriesLegendConstraints.addConstraint(requiredSeriesLevelConstraint);
-					//
-					// for (PhraseSpecification specification : phraseSpecifications)
-					// {
-					// conceptPhraseSpecifications
-					// .add(specification.substitutePlaceholders(mapping.getSubstitutions()));
-					// }
-					//
-					// SeriesLegendConcept seriesLegendConcept = new SeriesLegendConcept(conceptPhraseSpecifications,
-					// seriesLegendConstraints);
-					//
-					// this.timeSeriesSpecificConcepts.add(seriesLegendConcept);
+					final SeriesLegendAssessor seriesLegendAssessor = new SeriesLegendAssessor();
+					seriesLegendAssessor.assessConstraints();
+					final ConstraintGroup<ConstraintType> seriesLegendConstraints = seriesLegendAssessor
+							.getSeriesLegendConstraints();
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					final SeriesLegendConcept seriesLegendConcept = new SeriesLegendConcept(conceptPhraseSpecifications,
+							seriesLegendConstraints);
+
+					this.timeSeriesSpecificConcepts.add(seriesLegendConcept);
 				}
 
 				break;

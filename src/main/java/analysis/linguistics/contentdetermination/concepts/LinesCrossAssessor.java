@@ -31,6 +31,11 @@ public class LinesCrossAssessor implements Assessor
 	private final Map<String, ConstraintConfiguration> constraints;
 	private final ConstraintGroup<ConstraintType> constraintTypes;
 
+	/**
+	 * Creates a LinesCrossAssessor instance.
+	 * 
+	 * @param lineGraph
+	 */
 	public LinesCrossAssessor(final LineGraphWithDerivedInformation lineGraph)
 	{
 		this.lineGraph = lineGraph;
@@ -44,13 +49,19 @@ public class LinesCrossAssessor implements Assessor
 	@Override
 	public void assessConstraints()
 	{
-		List<TimeSeriesWithDerivedInformation> timeSeries = this.lineGraph.getTimeSeriesDerivedInformation();
-		int crossingPointCount = this.lineGraph.getCrossingPointCount(timeSeries.get(0), timeSeries.get(1));
+		final List<TimeSeriesWithDerivedInformation> timeSeries = this.lineGraph.getTimeSeriesDerivedInformation();
+		final int crossingPointCount = this.lineGraph.getCrossingPointCount(timeSeries.get(0), timeSeries.get(1));
 
-		ConstraintConfiguration linesCrossConstraintConfiguration = this.constraints
+		assessLinesCrossConstraint(crossingPointCount);
+		assessLinesCrossMultipleTimesConstraint(crossingPointCount);
+	}
+
+	private void assessLinesCrossConstraint(int crossingPointCount)
+	{
+		final ConstraintConfiguration linesCrossConstraintConfiguration = this.constraints
 				.get(ConstraintType.LINES_CROSS.getTextualForm());
 
-		BigDecimal initialLinesCrossConstraintValue = linesCrossConstraintConfiguration.getValue();
+		final BigDecimal initialLinesCrossConstraintValue = linesCrossConstraintConfiguration.getValue();
 		BigDecimal linesCross = new BigDecimal("0");
 
 		if (crossingPointCount > 0)
@@ -59,26 +70,29 @@ public class LinesCrossAssessor implements Assessor
 		}
 
 		linesCross = linesCross.multiply(initialLinesCrossConstraintValue);
-		Constraint<ConstraintType> hardConstraint1 = new HardConstraint<ConstraintType>(
-				ConstraintType.LINES_CROSS, new SatisfactionLevel(linesCross));
-		this.constraintTypes.addConstraint(hardConstraint1);
+		final Constraint<ConstraintType> hardConstraint = new HardConstraint<ConstraintType>(ConstraintType.LINES_CROSS,
+				new SatisfactionLevel(linesCross));
+		this.constraintTypes.addConstraint(hardConstraint);
+	}
 
-		ConstraintConfiguration linesCrossMultipleTimesConstraintConfiguration = this.constraints
+	private void assessLinesCrossMultipleTimesConstraint(int crossingPointCount)
+	{
+		final ConstraintConfiguration linesCrossMultipleTimesConstraintConfiguration = this.constraints
 				.get(ConstraintType.LINES_CROSS_MULTIPLE_TIMES.getTextualForm());
 
-		BigDecimal initialLinesCrossMultipleTimesConstraintValue = linesCrossMultipleTimesConstraintConfiguration
+		final BigDecimal initialLinesCrossMultipleTimesConstraintValue = linesCrossMultipleTimesConstraintConfiguration
 				.getValue();
 		BigDecimal linesCrossMultipleTimes = new BigDecimal("1");
 
 		if (crossingPointCount > 1)
 		{
-			linesCross = new BigDecimal("0");
+			linesCrossMultipleTimes = new BigDecimal("0");
 		}
 
 		linesCrossMultipleTimes = linesCrossMultipleTimes.multiply(initialLinesCrossMultipleTimesConstraintValue);
-		Constraint<ConstraintType> hardConstraint2 = new HardConstraint<ConstraintType>(
-				ConstraintType.LINES_CROSS_MULTIPLE_TIMES, new SatisfactionLevel(linesCross));
-		this.constraintTypes.addConstraint(hardConstraint2);
+		final Constraint<ConstraintType> hardConstraint = new HardConstraint<ConstraintType>(
+				ConstraintType.LINES_CROSS_MULTIPLE_TIMES, new SatisfactionLevel(linesCrossMultipleTimes));
+		this.constraintTypes.addConstraint(hardConstraint);
 	}
 
 	/**

@@ -68,6 +68,7 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		Smoothing smoothing = new BottomUpPiecewiseLinearFunction(this.segments);
 		SortedMap<Long, BigDecimal> timeSeriesSmoothed = smoothing.getTimeSeriesSmoothed();
 		builder.setTimeSeriesSmoothed(timeSeriesSmoothed);
+		builder.setSmoothedSegments(smoothing.getSmoothedSegments());
 		builder.setDirectionOfLongestSegment(
 				calculateDirectionOfLongestSegment(smoothing.getSmoothedSegments().toArray(new Segment[0])));
 

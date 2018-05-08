@@ -13,6 +13,8 @@ import analysis.constrain.ConstraintType;
 import analysis.linguistics.phrase.PhraseSpecification;
 
 /**
+ * TODO: Concept implementation needs rationalising. Currently reflects two different approaches. Original was to
+ * include constraint assessment in subclasses of this one, rather than current Assessor classes.
  * Abstract class, extensions of which represent time series analysis concepts, for use in NLG summaries of graphs
  * representing time series.
  * 

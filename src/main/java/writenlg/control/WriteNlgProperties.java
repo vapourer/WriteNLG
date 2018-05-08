@@ -89,6 +89,10 @@ public class WriteNlgProperties
 				String.format("Property TargetConceptCount = %s", this.properties.getProperty("TargetConceptCount")));
 		LOGGER.info(String.format("Property ConceptConstraintThreshold = %s",
 				this.properties.getProperty("ConceptConstraintThreshold")));
+		LOGGER.info(String.format("Property WeightedConstraintLowerBound = %s",
+				this.properties.getProperty("WeightedConstraintLowerBound")));
+		LOGGER.info(String.format("Property WeightedConstraintUpperBound = %s",
+				this.properties.getProperty("WeightedConstraintUpperBound")));
 	}
 
 	/**
