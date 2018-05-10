@@ -19,6 +19,7 @@ import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTime
 import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
+import analysis.linguistics.contentdetermination.concepts.MaximumAssessor;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendAssessor;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
@@ -174,6 +175,10 @@ public class Concepts implements ConceptLoader
 				{
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final MaximumAssessor maximumAssessor = new MaximumAssessor(
+							mapping.getTimeSeriesWithDerivedInformation());
+					maximumAssessor.assessConstraints();
 
 					// final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
 					//
