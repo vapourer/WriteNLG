@@ -28,7 +28,7 @@ public class CostComparatorTest
 	public static void setupClass()
 	{
 		System.setProperty("log4j.configurationFile", TestConstants.LOG4J2_CONFIGURATION_FILE_PATH);
-		LOGGER = LogManager.getLogger("TimeSeriesTest.class");
+		LOGGER = LogManager.getLogger("CostComparatorTest.class");
 	}
 
 	@Before

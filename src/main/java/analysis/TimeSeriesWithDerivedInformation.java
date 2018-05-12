@@ -176,10 +176,10 @@ public class TimeSeriesWithDerivedInformation
 
 			for (Segment eachSegment : this.smoothedSegments)
 			{
-				this.points.add(eachSegment.getPoint1());
+				this.smoothedPoints.add(eachSegment.getPoint1());
 			}
 
-			this.points.add(this.segments.get(this.smoothedSegments.size() - 1).getPoint2());
+			this.smoothedPoints.add(this.segments.get(this.smoothedSegments.size() - 1).getPoint2());
 		}
 
 		return this.smoothedPoints;
