@@ -4,10 +4,8 @@
 package analysis.statistics;
 
 import java.math.BigDecimal;
-import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,25 +34,15 @@ public class UpperTurningPointsSmoothed
 		this.timeSeries = timeSeriesWithDerivedInformation;
 	}
 
+	/**
+	 * @return a List of Point instances representing upper turning points above the 0.9 centile.
+	 */
 	public List<Point> identify()
 	{
-		int ninetyPercentileSize = this.timeSeries.getSeries().size() / 10;
-		LOGGER.info(String.format("Ninety percentile size: %d", ninetyPercentileSize));
+		NinetyPercentile ninetyPercentile = new NinetyPercentile(this.timeSeries);
+		Point[] ninetyPercentileGroup = ninetyPercentile.identify();
 
-		Point[] ninetyPercentileGroup = new Point[ninetyPercentileSize];
-
-		final AbstractQueue<Point> queue = new PriorityQueue<>(new PointYValueInverseComparator());
-
-		for (Point eachPoint : this.timeSeries.getPoints())
-		{
-			queue.add(eachPoint);
-		}
-
-		for (int i = 0; i < ninetyPercentileSize; i++)
-		{
-			ninetyPercentileGroup[i] = queue.poll();
-			LOGGER.info(String.format("%s is in ninety percentile group", ninetyPercentileGroup[i]));
-		}
+		int ninetyPercentileSize = ninetyPercentileGroup.length;
 
 		BigDecimal ninetyPercentileThreshold = null;
 

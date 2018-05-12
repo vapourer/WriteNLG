@@ -20,6 +20,7 @@ import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTime
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
 import analysis.linguistics.contentdetermination.concepts.MaximumAssessor;
+import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendAssessor;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
@@ -180,31 +181,19 @@ public class Concepts implements ConceptLoader
 							mapping.getTimeSeriesWithDerivedInformation());
 					maximumAssessor.assessConstraints();
 
-					// final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
-					//
-					// ConstraintGroup<String> maximumConstraints = new SoftConstraintGroup<>(
-					// new WeightedAverageConstraintProcessor());
-					// Constraint<String> testMaximumConstraint1 = new BoundedWeightedConstraint<>(
-					// "Maximum test constraint 1",
-					// new SatisfactionLevel(new BigDecimal("0.6"), new BigDecimal("3")), new BigDecimal("0"),
-					// new BigDecimal("1"));
-					// maximumConstraints.addConstraint(testMaximumConstraint1);
-					// Constraint<String> testMaximumConstraint2 = new BoundedWeightedConstraint<>(
-					// "Maximum test constraint 2",
-					// new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("4")), new BigDecimal("0"),
-					// new BigDecimal("1"));
-					// maximumConstraints.addConstraint(testMaximumConstraint2);
-					//
-					// for (PhraseSpecification specification : phraseSpecifications)
-					// {
-					// conceptPhraseSpecifications
-					// .add(specification.substitutePlaceholders(mapping.getSubstitutions()));
-					// }
-					//
-					// MaximumConcept maximumConcept = new MaximumConcept(conceptPhraseSpecifications,
-					// maximumConstraints);
-					//
-					// this.timeSeriesSpecificConcepts.add(maximumConcept);
+					final ConstraintGroup<ConstraintType> maximumConstraints = maximumAssessor.getMaximumConstraints();
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					MaximumConcept maximumConcept = new MaximumConcept(conceptPhraseSpecifications, maximumConstraints);
+
+					this.timeSeriesSpecificConcepts.add(maximumConcept);
 				}
 
 				break;

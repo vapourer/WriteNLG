@@ -4,11 +4,8 @@
 package analysis.linguistics.contentdetermination.concepts;
 
 import java.math.BigDecimal;
-import java.util.AbstractQueue;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,10 +22,9 @@ import analysis.constrain.SatisfactionLevel;
 import analysis.constrain.SoftConstraintGroup;
 import analysis.constrain.WeightedAverageConstraintProcessor;
 import analysis.graph.Point;
-import analysis.graph.Segment;
-import analysis.graph.Slope;
 import analysis.interfaces.Assessor;
-import analysis.statistics.PointYValueInverseComparator;
+import analysis.statistics.NinetyPercentile;
+import analysis.statistics.UpperTurningPointsSmoothed;
 import writenlg.control.WriteNlgProperties;
 
 /**
@@ -71,143 +67,60 @@ public class MaximumAssessor implements Assessor
 		final ConstraintConfiguration singleObviousMaximumConstraintConfiguration = this.constraints
 				.get(ConstraintType.SINGLE_OBVIOUS_MAXIMUM.getTextualForm());
 
-		Point maximum = this.timeSeries.getPointWithMaximumValue();
-		LOGGER.info(String.format("Maximum: %s", maximum));
+		UpperTurningPointsSmoothed upperTurningPoints = new UpperTurningPointsSmoothed(this.timeSeries);
+		List<Point> ninetyPercentileSmoothed = upperTurningPoints.identify();
 
-		int ninetyPercentileSize = this.timeSeries.getSeries().size() / 10;
-		LOGGER.info(String.format("Ninety percentile size: %d", ninetyPercentileSize));
+		int highPointCount = ninetyPercentileSmoothed.size();
 
-		Point[] ninetyPercentile = new Point[ninetyPercentileSize];
+		NinetyPercentile ninetyPercentile = new NinetyPercentile(this.timeSeries);
+		Point[] highPoints = ninetyPercentile.identify();
 
-		final AbstractQueue<Point> queue = new PriorityQueue<>(new PointYValueInverseComparator());
-
-		for (Point eachPoint : this.timeSeries.getPoints())
+		for (Point eachPoint : highPoints)
 		{
-			queue.add(eachPoint);
-		}
-
-		for (int i = 0; i < ninetyPercentileSize; i++)
-		{
-			ninetyPercentile[i] = queue.poll();
-			LOGGER.info(String.format("%s is in ninety percentile", ninetyPercentile[i]));
-		}
-
-		BigDecimal ninetyPercentileThreshold = null;
-
-		for (int i = ninetyPercentileSize - 1; i >= 0; i--)
-		{
-			if (ninetyPercentile[i] != null)
+			if (eachPoint.getX().compareTo(this.timeSeries.getPoints().get(0).getX()) == 0)
 			{
-				ninetyPercentileThreshold = ninetyPercentile[i].getY();
+				highPointCount++;
+			}
+
+			if (eachPoint.getX()
+					.compareTo(this.timeSeries.getPoints().get(this.timeSeries.getPoints().size() - 1).getX()) == 0)
+			{
+				highPointCount++;
+			}
+		}
+
+		LOGGER.info(String.format("Count of high points, including maximum: %d", highPointCount));
+
+		BigDecimal singleObviousMaximumConstraintValue = null;
+
+		switch (highPointCount)
+		{
+			case 1:
+				singleObviousMaximumConstraintValue = new BigDecimal("1")
+						.multiply(singleObviousMaximumConstraintConfiguration.getValue());
 				break;
-			}
+			case 2:
+				singleObviousMaximumConstraintValue = new BigDecimal("0.6")
+						.multiply(singleObviousMaximumConstraintConfiguration.getValue());
+				break;
+			case 3:
+				singleObviousMaximumConstraintValue = new BigDecimal("0.3")
+						.multiply(singleObviousMaximumConstraintConfiguration.getValue());
+				break;
+			default:
+				singleObviousMaximumConstraintValue = new BigDecimal("0.1")
+						.multiply(singleObviousMaximumConstraintConfiguration.getValue());
+				break;
 		}
-
-		LOGGER.info(String.format("Ninety percentile threshold: %s", ninetyPercentileThreshold));
-
-		List<Point> ninetyPercentileSmoothed = new ArrayList<>();
-
-		for (Point eachPoint : this.timeSeries.getSmoothedPoints())
-		{
-			LOGGER.info(String.format("Smoothed point: %s", eachPoint));
-
-			if (eachPoint.getY().compareTo(ninetyPercentileThreshold) > 0
-					&& (isTurningPoint(eachPoint) || this.timeSeries.getSmoothedPoints().indexOf(eachPoint) == 0
-							|| this.timeSeries.getSmoothedPoints()
-									.indexOf(eachPoint) == (this.timeSeries.getSmoothedPoints().size() - 1)))
-			{
-				ninetyPercentileSmoothed.add(eachPoint);
-				LOGGER.info(String.format("Upper turning point identified in ninety percentile - %s", eachPoint));
-			}
-		}
-
-		int upperTurningPointCount = ninetyPercentileSmoothed.size();
-		LOGGER.info(String.format("Count of upper turning points: %d", upperTurningPointCount));
 
 		final Constraint<ConstraintType> singleObviousMaximumConstraint = new BoundedWeightedConstraint<ConstraintType>(
 				ConstraintType.SINGLE_OBVIOUS_MAXIMUM,
-				new SatisfactionLevel(singleObviousMaximumConstraintConfiguration.getValue(),
+				new SatisfactionLevel(singleObviousMaximumConstraintValue,
 						singleObviousMaximumConstraintConfiguration.getWeighting()),
 				new BigDecimal(WriteNlgProperties.getInstance().getProperty("WeightedConstraintLowerBound")),
 				new BigDecimal(WriteNlgProperties.getInstance().getProperty("WeightedConstraintUpperBound")));
 
 		this.constraintTypes.addConstraint(singleObviousMaximumConstraint);
-	}
-
-	private boolean isTurningPoint(final Point point)
-	{
-		boolean turningPoint = false;
-
-		Segment beforeSegment = null;
-		Segment afterSegment = null;
-
-		final List<Segment> smoothedSegments = this.timeSeries.getSmoothedSegments();
-
-		for (Segment eachSmoothedSegment : smoothedSegments)
-		{
-			if (point.getX().compareTo(eachSmoothedSegment.getPoint2().getX()) == 0)
-			{
-				beforeSegment = eachSmoothedSegment;
-				LOGGER.info("beforePoint found");
-			}
-			else
-			{
-				beforeSegment = identifyNearestEarlierSegment(point, smoothedSegments);
-			}
-
-			if (point.getX().compareTo(eachSmoothedSegment.getPoint1().getX()) == 0)
-			{
-				afterSegment = eachSmoothedSegment;
-				LOGGER.info("afterPoint found");
-			}
-			else
-			{
-				afterSegment = identifyNearestLaterSegment(point, smoothedSegments);
-			}
-		}
-
-		if (beforeSegment != null && afterSegment != null)
-		{
-			return beforeSegment.getSlope() == Slope.ASCENDING && afterSegment.getSlope() == Slope.DESCENDING;
-		}
-
-		return turningPoint;
-	}
-
-	private Segment identifyNearestEarlierSegment(final Point point, final List<Segment> smoothedSegments)
-	{
-		Segment nearestEarlierSegment = null;
-
-		for (Segment eachSmoothedSegment : smoothedSegments)
-		{
-			if (eachSmoothedSegment.getPoint2().getX().compareTo(point.getX()) < 0)
-			{
-				nearestEarlierSegment = eachSmoothedSegment;
-			}
-
-			if (eachSmoothedSegment.getPoint2().getX().compareTo(point.getX()) > 0)
-			{
-				break;
-			}
-		}
-
-		return nearestEarlierSegment;
-	}
-
-	private Segment identifyNearestLaterSegment(final Point point, final List<Segment> smoothedSegments)
-	{
-		Segment nearestLaterSegment = null;
-
-		for (Segment eachSmoothedSegment : smoothedSegments)
-		{
-			if (eachSmoothedSegment.getPoint1().getX().compareTo(point.getX()) > 0)
-			{
-				nearestLaterSegment = eachSmoothedSegment;
-				break;
-			}
-		}
-
-		return nearestLaterSegment;
 	}
 
 	/**

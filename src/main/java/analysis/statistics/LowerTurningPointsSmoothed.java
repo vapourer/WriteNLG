@@ -4,10 +4,8 @@
 package analysis.statistics;
 
 import java.math.BigDecimal;
-import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,25 +34,15 @@ public class LowerTurningPointsSmoothed
 		this.timeSeries = timeSeriesWithDerivedInformation;
 	}
 
+	/**
+	 * @return a List of Point instances representing lower turning points below the 0.1 centile.
+	 */
 	public List<Point> identify()
 	{
-		int tenPercentileSize = this.timeSeries.getSeries().size() / 10;
-		LOGGER.info(String.format("Ten percentile size: %d", tenPercentileSize));
+		TenPercentile tenPercentile = new TenPercentile(this.timeSeries);
+		Point[] tenPercentileGroup = tenPercentile.identify();
 
-		Point[] tenPercentileGroup = new Point[tenPercentileSize];
-
-		final AbstractQueue<Point> queue = new PriorityQueue<>(new PointYValueComparator());
-
-		for (Point eachPoint : this.timeSeries.getPoints())
-		{
-			queue.add(eachPoint);
-		}
-
-		for (int i = 0; i < tenPercentileSize; i++)
-		{
-			tenPercentileGroup[i] = queue.poll();
-			LOGGER.info(String.format("%s is in ten percentile group", tenPercentileGroup[i]));
-		}
+		int tenPercentileSize = tenPercentileGroup.length;
 
 		BigDecimal tenPercentileThreshold = null;
 
