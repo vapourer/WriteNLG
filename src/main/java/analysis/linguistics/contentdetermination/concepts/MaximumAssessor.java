@@ -71,8 +71,8 @@ public class MaximumAssessor implements Assessor
 		final ConstraintConfiguration maximumAtStartConstraintConfiguration = this.constraints
 				.get(ConstraintType.MAXIMUM_AT_START.getTextualForm());
 
-		Maximum maximum = new Maximum(this.timeSeries.getTimeSeries());
-		Point maximumPoint = maximum.calculate();
+		final Maximum maximum = new Maximum(this.timeSeries.getTimeSeries());
+		final Point maximumPoint = maximum.calculate();
 
 		BigDecimal maximumAtStartConstraintValue = null;
 
@@ -102,8 +102,8 @@ public class MaximumAssessor implements Assessor
 		final ConstraintConfiguration maximumAtEndConstraintConfiguration = this.constraints
 				.get(ConstraintType.MAXIMUM_AT_END.getTextualForm());
 
-		Maximum maximum = new Maximum(this.timeSeries.getTimeSeries());
-		Point maximumPoint = maximum.calculate();
+		final Maximum maximum = new Maximum(this.timeSeries.getTimeSeries());
+		final Point maximumPoint = maximum.calculate();
 
 		BigDecimal maximumAtEndConstraintValue = null;
 
@@ -202,22 +202,14 @@ public class MaximumAssessor implements Assessor
 		this.constraintTypes.addConstraint(singleObviousMaximumConstraint);
 	}
 
-	/**
-	 * @return the constraintTypes
-	 */
-	public ConstraintGroup<ConstraintType> getMaximumConstraints()
-	{
-		return this.constraintTypes;
-	}
-
 	private int calculateHighPointsCount()
 	{
-		UpperTurningPointsSmoothed upperTurningPoints = new UpperTurningPointsSmoothed(this.timeSeries);
-		List<Point> ninetyPercentileSmoothed = upperTurningPoints.identify();
+		final UpperTurningPointsSmoothed upperTurningPoints = new UpperTurningPointsSmoothed(this.timeSeries);
+		final List<Point> ninetyPercentileSmoothed = upperTurningPoints.identify();
 
 		int highPointCount = ninetyPercentileSmoothed.size();
 
-		NinetyPercentile ninetyPercentile = new NinetyPercentile(this.timeSeries);
+		final NinetyPercentile ninetyPercentile = new NinetyPercentile(this.timeSeries);
 		Point[] highPoints = ninetyPercentile.identify();
 
 		for (Point eachPoint : highPoints)
@@ -237,5 +229,13 @@ public class MaximumAssessor implements Assessor
 		LOGGER.info(String.format("Count of high points, including maximum: %d", highPointCount));
 
 		return highPointCount;
+	}
+
+	/**
+	 * @return the constraintTypes
+	 */
+	public ConstraintGroup<ConstraintType> getMaximumConstraints()
+	{
+		return this.constraintTypes;
 	}
 }

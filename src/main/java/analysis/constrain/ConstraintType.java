@@ -8,12 +8,24 @@ package analysis.constrain;
  */
 public enum ConstraintType
 {
-	LINES_CROSS("LinesCross"), LINES_CROSS_MULTIPLE_TIMES("LinesCrossMultipleTimes"), LINES_DO_NOT_CROSS(
-			"LinesDoNotCross"), LINES_CROSS_ONCE("LinesCrossOnce"), SERIES_LEGEND(
-					"SeriesLegendRequired"), SINGLE_OBVIOUS_MAXIMUM(
-							"SingleObviousMaximum"), MULTIPLE_HIGH_TURNING_POINTS(
-									"MultipleHighTurningPoints"), MAXIMUM_AT_START(
-											"MaximumAtStart"), MAXIMUM_AT_END("MaximumAtEnd");
+	LINES_CROSS("LinesCross"),
+	LINES_CROSS_MULTIPLE_TIMES("LinesCrossMultipleTimes"),
+	LINES_DO_NOT_CROSS("LinesDoNotCross"),
+	LINES_CROSS_ONCE("LinesCrossOnce"),
+	SERIES_LEGEND("SeriesLegendRequired"),
+	SINGLE_OBVIOUS_MAXIMUM("SingleObviousMaximum"),
+	MULTIPLE_HIGH_TURNING_POINTS("MultipleHighTurningPoints"),
+	MAXIMUM_AT_START("MaximumAtStart"),
+	MAXIMUM_AT_END("MaximumAtEnd"),
+	SINGLE_OBVIOUS_MINIMUM("SingleObviousMinimum"),
+	MULTIPLE_LOW_TURNING_POINTS("MultipleLowTurningPoints"),
+	MINIMUM_AT_START("MinimumAtStart"),
+	MINIMUM_AT_END("MinimumAtEnd"),
+	ALL_SEGMENTS_ASCENDING("AllSegmentsAscending"),
+	MOST_SEGMENTS_ASCENDING("MostSegmentsAscending"),
+	ALL_SEGMENTS_DESCENDING("AllSegmentsDescending"),
+	MOST_SEGMENTS_DESCENDING("MostSegmentsDescending"),
+	TIME_SLICE_REQUIRED("TimeSliceRequired");
 
 	final private String textualForm;
 

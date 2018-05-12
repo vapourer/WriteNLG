@@ -21,8 +21,12 @@ import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossAssesso
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
 import analysis.linguistics.contentdetermination.concepts.MaximumAssessor;
 import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
+import analysis.linguistics.contentdetermination.concepts.MinimumAssessor;
+import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendAssessor;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
+import analysis.linguistics.contentdetermination.concepts.TimeSliceAssessor;
+import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
 import writenlg.substitution.Substitutor;
 import writenlg.substitution.TimeSeriesMapping;
@@ -126,7 +130,8 @@ public class Concepts implements ConceptLoader
 				this.globalConcepts.add(linesCrossMultipleTimesConcept);
 				break;
 			default:
-				break;
+				LOGGER.error(String.format("%s not implemented", globalConcept));
+				throw new RuntimeException("Not implemented");
 		}
 	}
 
@@ -169,8 +174,6 @@ public class Concepts implements ConceptLoader
 				}
 
 				break;
-			case DESCENDING_TREND:
-				break;
 			case MAXIMUM:
 				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
 				{
@@ -198,13 +201,63 @@ public class Concepts implements ConceptLoader
 
 				break;
 			case MINIMUM:
+				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				{
+					LOGGER.info(String.format("Mapping for %s",
+							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final MinimumAssessor minimumAssessor = new MinimumAssessor(
+							mapping.getTimeSeriesWithDerivedInformation());
+					minimumAssessor.assessConstraints();
+
+					final ConstraintGroup<ConstraintType> minimumConstraints = minimumAssessor.getMinimumConstraints();
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					MinimumConcept minimumConcept = new MinimumConcept(conceptPhraseSpecifications, minimumConstraints);
+
+					this.timeSeriesSpecificConcepts.add(minimumConcept);
+				}
+
 				break;
 			case RISING_TREND:
 				break;
+			case DESCENDING_TREND:
+				break;
 			case TIME_SLICE:
+				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				{
+					LOGGER.info(String.format("Mapping for %s",
+							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final TimeSliceAssessor timeSliceAssessor = new TimeSliceAssessor();
+					timeSliceAssessor.assessConstraints();
+					final ConstraintGroup<ConstraintType> timeSliceConstraints = timeSliceAssessor
+							.getTimeSliceConstraints();
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					final TimeSliceConcept timeSliceConcept = new TimeSliceConcept(conceptPhraseSpecifications,
+							timeSliceConstraints);
+
+					this.timeSeriesSpecificConcepts.add(timeSliceConcept);
+				}
 				break;
 			default:
-				break;
+				LOGGER.error(String.format("%s not implemented", timeSeriesSpecificConcept));
+				throw new RuntimeException("Not implemented");
 		}
 	}
 
