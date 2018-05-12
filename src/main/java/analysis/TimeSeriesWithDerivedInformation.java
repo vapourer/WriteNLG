@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import analysis.graph.Point;
 import analysis.graph.Segment;
 import analysis.graph.Slope;
@@ -22,8 +19,6 @@ import analysis.time.TimeSlice;
  */
 public class TimeSeriesWithDerivedInformation
 {
-	private static final Logger LOGGER = LogManager.getLogger("TimeSeriesWithDerivedInformation.class");
-
 	private final TimeSeries timeSeries;
 	private final Point pointWithMaximumValue;
 	private final Point pointWithMinimumValue;
@@ -162,12 +157,9 @@ public class TimeSeriesWithDerivedInformation
 			for (Segment eachSegment : this.segments)
 			{
 				this.points.add(eachSegment.getPoint1());
-				LOGGER.info(String.format("Point added to point list: ", eachSegment.getPoint1()));
 			}
 
 			this.points.add(this.segments.get(this.segments.size() - 1).getPoint2());
-			LOGGER.info(String.format("Point added to point list: ",
-					this.segments.get(this.segments.size() - 1).getPoint2()));
 		}
 
 		return this.points;
@@ -185,12 +177,9 @@ public class TimeSeriesWithDerivedInformation
 			for (Segment eachSegment : this.smoothedSegments)
 			{
 				this.points.add(eachSegment.getPoint1());
-				LOGGER.info(String.format("Point added to smoothed point list: ", eachSegment.getPoint1()));
 			}
 
 			this.points.add(this.segments.get(this.smoothedSegments.size() - 1).getPoint2());
-			LOGGER.info(String.format("Point added to smoothed point list: ",
-					this.segments.get(this.smoothedSegments.size() - 1).getPoint2()));
 		}
 
 		return this.smoothedPoints;

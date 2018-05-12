@@ -12,7 +12,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +32,7 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 
 	private final List<Segment> segments;
 	private final SortedMap<Long, BigDecimal> timeSeriesSmoothed;
-	private final List<Segment> smoothedSegments;
+	private final SortedSet<Segment> smoothedSegments;
 	private final BigDecimal maximumError;
 	private final DateFormat dateFormatter;
 
@@ -45,7 +47,7 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 		this.dateFormatter = new SimpleDateFormat(WriteNlgProperties.getInstance().getProperty("DateFormat"));
 		this.maximumError = new BigDecimal(WriteNlgProperties.getInstance().getProperty("MaximumError"));
 		this.timeSeriesSmoothed = new TreeMap<>();
-		this.smoothedSegments = new ArrayList<>();
+		this.smoothedSegments = new TreeSet<>(new SegmentStartTimeComparator());
 
 		LOGGER.info("BottomUpPiecewiseLinearFunction object created");
 		LOGGER.info(String.format("BottomUpPiecewiseLinearFunction maximum error = %s", this.maximumError.toString()));
@@ -154,25 +156,23 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 		// TODO: explore whether the algorithm might be made more concise here.
 		for (final SegmentPair segmentPair : queue)
 		{
-			Segment segment1 = segmentPair.getSegment1();
+			final Segment segment1 = segmentPair.getSegment1();
 			this.smoothedSegments.add(segment1);
-			LOGGER.info(String.format("Added segment to List - %s", segment1));
 
-			Segment segment2 = segmentPair.getSegment2();
-			this.smoothedSegments.add(segment2);
-			LOGGER.info(String.format("Added segment to List - %s", segment2));
+			final Segment segment2 = segmentPair.getSegment2();
 
 			final Long startTime1 = segment1.getStartTime();
 			final BigDecimal value1 = segment1.getPoint1().getY();
 			this.timeSeriesSmoothed.put(startTime1, value1);
-			final String formattedStartTime1 = this.dateFormatter.format(new Date(startTime1));
-			LOGGER.info(String.format("Added time/value pair to SortedMap (%s, %s)", formattedStartTime1, value1));
 
 			final Long startTime2 = segment2.getStartTime();
 			final BigDecimal value2 = segment2.getPoint1().getY();
 			this.timeSeriesSmoothed.put(startTime2, value2);
-			final String formattedStartTime2 = this.dateFormatter.format(new Date(startTime2));
-			LOGGER.info(String.format("Added time/value pair to SortedMap (%s, %s)", formattedStartTime2, value2));
+
+			if (queue.peek() == null)
+			{
+				this.smoothedSegments.add(segment2);
+			}
 		}
 
 		final Segment lastSegment = this.segments.get(this.segments.size() - 1);
@@ -181,7 +181,7 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 
 	private void logSegmentation()
 	{
-		LOGGER.info("Segmentation - output from bottom-up piecewise linear function");
+		LOGGER.info("Segmentation - output from bottom-up piecewise linear function as time/value pairs");
 
 		for (final Long eachTime : this.timeSeriesSmoothed.keySet())
 		{
@@ -189,7 +189,16 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 			LOGGER.info(String.format("%s\t%s\t", formattedDate, this.timeSeriesSmoothed.get(eachTime).toString()));
 		}
 
-		LOGGER.info("End of segmentation output");
+		LOGGER.info("End of time/value pair segmentation output");
+
+		LOGGER.info("Segmentation - List of smoothed segments from bottom-up piecewise linear function");
+
+		for (Segment eachSegment : this.smoothedSegments)
+		{
+			LOGGER.info(String.format("Smoothed segment: %s", eachSegment));
+		}
+
+		LOGGER.info("End of list of smoothed segments");
 	}
 
 	private void logQueueState(final AbstractQueue<SegmentPair> queue, final DateFormat dateFormatter)
