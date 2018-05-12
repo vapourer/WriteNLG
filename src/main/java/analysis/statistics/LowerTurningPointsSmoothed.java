@@ -18,71 +18,71 @@ import analysis.graph.Segment;
 import analysis.graph.Slope;
 
 /**
- * Identifies upper turning points above the 0.9 centile of a time series after smoothing.
+ * Identifies lower turning points below the 0.1 centile of a time series after smoothing.
  */
-public class UpperTurningPointsSmoothed
+public class LowerTurningPointsSmoothed
 {
-	private static final Logger LOGGER = LogManager.getLogger("UpperTurningPointsSmoothed.class");
+	private static final Logger LOGGER = LogManager.getLogger("LowerTurningPointsSmoothed.class");
 
 	private final TimeSeriesWithDerivedInformation timeSeries;
 
 	/**
-	 * Creates an UpperTurningPointsSmoothed instance.
+	 * Creates a LowerTurningPointsSmoothed instance.
 	 * 
 	 * @param timeSeriesWithDerivedInformation
 	 */
-	public UpperTurningPointsSmoothed(final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
+	public LowerTurningPointsSmoothed(final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
 	{
 		this.timeSeries = timeSeriesWithDerivedInformation;
 	}
 
 	public List<Point> identify()
 	{
-		int ninetyPercentileSize = this.timeSeries.getSeries().size() / 10;
-		LOGGER.info(String.format("Ninety percentile size: %d", ninetyPercentileSize));
+		int tenPercentileSize = this.timeSeries.getSeries().size() / 10;
+		LOGGER.info(String.format("Ten percentile size: %d", tenPercentileSize));
 
-		Point[] ninetyPercentileGroup = new Point[ninetyPercentileSize];
+		Point[] tenPercentileGroup = new Point[tenPercentileSize];
 
-		final AbstractQueue<Point> queue = new PriorityQueue<>(new PointYValueInverseComparator());
+		final AbstractQueue<Point> queue = new PriorityQueue<>(new PointYValueComparator());
 
 		for (Point eachPoint : this.timeSeries.getPoints())
 		{
 			queue.add(eachPoint);
 		}
 
-		for (int i = 0; i < ninetyPercentileSize; i++)
+		for (int i = 0; i < tenPercentileSize; i++)
 		{
-			ninetyPercentileGroup[i] = queue.poll();
-			LOGGER.info(String.format("%s is in ninety percentile group", ninetyPercentileGroup[i]));
+			tenPercentileGroup[i] = queue.poll();
+			LOGGER.info(String.format("%s is in ten percentile group", tenPercentileGroup[i]));
 		}
 
-		BigDecimal ninetyPercentileThreshold = null;
+		BigDecimal tenPercentileThreshold = null;
 
-		for (int i = ninetyPercentileSize - 1; i >= 0; i--)
+		for (int i = tenPercentileSize - 1; i >= 0; i--)
 		{
-			if (ninetyPercentileGroup[i] != null)
+			if (tenPercentileGroup[i] != null)
 			{
-				ninetyPercentileThreshold = ninetyPercentileGroup[i].getY();
+				tenPercentileThreshold = tenPercentileGroup[i].getY();
 				break;
 			}
 		}
 
-		LOGGER.info(String.format("Ninety percentile threshold: %s", ninetyPercentileThreshold));
+		LOGGER.info(String.format("Ten percentile threshold: %s", tenPercentileThreshold));
 
-		List<Point> ninetyPercentileSmoothed = new ArrayList<>();
+		List<Point> tenPercentileSmoothed = new ArrayList<>();
 
 		for (Point eachPoint : this.timeSeries.getSmoothedPoints())
 		{
 			LOGGER.info(String.format("Smoothed point: %s", eachPoint));
 
-			if (eachPoint.getY().compareTo(ninetyPercentileThreshold) >= 0 && isTurningPoint(eachPoint))
+			if (eachPoint.getY().compareTo(tenPercentileThreshold) <= 0 && isTurningPoint(eachPoint))
 			{
-				ninetyPercentileSmoothed.add(eachPoint);
+				tenPercentileSmoothed.add(eachPoint);
 				LOGGER.info(String.format("Upper turning point identified in ninety percentile - %s", eachPoint));
 			}
 		}
 
-		return ninetyPercentileSmoothed;
+		return tenPercentileSmoothed;
 	}
 
 	private boolean isTurningPoint(final Point point)
@@ -113,7 +113,7 @@ public class UpperTurningPointsSmoothed
 		{
 			LOGGER.info(String.format("beforeSegment: %s; afterSegment: %s", beforeSegment.getSlope(),
 					afterSegment.getSlope()));
-			turningPoint = beforeSegment.getSlope() == Slope.ASCENDING && afterSegment.getSlope() == Slope.DESCENDING;
+			turningPoint = beforeSegment.getSlope() == Slope.DESCENDING && afterSegment.getSlope() == Slope.ASCENDING;
 		}
 
 		return turningPoint;
