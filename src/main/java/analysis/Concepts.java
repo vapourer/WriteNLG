@@ -25,6 +25,8 @@ import analysis.linguistics.contentdetermination.concepts.MaximumAssessor;
 import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
 import analysis.linguistics.contentdetermination.concepts.MinimumAssessor;
 import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
+import analysis.linguistics.contentdetermination.concepts.RisingTrendAssessor;
+import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendAssessor;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceAssessor;
@@ -247,6 +249,30 @@ public class Concepts implements ConceptLoader
 
 				break;
 			case RISING_TREND:
+				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				{
+					LOGGER.info(String.format("Mapping for %s",
+							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final RisingTrendAssessor risingTrendAssessor = new RisingTrendAssessor(
+							mapping.getTimeSeriesWithDerivedInformation());
+					risingTrendAssessor.assessConstraints();
+					final ConstraintGroup<ConstraintType> timeSliceConstraints = risingTrendAssessor
+							.getRisingTrendConstraints();
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					final RisingTrendConcept risingTrendConcept = new RisingTrendConcept(conceptPhraseSpecifications,
+							timeSliceConstraints);
+
+					this.timeSeriesSpecificConcepts.add(risingTrendConcept);
+				}
 				break;
 			case DESCENDING_TREND:
 				break;
