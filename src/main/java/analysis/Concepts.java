@@ -13,6 +13,8 @@ import analysis.constrain.ConstraintGroup;
 import analysis.constrain.ConstraintType;
 import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
+import analysis.linguistics.contentdetermination.concepts.DescendingTrendAssessor;
+import analysis.linguistics.contentdetermination.concepts.DescendingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.LineCountAssessor;
 import analysis.linguistics.contentdetermination.concepts.LineCountConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossAssessor;
@@ -275,6 +277,30 @@ public class Concepts implements ConceptLoader
 				}
 				break;
 			case DESCENDING_TREND:
+				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				{
+					LOGGER.info(String.format("Mapping for %s",
+							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final DescendingTrendAssessor descendingTrendAssessor = new DescendingTrendAssessor(
+							mapping.getTimeSeriesWithDerivedInformation());
+					descendingTrendAssessor.assessConstraints();
+					final ConstraintGroup<ConstraintType> timeSliceConstraints = descendingTrendAssessor
+							.getDescendingTrendConstraints();
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					final DescendingTrendConcept descendingTrendConcept = new DescendingTrendConcept(
+							conceptPhraseSpecifications, timeSliceConstraints);
+
+					this.timeSeriesSpecificConcepts.add(descendingTrendConcept);
+				}
 				break;
 			case TIME_SLICE:
 				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
