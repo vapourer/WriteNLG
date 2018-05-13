@@ -24,6 +24,13 @@ NOUN		:	title
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@SeriesLegend@@
+GlobalConcept=LINE_COUNT
+PhraseSpecification
+Subject
+NOUN		:	series count
+Predicate
+VERB		:	be
+COMPLEMENT	:	@@LineCount@@
 TimeSeriesConcept=MAXIMUM
 PhraseSpecification
 Subject

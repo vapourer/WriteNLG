@@ -59,6 +59,9 @@ public class Substitutor implements Mapper
 			throw new RuntimeException("Provision for more than two time series not yet implemented");
 		}
 
+		this.globalMappings.addSubstitution("@@LineCount@@",
+				String.valueOf(this.lineGraphWithDerivedInformation.getTimeSeriesCount()));
+
 		return this.globalMappings;
 	}
 

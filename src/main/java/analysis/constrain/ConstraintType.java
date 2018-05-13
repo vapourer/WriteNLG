@@ -13,6 +13,7 @@ public enum ConstraintType
 	LINES_DO_NOT_CROSS("LinesDoNotCross"),
 	LINES_CROSS_ONCE("LinesCrossOnce"),
 	SERIES_LEGEND("SeriesLegendRequired"),
+	LINE_COUNT("LineCountRequired"),
 	SINGLE_OBVIOUS_MAXIMUM("SingleObviousMaximum"),
 	MULTIPLE_HIGH_TURNING_POINTS("MultipleHighTurningPoints"),
 	MAXIMUM_AT_START("MaximumAtStart"),

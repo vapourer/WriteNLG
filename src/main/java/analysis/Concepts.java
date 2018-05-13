@@ -13,6 +13,8 @@ import analysis.constrain.ConstraintGroup;
 import analysis.constrain.ConstraintType;
 import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
+import analysis.linguistics.contentdetermination.concepts.LineCountAssessor;
+import analysis.linguistics.contentdetermination.concepts.LineCountConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesAssessor;
@@ -128,6 +130,24 @@ public class Concepts implements ConceptLoader
 						linesCrossMultipleTimesPhraseSpecifications, linesCrossMultipleTimesConstraints);
 
 				this.globalConcepts.add(linesCrossMultipleTimesConcept);
+				break;
+			case LINE_COUNT:
+				final LineCountAssessor lineCountAssessor = new LineCountAssessor();
+				lineCountAssessor.assessConstraints();
+				final ConstraintGroup<ConstraintType> lineCountConstraints = lineCountAssessor
+						.getLineCountConstraints();
+
+				final List<PhraseSpecification> lineCountPhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					lineCountPhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				final LineCountConcept lineCountConcept = new LineCountConcept(lineCountPhraseSpecifications,
+						lineCountConstraints);
+				this.globalConcepts.add(lineCountConcept);
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", globalConcept));
