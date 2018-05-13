@@ -1,4 +1,0 @@
-Subject	:	Dixxy
-Verb	:	like
-Object	:	food
-
