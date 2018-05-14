@@ -33,12 +33,12 @@ public interface ConceptLoader
 			List<PhraseSpecification> phraseSpecifications);
 
 	/**
-	 * @return a List of GlobalConcept instances.
+	 * @return a List of global concepts.
 	 */
 	List<AbstractConcept> getGlobalConcepts();
 
 	/**
-	 * @return a List of TimeSeriesSpecificConcept instances.
+	 * @return a List of time series specific concepts.
 	 */
 	List<AbstractConcept> getTimeSeriesSpecificConcepts();
 }

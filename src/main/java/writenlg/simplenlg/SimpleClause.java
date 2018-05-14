@@ -90,6 +90,17 @@ public class SimpleClause extends Clause
 	/**
 	 * Adds an assignment.
 	 * 
+	 * @param partOfSpeech
+	 * @param expression
+	 */
+	public void addAssignment(final PartOfSpeech partOfSpeech, final String expression)
+	{
+		this.assignments.put(partOfSpeech, expression);
+	}
+
+	/**
+	 * Adds an assignment.
+	 * 
 	 * @param identifier
 	 * @param expression
 	 */
