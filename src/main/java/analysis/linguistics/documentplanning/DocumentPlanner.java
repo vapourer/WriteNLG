@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import analysis.GlobalConcept;
+import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import analysis.linguistics.contentdetermination.concepts.DescendingTrendConcept;
@@ -24,6 +25,10 @@ import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
+import analysis.linguistics.phrase.PhraseSpecification;
+import analysis.linguistics.phrase.partofspeech.Complement;
+import analysis.linguistics.phrase.partofspeech.NounPhrase;
+import writenlg.simplenlg.Clause;
 import writenlg.simplenlg.Document;
 import writenlg.simplenlg.Paragraph;
 import writenlg.simplenlg.PartOfSpeech;
@@ -40,12 +45,15 @@ public class DocumentPlanner
 {
 	private static final Logger LOGGER = LogManager.getLogger("DocumentPlanner.class");
 
+	private final LineGraphWithDerivedInformation lineGraph;
 	private final List<AbstractConcept> concepts;
 	private final Map<GlobalConcept, AbstractConcept> globalConcepts;
 	private final Map<TimeSeriesSpecificConcept, List<AbstractConcept>> timeSeriesSpecificConcepts;
 
-	public DocumentPlanner(List<AbstractConcept> concepts)
+	public DocumentPlanner(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation,
+			List<AbstractConcept> concepts)
 	{
+		this.lineGraph = lineGraphWithDerivedInformation;
 		this.concepts = concepts;
 		this.globalConcepts = new HashMap<>();
 		this.timeSeriesSpecificConcepts = new HashMap<>();
@@ -55,91 +63,134 @@ public class DocumentPlanner
 		LOGGER.info("New DocumentPlanner created");
 	}
 
+	private Clause createSimpleClause(PhraseSpecification specification)
+	{
+		final SimpleClause clause = new SimpleClause();
+
+		clause.addAssignment(PartOfSpeech.SUBJECT, specification.getSubject().getNounPhrase().getText());
+
+		clause.addAssignment(PartOfSpeech.VERB, specification.getPredicate().getVerb().getText());
+
+		Complement complement = specification.getPredicate().getComplement();
+
+		if (complement != null)
+		{
+			clause.addAssignment(PartOfSpeech.COMPLEMENT, complement.getText());
+		}
+
+		NounPhrase noun = specification.getPredicate().getNounPhrase();
+
+		if (noun != null)
+		{
+			clause.addAssignment(PartOfSpeech.OBJECT, noun.getText());
+		}
+
+		return clause;
+	}
+
 	public String createDocument()
 	{
 		final SimpleNlg simpleNlg = SimpleNlg.getInstance();
 
 		Document document = new Document();
+		document.setTitle(this.lineGraph.getTitle());
 		Section section = new Section();
+		section.setTitle("");
 		Paragraph paragraph1 = new Paragraph();
-		Sentence sentence1 = new Sentence();
-
-		// String summary = "";
-		// final StringBuilder builder = new StringBuilder();
-
-		final SimpleClause introductoryClause = new SimpleClause();
+		Paragraph paragraph2 = new Paragraph();
 
 		LineCountConcept lineCountConcept = (LineCountConcept) this.globalConcepts.get(GlobalConcept.LINE_COUNT);
 
 		if (lineCountConcept != null)
 		{
-			introductoryClause.addAssignment(PartOfSpeech.SUBJECT,
-					lineCountConcept.getPhraseSpecifications().get(0).getSubject().getNounPhrase().getText());
-
-			introductoryClause.addAssignment(PartOfSpeech.VERB,
-					lineCountConcept.getPhraseSpecifications().get(0).getPredicate().getVerb().getText());
-
-			introductoryClause.addAssignment(PartOfSpeech.COMPLEMENT,
-					lineCountConcept.getPhraseSpecifications().get(0).getPredicate().getComplement().getText());
-
-			sentence1.addClause(introductoryClause);
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(lineCountConcept.getPhraseSpecifications().get(0)));
+			paragraph1.addSentence(sentence);
 		}
-
-		paragraph1.addSentence(sentence1);
-		section.addParagraph(paragraph1);
-		document.addSection(section);
 
 		List<AbstractConcept> seriesLegendConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.SERIES_LEGEND);
 
-		if (seriesLegendConcepts != null)
+		if (!seriesLegendConcepts.isEmpty())
 		{
-
+			for (AbstractConcept eachConcept : seriesLegendConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph1.addSentence(sentence);
+			}
 		}
 
 		List<AbstractConcept> timeSliceConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.TIME_SLICE);
 
-		if (timeSliceConcepts != null)
+		if (!timeSliceConcepts.isEmpty())
 		{
-
+			for (AbstractConcept eachConcept : timeSliceConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph1.addSentence(sentence);
+			}
 		}
 
 		List<AbstractConcept> risingTrendConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.RISING_TREND);
 
-		if (risingTrendConcepts != null)
+		if (!risingTrendConcepts.isEmpty())
 		{
-
+			for (AbstractConcept eachConcept : risingTrendConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph2.addSentence(sentence);
+			}
 		}
 
 		List<AbstractConcept> descendingTrendConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.DESCENDING_TREND);
 
-		if (descendingTrendConcepts != null)
+		if (!descendingTrendConcepts.isEmpty())
 		{
-
+			for (AbstractConcept eachConcept : descendingTrendConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph2.addSentence(sentence);
+			}
 		}
 
 		List<AbstractConcept> maximumConcepts = this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM);
 
-		if (maximumConcepts != null)
+		if (!maximumConcepts.isEmpty())
 		{
-
+			for (AbstractConcept eachConcept : maximumConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph2.addSentence(sentence);
+			}
 		}
 
 		List<AbstractConcept> minimumConcepts = this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM);
 
-		if (minimumConcepts != null)
+		if (!minimumConcepts.isEmpty())
 		{
-
+			for (AbstractConcept eachConcept : minimumConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph2.addSentence(sentence);
+			}
 		}
 
 		LinesCrossConcept linesCrossConcept = (LinesCrossConcept) this.globalConcepts.get(GlobalConcept.LINES_CROSS);
 
 		if (linesCrossConcept != null)
 		{
-
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(linesCrossConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
 		}
 
 		LinesDoNotCrossConcept linesDoNotCrossConcept = (LinesDoNotCrossConcept) this.globalConcepts
@@ -147,7 +198,9 @@ public class DocumentPlanner
 
 		if (linesDoNotCrossConcept != null)
 		{
-
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(linesDoNotCrossConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
 		}
 
 		LinesCrossMultipleTimesConcept linesCrossMultipleTimesConcept = (LinesCrossMultipleTimesConcept) this.globalConcepts
@@ -155,33 +208,14 @@ public class DocumentPlanner
 
 		if (linesCrossMultipleTimesConcept != null)
 		{
-
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(linesCrossMultipleTimesConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
 		}
 
-		// for (AbstractConcept eachConcept : contentDeterminer.getSelectedConcepts())
-		// {
-		// for (final PhraseSpecification phraseSpecification : eachConcept.getPhraseSpecifications())
-		// {
-		// final SPhraseSpec clause = simpleNlg.createClause();
-		// clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());
-		// clause.setVerb(phraseSpecification.getPredicate().getVerb().getText());
-		//
-		// if (phraseSpecification.getPredicate().getNounPhrase() != null)
-		// {
-		// clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
-		// }
-		//
-		// if (phraseSpecification.getPredicate().getComplement() != null)
-		// {
-		// clause.setComplement(phraseSpecification.getPredicate().getComplement().getText());
-		// }
-		//
-		// builder.append(simpleNlg.realise(clause));
-		// builder.append(System.lineSeparator());
-		// }
-		// }
-
-		// summary += builder.toString();
+		section.addParagraph(paragraph1);
+		section.addParagraph(paragraph2);
+		document.addSection(section);
 
 		return document.generate();
 	}

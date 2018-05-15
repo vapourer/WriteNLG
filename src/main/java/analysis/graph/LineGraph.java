@@ -22,6 +22,7 @@ public class LineGraph
 {
 	private static final Logger LOGGER = LogManager.getLogger("LineGraph.class");
 
+	private final String title;
 	private final List<TimeSeries> timeSeriesGroup;
 
 	/**
@@ -34,10 +35,11 @@ public class LineGraph
 	 *            A list of Strings each containing the Y axis legend followed
 	 *            by an associated sequence of Y values.
 	 */
-	public LineGraph(final List<String> times, final List<String> values)
+	public LineGraph(final String title, final List<String> times, final List<String> values)
 	{
-		LOGGER.info("Creating LineGraph");
+		LOGGER.info(String.format("Creating LineGraph: '%s'", title));
 
+		this.title = title;
 		this.timeSeriesGroup = new ArrayList<>();
 
 		for (int i = 0; i < times.size(); i++)
@@ -80,5 +82,13 @@ public class LineGraph
 			final String formattedDate = dateFormatter.format(new Date(eachTime));
 			LOGGER.info(String.format("%s\t%s", formattedDate, timeSeries.get(eachTime)));
 		}
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle()
+	{
+		return title;
 	}
 }

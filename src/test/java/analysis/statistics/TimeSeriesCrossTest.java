@@ -51,7 +51,7 @@ public class TimeSeriesCrossTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 
@@ -88,7 +88,7 @@ public class TimeSeriesCrossTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 
@@ -128,7 +128,7 @@ public class TimeSeriesCrossTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 
@@ -168,7 +168,7 @@ public class TimeSeriesCrossTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 
@@ -209,7 +209,7 @@ public class TimeSeriesCrossTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 
@@ -252,7 +252,7 @@ public class TimeSeriesCrossTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 
@@ -292,7 +292,7 @@ public class TimeSeriesCrossTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 

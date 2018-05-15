@@ -45,6 +45,7 @@ public class TimeSeriesReader
 	 */
 	public LineGraph createLineGraphFromFile()
 	{
+		String title = "";
 		final List<String> times = new ArrayList<>();
 		final List<String> values = new ArrayList<>();
 
@@ -58,6 +59,12 @@ public class TimeSeriesReader
 			boolean isTimes = true;
 
 			LOGGER.info("Reading time series from data file");
+
+			if ((line = reader.readLine()) != null)
+			{
+				title = line;
+				LOGGER.info(String.format("Title: %s", title));
+			}
 
 			while ((line = reader.readLine()) != null)
 			{
@@ -100,6 +107,6 @@ public class TimeSeriesReader
 			}
 		}
 
-		return new LineGraph(times, values);
+		return new LineGraph(title, times, values);
 	}
 }

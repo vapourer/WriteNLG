@@ -97,7 +97,7 @@ public class LineGraphTest
 		values.add(values1);
 		values.add(values2);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 
 		// Act
 		final List<TimeSeries> timeSeriesGroup = lineGraph.getTimeSeriesGroup();

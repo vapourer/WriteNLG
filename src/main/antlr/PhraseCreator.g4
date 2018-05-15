@@ -30,7 +30,32 @@ phraseSpecifications		:	(phraseSpecification NEW_LINE)* phraseSpecification
 phraseSpecification			:	PHRASE_SPECIFICATION NEW_LINE subject NEW_LINE predicate
 							;
 							
-constraint					:	STRING
+features					:	FEATURES NEW_LINE feature+
+							;
+
+feature						:	complementiser NEW_LINE
+							|	tense NEW_LINE
+							|	conjunction NEW_LINE
+							;
+
+tense						:	'tense' '=' tenseValue
+							;
+
+tenseValue					:	'present'
+							|	'past'
+							|	'future'
+							;
+
+complementiser				:	'complementiser' '=' complementiserValue
+							;
+
+complementiserValue			:	STRING
+							;
+
+conjunction					:	'conjunction' '=' conjunctionValue
+							;
+
+conjunctionValue			:	STRING
 							;
 						
 subject						:	SUBJECT NEW_LINE assignments
@@ -79,6 +104,9 @@ SUBJECT						:	'Subject'
 							;
 						
 PREDICATE					:	'Predicate'
+							;
+							
+FEATURES					:	'Features'
 							;
 					
 PART_OF_SPEECH				:	'NOUN'

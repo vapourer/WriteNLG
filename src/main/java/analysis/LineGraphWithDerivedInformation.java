@@ -65,4 +65,12 @@ public class LineGraphWithDerivedInformation
 	{
 		return new TimeSeriesCross(series1, series2).identifySegmentsWithCrossingPoints().size();
 	}
+
+	/**
+	 * @return the graph's title.
+	 */
+	public String getTitle()
+	{
+		return this.lineGraph.getTitle();
+	}
 }

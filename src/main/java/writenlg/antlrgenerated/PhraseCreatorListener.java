@@ -88,15 +88,85 @@ public interface PhraseCreatorListener extends ParseTreeListener {
 	 */
 	void exitPhraseSpecification(PhraseCreatorParser.PhraseSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#constraint}.
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#features}.
 	 * @param ctx the parse tree
 	 */
-	void enterConstraint(PhraseCreatorParser.ConstraintContext ctx);
+	void enterFeatures(PhraseCreatorParser.FeaturesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#constraint}.
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#features}.
 	 * @param ctx the parse tree
 	 */
-	void exitConstraint(PhraseCreatorParser.ConstraintContext ctx);
+	void exitFeatures(PhraseCreatorParser.FeaturesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#feature}.
+	 * @param ctx the parse tree
+	 */
+	void enterFeature(PhraseCreatorParser.FeatureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#feature}.
+	 * @param ctx the parse tree
+	 */
+	void exitFeature(PhraseCreatorParser.FeatureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#tense}.
+	 * @param ctx the parse tree
+	 */
+	void enterTense(PhraseCreatorParser.TenseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#tense}.
+	 * @param ctx the parse tree
+	 */
+	void exitTense(PhraseCreatorParser.TenseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#tenseValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterTenseValue(PhraseCreatorParser.TenseValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#tenseValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitTenseValue(PhraseCreatorParser.TenseValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#complementiser}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplementiser(PhraseCreatorParser.ComplementiserContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#complementiser}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplementiser(PhraseCreatorParser.ComplementiserContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#complementiserValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplementiserValue(PhraseCreatorParser.ComplementiserValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#complementiserValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplementiserValue(PhraseCreatorParser.ComplementiserValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#conjunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterConjunction(PhraseCreatorParser.ConjunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#conjunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitConjunction(PhraseCreatorParser.ConjunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#conjunctionValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterConjunctionValue(PhraseCreatorParser.ConjunctionValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#conjunctionValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitConjunctionValue(PhraseCreatorParser.ConjunctionValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PhraseCreatorParser#subject}.
 	 * @param ctx the parse tree

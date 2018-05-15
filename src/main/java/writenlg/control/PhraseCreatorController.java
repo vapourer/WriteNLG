@@ -58,39 +58,7 @@ public class PhraseCreatorController extends Controller
 		final ConceptLoader concepts = listener.getConcepts();
 		final ContentDeterminer contentDeterminer = new ContentDetermination(concepts);
 
-		DocumentPlanner planner = new DocumentPlanner(contentDeterminer.getSelectedConcepts());
+		DocumentPlanner planner = new DocumentPlanner(lineGraph, contentDeterminer.getSelectedConcepts());
 		return planner.createDocument();
-
-		// final SimpleNlg simpleNlg = SimpleNlg.getInstance();
-		//
-		// String summary = "";
-		// final StringBuilder builder = new StringBuilder();
-		//
-		// for (AbstractConcept eachConcept : contentDeterminer.getSelectedConcepts())
-		// {
-		// for (final PhraseSpecification phraseSpecification : eachConcept.getPhraseSpecifications())
-		// {
-		// final SPhraseSpec clause = simpleNlg.createClause();
-		// clause.setSubject(phraseSpecification.getSubject().getNounPhrase().getText());
-		// clause.setVerb(phraseSpecification.getPredicate().getVerb().getText());
-		//
-		// if (phraseSpecification.getPredicate().getNounPhrase() != null)
-		// {
-		// clause.setObject(phraseSpecification.getPredicate().getNounPhrase().getText());
-		// }
-		//
-		// if (phraseSpecification.getPredicate().getComplement() != null)
-		// {
-		// clause.setComplement(phraseSpecification.getPredicate().getComplement().getText());
-		// }
-		//
-		// builder.append(simpleNlg.realise(clause));
-		// builder.append(System.lineSeparator());
-		// }
-		// }
-		//
-		// summary += builder.toString();
-		//
-		// return summary;
 	}
 }

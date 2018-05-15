@@ -49,7 +49,7 @@ public class UpperTurningPointsSmoothedTest
 		final List<String> values = new ArrayList<>();
 		values.add(inputValues);
 
-		final LineGraph lineGraph = new LineGraph(times, values);
+		final LineGraph lineGraph = new LineGraph("Test graph", times, values);
 		final LineGraphAnalyser analyser = new LineGraphAnalyser(lineGraph);
 		final LineGraphWithDerivedInformation lineGraphWithDerivedInformation = analyser.analyse();
 

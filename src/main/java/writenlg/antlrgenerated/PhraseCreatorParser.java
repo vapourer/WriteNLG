@@ -17,30 +17,37 @@ public class PhraseCreatorParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, GLOBAL_CONCEPT=4, TIME_SERIES_CONCEPT=5, GLOBAL_CONCEPT_TYPE=6, 
-		TIME_SERIES_CONCEPT_TYPE=7, PHRASE_SPECIFICATION=8, SUBJECT=9, PREDICATE=10, 
-		PART_OF_SPEECH=11, STRING=12, NEW_LINE=13, WHITE_SPACE=14, PLACE_HOLDER_MARKER=15;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
+		GLOBAL_CONCEPT=10, TIME_SERIES_CONCEPT=11, GLOBAL_CONCEPT_TYPE=12, TIME_SERIES_CONCEPT_TYPE=13, 
+		PHRASE_SPECIFICATION=14, SUBJECT=15, PREDICATE=16, FEATURES=17, PART_OF_SPEECH=18, 
+		STRING=19, NEW_LINE=20, WHITE_SPACE=21, PLACE_HOLDER_MARKER=22;
 	public static final int
 		RULE_writeDocument = 0, RULE_concept = 1, RULE_globalConcept = 2, RULE_globalConceptType = 3, 
 		RULE_timeSeriesConcept = 4, RULE_timeSeriesConceptType = 5, RULE_phraseSpecifications = 6, 
-		RULE_phraseSpecification = 7, RULE_constraint = 8, RULE_subject = 9, RULE_predicate = 10, 
-		RULE_assignments = 11, RULE_assignment = 12, RULE_identifier = 13, RULE_expression = 14;
+		RULE_phraseSpecification = 7, RULE_features = 8, RULE_feature = 9, RULE_tense = 10, 
+		RULE_tenseValue = 11, RULE_complementiser = 12, RULE_complementiserValue = 13, 
+		RULE_conjunction = 14, RULE_conjunctionValue = 15, RULE_subject = 16, 
+		RULE_predicate = 17, RULE_assignments = 18, RULE_assignment = 19, RULE_identifier = 20, 
+		RULE_expression = 21;
 	public static final String[] ruleNames = {
 		"writeDocument", "concept", "globalConcept", "globalConceptType", "timeSeriesConcept", 
 		"timeSeriesConceptType", "phraseSpecifications", "phraseSpecification", 
-		"constraint", "subject", "predicate", "assignments", "assignment", "identifier", 
-		"expression"
+		"features", "feature", "tense", "tenseValue", "complementiser", "complementiserValue", 
+		"conjunction", "conjunctionValue", "subject", "predicate", "assignments", 
+		"assignment", "identifier", "expression"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'='", "':'", "' '", "'GlobalConcept'", "'TimeSeriesConcept'", null, 
-		null, "'PhraseSpecification'", "'Subject'", "'Predicate'", null, null, 
-		null, null, "'@@'"
+		null, "'='", "'tense'", "'present'", "'past'", "'future'", "'complementiser'", 
+		"'conjunction'", "':'", "' '", "'GlobalConcept'", "'TimeSeriesConcept'", 
+		null, null, "'PhraseSpecification'", "'Subject'", "'Predicate'", "'Features'", 
+		null, null, null, null, "'@@'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, "GLOBAL_CONCEPT", "TIME_SERIES_CONCEPT", "GLOBAL_CONCEPT_TYPE", 
-		"TIME_SERIES_CONCEPT_TYPE", "PHRASE_SPECIFICATION", "SUBJECT", "PREDICATE", 
-		"PART_OF_SPEECH", "STRING", "NEW_LINE", "WHITE_SPACE", "PLACE_HOLDER_MARKER"
+		null, null, null, null, null, null, null, null, null, null, "GLOBAL_CONCEPT", 
+		"TIME_SERIES_CONCEPT", "GLOBAL_CONCEPT_TYPE", "TIME_SERIES_CONCEPT_TYPE", 
+		"PHRASE_SPECIFICATION", "SUBJECT", "PREDICATE", "FEATURES", "PART_OF_SPEECH", 
+		"STRING", "NEW_LINE", "WHITE_SPACE", "PLACE_HOLDER_MARKER"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -123,25 +130,25 @@ public class PhraseCreatorParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(35);
+			setState(49);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(30);
+					setState(44);
 					concept();
-					setState(31);
+					setState(45);
 					match(NEW_LINE);
 					}
 					} 
 				}
-				setState(37);
+				setState(51);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
 			}
-			setState(38);
+			setState(52);
 			concept();
 			}
 		}
@@ -181,20 +188,20 @@ public class PhraseCreatorParser extends Parser {
 		ConceptContext _localctx = new ConceptContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_concept);
 		try {
-			setState(42);
+			setState(56);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case GLOBAL_CONCEPT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(40);
+				setState(54);
 				globalConcept();
 				}
 				break;
 			case TIME_SERIES_CONCEPT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(41);
+				setState(55);
 				timeSeriesConcept();
 				}
 				break;
@@ -242,15 +249,15 @@ public class PhraseCreatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(44);
+			setState(58);
 			match(GLOBAL_CONCEPT);
-			setState(45);
+			setState(59);
 			match(T__0);
-			setState(46);
+			setState(60);
 			globalConceptType();
-			setState(47);
+			setState(61);
 			match(NEW_LINE);
-			setState(48);
+			setState(62);
 			phraseSpecifications();
 			}
 		}
@@ -287,7 +294,7 @@ public class PhraseCreatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(64);
 			match(GLOBAL_CONCEPT_TYPE);
 			}
 		}
@@ -331,15 +338,15 @@ public class PhraseCreatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52);
+			setState(66);
 			match(TIME_SERIES_CONCEPT);
-			setState(53);
+			setState(67);
 			match(T__0);
-			setState(54);
+			setState(68);
 			timeSeriesConceptType();
-			setState(55);
+			setState(69);
 			match(NEW_LINE);
-			setState(56);
+			setState(70);
 			phraseSpecifications();
 			}
 		}
@@ -376,7 +383,7 @@ public class PhraseCreatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(72);
 			match(TIME_SERIES_CONCEPT_TYPE);
 			}
 		}
@@ -423,25 +430,25 @@ public class PhraseCreatorParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(65);
+			setState(79);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(60);
+					setState(74);
 					phraseSpecification();
-					setState(61);
+					setState(75);
 					match(NEW_LINE);
 					}
 					} 
 				}
-				setState(67);
+				setState(81);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
-			setState(68);
+			setState(82);
 			phraseSpecification();
 			}
 		}
@@ -488,15 +495,15 @@ public class PhraseCreatorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(84);
 			match(PHRASE_SPECIFICATION);
-			setState(71);
+			setState(85);
 			match(NEW_LINE);
-			setState(72);
+			setState(86);
 			subject();
-			setState(73);
+			setState(87);
 			match(NEW_LINE);
-			setState(74);
+			setState(88);
 			predicate();
 			}
 		}
@@ -511,29 +518,375 @@ public class PhraseCreatorParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ConstraintContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(PhraseCreatorParser.STRING, 0); }
-		public ConstraintContext(ParserRuleContext parent, int invokingState) {
+	public static class FeaturesContext extends ParserRuleContext {
+		public TerminalNode FEATURES() { return getToken(PhraseCreatorParser.FEATURES, 0); }
+		public TerminalNode NEW_LINE() { return getToken(PhraseCreatorParser.NEW_LINE, 0); }
+		public List<FeatureContext> feature() {
+			return getRuleContexts(FeatureContext.class);
+		}
+		public FeatureContext feature(int i) {
+			return getRuleContext(FeatureContext.class,i);
+		}
+		public FeaturesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_constraint; }
+		@Override public int getRuleIndex() { return RULE_features; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterConstraint(this);
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterFeatures(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitConstraint(this);
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitFeatures(this);
 		}
 	}
 
-	public final ConstraintContext constraint() throws RecognitionException {
-		ConstraintContext _localctx = new ConstraintContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_constraint);
+	public final FeaturesContext features() throws RecognitionException {
+		FeaturesContext _localctx = new FeaturesContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_features);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(76);
+			setState(90);
+			match(FEATURES);
+			setState(91);
+			match(NEW_LINE);
+			setState(93); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(92);
+				feature();
+				}
+				}
+				setState(95); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__5) | (1L << T__6))) != 0) );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FeatureContext extends ParserRuleContext {
+		public ComplementiserContext complementiser() {
+			return getRuleContext(ComplementiserContext.class,0);
+		}
+		public TerminalNode NEW_LINE() { return getToken(PhraseCreatorParser.NEW_LINE, 0); }
+		public TenseContext tense() {
+			return getRuleContext(TenseContext.class,0);
+		}
+		public ConjunctionContext conjunction() {
+			return getRuleContext(ConjunctionContext.class,0);
+		}
+		public FeatureContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_feature; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterFeature(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitFeature(this);
+		}
+	}
+
+	public final FeatureContext feature() throws RecognitionException {
+		FeatureContext _localctx = new FeatureContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_feature);
+		try {
+			setState(106);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__5:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(97);
+				complementiser();
+				setState(98);
+				match(NEW_LINE);
+				}
+				break;
+			case T__1:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(100);
+				tense();
+				setState(101);
+				match(NEW_LINE);
+				}
+				break;
+			case T__6:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(103);
+				conjunction();
+				setState(104);
+				match(NEW_LINE);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class TenseContext extends ParserRuleContext {
+		public TenseValueContext tenseValue() {
+			return getRuleContext(TenseValueContext.class,0);
+		}
+		public TenseContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_tense; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterTense(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitTense(this);
+		}
+	}
+
+	public final TenseContext tense() throws RecognitionException {
+		TenseContext _localctx = new TenseContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_tense);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(108);
+			match(T__1);
+			setState(109);
+			match(T__0);
+			setState(110);
+			tenseValue();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class TenseValueContext extends ParserRuleContext {
+		public TenseValueContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_tenseValue; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterTenseValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitTenseValue(this);
+		}
+	}
+
+	public final TenseValueContext tenseValue() throws RecognitionException {
+		TenseValueContext _localctx = new TenseValueContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_tenseValue);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(112);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ComplementiserContext extends ParserRuleContext {
+		public ComplementiserValueContext complementiserValue() {
+			return getRuleContext(ComplementiserValueContext.class,0);
+		}
+		public ComplementiserContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_complementiser; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterComplementiser(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitComplementiser(this);
+		}
+	}
+
+	public final ComplementiserContext complementiser() throws RecognitionException {
+		ComplementiserContext _localctx = new ComplementiserContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_complementiser);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(114);
+			match(T__5);
+			setState(115);
+			match(T__0);
+			setState(116);
+			complementiserValue();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ComplementiserValueContext extends ParserRuleContext {
+		public TerminalNode STRING() { return getToken(PhraseCreatorParser.STRING, 0); }
+		public ComplementiserValueContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_complementiserValue; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterComplementiserValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitComplementiserValue(this);
+		}
+	}
+
+	public final ComplementiserValueContext complementiserValue() throws RecognitionException {
+		ComplementiserValueContext _localctx = new ComplementiserValueContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_complementiserValue);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(118);
+			match(STRING);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ConjunctionContext extends ParserRuleContext {
+		public ConjunctionValueContext conjunctionValue() {
+			return getRuleContext(ConjunctionValueContext.class,0);
+		}
+		public ConjunctionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conjunction; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterConjunction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitConjunction(this);
+		}
+	}
+
+	public final ConjunctionContext conjunction() throws RecognitionException {
+		ConjunctionContext _localctx = new ConjunctionContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_conjunction);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(120);
+			match(T__6);
+			setState(121);
+			match(T__0);
+			setState(122);
+			conjunctionValue();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ConjunctionValueContext extends ParserRuleContext {
+		public TerminalNode STRING() { return getToken(PhraseCreatorParser.STRING, 0); }
+		public ConjunctionValueContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conjunctionValue; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).enterConjunctionValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseCreatorListener ) ((PhraseCreatorListener)listener).exitConjunctionValue(this);
+		}
+	}
+
+	public final ConjunctionValueContext conjunctionValue() throws RecognitionException {
+		ConjunctionValueContext _localctx = new ConjunctionValueContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_conjunctionValue);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(124);
 			match(STRING);
 			}
 		}
@@ -570,15 +923,15 @@ public class PhraseCreatorParser extends Parser {
 
 	public final SubjectContext subject() throws RecognitionException {
 		SubjectContext _localctx = new SubjectContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_subject);
+		enterRule(_localctx, 32, RULE_subject);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
+			setState(126);
 			match(SUBJECT);
-			setState(79);
+			setState(127);
 			match(NEW_LINE);
-			setState(80);
+			setState(128);
 			assignments();
 			}
 		}
@@ -615,15 +968,15 @@ public class PhraseCreatorParser extends Parser {
 
 	public final PredicateContext predicate() throws RecognitionException {
 		PredicateContext _localctx = new PredicateContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_predicate);
+		enterRule(_localctx, 34, RULE_predicate);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82);
+			setState(130);
 			match(PREDICATE);
-			setState(83);
+			setState(131);
 			match(NEW_LINE);
-			setState(84);
+			setState(132);
 			assignments();
 			}
 		}
@@ -665,30 +1018,30 @@ public class PhraseCreatorParser extends Parser {
 
 	public final AssignmentsContext assignments() throws RecognitionException {
 		AssignmentsContext _localctx = new AssignmentsContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_assignments);
+		enterRule(_localctx, 36, RULE_assignments);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(91);
+			setState(139);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(86);
+					setState(134);
 					assignment();
-					setState(87);
+					setState(135);
 					match(NEW_LINE);
 					}
 					} 
 				}
-				setState(93);
+				setState(141);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
-			setState(94);
+			setState(142);
 			assignment();
 			}
 		}
@@ -726,15 +1079,15 @@ public class PhraseCreatorParser extends Parser {
 
 	public final AssignmentContext assignment() throws RecognitionException {
 		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_assignment);
+		enterRule(_localctx, 38, RULE_assignment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(96);
+			setState(144);
 			identifier();
-			setState(97);
-			match(T__1);
-			setState(98);
+			setState(145);
+			match(T__7);
+			setState(146);
 			expression();
 			}
 		}
@@ -767,11 +1120,11 @@ public class PhraseCreatorParser extends Parser {
 
 	public final IdentifierContext identifier() throws RecognitionException {
 		IdentifierContext _localctx = new IdentifierContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_identifier);
+		enterRule(_localctx, 40, RULE_identifier);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(100);
+			setState(148);
 			match(PART_OF_SPEECH);
 			}
 		}
@@ -811,34 +1164,34 @@ public class PhraseCreatorParser extends Parser {
 
 	public final ExpressionContext expression() throws RecognitionException {
 		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_expression);
+		enterRule(_localctx, 42, RULE_expression);
 		int _la;
 		try {
-			setState(113);
+			setState(161);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PLACE_HOLDER_MARKER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(102);
+				setState(150);
 				match(PLACE_HOLDER_MARKER);
-				setState(103);
+				setState(151);
 				match(STRING);
-				setState(104);
+				setState(152);
 				match(PLACE_HOLDER_MARKER);
-				setState(109);
+				setState(157);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==T__2) {
+				while (_la==T__8) {
 					{
 					{
-					setState(105);
-					match(T__2);
-					setState(106);
+					setState(153);
+					match(T__8);
+					setState(154);
 					match(STRING);
 					}
 					}
-					setState(111);
+					setState(159);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -847,7 +1200,7 @@ public class PhraseCreatorParser extends Parser {
 			case STRING:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(112);
+				setState(160);
 				match(STRING);
 				}
 				break;
@@ -867,33 +1220,49 @@ public class PhraseCreatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21v\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
-		"\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\2\7\2$\n\2\f\2"+
-		"\16\2\'\13\2\3\2\3\2\3\3\3\3\5\3-\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5"+
-		"\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\b\3\b\3\b\7\bB\n\b\f\b\16\bE\13\b\3"+
-		"\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\13\3\13\3\13\3\13\3\f\3\f\3\f"+
-		"\3\f\3\r\3\r\3\r\7\r\\\n\r\f\r\16\r_\13\r\3\r\3\r\3\16\3\16\3\16\3\16"+
-		"\3\17\3\17\3\20\3\20\3\20\3\20\3\20\7\20n\n\20\f\20\16\20q\13\20\3\20"+
-		"\5\20t\n\20\3\20\2\2\21\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36\2\2\2l"+
-		"\2%\3\2\2\2\4,\3\2\2\2\6.\3\2\2\2\b\64\3\2\2\2\n\66\3\2\2\2\f<\3\2\2\2"+
-		"\16C\3\2\2\2\20H\3\2\2\2\22N\3\2\2\2\24P\3\2\2\2\26T\3\2\2\2\30]\3\2\2"+
-		"\2\32b\3\2\2\2\34f\3\2\2\2\36s\3\2\2\2 !\5\4\3\2!\"\7\17\2\2\"$\3\2\2"+
-		"\2# \3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&(\3\2\2\2\'%\3\2\2\2()\5\4"+
-		"\3\2)\3\3\2\2\2*-\5\6\4\2+-\5\n\6\2,*\3\2\2\2,+\3\2\2\2-\5\3\2\2\2./\7"+
-		"\6\2\2/\60\7\3\2\2\60\61\5\b\5\2\61\62\7\17\2\2\62\63\5\16\b\2\63\7\3"+
-		"\2\2\2\64\65\7\b\2\2\65\t\3\2\2\2\66\67\7\7\2\2\678\7\3\2\289\5\f\7\2"+
-		"9:\7\17\2\2:;\5\16\b\2;\13\3\2\2\2<=\7\t\2\2=\r\3\2\2\2>?\5\20\t\2?@\7"+
-		"\17\2\2@B\3\2\2\2A>\3\2\2\2BE\3\2\2\2CA\3\2\2\2CD\3\2\2\2DF\3\2\2\2EC"+
-		"\3\2\2\2FG\5\20\t\2G\17\3\2\2\2HI\7\n\2\2IJ\7\17\2\2JK\5\24\13\2KL\7\17"+
-		"\2\2LM\5\26\f\2M\21\3\2\2\2NO\7\16\2\2O\23\3\2\2\2PQ\7\13\2\2QR\7\17\2"+
-		"\2RS\5\30\r\2S\25\3\2\2\2TU\7\f\2\2UV\7\17\2\2VW\5\30\r\2W\27\3\2\2\2"+
-		"XY\5\32\16\2YZ\7\17\2\2Z\\\3\2\2\2[X\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3"+
-		"\2\2\2^`\3\2\2\2_]\3\2\2\2`a\5\32\16\2a\31\3\2\2\2bc\5\34\17\2cd\7\4\2"+
-		"\2de\5\36\20\2e\33\3\2\2\2fg\7\r\2\2g\35\3\2\2\2hi\7\21\2\2ij\7\16\2\2"+
-		"jo\7\21\2\2kl\7\5\2\2ln\7\16\2\2mk\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2"+
-		"\2pt\3\2\2\2qo\3\2\2\2rt\7\16\2\2sh\3\2\2\2sr\3\2\2\2t\37\3\2\2\2\b%,"+
-		"C]os";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30\u00a6\4\2\t\2"+
+		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
+		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\3\2\3\2\3\2\7\2\62"+
+		"\n\2\f\2\16\2\65\13\2\3\2\3\2\3\3\3\3\5\3;\n\3\3\4\3\4\3\4\3\4\3\4\3\4"+
+		"\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\b\3\b\3\b\7\bP\n\b\f\b\16\b"+
+		"S\13\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n\6\n`\n\n\r\n\16\na"+
+		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13m\n\13\3\f\3\f\3\f\3"+
+		"\f\3\r\3\r\3\16\3\16\3\16\3\16\3\17\3\17\3\20\3\20\3\20\3\20\3\21\3\21"+
+		"\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\24\3\24\3\24\7\24\u008c\n\24"+
+		"\f\24\16\24\u008f\13\24\3\24\3\24\3\25\3\25\3\25\3\25\3\26\3\26\3\27\3"+
+		"\27\3\27\3\27\3\27\7\27\u009e\n\27\f\27\16\27\u00a1\13\27\3\27\5\27\u00a4"+
+		"\n\27\3\27\2\2\30\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,\2\3\3"+
+		"\2\5\7\2\u0098\2\63\3\2\2\2\4:\3\2\2\2\6<\3\2\2\2\bB\3\2\2\2\nD\3\2\2"+
+		"\2\fJ\3\2\2\2\16Q\3\2\2\2\20V\3\2\2\2\22\\\3\2\2\2\24l\3\2\2\2\26n\3\2"+
+		"\2\2\30r\3\2\2\2\32t\3\2\2\2\34x\3\2\2\2\36z\3\2\2\2 ~\3\2\2\2\"\u0080"+
+		"\3\2\2\2$\u0084\3\2\2\2&\u008d\3\2\2\2(\u0092\3\2\2\2*\u0096\3\2\2\2,"+
+		"\u00a3\3\2\2\2./\5\4\3\2/\60\7\26\2\2\60\62\3\2\2\2\61.\3\2\2\2\62\65"+
+		"\3\2\2\2\63\61\3\2\2\2\63\64\3\2\2\2\64\66\3\2\2\2\65\63\3\2\2\2\66\67"+
+		"\5\4\3\2\67\3\3\2\2\28;\5\6\4\29;\5\n\6\2:8\3\2\2\2:9\3\2\2\2;\5\3\2\2"+
+		"\2<=\7\f\2\2=>\7\3\2\2>?\5\b\5\2?@\7\26\2\2@A\5\16\b\2A\7\3\2\2\2BC\7"+
+		"\16\2\2C\t\3\2\2\2DE\7\r\2\2EF\7\3\2\2FG\5\f\7\2GH\7\26\2\2HI\5\16\b\2"+
+		"I\13\3\2\2\2JK\7\17\2\2K\r\3\2\2\2LM\5\20\t\2MN\7\26\2\2NP\3\2\2\2OL\3"+
+		"\2\2\2PS\3\2\2\2QO\3\2\2\2QR\3\2\2\2RT\3\2\2\2SQ\3\2\2\2TU\5\20\t\2U\17"+
+		"\3\2\2\2VW\7\20\2\2WX\7\26\2\2XY\5\"\22\2YZ\7\26\2\2Z[\5$\23\2[\21\3\2"+
+		"\2\2\\]\7\23\2\2]_\7\26\2\2^`\5\24\13\2_^\3\2\2\2`a\3\2\2\2a_\3\2\2\2"+
+		"ab\3\2\2\2b\23\3\2\2\2cd\5\32\16\2de\7\26\2\2em\3\2\2\2fg\5\26\f\2gh\7"+
+		"\26\2\2hm\3\2\2\2ij\5\36\20\2jk\7\26\2\2km\3\2\2\2lc\3\2\2\2lf\3\2\2\2"+
+		"li\3\2\2\2m\25\3\2\2\2no\7\4\2\2op\7\3\2\2pq\5\30\r\2q\27\3\2\2\2rs\t"+
+		"\2\2\2s\31\3\2\2\2tu\7\b\2\2uv\7\3\2\2vw\5\34\17\2w\33\3\2\2\2xy\7\25"+
+		"\2\2y\35\3\2\2\2z{\7\t\2\2{|\7\3\2\2|}\5 \21\2}\37\3\2\2\2~\177\7\25\2"+
+		"\2\177!\3\2\2\2\u0080\u0081\7\21\2\2\u0081\u0082\7\26\2\2\u0082\u0083"+
+		"\5&\24\2\u0083#\3\2\2\2\u0084\u0085\7\22\2\2\u0085\u0086\7\26\2\2\u0086"+
+		"\u0087\5&\24\2\u0087%\3\2\2\2\u0088\u0089\5(\25\2\u0089\u008a\7\26\2\2"+
+		"\u008a\u008c\3\2\2\2\u008b\u0088\3\2\2\2\u008c\u008f\3\2\2\2\u008d\u008b"+
+		"\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u0090\3\2\2\2\u008f\u008d\3\2\2\2\u0090"+
+		"\u0091\5(\25\2\u0091\'\3\2\2\2\u0092\u0093\5*\26\2\u0093\u0094\7\n\2\2"+
+		"\u0094\u0095\5,\27\2\u0095)\3\2\2\2\u0096\u0097\7\24\2\2\u0097+\3\2\2"+
+		"\2\u0098\u0099\7\30\2\2\u0099\u009a\7\25\2\2\u009a\u009f\7\30\2\2\u009b"+
+		"\u009c\7\13\2\2\u009c\u009e\7\25\2\2\u009d\u009b\3\2\2\2\u009e\u00a1\3"+
+		"\2\2\2\u009f\u009d\3\2\2\2\u009f\u00a0\3\2\2\2\u00a0\u00a4\3\2\2\2\u00a1"+
+		"\u009f\3\2\2\2\u00a2\u00a4\7\25\2\2\u00a3\u0098\3\2\2\2\u00a3\u00a2\3"+
+		"\2\2\2\u00a4-\3\2\2\2\n\63:Qal\u008d\u009f\u00a3";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
