@@ -27,7 +27,7 @@ timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
 phraseSpecifications		:	(phraseSpecification NEW_LINE)* phraseSpecification
 							;
 					
-phraseSpecification			:	PHRASE_SPECIFICATION NEW_LINE subject NEW_LINE predicate
+phraseSpecification			:	PHRASE_SPECIFICATION (NEW_LINE features?)* NEW_LINE subject NEW_LINE predicate
 							;
 							
 features					:	FEATURES NEW_LINE feature+
