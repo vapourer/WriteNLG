@@ -11,13 +11,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import control.WriteNlgProperties;
 import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintProcessor;
 import writenlg.constrain.HardConstraint;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.WeightedAverageConstraintProcessor;
-import writenlg.control.WriteNlgProperties;
 
 public class WeightedAverageConstraintProcessorTest
 {

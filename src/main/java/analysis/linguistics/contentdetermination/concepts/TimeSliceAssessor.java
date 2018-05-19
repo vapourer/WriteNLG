@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.interfaces.Assessor;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import control.WriteNlgProperties;
 import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintConfiguration;
@@ -20,7 +21,6 @@ import writenlg.constrain.Constraints;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAverageConstraintProcessor;
-import writenlg.control.WriteNlgProperties;
 
 /**
  * Establishes constraint values for time slices, based on initial values and weightings input from ANTLR Constraints

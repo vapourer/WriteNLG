@@ -16,7 +16,7 @@ import org.junit.Test;
 import analysis.TestConstants;
 import analysis.graph.Point;
 import analysis.graph.TimeSeries;
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 public class MinimumTest
 {

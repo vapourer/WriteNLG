@@ -10,7 +10,7 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 /**
  * Calculates the weighted average of a Set of constraints.

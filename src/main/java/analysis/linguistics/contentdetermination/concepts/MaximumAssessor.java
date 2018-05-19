@@ -18,6 +18,7 @@ import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.statistics.Maximum;
 import analysis.statistics.NinetyPercentile;
 import analysis.statistics.UpperTurningPointsSmoothed;
+import control.WriteNlgProperties;
 import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintConfiguration;
@@ -26,7 +27,6 @@ import writenlg.constrain.Constraints;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAverageConstraintProcessor;
-import writenlg.control.WriteNlgProperties;
 
 /**
  * Establishes constraint values for time series maximum values, based on initial values and weightings input from ANTLR

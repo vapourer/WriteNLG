@@ -6,7 +6,7 @@ package analysis.graph;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 /**
  * A line connecting two points on a two-dimensional line-graph.

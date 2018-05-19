@@ -8,7 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 /**
  * A point on a two-dimensional line-graph.

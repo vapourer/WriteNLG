@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.interfaces.ConceptLoader;
 import analysis.interfaces.ContentDeterminer;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 /**
  * Determines NLG content derived from time series analysis.

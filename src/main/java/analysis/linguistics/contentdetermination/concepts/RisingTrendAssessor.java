@@ -16,6 +16,7 @@ import analysis.graph.Segment;
 import analysis.graph.Slope;
 import analysis.interfaces.Assessor;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import control.WriteNlgProperties;
 import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintConfiguration;
@@ -24,7 +25,6 @@ import writenlg.constrain.Constraints;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAverageConstraintProcessor;
-import writenlg.control.WriteNlgProperties;
 
 /**
  * Establishes constraint values for time series with a rising trend, based on initial values and weightings input from

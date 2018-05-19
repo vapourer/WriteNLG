@@ -9,7 +9,7 @@ String antlrOutputDirectory = 'src/main/java/io/antlrgenerated'
 
 jar {
 	manifest {
-		attributes 'Main-Class': 'writenlg.control.WriteNlg'
+		attributes 'Main-Class': 'control.WriteNlg'
 	}
 }
 

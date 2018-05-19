@@ -18,6 +18,7 @@ import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.statistics.LowerTurningPointsSmoothed;
 import analysis.statistics.Minimum;
 import analysis.statistics.TenPercentile;
+import control.WriteNlgProperties;
 import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintConfiguration;
@@ -26,7 +27,6 @@ import writenlg.constrain.Constraints;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAverageConstraintProcessor;
-import writenlg.control.WriteNlgProperties;
 
 /**
  * Establishes constraint values for time series minimum values, based on initial values and weightings input from ANTLR

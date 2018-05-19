@@ -1,7 +1,7 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package writenlg.control;
+package control;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

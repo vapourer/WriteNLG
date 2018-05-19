@@ -18,7 +18,7 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TestConstants;
 import analysis.TimeSeriesWithDerivedInformation;
 import analysis.graph.LineGraph;
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 public class TimeSeriesCrossTest
 {

@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 public class SegmentTest
 {

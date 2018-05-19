@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.graph.Segment;
 import analysis.interfaces.Smoothing;
-import writenlg.control.WriteNlgProperties;
+import control.WriteNlgProperties;
 
 /**
  * An implementation of a bottom-up piecewise linear function.
