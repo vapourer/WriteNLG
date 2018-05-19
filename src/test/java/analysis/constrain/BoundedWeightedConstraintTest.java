@@ -9,6 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import writenlg.constrain.BoundedWeightedConstraint;
+import writenlg.constrain.Constraint;
+import writenlg.constrain.SatisfactionLevel;
 
 public class BoundedWeightedConstraintTest
 {

@@ -13,9 +13,6 @@ import analysis.Concepts;
 import analysis.GlobalConcept;
 import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.SoftConstraintGroup;
-import analysis.constrain.WeightedAdditionConstraintProcessor;
 import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.phrase.PhraseSpecification;
 import analysis.linguistics.phrase.Predicate;
@@ -27,6 +24,9 @@ import analysis.linguistics.phrase.partofspeech.PartOfSpeech;
 import analysis.linguistics.phrase.partofspeech.Verb;
 import io.antlrgenerated.PhraseCreatorBaseListener;
 import io.antlrgenerated.PhraseCreatorParser;
+import writenlg.constrain.ConstraintGroup;
+import writenlg.constrain.SoftConstraintGroup;
+import writenlg.constrain.WeightedAdditionConstraintProcessor;
 import writenlg.substitution.Substitutor;
 
 /**

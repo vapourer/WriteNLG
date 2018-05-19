@@ -6,16 +6,16 @@ package analysis.linguistics.contentdetermination.concepts;
 import java.util.Map;
 
 import analysis.GlobalConcept;
-import analysis.constrain.BooleanConstraintProcessor;
-import analysis.constrain.Constraint;
-import analysis.constrain.ConstraintConfiguration;
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.ConstraintType;
-import analysis.constrain.Constraints;
-import analysis.constrain.HardConstraint;
-import analysis.constrain.HardConstraintGroup;
-import analysis.constrain.SatisfactionLevel;
 import analysis.interfaces.Assessor;
+import analysis.linguistics.contentdetermination.ConstraintType;
+import writenlg.constrain.BooleanConstraintProcessor;
+import writenlg.constrain.Constraint;
+import writenlg.constrain.ConstraintConfiguration;
+import writenlg.constrain.ConstraintGroup;
+import writenlg.constrain.Constraints;
+import writenlg.constrain.HardConstraint;
+import writenlg.constrain.HardConstraintGroup;
+import writenlg.constrain.SatisfactionLevel;
 
 /**
  * Establishes constraint values for line count, based on initial values and weightings input from ANTLR Constraints

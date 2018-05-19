@@ -9,9 +9,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.ConstraintType;
 import analysis.interfaces.ConceptLoader;
+import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import analysis.linguistics.contentdetermination.concepts.DescendingTrendAssessor;
 import analysis.linguistics.contentdetermination.concepts.DescendingTrendConcept;
@@ -34,6 +33,7 @@ import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceAssessor;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
+import writenlg.constrain.ConstraintGroup;
 import writenlg.substitution.Substitutor;
 import writenlg.substitution.TimeSeriesMapping;
 

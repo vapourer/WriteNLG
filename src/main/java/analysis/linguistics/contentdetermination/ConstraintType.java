@@ -1,7 +1,7 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package analysis.constrain;
+package analysis.linguistics.contentdetermination;
 
 /**
  * Constraint types for LinesCrossConcept

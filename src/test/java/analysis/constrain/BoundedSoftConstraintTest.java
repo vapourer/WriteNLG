@@ -12,6 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import writenlg.constrain.BoundedSoftConstraint;
+import writenlg.constrain.SatisfactionLevel;
 
 public class BoundedSoftConstraintTest
 {

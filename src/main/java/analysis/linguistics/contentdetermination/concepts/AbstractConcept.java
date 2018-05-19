@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import analysis.constrain.Constraint;
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.ConstraintType;
+import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.linguistics.phrase.PhraseSpecification;
+import writenlg.constrain.Constraint;
+import writenlg.constrain.ConstraintGroup;
 
 /**
  * TODO: Concept implementation needs rationalising. Currently reflects two different approaches. Original was to

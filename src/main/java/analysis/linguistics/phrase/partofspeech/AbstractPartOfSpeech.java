@@ -5,8 +5,8 @@ package analysis.linguistics.phrase.partofspeech;
 
 import java.math.BigDecimal;
 
-import analysis.constrain.Constraint;
-import analysis.constrain.ConstraintGroup;
+import writenlg.constrain.Constraint;
+import writenlg.constrain.ConstraintGroup;
 
 /**
  * Base class for parts of speech. Has a String representation of the specific part of speech, and holds a

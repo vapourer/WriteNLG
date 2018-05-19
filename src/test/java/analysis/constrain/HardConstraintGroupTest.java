@@ -12,6 +12,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import writenlg.constrain.ConstraintGroup;
+import writenlg.constrain.HardConstraint;
+import writenlg.constrain.HardConstraintGroup;
+import writenlg.constrain.HardConstraintProcessor;
+import writenlg.constrain.SatisfactionLevel;
+import writenlg.constrain.SoftConstraint;
 
 public class HardConstraintGroupTest
 {

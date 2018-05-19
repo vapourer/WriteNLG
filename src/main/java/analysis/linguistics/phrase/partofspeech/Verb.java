@@ -8,8 +8,8 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import analysis.constrain.Constraint;
-import analysis.constrain.ConstraintGroup;
+import writenlg.constrain.Constraint;
+import writenlg.constrain.ConstraintGroup;
 
 /**
  * Represents a verb. Extends AbstractPartOfSpeech, which holds a constraintGroup of type E from which a value can be

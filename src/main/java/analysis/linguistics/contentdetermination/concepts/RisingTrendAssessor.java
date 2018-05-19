@@ -12,18 +12,18 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.TimeSeriesSpecificConcept;
 import analysis.TimeSeriesWithDerivedInformation;
-import analysis.constrain.BoundedWeightedConstraint;
-import analysis.constrain.Constraint;
-import analysis.constrain.ConstraintConfiguration;
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.ConstraintType;
-import analysis.constrain.Constraints;
-import analysis.constrain.SatisfactionLevel;
-import analysis.constrain.SoftConstraintGroup;
-import analysis.constrain.WeightedAverageConstraintProcessor;
 import analysis.graph.Segment;
 import analysis.graph.Slope;
 import analysis.interfaces.Assessor;
+import analysis.linguistics.contentdetermination.ConstraintType;
+import writenlg.constrain.BoundedWeightedConstraint;
+import writenlg.constrain.Constraint;
+import writenlg.constrain.ConstraintConfiguration;
+import writenlg.constrain.ConstraintGroup;
+import writenlg.constrain.Constraints;
+import writenlg.constrain.SatisfactionLevel;
+import writenlg.constrain.SoftConstraintGroup;
+import writenlg.constrain.WeightedAverageConstraintProcessor;
 import writenlg.control.WriteNlgProperties;
 
 /**

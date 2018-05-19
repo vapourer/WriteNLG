@@ -12,11 +12,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.SatisfactionLevel;
-import analysis.constrain.SoftConstraint;
-import analysis.constrain.SoftConstraintGroup;
-import analysis.constrain.WeightedAdditionConstraintProcessor;
+import writenlg.constrain.ConstraintGroup;
+import writenlg.constrain.SatisfactionLevel;
+import writenlg.constrain.SoftConstraint;
+import writenlg.constrain.SoftConstraintGroup;
+import writenlg.constrain.WeightedAdditionConstraintProcessor;
 
 public class ComplementTest
 {

@@ -5,9 +5,9 @@ package analysis.linguistics.contentdetermination.concepts;
 
 import java.util.List;
 
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.ConstraintType;
+import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.linguistics.phrase.PhraseSpecification;
+import writenlg.constrain.ConstraintGroup;
 
 /**
  * Representation of a lines crossing concept.

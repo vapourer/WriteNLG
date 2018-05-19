@@ -14,6 +14,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import writenlg.constrain.BoundedSoftConstraint;
+import writenlg.constrain.Constraint;
+import writenlg.constrain.ConstraintProcessor;
+import writenlg.constrain.HardConstraint;
+import writenlg.constrain.HardConstraintProcessor;
+import writenlg.constrain.SatisfactionLevel;
 
 public class HardConstraintProcessorTest
 {

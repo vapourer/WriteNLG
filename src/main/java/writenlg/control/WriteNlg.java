@@ -7,11 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import analysis.LineGraphAnalyser;
-import analysis.constrain.Constraints;
 import analysis.graph.LineGraph;
 import analysis.interfaces.LineGraphAnalysis;
 import io.AntlrGrammar;
 import io.TimeSeriesReader;
+import writenlg.constrain.Constraints;
 
 public class WriteNlg
 {

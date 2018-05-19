@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import analysis.constrain.ConstraintGroup;
-import analysis.constrain.ConstraintType;
+import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
+import writenlg.constrain.ConstraintGroup;
 
 /**
  * A conceptGroup of Concept instances, to be evaluated as part of the aggregation process.
