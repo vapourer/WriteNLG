@@ -3,7 +3,7 @@
 
 grammar Constraints;
 
-@header {package writenlg.antlrgenerated;}
+@header {package io.antlrgenerated;}
 
 constraintConfiguration		:	(concept NEW_LINE)* concept
 							;
@@ -58,6 +58,8 @@ TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'SERIES_LEGEND'
 							|	'TIME_SLICE'
 							;
+							
+//							AGGREGATION_CONCEPT_TYPE	|	
 							
 CONSTRAINT_NAME				:	'LinesCross'
 							|	'LinesCrossMultipleTimes'

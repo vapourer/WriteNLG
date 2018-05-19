@@ -3,7 +3,7 @@
 
 grammar PhraseCreator;
 
-@header {package writenlg.antlrgenerated;}
+@header {package io.antlrgenerated;}
 
 writeDocument				:	(concept NEW_LINE)* concept
 							;

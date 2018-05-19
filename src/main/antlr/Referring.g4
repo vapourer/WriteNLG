@@ -3,7 +3,7 @@
 
 grammar Referring;
 
-@header {package writenlg.antlrgenerated;}
+@header {package io.antlrgenerated;}
 
 referringExpression	:	(STRING NEW_LINE)*
 					|	STRING

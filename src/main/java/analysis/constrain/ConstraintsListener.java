@@ -10,10 +10,10 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
-import writenlg.antlrgenerated.ConstraintsBaseListener;
-import writenlg.antlrgenerated.ConstraintsParser;
-import writenlg.antlrgenerated.ConstraintsParser.GlobalConceptContext;
-import writenlg.antlrgenerated.ConstraintsParser.TimeSeriesConceptContext;
+import io.antlrgenerated.ConstraintsBaseListener;
+import io.antlrgenerated.ConstraintsParser;
+import io.antlrgenerated.ConstraintsParser.GlobalConceptContext;
+import io.antlrgenerated.ConstraintsParser.TimeSeriesConceptContext;
 
 /**
  * ConstraintsBaseListener overrides specific to Constraints.

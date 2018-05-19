@@ -9,8 +9,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import writenlg.antlrgenerated.ConstraintsLexer;
-import writenlg.antlrgenerated.ConstraintsParser;
+import io.antlrgenerated.ConstraintsLexer;
+import io.antlrgenerated.ConstraintsParser;
 import writenlg.expertinput.LexerParser;
 
 /**

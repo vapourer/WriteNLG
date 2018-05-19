@@ -3,7 +3,7 @@
 
 grammar Writer;
 
-@header {package writenlg.antlrgenerated;}
+@header {package io.antlrgenerated;}
 
 writeDocument		:	document
 					|	section

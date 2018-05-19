@@ -9,8 +9,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import writenlg.antlrgenerated.WriterLexer;
-import writenlg.antlrgenerated.WriterParser;
+import io.antlrgenerated.WriterLexer;
+import io.antlrgenerated.WriterParser;
 
 /**
  * Enables scanning and parsing of input acco0rding to an ANTLR generated Writer grammar.

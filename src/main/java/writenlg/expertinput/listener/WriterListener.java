@@ -8,9 +8,9 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Map;
 
+import io.antlrgenerated.WriterBaseListener;
+import io.antlrgenerated.WriterParser;
 import simplenlg.features.Tense;
-import writenlg.antlrgenerated.WriterBaseListener;
-import writenlg.antlrgenerated.WriterParser;
 import writenlg.simplenlg.CoordinatedPhrase;
 import writenlg.simplenlg.Document;
 import writenlg.simplenlg.DocumentGenerator;

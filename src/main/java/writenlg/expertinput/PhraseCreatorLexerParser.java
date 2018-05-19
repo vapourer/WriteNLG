@@ -9,8 +9,8 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import writenlg.antlrgenerated.PhraseCreatorLexer;
-import writenlg.antlrgenerated.PhraseCreatorParser;
+import io.antlrgenerated.PhraseCreatorLexer;
+import io.antlrgenerated.PhraseCreatorParser;
 
 /**
  * Scans and parses input according to the ANTLR generated PhraseCreator grammar.

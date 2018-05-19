@@ -3,7 +3,7 @@
 
 package analysis.linguistics.aggregation;
 
-import writenlg.antlrgenerated.AggregationBaseListener;
+import io.antlrgenerated.AggregationBaseListener;
 
 /**
  * AggregationBaseListener overrides specific to aggregation.

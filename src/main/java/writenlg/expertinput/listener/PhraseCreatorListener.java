@@ -25,8 +25,8 @@ import analysis.linguistics.phrase.partofspeech.Complement;
 import analysis.linguistics.phrase.partofspeech.NounPhrase;
 import analysis.linguistics.phrase.partofspeech.PartOfSpeech;
 import analysis.linguistics.phrase.partofspeech.Verb;
-import writenlg.antlrgenerated.PhraseCreatorBaseListener;
-import writenlg.antlrgenerated.PhraseCreatorParser;
+import io.antlrgenerated.PhraseCreatorBaseListener;
+import io.antlrgenerated.PhraseCreatorParser;
 import writenlg.substitution.Substitutor;
 
 /**

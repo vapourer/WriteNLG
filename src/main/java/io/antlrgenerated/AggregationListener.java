@@ -1,5 +1,5 @@
 // Generated from Aggregation.g4 by ANTLR 4.7
-package writenlg.antlrgenerated;
+package io.antlrgenerated;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

@@ -35,7 +35,6 @@ import writenlg.simplenlg.PartOfSpeech;
 import writenlg.simplenlg.Section;
 import writenlg.simplenlg.Sentence;
 import writenlg.simplenlg.SimpleClause;
-import writenlg.simplenlg.SimpleNlg;
 
 /**
  * Flexible document planning is not part of the current project. This initial implementation is to establish a standard
@@ -90,8 +89,6 @@ public class DocumentPlanner
 
 	public String createDocument()
 	{
-		final SimpleNlg simpleNlg = SimpleNlg.getInstance();
-
 		Document document = new Document();
 		document.setTitle(this.lineGraph.getTitle());
 		Section section = new Section();

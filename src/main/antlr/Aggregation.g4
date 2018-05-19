@@ -3,7 +3,7 @@
 
 grammar Aggregation;
 
-@header {package writenlg.antlrgenerated;}
+@header {package io.antlrgenerated;}
 
 aggregationRules		:	(conceptGroup NEW_LINE)* conceptGroup
 						;
