@@ -1,7 +1,7 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package writenlg.constrain;
+package io.expertinput.listener;
 
 import java.math.BigDecimal;
 
@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
+import analysis.constrain.Constraints;
 import io.antlrgenerated.ConstraintsBaseListener;
 import io.antlrgenerated.ConstraintsParser;
 import io.antlrgenerated.ConstraintsParser.GlobalConceptContext;

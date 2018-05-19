@@ -1,7 +1,7 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package writenlg.constrain;
+package analysis.constrain;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -15,6 +15,9 @@ import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import io.AntlrInputReader;
 import io.LexerParser;
+import io.expertinput.ConstraintsLexerParser;
+import io.expertinput.listener.ConstraintsListener;
+import writenlg.constrain.ConstraintConfiguration;
 
 public class Constraints
 {

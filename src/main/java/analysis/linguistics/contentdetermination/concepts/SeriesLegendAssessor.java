@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import analysis.TimeSeriesSpecificConcept;
+import analysis.constrain.Constraints;
 import analysis.interfaces.Assessor;
 import analysis.linguistics.contentdetermination.ConstraintType;
 import control.WriteNlgProperties;
@@ -14,7 +15,6 @@ import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintConfiguration;
 import writenlg.constrain.ConstraintGroup;
-import writenlg.constrain.Constraints;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAverageConstraintProcessor;

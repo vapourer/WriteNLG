@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.TimeSeriesSpecificConcept;
 import analysis.TimeSeriesWithDerivedInformation;
+import analysis.constrain.Constraints;
 import analysis.graph.Point;
 import analysis.interfaces.Assessor;
 import analysis.linguistics.contentdetermination.ConstraintType;
@@ -23,7 +24,6 @@ import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintConfiguration;
 import writenlg.constrain.ConstraintGroup;
-import writenlg.constrain.Constraints;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAverageConstraintProcessor;
