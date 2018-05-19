@@ -1,7 +1,7 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package writenlg.substitution;
+package analysis.substitution;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,8 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesWithDerivedInformation;
+import analysis.interfaces.Mapper;
+import writenlg.substitution.Substitutions;
 
 /**
  * Manages globalMappings for use during parsing.

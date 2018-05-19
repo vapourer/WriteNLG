@@ -22,12 +22,12 @@ import analysis.linguistics.phrase.partofspeech.Complement;
 import analysis.linguistics.phrase.partofspeech.NounPhrase;
 import analysis.linguistics.phrase.partofspeech.PartOfSpeech;
 import analysis.linguistics.phrase.partofspeech.Verb;
+import analysis.substitution.Substitutor;
 import io.antlrgenerated.PhraseCreatorBaseListener;
 import io.antlrgenerated.PhraseCreatorParser;
 import writenlg.constrain.ConstraintGroup;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAdditionConstraintProcessor;
-import writenlg.substitution.Substitutor;
 
 /**
  * PhraseCreatorBaseListener overrides specific to PhraseCreator.

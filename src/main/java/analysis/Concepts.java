@@ -33,9 +33,9 @@ import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceAssessor;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
 import analysis.linguistics.phrase.PhraseSpecification;
+import analysis.substitution.Substitutor;
+import analysis.substitution.TimeSeriesMapping;
 import writenlg.constrain.ConstraintGroup;
-import writenlg.substitution.Substitutor;
-import writenlg.substitution.TimeSeriesMapping;
 
 /**
  * Concept collections populated from ANTLR PhraseCreator input.

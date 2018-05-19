@@ -1,9 +1,12 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package writenlg.substitution;
+package analysis.interfaces;
 
 import java.util.List;
+
+import analysis.substitution.TimeSeriesMapping;
+import writenlg.substitution.Substitutions;
 
 /**
  * Manages substitutions for use during parsing.

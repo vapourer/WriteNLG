@@ -12,10 +12,10 @@ import analysis.interfaces.ContentDeterminer;
 import analysis.interfaces.LineGraphAnalysis;
 import analysis.linguistics.contentdetermination.ContentDetermination;
 import analysis.linguistics.documentplanning.DocumentPlanner;
+import analysis.substitution.Substitutor;
 import writenlg.expertinput.LexerParser;
 import writenlg.expertinput.PhraseCreatorLexerParser;
 import writenlg.expertinput.listener.PhraseCreatorListener;
-import writenlg.substitution.Substitutor;
 
 /**
  * Processes input data using linguistic rules based on the PhraseCreator ANTLR grammar.

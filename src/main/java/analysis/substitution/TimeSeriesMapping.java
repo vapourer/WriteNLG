@@ -1,7 +1,7 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package writenlg.substitution;
+package analysis.substitution;
 
 import java.util.Map;
 
@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import analysis.TimeSeriesWithDerivedInformation;
+import writenlg.substitution.Substitutions;
 
 /**
  * Container for Substitutions for this TimeSeries.
