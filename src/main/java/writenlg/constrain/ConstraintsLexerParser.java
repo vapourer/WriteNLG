@@ -9,9 +9,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import io.LexerParser;
 import io.antlrgenerated.ConstraintsLexer;
 import io.antlrgenerated.ConstraintsParser;
-import writenlg.expertinput.LexerParser;
 
 /**
  * Scans and parses input according to the ANTLR generated Constraints grammar.

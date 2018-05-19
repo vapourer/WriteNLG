@@ -5,7 +5,7 @@ package analysis.interfaces;
 
 import java.util.List;
 
-import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
+import writenlg.contentdetermination.AbstractConcept;
 
 /**
  * Determines NLG content derived from time series analysis.

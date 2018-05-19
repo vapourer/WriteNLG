@@ -6,9 +6,9 @@ package control;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import writenlg.expertinput.LexerParser;
-import writenlg.expertinput.WriterLexerParser;
-import writenlg.expertinput.listener.WriterListener;
+import io.LexerParser;
+import io.expertinput.WriterLexerParser;
+import io.expertinput.listener.WriterListener;
 import writenlg.simplenlg.DocumentGenerator;
 
 /**

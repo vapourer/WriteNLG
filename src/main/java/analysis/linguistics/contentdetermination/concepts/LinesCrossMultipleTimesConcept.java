@@ -6,8 +6,9 @@ package analysis.linguistics.contentdetermination.concepts;
 import java.util.List;
 
 import analysis.linguistics.contentdetermination.ConstraintType;
-import analysis.linguistics.phrase.PhraseSpecification;
 import writenlg.constrain.ConstraintGroup;
+import writenlg.contentdetermination.AbstractConcept;
+import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
  * Establishes constraint values for lines crossing multiple times, based on initial values and weightings input from

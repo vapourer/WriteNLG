@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import io.AntlrInputReader;
-import writenlg.expertinput.LexerParser;
+import io.LexerParser;
 
 public class Constraints
 {

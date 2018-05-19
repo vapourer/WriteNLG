@@ -13,9 +13,9 @@ import analysis.interfaces.LineGraphAnalysis;
 import analysis.linguistics.contentdetermination.ContentDetermination;
 import analysis.linguistics.documentplanning.DocumentPlanner;
 import analysis.substitution.Substitutor;
-import writenlg.expertinput.LexerParser;
-import writenlg.expertinput.PhraseCreatorLexerParser;
-import writenlg.expertinput.listener.PhraseCreatorListener;
+import io.LexerParser;
+import io.expertinput.PhraseCreatorLexerParser;
+import io.expertinput.listener.PhraseCreatorListener;
 
 /**
  * Processes input data using linguistic rules based on the PhraseCreator ANTLR grammar.

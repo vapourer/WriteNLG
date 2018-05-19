@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.contentdetermination.ConstraintType;
-import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import analysis.linguistics.contentdetermination.concepts.DescendingTrendAssessor;
 import analysis.linguistics.contentdetermination.concepts.DescendingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.LineCountAssessor;
@@ -32,10 +31,11 @@ import analysis.linguistics.contentdetermination.concepts.SeriesLegendAssessor;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceAssessor;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
-import analysis.linguistics.phrase.PhraseSpecification;
 import analysis.substitution.Substitutor;
 import analysis.substitution.TimeSeriesMapping;
 import writenlg.constrain.ConstraintGroup;
+import writenlg.contentdetermination.AbstractConcept;
+import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
  * Concept collections populated from ANTLR PhraseCreator input.

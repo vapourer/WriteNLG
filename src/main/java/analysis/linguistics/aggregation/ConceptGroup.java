@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import analysis.linguistics.contentdetermination.ConstraintType;
-import analysis.linguistics.contentdetermination.concepts.AbstractConcept;
 import writenlg.constrain.ConstraintGroup;
+import writenlg.contentdetermination.AbstractConcept;
 
 /**
  * A conceptGroup of Concept instances, to be evaluated as part of the aggregation process.

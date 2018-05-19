@@ -12,9 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.expertinput.LexerParser;
-import writenlg.expertinput.WriterLexerParser;
-import writenlg.expertinput.listener.WriterListener;
+import io.LexerParser;
+import io.expertinput.WriterLexerParser;
+import io.expertinput.listener.WriterListener;
 import writenlg.simplenlg.DocumentGenerator;
 
 public class ClauseTest
