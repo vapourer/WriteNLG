@@ -11,18 +11,18 @@ import writenlg.constrain.ConstraintGroup;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
- * If all introductory information is present, relevant aggregation occurs. Currently, there should be no case where any
- * introductory information is missing.
+ * Rationalises time slice declarations. Current implementation cannot cater for series with time intervals that differ,
+ * so this should always be used, with an exception thrown if there is a discrepancy.
  */
-public class AllIntroductoryInformationPresentConcept extends AbstractAggregationConcept
+public class IdenticalTimeSlicesConcept extends AbstractAggregationConcept
 {
 	/**
-	 * Creates an AllIntroductoryInformationPresentConcept instance.
+	 * Creates a new IdenticalTimeSlicesConcept instance.
 	 * 
 	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
-	public AllIntroductoryInformationPresentConcept(List<PhraseSpecification> phraseSpecifications,
+	public IdenticalTimeSlicesConcept(List<PhraseSpecification> phraseSpecifications,
 			ConstraintGroup<ConstraintType> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);

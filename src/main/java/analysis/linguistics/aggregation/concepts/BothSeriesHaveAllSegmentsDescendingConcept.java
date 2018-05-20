@@ -11,18 +11,17 @@ import writenlg.constrain.ConstraintGroup;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
- * If all introductory information is present, relevant aggregation occurs. Currently, there should be no case where any
- * introductory information is missing.
+ * Aggregates if both series have all segments descending.
  */
-public class AllIntroductoryInformationPresentConcept extends AbstractAggregationConcept
+public class BothSeriesHaveAllSegmentsDescendingConcept extends AbstractAggregationConcept
 {
 	/**
-	 * Creates an AllIntroductoryInformationPresentConcept instance.
+	 * Creates a new BothSeriesHaveAllSegmentsDescendingConcept instance.
 	 * 
 	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
-	public AllIntroductoryInformationPresentConcept(List<PhraseSpecification> phraseSpecifications,
+	public BothSeriesHaveAllSegmentsDescendingConcept(List<PhraseSpecification> phraseSpecifications,
 			ConstraintGroup<ConstraintType> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
