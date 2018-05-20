@@ -1,15 +1,15 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package analysis.linguistics.aggregation;
+package writenlg.aggregation;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import analysis.linguistics.contentdetermination.ConstraintType;
+import analysis.linguistics.aggregation.AggregationConstraintType;
+import writenlg.AbstractConcept;
 import writenlg.constrain.ConstraintGroup;
-import writenlg.contentdetermination.AbstractConcept;
 
 /**
  * A conceptGroup of Concept instances, to be evaluated as part of the aggregation process.
@@ -17,12 +17,12 @@ import writenlg.contentdetermination.AbstractConcept;
 public class ConceptGroup
 {
 	private final List<AbstractConcept> group;
-	private final ConstraintGroup<ConstraintType> constraintGroup;
+	private final ConstraintGroup<AggregationConstraintType> constraintGroup;
 
 	/**
 	 * Creates a new ConceptGroup instance.
 	 */
-	public ConceptGroup(final ConstraintGroup<ConstraintType> constraintGroup)
+	public ConceptGroup(final ConstraintGroup<AggregationConstraintType> constraintGroup)
 	{
 		this.constraintGroup = constraintGroup;
 		this.group = new ArrayList<>();
@@ -33,13 +33,13 @@ public class ConceptGroup
 	 */
 	public List<AbstractConcept> getGroup()
 	{
-		return group;
+		return this.group;
 	}
 
 	/**
 	 * @return the constraintGroup
 	 */
-	public ConstraintGroup<ConstraintType> getConstraintGroup()
+	public ConstraintGroup<AggregationConstraintType> getConstraintGroup()
 	{
 		return constraintGroup;
 	}

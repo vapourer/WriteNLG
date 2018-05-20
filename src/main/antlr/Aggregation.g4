@@ -35,6 +35,7 @@ CONCEPT_GROUP_TITLE		:	'AllIntroductoryInformationPresent'
 						|	'BothSeriesHaveAllSegmentsDescending'
 						|	'BothSeriesHaveMostSegmentsAscending'
 						|	'BothSeriesHaveMostSegmentsDescending'
+						|	'IdenticalTimeSlices'
 						;
 						
 GLOBAL_CONCEPT			:	'LINES_CROSS'

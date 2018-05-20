@@ -7,7 +7,7 @@ import java.util.List;
 
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
-import writenlg.contentdetermination.AbstractConcept;
+import writenlg.AbstractConcept;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**

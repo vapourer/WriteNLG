@@ -5,6 +5,8 @@ package writenlg.contentdetermination;
 
 import java.util.Comparator;
 
+import writenlg.AbstractConcept;
+
 /**
  * Compares weighted satisfaction levels of two AbstractConcept instances. Note: this comparator imposes orderings that
  * are inconsistent with equals.

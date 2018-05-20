@@ -33,8 +33,8 @@ import analysis.linguistics.contentdetermination.concepts.TimeSliceAssessor;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
 import analysis.substitution.Substitutor;
 import analysis.substitution.TimeSeriesMapping;
+import writenlg.AbstractConcept;
 import writenlg.constrain.ConstraintGroup;
-import writenlg.contentdetermination.AbstractConcept;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**

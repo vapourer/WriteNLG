@@ -6,8 +6,8 @@ package analysis.linguistics.contentdetermination.concepts;
 import java.util.List;
 
 import analysis.linguistics.contentdetermination.ConstraintType;
+import writenlg.AbstractConcept;
 import writenlg.constrain.ConstraintGroup;
-import writenlg.contentdetermination.AbstractConcept;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**

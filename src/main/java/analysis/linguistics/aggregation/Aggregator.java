@@ -6,23 +6,32 @@ package analysis.linguistics.aggregation;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import writenlg.aggregation.AbstractAggregationConcept;
+
 /**
  * Performs aggregation in conjunction with document planning, according to constraints
  */
 public class Aggregator
 {
-	private final Set<ConceptGroup> conceptGroups;
+	private static final Logger LOGGER = LogManager.getLogger("Aggregator.class");
+
+	private final Set<AbstractAggregationConcept> aggregationConcepts;
 
 	public Aggregator()
 	{
-		this.conceptGroups = new HashSet<>();
+		this.aggregationConcepts = new HashSet<>();
+
+		LOGGER.info("New Aggregator created");
 	}
 
 	/**
-	 * @param group
+	 * @param concept
 	 */
-	public void addConceptGroup(final ConceptGroup group)
+	public void addAggregationConcept(AbstractAggregationConcept concept)
 	{
-		this.conceptGroups.add(group);
+		this.aggregationConcepts.add(concept);
 	}
 }

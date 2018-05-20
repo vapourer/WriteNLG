@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.interfaces.ConceptLoader;
 import analysis.interfaces.ContentDeterminer;
 import control.WriteNlgProperties;
-import writenlg.contentdetermination.AbstractConcept;
+import writenlg.AbstractConcept;
 import writenlg.contentdetermination.ConceptSatisfactionLevelComparator;
 
 /**

@@ -24,7 +24,7 @@ import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
-import writenlg.contentdetermination.AbstractConcept;
+import writenlg.AbstractConcept;
 import writenlg.linguistics.phrase.PhraseSpecification;
 import writenlg.linguistics.phrase.partofspeech.Complement;
 import writenlg.linguistics.phrase.partofspeech.NounPhrase;

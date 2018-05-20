@@ -1,29 +1,27 @@
 // Copyright 2018 David Jakes.
 // This program is distributed under the terms of the GNU General Public License.
 
-package analysis.linguistics.contentdetermination.concepts;
+package analysis.linguistics.aggregation.concepts;
 
 import java.util.List;
 
 import analysis.linguistics.contentdetermination.ConstraintType;
-import writenlg.AbstractConcept;
+import writenlg.aggregation.AbstractAggregationConcept;
 import writenlg.constrain.ConstraintGroup;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
- * Establishes constraint values for lines crossing multiple times, based on initial values and weightings input from
- * ANTLR Constraints
- * text file, and analysis of time series data.
+ * @author David
  */
-public class LinesCrossMultipleTimesConcept extends AbstractConcept
+public class AllIntroductoryInformationPresentConcept extends AbstractAggregationConcept
 {
 	/**
-	 * Creates a new LinesCrossMultipleTimesConcept instance.
+	 * Creates an AllIntroductoryInformationPresentConcept instance.
 	 * 
 	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
-	public LinesCrossMultipleTimesConcept(List<PhraseSpecification> phraseSpecifications,
+	public AllIntroductoryInformationPresentConcept(List<PhraseSpecification> phraseSpecifications,
 			ConstraintGroup<ConstraintType> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
