@@ -17,22 +17,24 @@ public class AggregationParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, CONCEPT_GROUP=2, CONCEPT_GROUP_TITLE=3, GLOBAL_CONCEPT=4, TIME_SERIES_CONCEPT=5, 
-		NEW_LINE=6;
+		T__0=1, AGGREGATION_CONCEPT_GROUP=2, AGGREGATION_CONCEPT_GROUP_TITLE=3, 
+		GLOBAL_CONCEPT_NAME=4, TIME_SERIES_CONCEPT_NAME=5, GLOBAL_CONCEPT=6, TIME_SERIES_CONCEPT=7, 
+		NEW_LINE=8, WHITE_SPACE=9;
 	public static final int
-		RULE_aggregationRules = 0, RULE_conceptGroup = 1, RULE_conceptGroupTitle = 2, 
+		RULE_aggregationRules = 0, RULE_aggregationConceptGroup = 1, RULE_aggregationConceptGroupTitle = 2, 
 		RULE_concepts = 3, RULE_concept = 4, RULE_globalConcept = 5, RULE_timeSeriesConcept = 6;
 	public static final String[] ruleNames = {
-		"aggregationRules", "conceptGroup", "conceptGroupTitle", "concepts", "concept", 
-		"globalConcept", "timeSeriesConcept"
+		"aggregationRules", "aggregationConceptGroup", "aggregationConceptGroupTitle", 
+		"concepts", "concept", "globalConcept", "timeSeriesConcept"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'='", "'ConceptGroup'"
+		null, "'='", "'AggregationConceptGroup'", null, "'GlobalConcept'", "'TimeSeriesConcept'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, "CONCEPT_GROUP", "CONCEPT_GROUP_TITLE", "GLOBAL_CONCEPT", 
-		"TIME_SERIES_CONCEPT", "NEW_LINE"
+		null, null, "AGGREGATION_CONCEPT_GROUP", "AGGREGATION_CONCEPT_GROUP_TITLE", 
+		"GLOBAL_CONCEPT_NAME", "TIME_SERIES_CONCEPT_NAME", "GLOBAL_CONCEPT", "TIME_SERIES_CONCEPT", 
+		"NEW_LINE", "WHITE_SPACE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -84,11 +86,11 @@ public class AggregationParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class AggregationRulesContext extends ParserRuleContext {
-		public List<ConceptGroupContext> conceptGroup() {
-			return getRuleContexts(ConceptGroupContext.class);
+		public List<AggregationConceptGroupContext> aggregationConceptGroup() {
+			return getRuleContexts(AggregationConceptGroupContext.class);
 		}
-		public ConceptGroupContext conceptGroup(int i) {
-			return getRuleContext(ConceptGroupContext.class,i);
+		public AggregationConceptGroupContext aggregationConceptGroup(int i) {
+			return getRuleContext(AggregationConceptGroupContext.class,i);
 		}
 		public List<TerminalNode> NEW_LINE() { return getTokens(AggregationParser.NEW_LINE); }
 		public TerminalNode NEW_LINE(int i) {
@@ -123,7 +125,7 @@ public class AggregationParser extends Parser {
 					{
 					{
 					setState(14);
-					conceptGroup();
+					aggregationConceptGroup();
 					setState(15);
 					match(NEW_LINE);
 					}
@@ -134,7 +136,7 @@ public class AggregationParser extends Parser {
 				_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
 			}
 			setState(22);
-			conceptGroup();
+			aggregationConceptGroup();
 			}
 		}
 		catch (RecognitionException re) {
@@ -148,41 +150,41 @@ public class AggregationParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ConceptGroupContext extends ParserRuleContext {
-		public TerminalNode CONCEPT_GROUP() { return getToken(AggregationParser.CONCEPT_GROUP, 0); }
-		public ConceptGroupTitleContext conceptGroupTitle() {
-			return getRuleContext(ConceptGroupTitleContext.class,0);
+	public static class AggregationConceptGroupContext extends ParserRuleContext {
+		public TerminalNode AGGREGATION_CONCEPT_GROUP() { return getToken(AggregationParser.AGGREGATION_CONCEPT_GROUP, 0); }
+		public AggregationConceptGroupTitleContext aggregationConceptGroupTitle() {
+			return getRuleContext(AggregationConceptGroupTitleContext.class,0);
 		}
 		public TerminalNode NEW_LINE() { return getToken(AggregationParser.NEW_LINE, 0); }
 		public ConceptsContext concepts() {
 			return getRuleContext(ConceptsContext.class,0);
 		}
-		public ConceptGroupContext(ParserRuleContext parent, int invokingState) {
+		public AggregationConceptGroupContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_conceptGroup; }
+		@Override public int getRuleIndex() { return RULE_aggregationConceptGroup; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).enterConceptGroup(this);
+			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).enterAggregationConceptGroup(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).exitConceptGroup(this);
+			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).exitAggregationConceptGroup(this);
 		}
 	}
 
-	public final ConceptGroupContext conceptGroup() throws RecognitionException {
-		ConceptGroupContext _localctx = new ConceptGroupContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_conceptGroup);
+	public final AggregationConceptGroupContext aggregationConceptGroup() throws RecognitionException {
+		AggregationConceptGroupContext _localctx = new AggregationConceptGroupContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_aggregationConceptGroup);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(24);
-			match(CONCEPT_GROUP);
+			match(AGGREGATION_CONCEPT_GROUP);
 			setState(25);
 			match(T__0);
 			setState(26);
-			conceptGroupTitle();
+			aggregationConceptGroupTitle();
 			setState(27);
 			match(NEW_LINE);
 			setState(28);
@@ -200,30 +202,30 @@ public class AggregationParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ConceptGroupTitleContext extends ParserRuleContext {
-		public TerminalNode CONCEPT_GROUP_TITLE() { return getToken(AggregationParser.CONCEPT_GROUP_TITLE, 0); }
-		public ConceptGroupTitleContext(ParserRuleContext parent, int invokingState) {
+	public static class AggregationConceptGroupTitleContext extends ParserRuleContext {
+		public TerminalNode AGGREGATION_CONCEPT_GROUP_TITLE() { return getToken(AggregationParser.AGGREGATION_CONCEPT_GROUP_TITLE, 0); }
+		public AggregationConceptGroupTitleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_conceptGroupTitle; }
+		@Override public int getRuleIndex() { return RULE_aggregationConceptGroupTitle; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).enterConceptGroupTitle(this);
+			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).enterAggregationConceptGroupTitle(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).exitConceptGroupTitle(this);
+			if ( listener instanceof AggregationListener ) ((AggregationListener)listener).exitAggregationConceptGroupTitle(this);
 		}
 	}
 
-	public final ConceptGroupTitleContext conceptGroupTitle() throws RecognitionException {
-		ConceptGroupTitleContext _localctx = new ConceptGroupTitleContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_conceptGroupTitle);
+	public final AggregationConceptGroupTitleContext aggregationConceptGroupTitle() throws RecognitionException {
+		AggregationConceptGroupTitleContext _localctx = new AggregationConceptGroupTitleContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_aggregationConceptGroupTitle);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(30);
-			match(CONCEPT_GROUP_TITLE);
+			match(AGGREGATION_CONCEPT_GROUP_TITLE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -269,30 +271,26 @@ public class AggregationParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(32);
-			concept();
-			setState(35); 
+			setState(37);
 			_errHandler.sync(this);
-			_alt = 1;
-			do {
-				switch (_alt) {
-				case 1:
+			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
 					{
 					{
+					setState(32);
+					concept();
 					setState(33);
 					match(NEW_LINE);
-					setState(34);
-					concept();
 					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+					} 
 				}
-				setState(37); 
+				setState(39);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+			}
+			setState(40);
+			concept();
 			}
 		}
 		catch (RecognitionException re) {
@@ -331,20 +329,20 @@ public class AggregationParser extends Parser {
 		ConceptContext _localctx = new ConceptContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_concept);
 		try {
-			setState(41);
+			setState(44);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case GLOBAL_CONCEPT:
+			case GLOBAL_CONCEPT_NAME:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(39);
+				setState(42);
 				globalConcept();
 				}
 				break;
-			case TIME_SERIES_CONCEPT:
+			case TIME_SERIES_CONCEPT_NAME:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(40);
+				setState(43);
 				timeSeriesConcept();
 				}
 				break;
@@ -364,6 +362,7 @@ public class AggregationParser extends Parser {
 	}
 
 	public static class GlobalConceptContext extends ParserRuleContext {
+		public TerminalNode GLOBAL_CONCEPT_NAME() { return getToken(AggregationParser.GLOBAL_CONCEPT_NAME, 0); }
 		public TerminalNode GLOBAL_CONCEPT() { return getToken(AggregationParser.GLOBAL_CONCEPT, 0); }
 		public GlobalConceptContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -385,7 +384,11 @@ public class AggregationParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(43);
+			setState(46);
+			match(GLOBAL_CONCEPT_NAME);
+			setState(47);
+			match(T__0);
+			setState(48);
 			match(GLOBAL_CONCEPT);
 			}
 		}
@@ -401,6 +404,7 @@ public class AggregationParser extends Parser {
 	}
 
 	public static class TimeSeriesConceptContext extends ParserRuleContext {
+		public TerminalNode TIME_SERIES_CONCEPT_NAME() { return getToken(AggregationParser.TIME_SERIES_CONCEPT_NAME, 0); }
 		public TerminalNode TIME_SERIES_CONCEPT() { return getToken(AggregationParser.TIME_SERIES_CONCEPT, 0); }
 		public TimeSeriesConceptContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -422,7 +426,11 @@ public class AggregationParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(45);
+			setState(50);
+			match(TIME_SERIES_CONCEPT_NAME);
+			setState(51);
+			match(T__0);
+			setState(52);
 			match(TIME_SERIES_CONCEPT);
 			}
 		}
@@ -438,18 +446,20 @@ public class AggregationParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\b\62\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\2\7\2\24\n\2\f"+
-		"\2\16\2\27\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\5\3\5\3\5\6"+
-		"\5&\n\5\r\5\16\5\'\3\6\3\6\5\6,\n\6\3\7\3\7\3\b\3\b\3\b\2\2\t\2\4\6\b"+
-		"\n\f\16\2\2\2-\2\25\3\2\2\2\4\32\3\2\2\2\6 \3\2\2\2\b\"\3\2\2\2\n+\3\2"+
-		"\2\2\f-\3\2\2\2\16/\3\2\2\2\20\21\5\4\3\2\21\22\7\b\2\2\22\24\3\2\2\2"+
-		"\23\20\3\2\2\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2"+
-		"\27\25\3\2\2\2\30\31\5\4\3\2\31\3\3\2\2\2\32\33\7\4\2\2\33\34\7\3\2\2"+
-		"\34\35\5\6\4\2\35\36\7\b\2\2\36\37\5\b\5\2\37\5\3\2\2\2 !\7\5\2\2!\7\3"+
-		"\2\2\2\"%\5\n\6\2#$\7\b\2\2$&\5\n\6\2%#\3\2\2\2&\'\3\2\2\2\'%\3\2\2\2"+
-		"\'(\3\2\2\2(\t\3\2\2\2),\5\f\7\2*,\5\16\b\2+)\3\2\2\2+*\3\2\2\2,\13\3"+
-		"\2\2\2-.\7\6\2\2.\r\3\2\2\2/\60\7\7\2\2\60\17\3\2\2\2\5\25\'+";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\139\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\2\7\2\24\n\2\f\2"+
+		"\16\2\27\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\5\3\5\3\5\7\5"+
+		"&\n\5\f\5\16\5)\13\5\3\5\3\5\3\6\3\6\5\6/\n\6\3\7\3\7\3\7\3\7\3\b\3\b"+
+		"\3\b\3\b\3\b\2\2\t\2\4\6\b\n\f\16\2\2\2\64\2\25\3\2\2\2\4\32\3\2\2\2\6"+
+		" \3\2\2\2\b\'\3\2\2\2\n.\3\2\2\2\f\60\3\2\2\2\16\64\3\2\2\2\20\21\5\4"+
+		"\3\2\21\22\7\n\2\2\22\24\3\2\2\2\23\20\3\2\2\2\24\27\3\2\2\2\25\23\3\2"+
+		"\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\25\3\2\2\2\30\31\5\4\3\2\31\3\3\2"+
+		"\2\2\32\33\7\4\2\2\33\34\7\3\2\2\34\35\5\6\4\2\35\36\7\n\2\2\36\37\5\b"+
+		"\5\2\37\5\3\2\2\2 !\7\5\2\2!\7\3\2\2\2\"#\5\n\6\2#$\7\n\2\2$&\3\2\2\2"+
+		"%\"\3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(*\3\2\2\2)\'\3\2\2\2*+\5\n"+
+		"\6\2+\t\3\2\2\2,/\5\f\7\2-/\5\16\b\2.,\3\2\2\2.-\3\2\2\2/\13\3\2\2\2\60"+
+		"\61\7\6\2\2\61\62\7\3\2\2\62\63\7\b\2\2\63\r\3\2\2\2\64\65\7\7\2\2\65"+
+		"\66\7\3\2\2\66\67\7\t\2\2\67\17\3\2\2\2\5\25\'.";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -28,25 +28,25 @@ public class AggregationBaseListener implements AggregationListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConceptGroup(AggregationParser.ConceptGroupContext ctx) { }
+	@Override public void enterAggregationConceptGroup(AggregationParser.AggregationConceptGroupContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConceptGroup(AggregationParser.ConceptGroupContext ctx) { }
+	@Override public void exitAggregationConceptGroup(AggregationParser.AggregationConceptGroupContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConceptGroupTitle(AggregationParser.ConceptGroupTitleContext ctx) { }
+	@Override public void enterAggregationConceptGroupTitle(AggregationParser.AggregationConceptGroupTitleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConceptGroupTitle(AggregationParser.ConceptGroupTitleContext ctx) { }
+	@Override public void exitAggregationConceptGroupTitle(AggregationParser.AggregationConceptGroupTitleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

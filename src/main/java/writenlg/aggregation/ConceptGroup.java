@@ -5,8 +5,12 @@ package writenlg.aggregation;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import analysis.GlobalConcept;
+import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.aggregation.AggregationConstraintType;
 import writenlg.AbstractConcept;
 import writenlg.constrain.ConstraintGroup;
@@ -18,6 +22,8 @@ public class ConceptGroup
 {
 	private final List<AbstractConcept> group;
 	private final ConstraintGroup<AggregationConstraintType> constraintGroup;
+	private final Set<GlobalConcept> globalConcepts;
+	private final Set<TimeSeriesSpecificConcept> timeSeriesSpecificConcepts;
 
 	/**
 	 * Creates a new ConceptGroup instance.
@@ -26,6 +32,24 @@ public class ConceptGroup
 	{
 		this.constraintGroup = constraintGroup;
 		this.group = new ArrayList<>();
+		this.globalConcepts = new HashSet<>();
+		this.timeSeriesSpecificConcepts = new HashSet<>();
+	}
+
+	/**
+	 * @param globalConcept
+	 */
+	public void addGlobalConcept(final GlobalConcept globalConcept)
+	{
+		this.globalConcepts.add(globalConcept);
+	}
+
+	/**
+	 * @param timeSeriesSpecificConcept
+	 */
+	public void addTimeSeriesSpecificConcept(final TimeSeriesSpecificConcept timeSeriesSpecificConcept)
+	{
+		this.timeSeriesSpecificConcepts.add(timeSeriesSpecificConcept);
 	}
 
 	/**

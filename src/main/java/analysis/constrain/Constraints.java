@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
+import analysis.linguistics.aggregation.AggregationConcept;
 import io.AntlrInputReader;
 import io.LexerParser;
 import io.expertinput.ConstraintsLexerParser;
@@ -27,6 +28,7 @@ public class Constraints
 
 	private final Map<GlobalConcept, Map<String, ConstraintConfiguration>> constraintConfigurationsForGlobalConcepts;
 	private final Map<TimeSeriesSpecificConcept, Map<String, ConstraintConfiguration>> constraintConfigurationsForTimeSeriesSpecificConcepts;
+	private final Map<AggregationConcept, Map<String, ConstraintConfiguration>> constraintConfigurationsForAggregationConcepts;
 
 	/**
 	 * Creates a Constraints instance.
@@ -65,6 +67,8 @@ public class Constraints
 	{
 		this.constraintConfigurationsForGlobalConcepts = new HashMap<>();
 		this.constraintConfigurationsForTimeSeriesSpecificConcepts = new HashMap<>();
+		this.constraintConfigurationsForAggregationConcepts = new HashMap<>();
+
 		LOGGER.info("Constraints instance created");
 	}
 
@@ -121,6 +125,26 @@ public class Constraints
 		}
 
 		LOGGER.info(String.format("Time series specific constraint configuration loaded for %s: %s - %s", concept, name,
+				configuration));
+	}
+
+	public void addConstraintConfigurationForAggregationConcept(final AggregationConcept concept, final String name,
+			final BigDecimal value, final BigDecimal weighting)
+	{
+		ConstraintConfiguration configuration = new ConstraintConfiguration(value, weighting);
+
+		if (this.constraintConfigurationsForAggregationConcepts.containsKey(concept))
+		{
+			this.constraintConfigurationsForAggregationConcepts.get(concept).put(name, configuration);
+		}
+		else
+		{
+			Map<String, ConstraintConfiguration> constraintConfigurations = new HashMap<>();
+			constraintConfigurations.put(name, configuration);
+			this.constraintConfigurationsForAggregationConcepts.put(concept, constraintConfigurations);
+		}
+
+		LOGGER.info(String.format("Aggregation constraint configuration loaded for %s: %s - %s", concept, name,
 				configuration));
 	}
 

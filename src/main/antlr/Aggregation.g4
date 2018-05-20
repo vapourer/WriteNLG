@@ -5,53 +5,63 @@ grammar Aggregation;
 
 @header {package io.antlrgenerated;}
 
-aggregationRules		:	(conceptGroup NEW_LINE)* conceptGroup
-						;
+aggregationRules					:	(aggregationConceptGroup NEW_LINE)* aggregationConceptGroup
+									;
 					
-conceptGroup			:	CONCEPT_GROUP '=' conceptGroupTitle NEW_LINE concepts
-						;
+aggregationConceptGroup				:	AGGREGATION_CONCEPT_GROUP '=' aggregationConceptGroupTitle NEW_LINE concepts
+									;
 					
-conceptGroupTitle		:	CONCEPT_GROUP_TITLE
-						;
+aggregationConceptGroupTitle		:	AGGREGATION_CONCEPT_GROUP_TITLE
+									;
 					
-concepts				:	concept (NEW_LINE concept)+
-						;
+// concepts							:	concept (NEW_LINE concept)+
+concepts							:	(concept NEW_LINE)* concept
+									;
 					
-concept					:	globalConcept
-						|	timeSeriesConcept
-						;
+concept								:	globalConcept
+									|	timeSeriesConcept
+									;
 						
-globalConcept			:	GLOBAL_CONCEPT
-						;
+globalConcept						:	GLOBAL_CONCEPT_NAME '=' GLOBAL_CONCEPT
+									;
 						
-timeSeriesConcept		:	TIME_SERIES_CONCEPT
-						;
+timeSeriesConcept					:	TIME_SERIES_CONCEPT_NAME '=' TIME_SERIES_CONCEPT
+									;
 						
-CONCEPT_GROUP			:	'ConceptGroup'
-						;
+AGGREGATION_CONCEPT_GROUP			:	'AggregationConceptGroup'
+									;
 
-CONCEPT_GROUP_TITLE		:	'AllIntroductoryInformationPresent'
-						|	'BothSeriesHaveAllSegmentsAscending'
-						|	'BothSeriesHaveAllSegmentsDescending'
-						|	'BothSeriesHaveMostSegmentsAscending'
-						|	'BothSeriesHaveMostSegmentsDescending'
-						|	'IdenticalTimeSlices'
-						;
+AGGREGATION_CONCEPT_GROUP_TITLE		:	'AllIntroductoryInformationPresent'
+									|	'BothSeriesHaveAllSegmentsAscending'
+									|	'BothSeriesHaveAllSegmentsDescending'
+									|	'BothSeriesHaveMostSegmentsAscending'
+									|	'BothSeriesHaveMostSegmentsDescending'
+									|	'IdenticalTimeSlices'
+									;
+									
+GLOBAL_CONCEPT_NAME					:	'GlobalConcept'
+									;
+									
+TIME_SERIES_CONCEPT_NAME			:	'TimeSeriesConcept'
+									;
 						
-GLOBAL_CONCEPT			:	'LINES_CROSS'
-						|	'LINES_DO_NOT_CROSS'
-						|	'LINES_CROSS_MULTIPLE_TIMES'
-						|	'LINE_COUNT'
-						;
+GLOBAL_CONCEPT						:	'LINES_CROSS'
+									|	'LINES_DO_NOT_CROSS'
+									|	'LINES_CROSS_MULTIPLE_TIMES'
+									|	'LINE_COUNT'
+									;
 						
-TIME_SERIES_CONCEPT		:	'MAXIMUM'
-						|	'MINIMUM'
-						|	'RISING_TREND'
-						|	'DESCENDING_TREND'
-						|	'SERIES_LEGEND'
-						|	'TIME_SLICE'
-						;
+TIME_SERIES_CONCEPT					:	'MAXIMUM'
+									|	'MINIMUM'
+									|	'RISING_TREND'
+									|	'DESCENDING_TREND'
+									|	'SERIES_LEGEND'
+									|	'TIME_SLICE'
+									;
 						
-NEW_LINE				:	('\r'? '\n')
-						;
+NEW_LINE							:	('\r'? '\n')
+									;
+									
+WHITE_SPACE							:	[ \t]+ -> skip
+									;
 						

@@ -26,7 +26,13 @@ public enum ConstraintType
 	MOST_SEGMENTS_ASCENDING("MostSegmentsAscending"),
 	ALL_SEGMENTS_DESCENDING("AllSegmentsDescending"),
 	MOST_SEGMENTS_DESCENDING("MostSegmentsDescending"),
-	TIME_SLICE_REQUIRED("TimeSliceRequired");
+	TIME_SLICE_REQUIRED("TimeSliceRequired"),
+	ALL_INTRODUCTORY_INFORMATION_PRESENT("AllIntroductoryInformationPresent"),
+	BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING("BothSeriesHaveAllSegmentsAscending"),
+	BOTH_SERIES_HAVE_ALL_SEGMENTS_DESCENDING("BothSeriesHaveAllSegmentsDescending"),
+	BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING("BothSeriesHaveMostSegmentsAscending"),
+	BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING("BothSeriesHaveMostSegmentsDescending"),
+	IDENTICAL_TIME_SLICES("IdenticalTimeSlices");
 
 	final private String textualForm;
 

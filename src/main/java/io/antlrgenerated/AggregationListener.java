@@ -18,25 +18,25 @@ public interface AggregationListener extends ParseTreeListener {
 	 */
 	void exitAggregationRules(AggregationParser.AggregationRulesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AggregationParser#conceptGroup}.
+	 * Enter a parse tree produced by {@link AggregationParser#aggregationConceptGroup}.
 	 * @param ctx the parse tree
 	 */
-	void enterConceptGroup(AggregationParser.ConceptGroupContext ctx);
+	void enterAggregationConceptGroup(AggregationParser.AggregationConceptGroupContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AggregationParser#conceptGroup}.
+	 * Exit a parse tree produced by {@link AggregationParser#aggregationConceptGroup}.
 	 * @param ctx the parse tree
 	 */
-	void exitConceptGroup(AggregationParser.ConceptGroupContext ctx);
+	void exitAggregationConceptGroup(AggregationParser.AggregationConceptGroupContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AggregationParser#conceptGroupTitle}.
+	 * Enter a parse tree produced by {@link AggregationParser#aggregationConceptGroupTitle}.
 	 * @param ctx the parse tree
 	 */
-	void enterConceptGroupTitle(AggregationParser.ConceptGroupTitleContext ctx);
+	void enterAggregationConceptGroupTitle(AggregationParser.AggregationConceptGroupTitleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AggregationParser#conceptGroupTitle}.
+	 * Exit a parse tree produced by {@link AggregationParser#aggregationConceptGroupTitle}.
 	 * @param ctx the parse tree
 	 */
-	void exitConceptGroupTitle(AggregationParser.ConceptGroupTitleContext ctx);
+	void exitAggregationConceptGroupTitle(AggregationParser.AggregationConceptGroupTitleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AggregationParser#concepts}.
 	 * @param ctx the parse tree

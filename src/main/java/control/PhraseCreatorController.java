@@ -10,6 +10,7 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.interfaces.ConceptLoader;
 import analysis.interfaces.ContentDeterminer;
 import analysis.interfaces.LineGraphAnalysis;
+import analysis.linguistics.aggregation.Aggregator;
 import analysis.linguistics.contentdetermination.ContentDetermination;
 import analysis.linguistics.documentplanning.DocumentPlanner;
 import analysis.substitution.Substitutor;
@@ -54,6 +55,8 @@ public class PhraseCreatorController extends Controller
 		final Substitutor substitutor = new Substitutor(lineGraph);
 		final PhraseCreatorListener listener = new PhraseCreatorListener(lineGraph, substitutor);
 		lexerParser.walkParseTree(listener);
+
+		new Aggregator();
 
 		final ConceptLoader concepts = listener.getConcepts();
 		final ContentDeterminer contentDeterminer = new ContentDetermination(concepts);
