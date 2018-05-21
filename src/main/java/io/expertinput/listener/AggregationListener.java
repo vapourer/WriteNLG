@@ -77,4 +77,12 @@ public class AggregationListener extends AggregationBaseListener
 					Enum.valueOf(TimeSeriesSpecificConcept.class, context.timeSeriesConcept().getText()));
 		}
 	}
+
+	/**
+	 * @return the conceptGroups
+	 */
+	public Map<AggregationConcept, ConceptGroup> getConceptGroups()
+	{
+		return this.conceptGroups;
+	}
 }
