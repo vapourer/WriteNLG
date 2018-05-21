@@ -33,7 +33,7 @@ public class AntlrInputReader
 		try
 		{
 			antlrInput = CharStreams.fromPath(this.path);
-			LOGGER.info("Reading of ANTLR input from file completed");
+			LOGGER.info("Reading of ANTLR input (CharStreams) from file completed");
 		}
 		catch (final FileNotFoundException e)
 		{

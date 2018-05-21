@@ -8,41 +8,34 @@ grammar Aggregation;
 aggregationRules					:	(aggregationConceptGroup NEW_LINE)* aggregationConceptGroup
 									;
 					
-aggregationConceptGroup				:	AGGREGATION_CONCEPT_GROUP '=' aggregationConceptGroupTitle NEW_LINE concepts
+aggregationConceptGroup				:	AGGREGATION_CONCEPT_GROUP_NAME '=' aggregationConceptGroupTitle NEW_LINE concepts
 									;
 					
-aggregationConceptGroupTitle		:	AGGREGATION_CONCEPT_GROUP_TITLE
+aggregationConceptGroupTitle		:	AGGREGATION_CONCEPT_GROUP
 									;
 					
-// concepts							:	concept (NEW_LINE concept)+
 concepts							:	(concept NEW_LINE)* concept
 									;
-					
+									
 concept								:	globalConcept
 									|	timeSeriesConcept
 									;
 						
-globalConcept						:	GLOBAL_CONCEPT_NAME '=' GLOBAL_CONCEPT
+globalConcept						:	GLOBAL_CONCEPT
 									;
 						
-timeSeriesConcept					:	TIME_SERIES_CONCEPT_NAME '=' TIME_SERIES_CONCEPT
+timeSeriesConcept					:	TIME_SERIES_CONCEPT
 									;
 						
-AGGREGATION_CONCEPT_GROUP			:	'AggregationConceptGroup'
-									;
-
-AGGREGATION_CONCEPT_GROUP_TITLE		:	'AllIntroductoryInformationPresent'
-									|	'BothSeriesHaveAllSegmentsAscending'
-									|	'BothSeriesHaveAllSegmentsDescending'
-									|	'BothSeriesHaveMostSegmentsAscending'
-									|	'BothSeriesHaveMostSegmentsDescending'
-									|	'IdenticalTimeSlices'
+AGGREGATION_CONCEPT_GROUP_NAME		:	'AggregationConceptGroup'
 									;
 									
-GLOBAL_CONCEPT_NAME					:	'GlobalConcept'
-									;
-									
-TIME_SERIES_CONCEPT_NAME			:	'TimeSeriesConcept'
+AGGREGATION_CONCEPT_GROUP			:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
+									|	'BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING'
+									|	'BOTH_SERIES_HAVE_ALL_SEGMENTS_DESCENDING'
+									|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING'
+									|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING'
+									|	'IDENTICAL_TIME_SLICES'
 									;
 						
 GLOBAL_CONCEPT						:	'LINES_CROSS'
@@ -60,8 +53,5 @@ TIME_SERIES_CONCEPT					:	'MAXIMUM'
 									;
 						
 NEW_LINE							:	('\r'? '\n')
-									;
-									
-WHITE_SPACE							:	[ \t]+ -> skip
 									;
 						
