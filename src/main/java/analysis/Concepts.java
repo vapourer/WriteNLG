@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.interfaces.ConceptLoader;
 import analysis.linguistics.contentdetermination.ConstraintType;
-import analysis.linguistics.contentdetermination.concepts.DescendingTrendAssessor;
 import analysis.linguistics.contentdetermination.concepts.DescendingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.LineCountAssessor;
 import analysis.linguistics.contentdetermination.concepts.LineCountConcept;
@@ -21,11 +20,8 @@ import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTime
 import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossAssessor;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
-import analysis.linguistics.contentdetermination.concepts.MaximumAssessor;
 import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
-import analysis.linguistics.contentdetermination.concepts.MinimumAssessor;
 import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
-import analysis.linguistics.contentdetermination.concepts.RisingTrendAssessor;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendAssessor;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
@@ -204,12 +200,6 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
-					final MaximumAssessor maximumAssessor = new MaximumAssessor(
-							mapping.getTimeSeriesWithDerivedInformation());
-					maximumAssessor.assessConstraints();
-
-					final ConstraintGroup<ConstraintType> maximumConstraints = maximumAssessor.getMaximumConstraints();
-
 					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
 
 					for (PhraseSpecification specification : phraseSpecifications)
@@ -218,7 +208,8 @@ public class Concepts implements ConceptLoader
 								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
 					}
 
-					MaximumConcept maximumConcept = new MaximumConcept(conceptPhraseSpecifications, maximumConstraints);
+					MaximumConcept maximumConcept = new MaximumConcept(conceptPhraseSpecifications,
+							mapping.getTimeSeriesWithDerivedInformation());
 
 					this.timeSeriesSpecificConcepts.add(maximumConcept);
 				}
@@ -230,12 +221,6 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
-					final MinimumAssessor minimumAssessor = new MinimumAssessor(
-							mapping.getTimeSeriesWithDerivedInformation());
-					minimumAssessor.assessConstraints();
-
-					final ConstraintGroup<ConstraintType> minimumConstraints = minimumAssessor.getMinimumConstraints();
-
 					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
 
 					for (PhraseSpecification specification : phraseSpecifications)
@@ -244,7 +229,8 @@ public class Concepts implements ConceptLoader
 								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
 					}
 
-					MinimumConcept minimumConcept = new MinimumConcept(conceptPhraseSpecifications, minimumConstraints);
+					MinimumConcept minimumConcept = new MinimumConcept(conceptPhraseSpecifications,
+							mapping.getTimeSeriesWithDerivedInformation());
 
 					this.timeSeriesSpecificConcepts.add(minimumConcept);
 				}
@@ -256,12 +242,6 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
-					final RisingTrendAssessor risingTrendAssessor = new RisingTrendAssessor(
-							mapping.getTimeSeriesWithDerivedInformation());
-					risingTrendAssessor.assessConstraints();
-					final ConstraintGroup<ConstraintType> timeSliceConstraints = risingTrendAssessor
-							.getRisingTrendConstraints();
-
 					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
 
 					for (PhraseSpecification specification : phraseSpecifications)
@@ -271,7 +251,7 @@ public class Concepts implements ConceptLoader
 					}
 
 					final RisingTrendConcept risingTrendConcept = new RisingTrendConcept(conceptPhraseSpecifications,
-							timeSliceConstraints);
+							mapping.getTimeSeriesWithDerivedInformation());
 
 					this.timeSeriesSpecificConcepts.add(risingTrendConcept);
 				}
@@ -282,12 +262,6 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
-					final DescendingTrendAssessor descendingTrendAssessor = new DescendingTrendAssessor(
-							mapping.getTimeSeriesWithDerivedInformation());
-					descendingTrendAssessor.assessConstraints();
-					final ConstraintGroup<ConstraintType> timeSliceConstraints = descendingTrendAssessor
-							.getDescendingTrendConstraints();
-
 					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
 
 					for (PhraseSpecification specification : phraseSpecifications)
@@ -297,7 +271,7 @@ public class Concepts implements ConceptLoader
 					}
 
 					final DescendingTrendConcept descendingTrendConcept = new DescendingTrendConcept(
-							conceptPhraseSpecifications, timeSliceConstraints);
+							conceptPhraseSpecifications, mapping.getTimeSeriesWithDerivedInformation());
 
 					this.timeSeriesSpecificConcepts.add(descendingTrendConcept);
 				}

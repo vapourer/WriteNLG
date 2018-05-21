@@ -28,8 +28,7 @@ import writenlg.constrain.WeightedAverageConstraintProcessor;
 
 /**
  * Establishes constraint values for time series with a descending trend, based on initial values and weightings input
- * from
- * ANTLR Constraints text file, and analysis of time series data.
+ * from ANTLR Constraints text file, and analysis of time series data.
  */
 public class DescendingTrendAssessor implements Assessor
 {

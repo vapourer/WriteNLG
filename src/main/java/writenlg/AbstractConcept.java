@@ -28,6 +28,7 @@ public abstract class AbstractConcept
 	/**
 	 * Creates an AbstractConcept instance.
 	 * 
+	 * @param phraseSpecifications
 	 * @param constraintGroup
 	 */
 	public AbstractConcept(final List<PhraseSpecification> phraseSpecifications,
@@ -48,16 +49,6 @@ public abstract class AbstractConcept
 	}
 
 	/**
-	 * Add a constraint for this concept.
-	 *
-	 * @param constraint
-	 */
-	public void addConstraint(final Constraint<ConstraintType> constraint)
-	{
-		this.constraintGroup.addConstraint(constraint);
-	}
-
-	/**
 	 * Calculates the overall satisfaction level for this concept.
 	 *
 	 * @return BigDecimal
@@ -65,6 +56,14 @@ public abstract class AbstractConcept
 	public BigDecimal calculateSatisfactionLevel()
 	{
 		return this.constraintGroup.evaluate();
+	}
+
+	/**
+	 * @return the phraseSpecifications
+	 */
+	public List<PhraseSpecification> getPhraseSpecifications()
+	{
+		return new ArrayList<>(phraseSpecifications);
 	}
 
 	/**
@@ -76,10 +75,12 @@ public abstract class AbstractConcept
 	}
 
 	/**
-	 * @return the phraseSpecifications
+	 * Add a constraint for this concept.
+	 *
+	 * @param constraint
 	 */
-	public List<PhraseSpecification> getPhraseSpecifications()
+	protected void addConstraint(final Constraint<ConstraintType> constraint)
 	{
-		return new ArrayList<>(phraseSpecifications);
+		this.constraintGroup.addConstraint(constraint);
 	}
 }
