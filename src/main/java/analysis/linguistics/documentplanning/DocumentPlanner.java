@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.GlobalConcept;
 import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
+import analysis.linguistics.aggregation.Aggregator;
 import analysis.linguistics.contentdetermination.concepts.DescendingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.LineCountConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
@@ -46,14 +47,16 @@ public class DocumentPlanner
 
 	private final LineGraphWithDerivedInformation lineGraph;
 	private final List<AbstractConcept> concepts;
+	private final Aggregator aggregator;
 	private final Map<GlobalConcept, AbstractConcept> globalConcepts;
 	private final Map<TimeSeriesSpecificConcept, List<AbstractConcept>> timeSeriesSpecificConcepts;
 
 	public DocumentPlanner(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation,
-			List<AbstractConcept> concepts)
+			List<AbstractConcept> concepts, final Aggregator aggregator)
 	{
 		this.lineGraph = lineGraphWithDerivedInformation;
 		this.concepts = concepts;
+		this.aggregator = aggregator;
 		this.globalConcepts = new HashMap<>();
 		this.timeSeriesSpecificConcepts = new HashMap<>();
 

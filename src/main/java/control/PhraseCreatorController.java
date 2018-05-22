@@ -7,9 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import analysis.LineGraphWithDerivedInformation;
-import analysis.interfaces.ConceptLoader;
-import analysis.interfaces.ContentDeterminer;
 import analysis.interfaces.LineGraphAnalysis;
+import analysis.linguistics.aggregation.Aggregator;
 import analysis.linguistics.contentdetermination.ContentDetermination;
 import analysis.linguistics.documentplanning.DocumentPlanner;
 import analysis.substitution.Substitutor;
@@ -55,12 +54,10 @@ public class PhraseCreatorController extends Controller
 		final PhraseCreatorListener listener = new PhraseCreatorListener(lineGraph, substitutor);
 		lexerParser.walkParseTree(listener);
 
-		// new Aggregator(listener.g);
+		DocumentPlanner planner = new DocumentPlanner(lineGraph,
+				new ContentDetermination(listener.getConcepts()).getSelectedConcepts(),
+				new Aggregator(listener.getAggregationConcepts()));
 
-		final ConceptLoader concepts = listener.getConcepts();
-		final ContentDeterminer contentDeterminer = new ContentDetermination(concepts);
-
-		DocumentPlanner planner = new DocumentPlanner(lineGraph, contentDeterminer.getSelectedConcepts());
 		return planner.createDocument();
 	}
 }
