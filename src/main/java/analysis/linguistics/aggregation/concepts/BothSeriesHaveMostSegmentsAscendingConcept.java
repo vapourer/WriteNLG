@@ -3,6 +3,7 @@
 
 package analysis.linguistics.aggregation.concepts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import writenlg.aggregation.AbstractAggregationConcept;
@@ -15,6 +16,14 @@ import writenlg.linguistics.phrase.PhraseSpecification;
  */
 public class BothSeriesHaveMostSegmentsAscendingConcept extends AbstractAggregationConcept
 {
+	/**
+	 * Creates a new BothSeriesHaveMostSegmentsAscendingConcept instance.
+	 */
+	public BothSeriesHaveMostSegmentsAscendingConcept()
+	{
+		this(new ArrayList<>());
+	}
+
 	/**
 	 * Creates a new BothSeriesHaveMostSegmentsAscendingConcept instance.
 	 * 

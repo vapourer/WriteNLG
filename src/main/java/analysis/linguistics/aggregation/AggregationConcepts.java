@@ -70,9 +70,17 @@ public class AggregationConcepts
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", aggregationConcept));
-				throw new RuntimeException("Not implemented");
+				throw new RuntimeException("Enum value not implemented");
 		}
 
 		LOGGER.info(String.format("%s concept added", aggregationConcept));
+	}
+
+	/**
+	 * @return the aggregationConcepts
+	 */
+	public Map<AggregationConcept, AbstractAggregationConcept> getAggregationConcepts()
+	{
+		return new HashMap<>(this.aggregationConcepts);
 	}
 }

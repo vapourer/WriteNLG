@@ -78,6 +78,6 @@ public class AggregationListener extends AggregationBaseListener
 	 */
 	public Map<AggregationConcept, ConceptGroup> getConceptGroups()
 	{
-		return this.conceptGroups;
+		return new HashMap<>(this.conceptGroups);
 	}
 }

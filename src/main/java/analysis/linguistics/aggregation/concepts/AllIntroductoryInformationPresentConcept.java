@@ -3,6 +3,7 @@
 
 package analysis.linguistics.aggregation.concepts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import writenlg.aggregation.AbstractAggregationConcept;
@@ -16,6 +17,14 @@ import writenlg.linguistics.phrase.PhraseSpecification;
  */
 public class AllIntroductoryInformationPresentConcept extends AbstractAggregationConcept
 {
+	/**
+	 * Creates an AllIntroductoryInformationPresentConcept instance.
+	 */
+	public AllIntroductoryInformationPresentConcept()
+	{
+		this(new ArrayList<>());
+	}
+
 	/**
 	 * Creates an AllIntroductoryInformationPresentConcept instance.
 	 * 

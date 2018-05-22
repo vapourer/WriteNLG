@@ -233,4 +233,12 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	{
 		return this.concepts;
 	}
+
+	/**
+	 * @return the aggregationConcepts
+	 */
+	public AggregationConcepts getAggregationConcepts()
+	{
+		return this.aggregationConcepts;
+	}
 }
