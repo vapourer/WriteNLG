@@ -20,6 +20,10 @@ public abstract class AbstractAggregationConcept extends AbstractConcept
 {
 	private final Set<ConceptGroup> conceptGroups;
 
+	protected abstract void prepareAggregatedPhraseSpecification();
+
+	protected abstract void assessConstraints();
+
 	public AbstractAggregationConcept(List<PhraseSpecification> phraseSpecifications,
 			ConstraintGroup<ConstraintType> constraintGroup)
 	{
@@ -33,5 +37,11 @@ public abstract class AbstractAggregationConcept extends AbstractConcept
 	public void addConceptGroup(final ConceptGroup group)
 	{
 		this.conceptGroups.add(group);
+	}
+
+	public void prepareAggregatedPhraseSpecificationAndAssessConstraints()
+	{
+		prepareAggregatedPhraseSpecification();
+		assessConstraints();
 	}
 }

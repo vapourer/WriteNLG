@@ -4,6 +4,7 @@
 package writenlg.linguistics.phrase;
 
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -83,5 +84,34 @@ public class PhraseSpecification
 		Subject replacementSubject = this.subject.substitutePlaceholders(substitutions);
 		Predicate replacementPredicate = this.predicate.substitutePlaceholders(substitutions);
 		return new PhraseSpecification(replacementSubject, replacementPredicate);
+	}
+
+	@Override
+	public boolean equals(Object object)
+	{
+		if (this == object)
+		{
+			return true;
+		}
+
+		if (object == null)
+		{
+			return false;
+		}
+
+		if (!(object instanceof PhraseSpecification))
+		{
+			return false;
+		}
+
+		PhraseSpecification otherSpecification = (PhraseSpecification) object;
+
+		return this.subject.equals(otherSpecification.subject) && this.predicate.equals(otherSpecification.predicate);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(this.subject, this.predicate);
 	}
 }

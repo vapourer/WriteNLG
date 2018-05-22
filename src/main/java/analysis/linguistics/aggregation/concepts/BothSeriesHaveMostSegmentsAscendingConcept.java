@@ -33,4 +33,18 @@ public class BothSeriesHaveMostSegmentsAscendingConcept extends AbstractAggregat
 	{
 		super(phraseSpecifications, new HardConstraintGroup<>(new HardConstraintProcessor()));
 	}
+
+	@Override
+	protected void prepareAggregatedPhraseSpecification()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void assessConstraints()
+	{
+		// TODO Auto-generated method stub
+
+	}
 }

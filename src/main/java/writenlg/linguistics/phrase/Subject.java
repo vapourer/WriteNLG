@@ -4,6 +4,7 @@
 package writenlg.linguistics.phrase;
 
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,5 +72,34 @@ public class Subject
 		}
 
 		return new Subject(replacement);
+	}
+
+	@Override
+	public boolean equals(Object object)
+	{
+		if (this == object)
+		{
+			return true;
+		}
+
+		if (object == null)
+		{
+			return false;
+		}
+
+		if (!(object instanceof Subject))
+		{
+			return false;
+		}
+
+		Subject otherSubject = (Subject) object;
+
+		return this.nounPhrase.getText().equals(otherSubject.nounPhrase.getText());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(this.nounPhrase.getText());
 	}
 }

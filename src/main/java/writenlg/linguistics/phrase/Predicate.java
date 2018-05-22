@@ -4,6 +4,7 @@
 package writenlg.linguistics.phrase;
 
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -135,5 +136,38 @@ public class Predicate
 		}
 
 		return new Predicate(this.verb, replacementNounPhrase, replacementComplement);
+	}
+
+	@Override
+	public boolean equals(Object object)
+	{
+		if (this == object)
+		{
+			return true;
+		}
+
+		if (object == null)
+		{
+			return false;
+		}
+
+		if (!(object instanceof Predicate))
+		{
+			return false;
+		}
+
+		Predicate otherPredicate = (Predicate) object;
+
+		return this.verb.getText().equals(otherPredicate.verb.getText()) && this.nounPhrase == null
+				? otherPredicate.nounPhrase == null
+				: this.nounPhrase.getText().equals(otherPredicate.nounPhrase.getText()) && this.complement == null
+						? otherPredicate.complement == null
+						: this.complement.getText().equals(otherPredicate.complement.getText());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(this.verb.getText(), this.nounPhrase.getText(), this.complement.getText());
 	}
 }
