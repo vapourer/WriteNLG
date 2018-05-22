@@ -5,9 +5,9 @@ package analysis.linguistics.aggregation.concepts;
 
 import java.util.List;
 
-import analysis.linguistics.contentdetermination.ConstraintType;
 import writenlg.aggregation.AbstractAggregationConcept;
-import writenlg.constrain.ConstraintGroup;
+import writenlg.constrain.BooleanConstraintProcessor;
+import writenlg.constrain.HardConstraintGroup;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
@@ -20,11 +20,9 @@ public class IdenticalTimeSlicesConcept extends AbstractAggregationConcept
 	 * Creates a new IdenticalTimeSlicesConcept instance.
 	 * 
 	 * @param phraseSpecifications
-	 * @param constraintGroup
 	 */
-	public IdenticalTimeSlicesConcept(List<PhraseSpecification> phraseSpecifications,
-			ConstraintGroup<ConstraintType> constraintGroup)
+	public IdenticalTimeSlicesConcept(List<PhraseSpecification> phraseSpecifications)
 	{
-		super(phraseSpecifications, constraintGroup);
+		super(phraseSpecifications, new HardConstraintGroup<>(new BooleanConstraintProcessor()));
 	}
 }

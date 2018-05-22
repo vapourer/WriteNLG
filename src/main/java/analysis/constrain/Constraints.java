@@ -166,4 +166,13 @@ public class Constraints
 	{
 		return this.constraintConfigurationsForTimeSeriesSpecificConcepts.get(concept);
 	}
+
+	/**
+	 * @param concept
+	 * @return the Map<String, ConstraintConfiguration> associated with concept
+	 */
+	public Map<String, ConstraintConfiguration> getConfigurationsForAggregationConcept(final AggregationConcept concept)
+	{
+		return this.constraintConfigurationsForAggregationConcepts.get(concept);
+	}
 }

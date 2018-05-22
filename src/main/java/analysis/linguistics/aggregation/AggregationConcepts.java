@@ -3,12 +3,19 @@
 
 package analysis.linguistics.aggregation;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
+import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
+import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsDescendingConcept;
+import analysis.linguistics.aggregation.concepts.BothSeriesHaveMostSegmentsAscendingConcept;
+import analysis.linguistics.aggregation.concepts.BothSeriesHaveMostSegmentsDescendingConcept;
+import analysis.linguistics.aggregation.concepts.IdenticalTimeSlicesConcept;
 import writenlg.aggregation.AbstractAggregationConcept;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
@@ -19,14 +26,14 @@ public class AggregationConcepts
 {
 	private static final Logger LOGGER = LogManager.getLogger("AggregationConcepts.class");
 
-	private final List<AbstractAggregationConcept> aggregationConcepts;
+	private final Map<AggregationConcept, AbstractAggregationConcept> aggregationConcepts;
 
 	/**
 	 * Creates a new AggregationConcepts instance.
 	 */
 	public AggregationConcepts()
 	{
-		this.aggregationConcepts = new ArrayList<>();
+		this.aggregationConcepts = new HashMap<>();
 	}
 
 	/**
@@ -39,17 +46,27 @@ public class AggregationConcepts
 		switch (aggregationConcept)
 		{
 			case ALL_INTRODUCTORY_INFORMATION_PRESENT:
-
+				this.aggregationConcepts.put(aggregationConcept,
+						new AllIntroductoryInformationPresentConcept(phraseSpecifications));
 				break;
 			case BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING:
+				this.aggregationConcepts.put(aggregationConcept,
+						new BothSeriesHaveAllSegmentsAscendingConcept(phraseSpecifications));
 				break;
 			case BOTH_SERIES_HAVE_ALL_SEGMENTS_DESCENDING:
+				this.aggregationConcepts.put(aggregationConcept,
+						new BothSeriesHaveAllSegmentsDescendingConcept(phraseSpecifications));
 				break;
 			case BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING:
+				this.aggregationConcepts.put(aggregationConcept,
+						new BothSeriesHaveMostSegmentsAscendingConcept(phraseSpecifications));
 				break;
 			case BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING:
+				this.aggregationConcepts.put(aggregationConcept,
+						new BothSeriesHaveMostSegmentsDescendingConcept(phraseSpecifications));
 				break;
 			case IDENTICAL_TIME_SLICES:
+				this.aggregationConcepts.put(aggregationConcept, new IdenticalTimeSlicesConcept(phraseSpecifications));
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", aggregationConcept));

@@ -3,35 +3,25 @@
 
 package writenlg.aggregation;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
-import analysis.linguistics.aggregation.AggregationConstraintType;
-import writenlg.AbstractConcept;
-import writenlg.constrain.ConstraintGroup;
 
 /**
  * A conceptGroup of Concept instances, to be evaluated as part of the aggregation process.
  */
 public class ConceptGroup
 {
-	private final List<AbstractConcept> group;
-	private final ConstraintGroup<AggregationConstraintType> constraintGroup;
 	private final Set<GlobalConcept> globalConcepts;
 	private final Set<TimeSeriesSpecificConcept> timeSeriesSpecificConcepts;
 
 	/**
 	 * Creates a new ConceptGroup instance.
 	 */
-	public ConceptGroup(final ConstraintGroup<AggregationConstraintType> constraintGroup)
+	public ConceptGroup()
 	{
-		this.constraintGroup = constraintGroup;
-		this.group = new ArrayList<>();
 		this.globalConcepts = new HashSet<>();
 		this.timeSeriesSpecificConcepts = new HashSet<>();
 	}
@@ -53,28 +43,18 @@ public class ConceptGroup
 	}
 
 	/**
-	 * @return the group
+	 * @return the globalConcepts
 	 */
-	public List<AbstractConcept> getGroup()
+	public Set<GlobalConcept> getGlobalConcepts()
 	{
-		return this.group;
+		return new HashSet<>(this.globalConcepts);
 	}
 
 	/**
-	 * @return the constraintGroup
+	 * @return the timeSeriesSpecificConcepts
 	 */
-	public ConstraintGroup<AggregationConstraintType> getConstraintGroup()
+	public Set<TimeSeriesSpecificConcept> getTimeSeriesSpecificConcepts()
 	{
-		return constraintGroup;
-	}
-
-	/**
-	 * Calculates the overall satisfaction level for this ConceptGroup.
-	 *
-	 * @return BigDecimal
-	 */
-	public BigDecimal calculateSatisfactionLevel()
-	{
-		return this.constraintGroup.evaluate();
+		return new HashSet<>(this.timeSeriesSpecificConcepts);
 	}
 }

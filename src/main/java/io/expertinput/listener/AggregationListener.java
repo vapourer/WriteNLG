@@ -12,12 +12,9 @@ import org.apache.logging.log4j.Logger;
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.aggregation.AggregationConcept;
-import analysis.linguistics.aggregation.AggregationConstraintType;
 import io.antlrgenerated.AggregationBaseListener;
 import io.antlrgenerated.AggregationParser;
 import writenlg.aggregation.ConceptGroup;
-import writenlg.constrain.HardConstraintGroup;
-import writenlg.constrain.HardConstraintProcessor;
 
 /**
  * AggregationBaseListener overrides specific to aggregation.
@@ -49,9 +46,7 @@ public class AggregationListener extends AggregationBaseListener
 
 		LOGGER.info(String.format("Concept group title: %s", this.groupTitle));
 
-		HardConstraintGroup<AggregationConstraintType> constraintGroup = new HardConstraintGroup<>(
-				new HardConstraintProcessor());
-		this.conceptGroup = new ConceptGroup(constraintGroup);
+		this.conceptGroup = new ConceptGroup();
 	}
 
 	@Override

@@ -5,9 +5,9 @@ package analysis.linguistics.aggregation.concepts;
 
 import java.util.List;
 
-import analysis.linguistics.contentdetermination.ConstraintType;
 import writenlg.aggregation.AbstractAggregationConcept;
-import writenlg.constrain.ConstraintGroup;
+import writenlg.constrain.HardConstraintGroup;
+import writenlg.constrain.HardConstraintProcessor;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
@@ -19,11 +19,9 @@ public class BothSeriesHaveMostSegmentsDescendingConcept extends AbstractAggrega
 	 * Creates a new BothSeriesHaveMostSegmentsDescendingConcept instance.
 	 * 
 	 * @param phraseSpecifications
-	 * @param constraintGroup
 	 */
-	public BothSeriesHaveMostSegmentsDescendingConcept(List<PhraseSpecification> phraseSpecifications,
-			ConstraintGroup<ConstraintType> constraintGroup)
+	public BothSeriesHaveMostSegmentsDescendingConcept(List<PhraseSpecification> phraseSpecifications)
 	{
-		super(phraseSpecifications, constraintGroup);
+		super(phraseSpecifications, new HardConstraintGroup<>(new HardConstraintProcessor()));
 	}
 }

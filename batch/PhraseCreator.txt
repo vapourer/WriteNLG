@@ -20,28 +20,28 @@ COMPLEMENT	:	@@CrossCount@@ time
 TimeSeriesConcept=SERIES_LEGEND
 PhraseSpecification
 Subject
-NOUN		:	title
+NOUN		:	the title
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@SeriesLegend@@
 GlobalConcept=LINE_COUNT
 PhraseSpecification
 Subject
-NOUN		:	series count
+NOUN		:	the series count
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@LineCount@@
 TimeSeriesConcept=MAXIMUM
 PhraseSpecification
 Subject
-NOUN		:	maximum
+NOUN		:	the maximum
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@Maximum@@
 TimeSeriesConcept=MINIMUM
 PhraseSpecification
 Subject
-NOUN		:	minimum
+NOUN		:	the minimum
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@Minimum@@
@@ -60,7 +60,7 @@ VERB		:	fall
 TimeSeriesConcept=TIME_SLICE
 PhraseSpecification
 Subject
-NOUN		:	time interval
+NOUN		:	the time interval
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@TimeSlice@@
