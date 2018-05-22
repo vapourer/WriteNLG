@@ -3,7 +3,6 @@
 
 package analysis.linguistics.documentplanning;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,31 +41,26 @@ public class DocumentPlanner
 	private static final Logger LOGGER = LogManager.getLogger("DocumentPlanner.class");
 
 	private final LineGraphWithDerivedInformation lineGraph;
-	// private final List<AbstractConcept> concepts;
-	// private final Aggregator aggregator;
+
 	private final Map<GlobalConcept, AbstractConcept> globalConcepts;
 	private final Map<TimeSeriesSpecificConcept, List<AbstractConcept>> timeSeriesSpecificConcepts;
 	private final Map<AggregationConcept, AbstractAggregationConcept> aggregationConcepts;
 
-	// public DocumentPlanner(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation,
-	// List<AbstractConcept> concepts, final Aggregator aggregator)
+	/**
+	 * Creates a new DocumentPlanner instance.
+	 * 
+	 * @param lineGraphWithDerivedInformation
+	 * @param aggregator
+	 */
 	public DocumentPlanner(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation,
 			final Aggregator aggregator)
 	{
 		this.lineGraph = lineGraphWithDerivedInformation;
-		// this.concepts = concepts;
-		// this.aggregator = aggregator;
+
 		this.globalConcepts = aggregator.getGlobalConcepts();
 		this.timeSeriesSpecificConcepts = aggregator.getTimeSeriesSpecificConcepts();
 
-		for (TimeSeriesSpecificConcept concept : timeSeriesSpecificConcepts.keySet())
-		{
-			LOGGER.info(String.format("%s: %d", concept, timeSeriesSpecificConcepts.get(concept).size()));
-		}
-
 		this.aggregationConcepts = aggregator.getAggregationConcepts();
-
-		// prepareMapsAndLoadConcepts();
 
 		LOGGER.info("New DocumentPlanner created");
 	}
@@ -235,89 +229,4 @@ public class DocumentPlanner
 
 		return clause;
 	}
-
-	private void prepareMapsAndLoadConcepts()
-	{
-		loadTimeSeriesSpecificMaps();
-		// loadConcepts();
-	}
-
-	private void loadTimeSeriesSpecificMaps()
-	{
-		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.DESCENDING_TREND, new ArrayList<>());
-		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.MAXIMUM, new ArrayList<>());
-		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.MINIMUM, new ArrayList<>());
-		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.RISING_TREND, new ArrayList<>());
-		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.SERIES_LEGEND, new ArrayList<>());
-		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.TIME_SLICE, new ArrayList<>());
-	}
-
-	// private void loadConcepts()
-	// {
-	// for (AbstractConcept eachConcept : this.concepts)
-	// {
-	// if (eachConcept instanceof LineCountConcept)
-	// {
-	// this.globalConcepts.put(GlobalConcept.LINE_COUNT, eachConcept);
-	// LOGGER.info(String.format("GlobalConcept added: %s", GlobalConcept.LINE_COUNT));
-	// }
-	//
-	// if (eachConcept instanceof LinesCrossConcept)
-	// {
-	// this.globalConcepts.put(GlobalConcept.LINES_CROSS, eachConcept);
-	// LOGGER.info(String.format("GlobalConcept added: %s", GlobalConcept.LINES_CROSS));
-	// }
-	//
-	// if (eachConcept instanceof LinesCrossMultipleTimesConcept)
-	// {
-	// this.globalConcepts.put(GlobalConcept.LINES_CROSS_MULTIPLE_TIMES, eachConcept);
-	// LOGGER.info(String.format("GlobalConcept added: %s", GlobalConcept.LINES_CROSS_MULTIPLE_TIMES));
-	// }
-	//
-	// if (eachConcept instanceof LinesDoNotCrossConcept)
-	// {
-	// this.globalConcepts.put(GlobalConcept.LINES_DO_NOT_CROSS, eachConcept);
-	// LOGGER.info(String.format("GlobalConcept added: %s", GlobalConcept.LINES_DO_NOT_CROSS));
-	// }
-	//
-	// if (eachConcept instanceof SeriesLegendConcept)
-	// {
-	// this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.SERIES_LEGEND).add(eachConcept);
-	// LOGGER.info(
-	// String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.SERIES_LEGEND));
-	// }
-	//
-	// if (eachConcept instanceof DescendingTrendConcept)
-	// {
-	// this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.DESCENDING_TREND).add(eachConcept);
-	// LOGGER.info(String.format("TimeSeriesSpecificConcept added: %s",
-	// TimeSeriesSpecificConcept.DESCENDING_TREND));
-	// }
-	//
-	// if (eachConcept instanceof MaximumConcept)
-	// {
-	// this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).add(eachConcept);
-	// LOGGER.info(String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.MAXIMUM));
-	// }
-	//
-	// if (eachConcept instanceof MinimumConcept)
-	// {
-	// this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).add(eachConcept);
-	// LOGGER.info(String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.MINIMUM));
-	// }
-	//
-	// if (eachConcept instanceof RisingTrendConcept)
-	// {
-	// this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND).add(eachConcept);
-	// LOGGER.info(
-	// String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.RISING_TREND));
-	// }
-	//
-	// if (eachConcept instanceof TimeSliceConcept)
-	// {
-	// this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TIME_SLICE).add(eachConcept);
-	// LOGGER.info(String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.TIME_SLICE));
-	// }
-	// }
-	// }
 }
