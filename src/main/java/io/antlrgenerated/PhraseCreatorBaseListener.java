@@ -88,6 +88,30 @@ public class PhraseCreatorBaseListener implements PhraseCreatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAggregationConcept(PhraseCreatorParser.AggregationConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAggregationConcept(PhraseCreatorParser.AggregationConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAggregationConceptType(PhraseCreatorParser.AggregationConceptTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAggregationConceptType(PhraseCreatorParser.AggregationConceptTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPhraseSpecifications(PhraseCreatorParser.PhraseSpecificationsContext ctx) { }
 	/**
 	 * {@inheritDoc}

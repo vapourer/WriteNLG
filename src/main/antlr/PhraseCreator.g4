@@ -10,6 +10,7 @@ writeDocument				:	(concept NEW_LINE)* concept
 						
 concept						:	globalConcept
 							|	timeSeriesConcept
+							|	aggregationConcept
 							;
 
 globalConcept				:	GLOBAL_CONCEPT '=' globalConceptType NEW_LINE phraseSpecifications
@@ -22,6 +23,12 @@ timeSeriesConcept			:	TIME_SERIES_CONCEPT '=' timeSeriesConceptType NEW_LINE phr
 							;
 						
 timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
+							;
+							
+aggregationConcept			:	AGGREGATION_CONCEPT '=' aggregationConceptType NEW_LINE phraseSpecifications
+							;
+							
+aggregationConceptType		:	AGGREGATION_CONCEPT_TYPE
 							;
 					
 phraseSpecifications		:	(phraseSpecification NEW_LINE)* phraseSpecification
@@ -74,6 +81,7 @@ identifier					:	PART_OF_SPEECH
 							;
 			
 expression					:	PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER (' ' STRING)*
+							|	(STRING ' ')* PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER
 							|	STRING
 							;
 						
@@ -81,6 +89,9 @@ GLOBAL_CONCEPT				:	'GlobalConcept'
 							;
 
 TIME_SERIES_CONCEPT			:	'TimeSeriesConcept'
+							;
+							
+AGGREGATION_CONCEPT			:	'AggregationConcept'
 							;
 							
 GLOBAL_CONCEPT_TYPE			:	'LINES_CROSS'
@@ -96,6 +107,14 @@ TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'SERIES_LEGEND'
 							|	'TIME_SLICE'
 							;
+							
+AGGREGATION_CONCEPT_TYPE	:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
+							|	'BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING'
+							|	'BOTH_SERIES_HAVE_ALL_SEGMENTS_DESCENDING'
+							|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING'
+							|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING'
+							|	'IDENTICAL_TIME_SLICES'
+							;	
 						
 PHRASE_SPECIFICATION		:	'PhraseSpecification'
 							;

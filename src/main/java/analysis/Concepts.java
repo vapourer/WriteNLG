@@ -121,7 +121,7 @@ public class Concepts implements ConceptLoader
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", globalConcept));
-				throw new RuntimeException("Not implemented");
+				throw new RuntimeException("Enum value not implemented");
 		}
 	}
 
@@ -262,7 +262,7 @@ public class Concepts implements ConceptLoader
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", timeSeriesSpecificConcept));
-				throw new RuntimeException("Not implemented");
+				throw new RuntimeException("Enum value not implemented");
 		}
 	}
 

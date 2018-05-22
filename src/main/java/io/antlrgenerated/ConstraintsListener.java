@@ -68,6 +68,26 @@ public interface ConstraintsListener extends ParseTreeListener {
 	 */
 	void exitTimeSeriesConceptType(ConstraintsParser.TimeSeriesConceptTypeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#aggregationConcept}.
+	 * @param ctx the parse tree
+	 */
+	void enterAggregationConcept(ConstraintsParser.AggregationConceptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#aggregationConcept}.
+	 * @param ctx the parse tree
+	 */
+	void exitAggregationConcept(ConstraintsParser.AggregationConceptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ConstraintsParser#aggregationConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void enterAggregationConceptType(ConstraintsParser.AggregationConceptTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ConstraintsParser#aggregationConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void exitAggregationConceptType(ConstraintsParser.AggregationConceptTypeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ConstraintsParser#constraints}.
 	 * @param ctx the parse tree
 	 */

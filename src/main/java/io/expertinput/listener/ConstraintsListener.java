@@ -11,8 +11,10 @@ import org.apache.logging.log4j.Logger;
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.Constraints;
+import analysis.linguistics.aggregation.AggregationConcept;
 import io.antlrgenerated.ConstraintsBaseListener;
 import io.antlrgenerated.ConstraintsParser;
+import io.antlrgenerated.ConstraintsParser.AggregationConceptContext;
 import io.antlrgenerated.ConstraintsParser.GlobalConceptContext;
 import io.antlrgenerated.ConstraintsParser.TimeSeriesConceptContext;
 
@@ -23,9 +25,10 @@ public class ConstraintsListener extends ConstraintsBaseListener
 {
 	private static final Logger LOGGER = LogManager.getLogger("ConstraintsListener.class");
 
-	private boolean isGlobal;
+	private ConceptType conceptType;
 	private GlobalConcept globalConcept;
 	private TimeSeriesSpecificConcept timeSeriesSpecificConcept;
+	private AggregationConcept aggregationConcept;
 
 	/**
 	 * Creates a new ConstraintsListener instance.
@@ -43,17 +46,26 @@ public class ConstraintsListener extends ConstraintsBaseListener
 		final BigDecimal weighting = context.weighting() == null ? new BigDecimal("1")
 				: new BigDecimal(context.weighting().getText());
 
-		if (this.isGlobal)
+		switch (this.conceptType)
 		{
-			Constraints.getInstance().addConstraintConfigurationForGlobalConcept(this.globalConcept, constraintName,
-					initialValue, weighting);
-			LOGGER.info("Constraint configuration for global concept loaded");
-		}
-		else
-		{
-			Constraints.getInstance().addConstraintConfigurationForTimeSeriesSpecificConcept(timeSeriesSpecificConcept,
-					constraintName, initialValue, weighting);
-			LOGGER.info("Constraint configuration for time series specific concept loaded");
+			case AGGREGATION_CONCEPT:
+				Constraints.getInstance().addConstraintConfigurationForAggregationConcept(this.aggregationConcept,
+						constraintName, initialValue, weighting);
+				LOGGER.info("Constraint configuration for aggregation concept loaded");
+				break;
+			case GLOBAL_CONCEPT:
+				Constraints.getInstance().addConstraintConfigurationForGlobalConcept(this.globalConcept, constraintName,
+						initialValue, weighting);
+				LOGGER.info("Constraint configuration for global concept loaded");
+				break;
+			case TIME_SERIES_SPECIFIC_CONCEPT:
+				Constraints.getInstance().addConstraintConfigurationForTimeSeriesSpecificConcept(
+						timeSeriesSpecificConcept, constraintName, initialValue, weighting);
+				LOGGER.info("Constraint configuration for time series specific concept loaded");
+				break;
+			default:
+				LOGGER.error(String.format("%s not implemented", this.conceptType));
+				throw new RuntimeException("Enum value not implemented");
 		}
 	}
 
@@ -61,8 +73,10 @@ public class ConstraintsListener extends ConstraintsBaseListener
 	public void enterGlobalConcept(GlobalConceptContext context)
 	{
 		this.timeSeriesSpecificConcept = null;
+		this.aggregationConcept = null;
+
 		this.globalConcept = Enum.valueOf(GlobalConcept.class, context.globalConceptType().getText());
-		this.isGlobal = true;
+		this.conceptType = ConceptType.GLOBAL_CONCEPT;
 
 		LOGGER.info(String.format("Global concept is %s", context.globalConceptType().getText()));
 	}
@@ -71,10 +85,29 @@ public class ConstraintsListener extends ConstraintsBaseListener
 	public void enterTimeSeriesConcept(TimeSeriesConceptContext context)
 	{
 		this.globalConcept = null;
+		this.aggregationConcept = null;
+
 		this.timeSeriesSpecificConcept = Enum.valueOf(TimeSeriesSpecificConcept.class,
 				context.timeSeriesConceptType().getText());
-		this.isGlobal = false;
+		this.conceptType = ConceptType.TIME_SERIES_SPECIFIC_CONCEPT;
 
 		LOGGER.info(String.format("Time series specific concept is %s", context.timeSeriesConceptType().getText()));
+	}
+
+	@Override
+	public void enterAggregationConcept(AggregationConceptContext context)
+	{
+		this.globalConcept = null;
+		this.timeSeriesSpecificConcept = null;
+
+		this.aggregationConcept = Enum.valueOf(AggregationConcept.class, context.aggregationConceptType().getText());
+		this.conceptType = ConceptType.AGGREGATION_CONCEPT;
+
+		LOGGER.info(String.format("Aggregation concept is %s", context.aggregationConceptType().getText()));
+	}
+
+	private enum ConceptType
+	{
+		GLOBAL_CONCEPT, TIME_SERIES_SPECIFIC_CONCEPT, AGGREGATION_CONCEPT,
 	}
 }

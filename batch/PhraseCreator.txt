@@ -64,3 +64,11 @@ NOUN		:	time interval
 Predicate
 VERB		:	be
 COMPLEMENT	:	@@TimeSlice@@
+AggregationConcept=ALL_INTRODUCTORY_INFORMATION_PRESENT
+PhraseSpecification
+Subject
+NOUN		:	@@LineCount@@ series
+Predicate
+VERB		:	be
+COMPLEMENT	:	recorded every @@TimeSlice@@
+			

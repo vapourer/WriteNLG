@@ -88,6 +88,30 @@ public class ConstraintsBaseListener implements ConstraintsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAggregationConcept(ConstraintsParser.AggregationConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAggregationConcept(ConstraintsParser.AggregationConceptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAggregationConceptType(ConstraintsParser.AggregationConceptTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAggregationConceptType(ConstraintsParser.AggregationConceptTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConstraints(ConstraintsParser.ConstraintsContext ctx) { }
 	/**
 	 * {@inheritDoc}

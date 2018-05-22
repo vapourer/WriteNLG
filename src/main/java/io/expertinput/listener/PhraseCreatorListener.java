@@ -14,6 +14,8 @@ import analysis.GlobalConcept;
 import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.interfaces.ConceptLoader;
+import analysis.linguistics.aggregation.AggregationConcept;
+import analysis.linguistics.aggregation.AggregationConcepts;
 import analysis.substitution.Substitutor;
 import io.antlrgenerated.PhraseCreatorBaseListener;
 import io.antlrgenerated.PhraseCreatorParser;
@@ -37,9 +39,11 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	private static final Logger LOGGER = LogManager.getLogger("PhraseCreatorListener.class");
 
 	private final ConceptLoader concepts;
+	private final AggregationConcepts aggregationConcepts;
 
 	private GlobalConcept globalConcept;
 	private TimeSeriesSpecificConcept timeSeriesSpecificConcept;
+	private AggregationConcept aggregationConcept;
 	private List<PhraseSpecification> phraseSpecifications;
 	private PhraseSpecification phraseSpecification;
 	private SentencePart sentencePart;
@@ -56,6 +60,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		this.phraseSpecifications = new ArrayList<>();
 		this.sentencePart = SentencePart.SUBJECT;
 		this.concepts = new Concepts(lineGraph, substitutor);
+		this.aggregationConcepts = new AggregationConcepts();
 	}
 
 	@Override
@@ -84,6 +89,20 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	public void exitTimeSeriesConcept(PhraseCreatorParser.TimeSeriesConceptContext context)
 	{
 		this.concepts.addTimeSeriesSpecificConcept(this.timeSeriesSpecificConcept, this.phraseSpecifications);
+		this.phraseSpecifications = new ArrayList<>();
+	}
+
+	@Override
+	public void enterAggregationConcept(PhraseCreatorParser.AggregationConceptContext context)
+	{
+		this.aggregationConcept = Enum.valueOf(AggregationConcept.class, context.aggregationConceptType().getText());
+		LOGGER.info(String.format("AggregationConcept: %s", this.aggregationConcept));
+	}
+
+	@Override
+	public void exitAggregationConcept(PhraseCreatorParser.AggregationConceptContext context)
+	{
+		this.aggregationConcepts.addAggregationConcept(this.aggregationConcept, this.phraseSpecifications);
 		this.phraseSpecifications = new ArrayList<>();
 	}
 

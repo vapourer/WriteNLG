@@ -68,6 +68,26 @@ public interface PhraseCreatorListener extends ParseTreeListener {
 	 */
 	void exitTimeSeriesConceptType(PhraseCreatorParser.TimeSeriesConceptTypeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#aggregationConcept}.
+	 * @param ctx the parse tree
+	 */
+	void enterAggregationConcept(PhraseCreatorParser.AggregationConceptContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#aggregationConcept}.
+	 * @param ctx the parse tree
+	 */
+	void exitAggregationConcept(PhraseCreatorParser.AggregationConceptContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#aggregationConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void enterAggregationConceptType(PhraseCreatorParser.AggregationConceptTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#aggregationConceptType}.
+	 * @param ctx the parse tree
+	 */
+	void exitAggregationConceptType(PhraseCreatorParser.AggregationConceptTypeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PhraseCreatorParser#phraseSpecifications}.
 	 * @param ctx the parse tree
 	 */

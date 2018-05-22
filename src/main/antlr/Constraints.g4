@@ -10,6 +10,7 @@ constraintConfiguration		:	(concept NEW_LINE)* concept
 						
 concept						:	globalConcept
 							|	timeSeriesConcept
+							|	aggregationConcept
 							;
 
 globalConcept				:	GLOBAL_CONCEPT '=' globalConceptType NEW_LINE constraints
@@ -22,6 +23,12 @@ timeSeriesConcept			:	TIME_SERIES_CONCEPT '=' timeSeriesConceptType NEW_LINE con
 							;
 						
 timeSeriesConceptType		:	TIME_SERIES_CONCEPT_TYPE
+							;
+							
+aggregationConcept			:	AGGREGATION_CONCEPT '=' aggregationConceptType NEW_LINE constraints
+							;
+							
+aggregationConceptType		:	AGGREGATION_CONCEPT_TYPE
 							;
 							
 constraints					:	(constraint NEW_LINE)* constraint
@@ -44,6 +51,9 @@ GLOBAL_CONCEPT				:	'GlobalConcept'
 
 TIME_SERIES_CONCEPT			:	'TimeSeriesConcept'
 							;
+							
+AGGREGATION_CONCEPT			:	'AggregationConcept'
+							;
 
 GLOBAL_CONCEPT_TYPE			:	'LINES_CROSS'
 							|	'LINES_DO_NOT_CROSS'
@@ -59,7 +69,13 @@ TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'TIME_SLICE'
 							;
 							
-//							AGGREGATION_CONCEPT_TYPE	|	
+AGGREGATION_CONCEPT_TYPE	:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
+							|	'BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING'
+							|	'BOTH_SERIES_HAVE_ALL_SEGMENTS_DESCENDING'
+							|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING'
+							|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING'
+							|	'IDENTICAL_TIME_SLICES'
+							;	
 							
 CONSTRAINT_NAME				:	'LinesCross'
 							|	'LinesCrossMultipleTimes'
@@ -80,6 +96,12 @@ CONSTRAINT_NAME				:	'LinesCross'
 							|	'AllSegmentsDescending'
 							|	'MostSegmentsDescending'
 							|	'TimeSliceRequired'
+							|	'AllIntroductoryInformationPresent'
+							|	'BothSeriesHaveAllSegmentsAscending'
+							|	'BothSeriesHaveAllSegmentsDescending'
+							|	'BothSeriesHaveMostSegmentsAscending'
+							|	'BothSeriesHaveMostSegmentsDescending'
+							|	'IdenticalTimeSlices'
 							;
 							
 INITIAL_VALUE				:	DIGIT+ '.' DIGIT+
