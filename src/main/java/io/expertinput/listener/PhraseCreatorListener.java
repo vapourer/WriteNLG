@@ -38,6 +38,8 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 {
 	private static final Logger LOGGER = LogManager.getLogger("PhraseCreatorListener.class");
 
+	private final String PLURAL = "plural";
+
 	private final ConceptLoader concepts;
 	private final AggregationConcepts aggregationConcepts;
 
@@ -49,6 +51,10 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	private SentencePart sentencePart;
 	private Subject subject;
 	private Predicate predicate;
+	private boolean isSubjectPlural;
+	private boolean isVerbPlural;
+	private boolean isObjectPlural;
+	private boolean isComplementPlural;
 
 	/**
 	 * Creates a PhraseCreator instance.
@@ -60,7 +66,7 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		this.phraseSpecifications = new ArrayList<>();
 		this.sentencePart = SentencePart.SUBJECT;
 		this.concepts = new Concepts(lineGraph, substitutor);
-		this.aggregationConcepts = new AggregationConcepts();
+		this.aggregationConcepts = new AggregationConcepts(substitutor);
 	}
 
 	@Override
@@ -119,6 +125,12 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		this.phraseSpecification.setSubject(this.subject);
 		this.phraseSpecification.setPredicate(this.predicate);
 		this.phraseSpecifications.add(this.phraseSpecification);
+
+		this.isSubjectPlural = false;
+		this.isVerbPlural = false;
+		this.isObjectPlural = false;
+		this.isComplementPlural = false;
+
 		this.phraseSpecification = new PhraseSpecification();
 	}
 
@@ -158,6 +170,34 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		}
 	}
 
+	@Override
+	public void enterSubjectNumber(PhraseCreatorParser.SubjectNumberContext context)
+	{
+		LOGGER.info(String.format("SubjectNumber: %s", context.numberValue().getText()));
+		this.isSubjectPlural = PLURAL.equals(context.numberValue().getText()) ? true : false;
+	}
+
+	@Override
+	public void enterVerbNumber(PhraseCreatorParser.VerbNumberContext context)
+	{
+		LOGGER.info(String.format("VerbNumber: %s", context.numberValue().getText()));
+		this.isVerbPlural = PLURAL.equals(context.numberValue().getText()) ? true : false;
+	}
+
+	@Override
+	public void enterObjectNumber(PhraseCreatorParser.ObjectNumberContext context)
+	{
+		LOGGER.info(String.format("ObjectNumber: %s", context.numberValue().getText()));
+		this.isObjectPlural = PLURAL.equals(context.numberValue().getText()) ? true : false;
+	}
+
+	@Override
+	public void enterComplementNumber(PhraseCreatorParser.ComplementNumberContext context)
+	{
+		LOGGER.info(String.format("ComplementNumber: %s", context.numberValue().getText()));
+		this.isComplementPlural = PLURAL.equals(context.numberValue().getText()) ? true : false;
+	}
+
 	private void setPartOfSpeechToSubject(final PartOfSpeech partOfSpeech, final String expression,
 			final ConstraintGroup<String> constraintGroup)
 	{
@@ -165,7 +205,9 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		{
 			case NOUN:
 				this.subject.setNounPhrase(new NounPhrase(expression, constraintGroup));
-				LOGGER.info(String.format("New NounPhrase added to Subject: %s", expression));
+				this.subject.getNounPhrase().setPlural(this.isSubjectPlural);
+				LOGGER.info(String.format("New NounPhrase added to Subject: %s; plural: %s", expression,
+						this.isSubjectPlural));
 				break;
 			case VERB:
 				break;
@@ -197,11 +239,15 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		{
 			case NOUN:
 				this.predicate.setNounPhrase(new NounPhrase(expression, constraintGroup));
-				LOGGER.info(String.format("New NounPhrase added to Predicate: %s", expression));
+				this.predicate.getNounPhrase().setPlural(this.isObjectPlural);
+				LOGGER.info(String.format("New NounPhrase added to Predicate: %s; plural: %s", expression,
+						this.isObjectPlural));
 				break;
 			case VERB:
 				this.predicate.setVerb(new Verb(expression, constraintGroup));
-				LOGGER.info(String.format("New Verb added to Predicate: %s", expression));
+				this.predicate.getVerb().setPlural(this.isVerbPlural);
+				LOGGER.info(
+						String.format("New Verb added to Predicate: %s; plural: %s", expression, this.isVerbPlural));
 				break;
 			case ADJECTIVE:
 				break;
@@ -219,7 +265,9 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 				break;
 			case COMPLEMENT:
 				this.predicate.setComplement(new Complement(expression, constraintGroup));
-				LOGGER.info(String.format("New Complement added to Predicate: %s", expression));
+				this.predicate.getComplement().setPlural(this.isComplementPlural);
+				LOGGER.info(String.format("New Complement added to Predicate: %s; plural: %s", expression,
+						this.isComplementPlural));
 				break;
 			default:
 				break;

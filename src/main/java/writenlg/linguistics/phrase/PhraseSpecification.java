@@ -18,6 +18,7 @@ public class PhraseSpecification
 
 	private Subject subject;
 	private Predicate predicate;
+	private boolean plural;
 
 	/**
 	 * Creates a new PhraseSpecification instance.
@@ -75,6 +76,23 @@ public class PhraseSpecification
 	}
 
 	/**
+	 * @return the plural
+	 */
+	public boolean isPlural()
+	{
+		return plural;
+	}
+
+	/**
+	 * @param plural
+	 *            the plural to set
+	 */
+	public void setPlural(boolean plural)
+	{
+		this.plural = plural;
+	}
+
+	/**
 	 * Replaces placeholders with values drawn from statistical analysis.
 	 * 
 	 * @param substitutions
@@ -83,7 +101,11 @@ public class PhraseSpecification
 	{
 		Subject replacementSubject = this.subject.substitutePlaceholders(substitutions);
 		Predicate replacementPredicate = this.predicate.substitutePlaceholders(substitutions);
-		return new PhraseSpecification(replacementSubject, replacementPredicate);
+
+		PhraseSpecification newSpecification = new PhraseSpecification(replacementSubject, replacementPredicate);
+		newSpecification.setPlural(this.plural);
+
+		return newSpecification;
 	}
 
 	@Override

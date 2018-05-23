@@ -34,7 +34,27 @@ aggregationConceptType		:	AGGREGATION_CONCEPT_TYPE
 phraseSpecifications		:	(phraseSpecification NEW_LINE)* phraseSpecification
 							;
 					
-phraseSpecification			:	PHRASE_SPECIFICATION (NEW_LINE features?)* NEW_LINE subject NEW_LINE predicate
+phraseSpecification			:	PHRASE_SPECIFICATION NEW_LINE features? subject NEW_LINE predicate
+							;
+						
+subject						:	SUBJECT NEW_LINE assignments
+							;
+						
+predicate					:	PREDICATE NEW_LINE assignments
+							;
+					
+assignments					:	(assignment NEW_LINE)* assignment
+							;
+
+assignment					:	identifier ':' expression
+							;
+
+identifier					:	PART_OF_SPEECH
+							;
+			
+expression					:	PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER (' ' STRING)*
+							|	(STRING ' ')* PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER
+							|	STRING
 							;
 							
 features					:	FEATURES NEW_LINE feature+
@@ -43,6 +63,10 @@ features					:	FEATURES NEW_LINE feature+
 feature						:	complementiser NEW_LINE
 							|	tense NEW_LINE
 							|	conjunction NEW_LINE
+							|	subjectNumber NEW_LINE
+							|	verbNumber NEW_LINE
+							|	objectNumber NEW_LINE
+							|	complementNumber NEW_LINE
 							;
 
 tense						:	'tense' '=' tenseValue
@@ -64,25 +88,21 @@ conjunction					:	'conjunction' '=' conjunctionValue
 
 conjunctionValue			:	STRING
 							;
-						
-subject						:	SUBJECT NEW_LINE assignments
+							
+subjectNumber				:	'SubjectNumber' '=' numberValue
 							;
-						
-predicate					:	PREDICATE NEW_LINE assignments
+							
+verbNumber					:	'VerbNumber' '=' numberValue
 							;
-					
-assignments					:	(assignment NEW_LINE)* assignment
+							
+objectNumber				:	'ObjectNumber' '=' numberValue
 							;
-
-assignment					:	identifier ':' expression
+							
+complementNumber			:	'ComplementNumber' '=' numberValue
 							;
-
-identifier					:	PART_OF_SPEECH
-							;
-			
-expression					:	PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER (' ' STRING)*
-							|	(STRING ' ')* PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER
-							|	STRING
+							
+numberValue					:	'singular'
+							|	'plural'
 							;
 						
 GLOBAL_CONCEPT				:	'GlobalConcept'

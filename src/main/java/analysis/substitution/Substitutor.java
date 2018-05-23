@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesWithDerivedInformation;
 import analysis.interfaces.Mapper;
+import writenlg.substitution.NumberTransformations;
 import writenlg.substitution.Substitutions;
 
 /**
@@ -22,7 +23,9 @@ public class Substitutor implements Mapper
 	private static final Logger LOGGER = LogManager.getLogger("Substitutor.class");
 
 	private final LineGraphWithDerivedInformation lineGraphWithDerivedInformation;
+	private final NumberTransformations numberTransformations;
 	private final Substitutions globalMappings;
+
 	private final List<TimeSeriesMapping> timeSeriesMappings;
 
 	/**
@@ -34,6 +37,7 @@ public class Substitutor implements Mapper
 	public Substitutor(final LineGraphWithDerivedInformation lineGraphWithDerivedInformation)
 	{
 		this.lineGraphWithDerivedInformation = lineGraphWithDerivedInformation;
+		this.numberTransformations = new NumberTransformations();
 		this.globalMappings = new Substitutions();
 		this.timeSeriesMappings = new ArrayList<>();
 		loadMappings();
@@ -63,6 +67,9 @@ public class Substitutor implements Mapper
 
 		this.globalMappings.addSubstitution("@@LineCount@@",
 				String.valueOf(this.lineGraphWithDerivedInformation.getTimeSeriesCount()));
+
+		this.globalMappings.addSubstitution("@@LineCountText@@",
+				this.numberTransformations.textForNumber(this.lineGraphWithDerivedInformation.getTimeSeriesCount()));
 
 		return this.globalMappings;
 	}

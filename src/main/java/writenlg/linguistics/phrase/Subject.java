@@ -71,6 +71,8 @@ public class Subject
 			replacement = replacement.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
 		}
 
+		replacement.setPlural(this.nounPhrase.isPlural());
+
 		return new Subject(replacement);
 	}
 

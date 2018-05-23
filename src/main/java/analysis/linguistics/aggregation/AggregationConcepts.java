@@ -3,6 +3,7 @@
 
 package analysis.linguistics.aggregation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsDescen
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveMostSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveMostSegmentsDescendingConcept;
 import analysis.linguistics.aggregation.concepts.IdenticalTimeSlicesConcept;
+import analysis.substitution.Substitutor;
 import writenlg.aggregation.AbstractAggregationConcept;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
@@ -26,13 +28,16 @@ public class AggregationConcepts
 {
 	private static final Logger LOGGER = LogManager.getLogger("AggregationConcepts.class");
 
+	private final Substitutor substitutor;
+
 	private final Map<AggregationConcept, AbstractAggregationConcept> aggregationConcepts;
 
 	/**
 	 * Creates a new AggregationConcepts instance.
 	 */
-	public AggregationConcepts()
+	public AggregationConcepts(final Substitutor substitutor)
 	{
+		this.substitutor = substitutor;
 		this.aggregationConcepts = new HashMap<>();
 	}
 
@@ -46,8 +51,16 @@ public class AggregationConcepts
 		switch (aggregationConcept)
 		{
 			case ALL_INTRODUCTORY_INFORMATION_PRESENT:
-				this.aggregationConcepts.put(aggregationConcept,
-						new AllIntroductoryInformationPresentConcept(phraseSpecifications));
+				final List<PhraseSpecification> allIntroductoryInformationPresentPhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					allIntroductoryInformationPresentPhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				this.aggregationConcepts.put(aggregationConcept, new AllIntroductoryInformationPresentConcept(
+						allIntroductoryInformationPresentPhraseSpecifications));
 				break;
 			case BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING:
 				this.aggregationConcepts.put(aggregationConcept,

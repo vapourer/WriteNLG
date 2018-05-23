@@ -1,22 +1,32 @@
 GlobalConcept=LINES_CROSS
 PhraseSpecification
+Features
+SubjectNumber=plural
+VerbNumber=plural
 Subject
-NOUN		:	line
+NOUN		:	the lines
 Predicate
 VERB		:	cross
 GlobalConcept=LINES_DO_NOT_CROSS
 PhraseSpecification
+Features
+SubjectNumber=plural
+VerbNumber=plural
 Subject
-NOUN		:	line
+NOUN		:	the lines
 Predicate
 VERB		:	do not cross
 GlobalConcept=LINES_CROSS_MULTIPLE_TIMES
 PhraseSpecification
+Features
+SubjectNumber=plural
+VerbNumber=plural
+ComplementNumber=plural
 Subject
-NOUN		:	line
+NOUN		:	the lines
 Predicate
 VERB		:	cross
-COMPLEMENT	:	@@CrossCount@@ time
+COMPLEMENT	:	@@CrossCount@@ times
 TimeSeriesConcept=SERIES_LEGEND
 PhraseSpecification
 Subject
@@ -66,8 +76,11 @@ VERB		:	be
 COMPLEMENT	:	@@TimeSlice@@
 AggregationConcept=ALL_INTRODUCTORY_INFORMATION_PRESENT
 PhraseSpecification
+Features
+SubjectNumber=plural
+VerbNumber=plural
 Subject
-NOUN		:	@@LineCount@@ series
+NOUN		:	@@LineCountText@@ series
 Predicate
 VERB		:	be
 COMPLEMENT	:	recorded every @@TimeSlice@@

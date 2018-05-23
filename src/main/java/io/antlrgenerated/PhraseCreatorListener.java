@@ -108,6 +108,66 @@ public interface PhraseCreatorListener extends ParseTreeListener {
 	 */
 	void exitPhraseSpecification(PhraseCreatorParser.PhraseSpecificationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#subject}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubject(PhraseCreatorParser.SubjectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#subject}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubject(PhraseCreatorParser.SubjectContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#predicate}.
+	 * @param ctx the parse tree
+	 */
+	void enterPredicate(PhraseCreatorParser.PredicateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#predicate}.
+	 * @param ctx the parse tree
+	 */
+	void exitPredicate(PhraseCreatorParser.PredicateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#assignments}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignments(PhraseCreatorParser.AssignmentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#assignments}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignments(PhraseCreatorParser.AssignmentsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment(PhraseCreatorParser.AssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment(PhraseCreatorParser.AssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(PhraseCreatorParser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(PhraseCreatorParser.IdentifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(PhraseCreatorParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(PhraseCreatorParser.ExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PhraseCreatorParser#features}.
 	 * @param ctx the parse tree
 	 */
@@ -188,63 +248,53 @@ public interface PhraseCreatorListener extends ParseTreeListener {
 	 */
 	void exitConjunctionValue(PhraseCreatorParser.ConjunctionValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#subject}.
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#subjectNumber}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubject(PhraseCreatorParser.SubjectContext ctx);
+	void enterSubjectNumber(PhraseCreatorParser.SubjectNumberContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#subject}.
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#subjectNumber}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubject(PhraseCreatorParser.SubjectContext ctx);
+	void exitSubjectNumber(PhraseCreatorParser.SubjectNumberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#predicate}.
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#verbNumber}.
 	 * @param ctx the parse tree
 	 */
-	void enterPredicate(PhraseCreatorParser.PredicateContext ctx);
+	void enterVerbNumber(PhraseCreatorParser.VerbNumberContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#predicate}.
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#verbNumber}.
 	 * @param ctx the parse tree
 	 */
-	void exitPredicate(PhraseCreatorParser.PredicateContext ctx);
+	void exitVerbNumber(PhraseCreatorParser.VerbNumberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#assignments}.
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#objectNumber}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignments(PhraseCreatorParser.AssignmentsContext ctx);
+	void enterObjectNumber(PhraseCreatorParser.ObjectNumberContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#assignments}.
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#objectNumber}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignments(PhraseCreatorParser.AssignmentsContext ctx);
+	void exitObjectNumber(PhraseCreatorParser.ObjectNumberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#assignment}.
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#complementNumber}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignment(PhraseCreatorParser.AssignmentContext ctx);
+	void enterComplementNumber(PhraseCreatorParser.ComplementNumberContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#assignment}.
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#complementNumber}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignment(PhraseCreatorParser.AssignmentContext ctx);
+	void exitComplementNumber(PhraseCreatorParser.ComplementNumberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#identifier}.
+	 * Enter a parse tree produced by {@link PhraseCreatorParser#numberValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterIdentifier(PhraseCreatorParser.IdentifierContext ctx);
+	void enterNumberValue(PhraseCreatorParser.NumberValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#identifier}.
+	 * Exit a parse tree produced by {@link PhraseCreatorParser#numberValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitIdentifier(PhraseCreatorParser.IdentifierContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PhraseCreatorParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpression(PhraseCreatorParser.ExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PhraseCreatorParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpression(PhraseCreatorParser.ExpressionContext ctx);
+	void exitNumberValue(PhraseCreatorParser.NumberValueContext ctx);
 }

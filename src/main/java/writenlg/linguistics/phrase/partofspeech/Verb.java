@@ -19,6 +19,8 @@ public class Verb extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("Verb.class");
 
+	private boolean plural;
+
 	/**
 	 * Creates a Verb instance.
 	 * 
@@ -38,5 +40,22 @@ public class Verb extends AbstractPartOfSpeech
 			LOGGER.info(String.format("Constraint for %s: %s, with satisfaction level: %s", getText(),
 					constraint.getConstrainedElement(), constraint.getSatisfactionLevelAsValue()));
 		}
+	}
+
+	/**
+	 * @return the plural
+	 */
+	public boolean isPlural()
+	{
+		return plural;
+	}
+
+	/**
+	 * @param plural
+	 *            the plural to set
+	 */
+	public void setPlural(boolean plural)
+	{
+		this.plural = plural;
 	}
 }

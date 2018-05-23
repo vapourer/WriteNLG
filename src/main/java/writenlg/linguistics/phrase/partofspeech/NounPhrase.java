@@ -19,6 +19,8 @@ public class NounPhrase extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("NounPhrase.class");
 
+	private boolean plural;
+
 	/**
 	 * Creates a NounPhrase instance.
 	 *
@@ -41,6 +43,24 @@ public class NounPhrase extends AbstractPartOfSpeech
 	}
 
 	/**
+	 * @return the plural
+	 */
+	public boolean isPlural()
+	{
+		return plural;
+	}
+
+	/**
+	 * @param plural
+	 *            the plural to set
+	 */
+	public void setPlural(boolean plural)
+	{
+		this.plural = plural;
+		LOGGER.info(String.format("setPlural NounPhrase %s is plural: %s", getText(), this.plural));
+	}
+
+	/**
 	 * Returns this text with placeholders replaced by analysis derived information.
 	 * 
 	 * @param regex
@@ -49,6 +69,10 @@ public class NounPhrase extends AbstractPartOfSpeech
 	 */
 	public NounPhrase replaceAll(String regex, String substitution)
 	{
-		return new NounPhrase(getText().replaceAll(regex, substitution), this.getConstraintGroup());
+		NounPhrase newNounPhrase = new NounPhrase(getText().replaceAll(regex, substitution), this.getConstraintGroup());
+		LOGGER.info(String.format("replaceAll NounPhrase %s is plural: %s", getText(), this.plural));
+		// newNounPhrase.setPlural(this.plural);
+
+		return newNounPhrase;
 	}
 }

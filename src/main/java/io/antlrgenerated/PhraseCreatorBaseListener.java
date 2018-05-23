@@ -136,6 +136,78 @@ public class PhraseCreatorBaseListener implements PhraseCreatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSubject(PhraseCreatorParser.SubjectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSubject(PhraseCreatorParser.SubjectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPredicate(PhraseCreatorParser.PredicateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPredicate(PhraseCreatorParser.PredicateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignments(PhraseCreatorParser.AssignmentsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignments(PhraseCreatorParser.AssignmentsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignment(PhraseCreatorParser.AssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment(PhraseCreatorParser.AssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIdentifier(PhraseCreatorParser.IdentifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdentifier(PhraseCreatorParser.IdentifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpression(PhraseCreatorParser.ExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpression(PhraseCreatorParser.ExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFeatures(PhraseCreatorParser.FeaturesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -232,73 +304,61 @@ public class PhraseCreatorBaseListener implements PhraseCreatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSubject(PhraseCreatorParser.SubjectContext ctx) { }
+	@Override public void enterSubjectNumber(PhraseCreatorParser.SubjectNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSubject(PhraseCreatorParser.SubjectContext ctx) { }
+	@Override public void exitSubjectNumber(PhraseCreatorParser.SubjectNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPredicate(PhraseCreatorParser.PredicateContext ctx) { }
+	@Override public void enterVerbNumber(PhraseCreatorParser.VerbNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPredicate(PhraseCreatorParser.PredicateContext ctx) { }
+	@Override public void exitVerbNumber(PhraseCreatorParser.VerbNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignments(PhraseCreatorParser.AssignmentsContext ctx) { }
+	@Override public void enterObjectNumber(PhraseCreatorParser.ObjectNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignments(PhraseCreatorParser.AssignmentsContext ctx) { }
+	@Override public void exitObjectNumber(PhraseCreatorParser.ObjectNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(PhraseCreatorParser.AssignmentContext ctx) { }
+	@Override public void enterComplementNumber(PhraseCreatorParser.ComplementNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment(PhraseCreatorParser.AssignmentContext ctx) { }
+	@Override public void exitComplementNumber(PhraseCreatorParser.ComplementNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdentifier(PhraseCreatorParser.IdentifierContext ctx) { }
+	@Override public void enterNumberValue(PhraseCreatorParser.NumberValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIdentifier(PhraseCreatorParser.IdentifierContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterExpression(PhraseCreatorParser.ExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExpression(PhraseCreatorParser.ExpressionContext ctx) { }
+	@Override public void exitNumberValue(PhraseCreatorParser.NumberValueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

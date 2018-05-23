@@ -23,6 +23,7 @@ public class Predicate
 	private Verb verb;
 	private NounPhrase nounPhrase;
 	private Complement complement;
+	private boolean plural;
 
 	/**
 	 * Creates a new Predicate instance.
@@ -104,6 +105,23 @@ public class Predicate
 	}
 
 	/**
+	 * @return the plural
+	 */
+	public boolean isPlural()
+	{
+		return plural;
+	}
+
+	/**
+	 * @param plural
+	 *            the plural to set
+	 */
+	public void setPlural(boolean plural)
+	{
+		this.plural = plural;
+	}
+
+	/**
 	 * Replaces placeholders with values drawn from statistical analysis.
 	 * 
 	 * @param substitutions
@@ -122,6 +140,8 @@ public class Predicate
 				replacementNounPhrase = replacementNounPhrase.replaceAll(eachPlaceHolder,
 						substitutions.get(eachPlaceHolder));
 			}
+
+			replacementNounPhrase.setPlural(this.nounPhrase.isPlural());
 		}
 
 		if (this.complement != null)
@@ -133,6 +153,8 @@ public class Predicate
 				replacementComplement = replacementComplement.replaceAll(eachPlaceHolder,
 						substitutions.get(eachPlaceHolder));
 			}
+
+			replacementComplement.setPlural(this.complement.isPlural());
 		}
 
 		return new Predicate(this.verb, replacementNounPhrase, replacementComplement);

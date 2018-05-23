@@ -18,6 +18,8 @@ public class Complement extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("Complement.class");
 
+	private boolean plural;
+
 	/**
 	 * Creates a Complement instance.
 	 * 
@@ -37,6 +39,23 @@ public class Complement extends AbstractPartOfSpeech
 			LOGGER.info(String.format("Constraint for %s: %s, with satisfaction level: %s", getText(),
 					constraint.getConstrainedElement(), constraint.getSatisfactionLevelAsValue()));
 		}
+	}
+
+	/**
+	 * @return the plural
+	 */
+	public boolean isPlural()
+	{
+		return plural;
+	}
+
+	/**
+	 * @param plural
+	 *            the plural to set
+	 */
+	public void setPlural(boolean plural)
+	{
+		this.plural = plural;
 	}
 
 	/**

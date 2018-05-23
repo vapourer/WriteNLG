@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import simplenlg.features.Feature;
+import simplenlg.features.NumberAgreement;
 import simplenlg.features.Tense;
 import simplenlg.framework.NLGElement;
 import simplenlg.phrasespec.SPhraseSpec;
@@ -21,6 +22,10 @@ public class SimpleClause extends Clause
 	private final SPhraseSpec specification;
 	private String complementiser;
 	private Tense tense;
+	private boolean subjectPlural;
+	private boolean verbPlural;
+	private boolean objectPlural;
+	private boolean complementPlural;
 
 	/**
 	 * Creates a SimpleClause instance.
@@ -45,12 +50,30 @@ public class SimpleClause extends Clause
 			{
 				case SUBJECT:
 					this.specification.setSubject(this.assignments.get(eachPartOfSpeech));
+
+					if (this.subjectPlural)
+					{
+						this.specification.getSubject().setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
+					}
+
 					break;
 				case VERB:
 					this.specification.setVerb(this.assignments.get(eachPartOfSpeech));
+
+					if (this.verbPlural)
+					{
+						this.specification.getVerb().setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
+					}
+
 					break;
 				case OBJECT:
 					this.specification.setObject(this.assignments.get(eachPartOfSpeech));
+
+					if (this.objectPlural)
+					{
+						this.specification.getObject().setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
+					}
+
 					break;
 				case INDIRECT_OBJECT:
 					this.specification.setIndirectObject(this.assignments.get(eachPartOfSpeech));
@@ -186,5 +209,73 @@ public class SimpleClause extends Clause
 		}
 
 		throw new IllegalArgumentException(identifier + " is not a recognised identifier.");
+	}
+
+	/**
+	 * @return the subjectPlural
+	 */
+	public boolean isSubjectPlural()
+	{
+		return subjectPlural;
+	}
+
+	/**
+	 * @param subjectPlural
+	 *            the subjectPlural to set
+	 */
+	public void setSubjectPlural(boolean subjectPlural)
+	{
+		this.subjectPlural = subjectPlural;
+	}
+
+	/**
+	 * @return the verbPlural
+	 */
+	public boolean isVerbPlural()
+	{
+		return verbPlural;
+	}
+
+	/**
+	 * @param verbPlural
+	 *            the verbPlural to set
+	 */
+	public void setVerbPlural(boolean verbPlural)
+	{
+		this.verbPlural = verbPlural;
+	}
+
+	/**
+	 * @return the objectPlural
+	 */
+	public boolean isObjectPlural()
+	{
+		return objectPlural;
+	}
+
+	/**
+	 * @param objectPlural
+	 *            the objectPlural to set
+	 */
+	public void setObjectPlural(boolean objectPlural)
+	{
+		this.objectPlural = objectPlural;
+	}
+
+	/**
+	 * @return the complementPlural
+	 */
+	public boolean isComplementPlural()
+	{
+		return complementPlural;
+	}
+
+	/**
+	 * @param complementPlural
+	 *            the complementPlural to set
+	 */
+	public void setComplementPlural(boolean complementPlural)
+	{
+		this.complementPlural = complementPlural;
 	}
 }

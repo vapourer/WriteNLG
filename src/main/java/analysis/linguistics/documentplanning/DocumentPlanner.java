@@ -236,22 +236,29 @@ public class DocumentPlanner
 	{
 		final SimpleClause clause = new SimpleClause();
 
+		LOGGER.info(String.format("Plural subject: %s", specification.getSubject().getNounPhrase().isPlural()));
 		clause.addAssignment(PartOfSpeech.SUBJECT, specification.getSubject().getNounPhrase().getText());
+		clause.setSubjectPlural(specification.getSubject().getNounPhrase().isPlural());
 
+		LOGGER.info(String.format("Plural verb: %s", specification.getPredicate().getVerb().isPlural()));
 		clause.addAssignment(PartOfSpeech.VERB, specification.getPredicate().getVerb().getText());
+		clause.setVerbPlural(specification.getPredicate().getVerb().isPlural());
 
 		Complement complement = specification.getPredicate().getComplement();
 
 		if (complement != null)
 		{
 			clause.addAssignment(PartOfSpeech.COMPLEMENT, complement.getText());
+			clause.setComplementPlural(complement.isPlural());
 		}
 
 		NounPhrase noun = specification.getPredicate().getNounPhrase();
 
 		if (noun != null)
 		{
+			LOGGER.info(String.format("Plural object: %s", noun.isPlural()));
 			clause.addAssignment(PartOfSpeech.OBJECT, noun.getText());
+			clause.setObjectPlural(noun.isPlural());
 		}
 
 		return clause;
