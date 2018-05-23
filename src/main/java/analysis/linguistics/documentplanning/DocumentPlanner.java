@@ -14,6 +14,7 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.aggregation.Aggregator;
+import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
 import analysis.linguistics.aggregation.concepts.IdenticalTimeSlicesConcept;
 import analysis.linguistics.contentdetermination.concepts.LineCountConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
@@ -59,8 +60,23 @@ public class DocumentPlanner
 
 		this.globalConcepts = aggregator.getGlobalConcepts();
 		this.timeSeriesSpecificConcepts = aggregator.getTimeSeriesSpecificConcepts();
-
 		this.aggregationConcepts = aggregator.getAggregationConcepts();
+
+		for (GlobalConcept eachGlobalConcept : this.globalConcepts.keySet())
+		{
+			LOGGER.info(String.format("GlobalConcept: %s", eachGlobalConcept));
+		}
+
+		for (TimeSeriesSpecificConcept eachTimeSeriesSpecificConcept : this.timeSeriesSpecificConcepts.keySet())
+		{
+			LOGGER.info(String.format("TimeSeriesSpecificConcept: %s; count: %d", eachTimeSeriesSpecificConcept,
+					this.timeSeriesSpecificConcepts.get(eachTimeSeriesSpecificConcept).size()));
+		}
+
+		for (AggregationConcept eachAggregationConcept : this.aggregationConcepts.keySet())
+		{
+			LOGGER.info(String.format("AggregationConcept: %s", eachAggregationConcept));
+		}
 
 		LOGGER.info("New DocumentPlanner created");
 	}
@@ -73,6 +89,17 @@ public class DocumentPlanner
 		section.setTitle("");
 		Paragraph paragraph1 = new Paragraph();
 		Paragraph paragraph2 = new Paragraph();
+
+		AllIntroductoryInformationPresentConcept allIntroductoryInformationPresentConcept = (AllIntroductoryInformationPresentConcept) this.aggregationConcepts
+				.get(AggregationConcept.ALL_INTRODUCTORY_INFORMATION_PRESENT);
+
+		if (allIntroductoryInformationPresentConcept != null)
+		{
+			Sentence sentence = new Sentence();
+			sentence.addClause(
+					createSimpleClause(allIntroductoryInformationPresentConcept.getPhraseSpecifications().get(0)));
+			paragraph1.addSentence(sentence);
+		}
 
 		LineCountConcept lineCountConcept = (LineCountConcept) this.globalConcepts.get(GlobalConcept.LINE_COUNT);
 

@@ -26,6 +26,11 @@ public class BooleanConstraintProcessor extends ConstraintProcessor
 	{
 		LOGGER.info("Evaluating hard constraints as booleans");
 
+		if (constraints.isEmpty())
+		{
+			return new BigDecimal("0");
+		}
+
 		BigDecimal value = new BigDecimal("1");
 
 		for (final Constraint<E> constraint : constraints)

@@ -97,6 +97,8 @@ public class WriteNlgProperties
 				this.properties.getProperty("WeightedConstraintUpperBound")));
 		LOGGER.info(String.format("Property MostSegmentsSameSlopePercentageThreshold = %s",
 				this.properties.getProperty("MostSegmentsSameSlopePercentageThreshold")));
+		LOGGER.info(String.format("Property IntroductoryInformationElementSize = %s",
+				this.properties.getProperty("IntroductoryInformationElementSize")));
 	}
 
 	/**

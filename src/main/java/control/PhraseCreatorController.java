@@ -54,15 +54,8 @@ public class PhraseCreatorController extends Controller
 		final PhraseCreatorListener listener = new PhraseCreatorListener(lineGraph, substitutor);
 		lexerParser.walkParseTree(listener);
 
-		Aggregator aggregator = new Aggregator(new ContentDetermination(listener.getConcepts()).getSelectedConcepts(),
-				listener.getAggregationConcepts());
-
-		// DocumentPlanner planner = new DocumentPlanner(lineGraph,
-		// new ContentDetermination(listener.getConcepts()).getSelectedConcepts(),
-		// new Aggregator(listener.getAggregationConcepts()));
-
-		DocumentPlanner planner = new DocumentPlanner(lineGraph, aggregator);
-
-		return planner.createDocument();
+		return new DocumentPlanner(lineGraph,
+				new Aggregator(new ContentDetermination(listener.getConcepts()).getSelectedConcepts(),
+						listener.getAggregationConcepts())).createDocument();
 	}
 }

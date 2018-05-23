@@ -32,8 +32,9 @@ public class IdenticalTimeSlicesConcept extends AbstractAggregationConcept
 {
 	private static final Logger LOGGER = LogManager.getLogger("IdenticalTimeSlicesConcept.class");
 
-	private List<AbstractConcept> timeSliceConcepts;
 	private final Map<String, ConstraintConfiguration> constraints;
+
+	private List<AbstractConcept> timeSliceConcepts;
 
 	/**
 	 * Creates a new IdenticalTimeSlicesConcept instance.
@@ -55,35 +56,70 @@ public class IdenticalTimeSlicesConcept extends AbstractAggregationConcept
 
 		this.constraints = Constraints.getInstance()
 				.getConfigurationsForAggregationConcept(AggregationConcept.IDENTICAL_TIME_SLICES);
+	}
 
-		// prepareAggregatedPhraseSpecification();
-		// assessConstraints();
+	/**
+	 * @param timeSliceConcepts
+	 *            the timeSliceConcepts to set
+	 */
+	public void setTimeSliceConcepts(List<AbstractConcept> timeSliceConcepts)
+	{
+		this.timeSliceConcepts = timeSliceConcepts;
 	}
 
 	@Override
 	protected void prepareAggregatedPhraseSpecification()
 	{
-		addPhraseSpecification(this.timeSliceConcepts.get(0).getPhraseSpecifications().get(0));
+		if (!this.timeSliceConcepts.isEmpty())
+		{
+			addPhraseSpecification(this.timeSliceConcepts.get(0).getPhraseSpecifications().get(0));
+		}
 	}
 
 	@Override
 	protected void assessConstraints()
 	{
-		BigDecimal seriesTimeSlicesAreIdentical = this.constraints
-				.get(ConstraintType.IDENTICAL_TIME_SLICES.getTextualForm()).getValue();
+		assessTimeSlicesPresentConstraint();
+		assessIdenticalTimeSlicesConstraint();
+	}
+
+	private void assessTimeSlicesPresentConstraint()
+	{
+		BigDecimal seriesTimeSlicesArePresent = this.constraints
+				.get(ConstraintType.TIME_SLICE_REQUIRED.getTextualForm()).getValue();
 
 		if (this.timeSliceConcepts.size() == 2)
 		{
-			seriesTimeSlicesAreIdentical = seriesTimeSlicesAreIdentical.multiply(new BigDecimal("1"));
+			seriesTimeSlicesArePresent = seriesTimeSlicesArePresent.multiply(new BigDecimal("1"));
+		}
+		else if (this.timeSliceConcepts.size() == 0)
+		{
+			seriesTimeSlicesArePresent = seriesTimeSlicesArePresent.multiply(new BigDecimal("0"));
 		}
 		else
 		{
-			LOGGER.error(String.format("Current implementation is only for two time series, but there were %s",
+			LOGGER.error(String.format(
+					"Current implementation is only for two time series, but there were %s, and time slice phrase specifications have not been removed",
 					this.timeSliceConcepts.size()));
 			throw new RuntimeException("Current implementation is for exactly two time series");
 		}
 
-		if (this.timeSliceConcepts.get(0).getPhraseSpecifications().get(0)
+		final Constraint<ConstraintType> timeSlicesPresentConstraint = new HardConstraint<ConstraintType>(
+				ConstraintType.TIME_SLICE_REQUIRED, new SatisfactionLevel(seriesTimeSlicesArePresent));
+
+		addConstraint(timeSlicesPresentConstraint);
+	}
+
+	private void assessIdenticalTimeSlicesConstraint()
+	{
+		BigDecimal seriesTimeSlicesAreIdentical = this.constraints
+				.get(ConstraintType.IDENTICAL_TIME_SLICES.getTextualForm()).getValue();
+
+		if (this.timeSliceConcepts.isEmpty())
+		{
+			seriesTimeSlicesAreIdentical = seriesTimeSlicesAreIdentical.multiply(new BigDecimal("0"));
+		}
+		else if (this.timeSliceConcepts.get(0).getPhraseSpecifications().get(0)
 				.equals(this.timeSliceConcepts.get(1).getPhraseSpecifications().get(0)))
 		{
 			seriesTimeSlicesAreIdentical = seriesTimeSlicesAreIdentical.multiply(new BigDecimal("1"));
@@ -99,22 +135,5 @@ public class IdenticalTimeSlicesConcept extends AbstractAggregationConcept
 				ConstraintType.IDENTICAL_TIME_SLICES, new SatisfactionLevel(seriesTimeSlicesAreIdentical));
 
 		addConstraint(identicalTimeSlicesConstraint);
-	}
-
-	/**
-	 * @return the timeSliceConcepts
-	 */
-	public List<AbstractConcept> getTimeSliceConcepts()
-	{
-		return timeSliceConcepts;
-	}
-
-	/**
-	 * @param timeSliceConcepts
-	 *            the timeSliceConcepts to set
-	 */
-	public void setTimeSliceConcepts(List<AbstractConcept> timeSliceConcepts)
-	{
-		this.timeSliceConcepts = timeSliceConcepts;
 	}
 }
