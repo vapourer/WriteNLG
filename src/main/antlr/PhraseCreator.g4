@@ -53,7 +53,6 @@ identifier					:	PART_OF_SPEECH
 							;
 			
 expression					:	PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER (' ' STRING)*
-//							|	(STRING ' ')* PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER
 							|	STRING
 							;
 							
