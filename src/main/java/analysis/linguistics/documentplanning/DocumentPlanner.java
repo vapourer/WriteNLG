@@ -15,6 +15,7 @@ import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.aggregation.Aggregator;
 import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
+import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.IdenticalTimeSlicesConcept;
 import analysis.linguistics.contentdetermination.concepts.LineCountConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
@@ -26,6 +27,7 @@ import writenlg.linguistics.phrase.PhraseSpecification;
 import writenlg.linguistics.phrase.partofspeech.Complement;
 import writenlg.linguistics.phrase.partofspeech.NounPhrase;
 import writenlg.simplenlg.Clause;
+import writenlg.simplenlg.CoordinatedPhrase;
 import writenlg.simplenlg.Document;
 import writenlg.simplenlg.Paragraph;
 import writenlg.simplenlg.PartOfSpeech;
@@ -157,6 +159,26 @@ public class DocumentPlanner
 				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
 				paragraph2.addSentence(sentence);
 			}
+		}
+
+		BothSeriesHaveAllSegmentsAscendingConcept bothSeriesHaveAllSegmentsAscendingConcept = (BothSeriesHaveAllSegmentsAscendingConcept) this.aggregationConcepts
+				.get(AggregationConcept.BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING);
+
+		if (bothSeriesHaveAllSegmentsAscendingConcept != null)
+		{
+			List<PhraseSpecification> phraseSpecifications = bothSeriesHaveAllSegmentsAscendingConcept
+					.getPhraseSpecifications();
+			Sentence sentence = new Sentence();
+			CoordinatedPhrase coordinatedPhrase = new CoordinatedPhrase();
+
+			for (PhraseSpecification eachPhraseSpecification : phraseSpecifications)
+			{
+				coordinatedPhrase.addClause((SimpleClause) createSimpleClause(eachPhraseSpecification));
+			}
+
+			coordinatedPhrase.setConjunction(bothSeriesHaveAllSegmentsAscendingConcept.getConjunction());
+			sentence.addClause(coordinatedPhrase);
+			paragraph2.addSentence(sentence);
 		}
 
 		List<AbstractConcept> descendingTrendConcepts = this.timeSeriesSpecificConcepts

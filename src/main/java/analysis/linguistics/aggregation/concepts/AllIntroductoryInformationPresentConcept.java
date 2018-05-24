@@ -89,7 +89,7 @@ public class AllIntroductoryInformationPresentConcept extends AbstractAggregatio
 	{
 		if (this.getPhraseSpecifications().size() == 0)
 		{
-			LOGGER.info(
+			LOGGER.error(
 					"List of phrase specifications was empty, but current implementation expects a prepared phrase specification from ANTLR input");
 			throw new RuntimeException(
 					"Current implementation expects a prepared phrase specification from ANTLR input");

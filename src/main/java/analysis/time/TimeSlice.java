@@ -129,6 +129,7 @@ public class TimeSlice
 		}
 	}
 
+	// TODO: Rationalise calculateTimeSlice and calculateTimeSliceAsAdjective
 	private String calculateTimeSliceAsAdjective()
 	{
 		Calendar calendar = Calendar.getInstance();

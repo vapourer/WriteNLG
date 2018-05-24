@@ -36,3 +36,6 @@ LineCountRequired=1.0
 SeriesLegendRequired=1.0
 TimeSliceRequired=1.0
 AllIntroductoryInformationPresent=1.0
+AggregationConcept=BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING
+BothSeriesHaveAllSegmentsAscending=1.0
+AllSegmentsAscending=1.0

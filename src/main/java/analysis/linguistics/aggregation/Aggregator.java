@@ -89,6 +89,7 @@ public class Aggregator
 	{
 		processAllIntroductoryInformationPresentConcept();
 		processIdenticalTimeSlicesConcept();
+		processBothSeriesHaveAllSegmentsAscendingConcept();
 	}
 
 	private void processAllIntroductoryInformationPresentConcept()
@@ -96,10 +97,13 @@ public class Aggregator
 		AllIntroductoryInformationPresentConcept allIntroductoryInformationPresentConcept = (AllIntroductoryInformationPresentConcept) this.aggregationConcepts
 				.get(AggregationConcept.ALL_INTRODUCTORY_INFORMATION_PRESENT);
 
-		allIntroductoryInformationPresentConcept.setGlobalConcepts(this.globalConcepts);
-		allIntroductoryInformationPresentConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
+		if (allIntroductoryInformationPresentConcept != null)
+		{
+			allIntroductoryInformationPresentConcept.setGlobalConcepts(this.globalConcepts);
+			allIntroductoryInformationPresentConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
 
-		allIntroductoryInformationPresentConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+			allIntroductoryInformationPresentConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
 
 		int introductoryInformationElementCount = 0;
 
@@ -136,10 +140,13 @@ public class Aggregator
 		IdenticalTimeSlicesConcept identicalTimeSlicesConcept = (IdenticalTimeSlicesConcept) this.aggregationConcepts
 				.get(AggregationConcept.IDENTICAL_TIME_SLICES);
 
-		identicalTimeSlicesConcept
-				.setTimeSliceConcepts(this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TIME_SLICE));
+		if (identicalTimeSlicesConcept != null)
+		{
+			identicalTimeSlicesConcept
+					.setTimeSliceConcepts(this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TIME_SLICE));
 
-		identicalTimeSlicesConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+			identicalTimeSlicesConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
 
 		if (identicalTimeSlicesConcept != null
 				&& identicalTimeSlicesConcept.calculateSatisfactionLevel().compareTo(new BigDecimal("1")) == 0)
@@ -150,6 +157,34 @@ public class Aggregator
 		else
 		{
 			this.aggregationConcepts.remove(AggregationConcept.IDENTICAL_TIME_SLICES);
+		}
+	}
+
+	private void processBothSeriesHaveAllSegmentsAscendingConcept()
+	{
+		BothSeriesHaveAllSegmentsAscendingConcept bothSeriesHaveAllSegmentsAscendingConcept = (BothSeriesHaveAllSegmentsAscendingConcept) this.aggregationConcepts
+				.get(AggregationConcept.BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING);
+
+		if (bothSeriesHaveAllSegmentsAscendingConcept != null)
+		{
+			bothSeriesHaveAllSegmentsAscendingConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
+			bothSeriesHaveAllSegmentsAscendingConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
+
+		final int allSegmentsAscendingCount = this.timeSeriesSpecificConcepts
+				.get(TimeSeriesSpecificConcept.RISING_TREND).size();
+
+		if (bothSeriesHaveAllSegmentsAscendingConcept != null && bothSeriesHaveAllSegmentsAscendingConcept
+				.calculateSatisfactionLevel().compareTo(new BigDecimal(allSegmentsAscendingCount)) > 0)
+		{
+			this.aggregationConcepts.put(AggregationConcept.BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING,
+					bothSeriesHaveAllSegmentsAscendingConcept);
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND).clear();
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).clear();
+		}
+		else
+		{
+			this.aggregationConcepts.remove(AggregationConcept.BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING);
 		}
 	}
 

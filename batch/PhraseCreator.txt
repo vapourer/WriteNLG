@@ -44,29 +44,35 @@ COMPLEMENT		:	@@LineCount@@
 TimeSeriesConcept=MAXIMUM
 PhraseSpecification
 Subject
-NOUN			:	the maximum
+NOUN			:	@@SeriesLegend@@
 Predicate
-VERB			:	be
-COMPLEMENT		:	@@Maximum@@
+VERB			:	have
+COMPLEMENT		:	maximum
+COMPLEMENT2		:	@@Maximum@@
 TimeSeriesConcept=MINIMUM
 PhraseSpecification
 Subject
-NOUN			:	the minimum
+NOUN			:	@@SeriesLegend@@
 Predicate
-VERB			:	be
-COMPLEMENT		:	@@Minimum@@
+VERB			:	have
+COMPLEMENT		:	minimum
+COMPLEMENT2		:	@@Minimum@@
 TimeSeriesConcept=RISING_TREND
 PhraseSpecification
 Subject
 NOUN			:	@@SeriesLegend@@
 Predicate
 VERB			:	rise
+COMPLEMENT		:	to
+COMPLEMENT2		:	@@Maximum@@
 TimeSeriesConcept=DESCENDING_TREND
 PhraseSpecification
 Subject
 NOUN			:	@@SeriesLegend@@
 Predicate
 VERB			:	fall
+COMPLEMENT		:	to
+COMPLEMENT2		:	@@Minimum@@
 TimeSeriesConcept=TIME_SLICE
 PhraseSpecification
 Subject

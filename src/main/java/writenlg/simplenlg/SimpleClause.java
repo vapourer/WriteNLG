@@ -55,9 +55,6 @@ public class SimpleClause extends Clause
 			{
 				case SUBJECT:
 					subject = this.assignments.get(eachPartOfSpeech);
-
-					// this.specification.setSubject(this.assignments.get(eachPartOfSpeech));
-
 					break;
 				case ADDITIONAL_SUBJECT:
 					additionalSubject = this.assignments.get(eachPartOfSpeech);

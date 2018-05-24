@@ -11,6 +11,7 @@ import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGFactory;
 import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
+import simplenlg.phrasespec.PPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.realiser.english.Realiser;
 
@@ -67,6 +68,16 @@ public class SimpleNlg
 	public NPPhraseSpec createNounPhraseSpecification(String text)
 	{
 		return this.nlgFactory.createNounPhrase(text);
+	}
+
+	/**
+	 * Creates a new PPPhraseSpec
+	 * 
+	 * @return PPPhraseSpec
+	 */
+	public PPPhraseSpec createPrepositionalPhraseSpecification()
+	{
+		return this.nlgFactory.createPrepositionPhrase();
 	}
 
 	/**

@@ -69,4 +69,5 @@ public class Complement extends AbstractPartOfSpeech
 	{
 		return new Complement(getText().replaceAll(regex, substitution), this.getConstraintGroup());
 	}
+
 }

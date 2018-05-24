@@ -24,11 +24,14 @@ public abstract class AbstractAggregationConcept extends AbstractConcept
 
 	protected abstract void assessConstraints();
 
+	private String conjunction;
+
 	public AbstractAggregationConcept(List<PhraseSpecification> phraseSpecifications,
 			ConstraintGroup<ConstraintType> constraintGroup)
 	{
 		super(phraseSpecifications, constraintGroup);
 		this.conceptGroups = new HashSet<>();
+		this.conjunction = "";
 	}
 
 	/**
@@ -43,5 +46,22 @@ public abstract class AbstractAggregationConcept extends AbstractConcept
 	{
 		prepareAggregatedPhraseSpecification();
 		assessConstraints();
+	}
+
+	/**
+	 * @return the conjunction
+	 */
+	public String getConjunction()
+	{
+		return conjunction;
+	}
+
+	/**
+	 * @param conjunction
+	 *            the conjunction to set
+	 */
+	public void setConjunction(final String conjunction)
+	{
+		this.conjunction = conjunction;
 	}
 }
