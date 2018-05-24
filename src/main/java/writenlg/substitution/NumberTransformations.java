@@ -11,9 +11,24 @@ import java.util.Map;
  */
 public final class NumberTransformations
 {
+	private static NumberTransformations INSTANCE;
+
 	private final Map<Integer, String> numbersToStrings;
 
-	public NumberTransformations()
+	/**
+	 * @return a new NumberTransformations instance.
+	 */
+	public static NumberTransformations getInstance()
+	{
+		if (INSTANCE == null)
+		{
+			INSTANCE = new NumberTransformations();
+		}
+
+		return INSTANCE;
+	}
+
+	private NumberTransformations()
 	{
 		this.numbersToStrings = new HashMap<>();
 		populateNumbersToStrings();

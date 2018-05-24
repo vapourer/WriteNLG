@@ -53,7 +53,7 @@ identifier					:	PART_OF_SPEECH
 							;
 			
 expression					:	PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER (' ' STRING)*
-							|	(STRING ' ')* PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER
+//							|	(STRING ' ')* PLACE_HOLDER_MARKER STRING PLACE_HOLDER_MARKER
 							|	STRING
 							;
 							
@@ -158,6 +158,7 @@ PART_OF_SPEECH				:	'NOUN'
 							|	'CONJUNCTION'
 							|	'INTERJECTION'
 							|	'COMPLEMENT'
+							|	'COMPLEMENT2'
 							;
 					
 STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*

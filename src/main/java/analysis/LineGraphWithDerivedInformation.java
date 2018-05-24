@@ -6,15 +6,21 @@ package analysis;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import analysis.graph.LineGraph;
 import analysis.graph.TimeSeries;
 import analysis.statistics.TimeSeriesCross;
+import analysis.time.TimeSlice;
 
 /**
  * Container for analyses and comparison of multiple time series, based on selected statistical algorithms.
  */
 public class LineGraphWithDerivedInformation
 {
+	private static final Logger LOGGER = LogManager.getLogger("LineGraphWithDerivedInformation.class");
+
 	private final LineGraph lineGraph;
 	private final List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation;
 	private final int timeSeriesCount;
@@ -72,5 +78,25 @@ public class LineGraphWithDerivedInformation
 	public String getTitle()
 	{
 		return this.lineGraph.getTitle();
+	}
+
+	/**
+	 * @return the timeSlice
+	 */
+	public TimeSlice getTimeSlice()
+	{
+		TimeSlice timeSlice = this.timeSeriesWithDerivedInformation.get(0).getTimeSlice();
+
+		for (int i = 1; i < this.timeSeriesWithDerivedInformation.size(); i++)
+		{
+			if (!this.timeSeriesWithDerivedInformation.get(i).getTimeSlice().toString().equals(timeSlice.toString()))
+			{
+				LOGGER.error(
+						"Multiple time slices identified. Current implementation does not cater for differing timeslices.");
+				throw new RuntimeException("Current implementation does not cater for differing timeslices");
+			}
+		}
+
+		return timeSlice;
 	}
 }

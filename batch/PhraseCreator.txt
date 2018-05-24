@@ -83,5 +83,5 @@ Subject
 NOUN		:	@@LineCountText@@ series
 Predicate
 VERB		:	be
-COMPLEMENT	:	recorded every @@TimeSlice@@
-			
+COMPLEMENT	:	recorded each
+COMPLEMENT2	:	@@TimeSlice@@

@@ -51,6 +51,8 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	private SentencePart sentencePart;
 	private Subject subject;
 	private Predicate predicate;
+	private String complement;
+	private ConstraintGroup<String> complementConstraintGroup;
 	private boolean isSubjectPlural;
 	private boolean isVerbPlural;
 	private boolean isObjectPlural;
@@ -122,6 +124,14 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 	@Override
 	public void exitPhraseSpecification(final PhraseCreatorParser.PhraseSpecificationContext context)
 	{
+		if (this.complement != null)
+		{
+			this.predicate.setComplement(new Complement(this.complement, this.complementConstraintGroup));
+			this.predicate.getComplement().setPlural(this.isComplementPlural);
+			LOGGER.info(String.format("New Complement added to Predicate: %s; plural: %s", this.complement,
+					this.isComplementPlural));
+		}
+
 		this.phraseSpecification.setSubject(this.subject);
 		this.phraseSpecification.setPredicate(this.predicate);
 		this.phraseSpecifications.add(this.phraseSpecification);
@@ -130,6 +140,9 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 		this.isVerbPlural = false;
 		this.isObjectPlural = false;
 		this.isComplementPlural = false;
+
+		this.complement = null;
+		this.complementConstraintGroup = null;
 
 		this.phraseSpecification = new PhraseSpecification();
 	}
@@ -264,10 +277,15 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 			case PRONOUN:
 				break;
 			case COMPLEMENT:
-				this.predicate.setComplement(new Complement(expression, constraintGroup));
-				this.predicate.getComplement().setPlural(this.isComplementPlural);
-				LOGGER.info(String.format("New Complement added to Predicate: %s; plural: %s", expression,
-						this.isComplementPlural));
+				this.complement = expression;
+				this.complementConstraintGroup = constraintGroup;
+				// this.predicate.setComplement(new Complement(expression, constraintGroup));
+				// this.predicate.getComplement().setPlural(this.isComplementPlural);
+				// LOGGER.info(String.format("New Complement added to Predicate: %s; plural: %s", expression,
+				// this.isComplementPlural));
+				break;
+			case COMPLEMENT2:
+				this.complement += " " + expression;
 				break;
 			default:
 				break;

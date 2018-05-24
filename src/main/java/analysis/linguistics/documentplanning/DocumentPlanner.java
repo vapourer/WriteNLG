@@ -248,6 +248,7 @@ public class DocumentPlanner
 
 		if (complement != null)
 		{
+			LOGGER.info(String.format("Plural complement: %s", complement.isPlural()));
 			clause.addAssignment(PartOfSpeech.COMPLEMENT, complement.getText());
 			clause.setComplementPlural(complement.isPlural());
 		}

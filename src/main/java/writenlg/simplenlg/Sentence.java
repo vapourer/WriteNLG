@@ -48,13 +48,9 @@ public class Sentence implements DocumentGenerator
 							.addComplement(eachClause.getAsNLGElement());
 				}
 			}
+		}
 
-			this.sentence = SimpleNlg.getInstance().createSentence(this.clauses.get(0).getAsNLGElement());
-		}
-		else
-		{
-			this.sentence = SimpleNlg.getInstance().createSentence(this.clauses.get(0).getAsNLGElement());
-		}
+		this.sentence = SimpleNlg.getInstance().createSentence(this.clauses.get(0).getAsNLGElement());
 	}
 
 	/**
