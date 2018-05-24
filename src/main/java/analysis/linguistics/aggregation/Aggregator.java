@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
+import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
+import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
+import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
 import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsDescendingConcept;
@@ -181,6 +184,7 @@ public class Aggregator
 					bothSeriesHaveAllSegmentsAscendingConcept);
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND).clear();
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).clear();
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).clear();
 		}
 		else
 		{
@@ -236,6 +240,18 @@ public class Aggregator
 				final IdenticalTimeSlicesConcept identicalTimeSlicesConcept = new IdenticalTimeSlicesConcept();
 				identicalTimeSlicesConcept.addConceptGroup(conceptGroup);
 				return identicalTimeSlicesConcept;
+			case AGGREGATE_MAXIMA:
+				final AggregateMaximaConcept aggregateMaximaConcept = new AggregateMaximaConcept();
+				aggregateMaximaConcept.addConceptGroup(conceptGroup);
+				return aggregateMaximaConcept;
+			case AGGREGATE_MINIMA:
+				final AggregateMinimaConcept aggregateMinimaConcept = new AggregateMinimaConcept();
+				aggregateMinimaConcept.addConceptGroup(conceptGroup);
+				return aggregateMinimaConcept;
+			case AGGREGATE_MAXIMUM_AND_MINIMUM:
+				final AggregateMaximumAndMinimumConcept aggregateMaximumAndMinimumConcept = new AggregateMaximumAndMinimumConcept();
+				aggregateMaximumAndMinimumConcept.addConceptGroup(conceptGroup);
+				return aggregateMaximumAndMinimumConcept;
 			default:
 				LOGGER.error(String.format("%s not implemented", aggregationConcept));
 				throw new RuntimeException("Enum value not implemented");

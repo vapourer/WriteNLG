@@ -32,7 +32,12 @@ public enum ConstraintType
 	BOTH_SERIES_HAVE_ALL_SEGMENTS_DESCENDING("BothSeriesHaveAllSegmentsDescending"),
 	BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING("BothSeriesHaveMostSegmentsAscending"),
 	BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING("BothSeriesHaveMostSegmentsDescending"),
-	IDENTICAL_TIME_SLICES("IdenticalTimeSlices");
+	IDENTICAL_TIME_SLICES("IdenticalTimeSlices"),
+	MAXIMUM_REQUIRED("MaximumRequired"),
+	MINIMUM_REQUIRED("MinimumRequired"),
+	MAXIMA_ALL_PRESENT("MaximaAllPresent"),
+	MINIMA_ALL_PRESENT("MinimaAllPresent"),
+	MAXIMA_AND_MINIMA_ALL_PRESENT("MaximaAndMinimaAllPresent");
 
 	final private String textualForm;
 

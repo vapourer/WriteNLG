@@ -284,12 +284,11 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 			case COMPLEMENT:
 				this.complement = expression;
 				this.complementConstraintGroup = constraintGroup;
-				// this.predicate.setComplement(new Complement(expression, constraintGroup));
-				// this.predicate.getComplement().setPlural(this.isComplementPlural);
-				// LOGGER.info(String.format("New Complement added to Predicate: %s; plural: %s", expression,
-				// this.isComplementPlural));
 				break;
 			case COMPLEMENT2:
+				this.complement += " " + expression;
+				break;
+			case COMPLEMENT3:
 				this.complement += " " + expression;
 				break;
 			default:

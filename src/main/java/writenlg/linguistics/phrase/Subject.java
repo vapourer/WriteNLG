@@ -144,7 +144,8 @@ public class Subject
 		Subject otherSubject = (Subject) object;
 
 		return this.nounPhrase.getText().equals(otherSubject.nounPhrase.getText())
-				&& this.additionalNounPhrase.getText().equals(otherSubject.additionalNounPhrase.getText());
+				&& ((this.additionalNounPhrase == null && otherSubject.additionalNounPhrase == null)
+						|| (this.additionalNounPhrase.getText().equals(otherSubject.additionalNounPhrase.getText())));
 	}
 
 	@Override

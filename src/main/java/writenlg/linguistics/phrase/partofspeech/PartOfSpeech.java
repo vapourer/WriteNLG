@@ -20,4 +20,5 @@ public enum PartOfSpeech
 	INTERJECTION,
 	COMPLEMENT,
 	COMPLEMENT2,
+	COMPLEMENT3,
 }

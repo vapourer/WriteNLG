@@ -13,7 +13,10 @@ public enum AggregationConstraintType
 	BOTH_SERIES_HAVE_ALL_SEGMENTS_DESCENDING("BothSeriesHaveAllSegmentsDescending"),
 	BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING("BothSeriesHaveMostSegmentsAscending"),
 	BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING("BothSeriesHaveMostSegmentsDescending"),
-	IDENTICAL_TIME_SLICES("IdenticalTimeSlices");
+	IDENTICAL_TIME_SLICES("IdenticalTimeSlices"),
+	AGGREGATE_MAXIMA("AggregateMaximaConcept"),
+	AGGREGATE_MINIMA("AggregateMinima"),
+	AGGREGATE_MAXIMUM_AND_MINIMUM("AggregateMaximumAndMinimum");
 
 	final private String textualForm;
 

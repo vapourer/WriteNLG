@@ -63,16 +63,18 @@ Subject
 NOUN			:	@@SeriesLegend@@
 Predicate
 VERB			:	rise
-COMPLEMENT		:	to
-COMPLEMENT2		:	@@Maximum@@
+COMPLEMENT		:	from
+COMPLEMENT2		:	@@Minimum@@ to
+COMPLEMENT3		:	@@Maximum@@
 TimeSeriesConcept=DESCENDING_TREND
 PhraseSpecification
 Subject
 NOUN			:	@@SeriesLegend@@
 Predicate
 VERB			:	fall
-COMPLEMENT		:	to
-COMPLEMENT2		:	@@Minimum@@
+COMPLEMENT		:	from
+COMPLEMENT2		:	@@Maximum@@ to
+COMPLEMENT3		:	@@Minimum@@
 TimeSeriesConcept=TIME_SLICE
 PhraseSpecification
 Subject

@@ -15,6 +15,7 @@ import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.Constraints;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
 import writenlg.aggregation.AbstractAggregationConcept;
 import writenlg.constrain.Constraint;
@@ -24,7 +25,6 @@ import writenlg.constrain.HardConstraintGroup;
 import writenlg.constrain.HardConstraintProcessor;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.linguistics.phrase.PhraseSpecification;
-import writenlg.linguistics.phrase.partofspeech.Complement;
 
 /**
  * Aggregates if both series have all segments ascending.
@@ -82,17 +82,7 @@ public class BothSeriesHaveAllSegmentsAscendingConcept extends AbstractAggregati
 				addPhraseSpecification(eachConcept.getPhraseSpecifications().get(0));
 			}
 
-			Complement complement1 = getPhraseSpecifications().get(0).getPredicate().getComplement();
-			Complement complement2 = getPhraseSpecifications().get(1).getPredicate().getComplement();
-
-			if (complement1.getText().equals(complement2.getText()))
-			{
-				setConjunction("and");
-			}
-			else
-			{
-				setConjunction("but");
-			}
+			setConjunction("whilst");
 		}
 	}
 
@@ -126,7 +116,11 @@ public class BothSeriesHaveAllSegmentsAscendingConcept extends AbstractAggregati
 		BigDecimal bothSeriesHaveAllSegmentsAscending = this.constraints
 				.get(ConstraintType.BOTH_SERIES_HAVE_ALL_SEGMENTS_ASCENDING.getTextualForm()).getValue();
 
-		if (this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND).size() == 2)
+		int seriesWithAllSegmentsAscendingSize = Integer
+				.parseInt(WriteNlgProperties.getInstance().getProperty("SeriesWithAllSegmentsAscendingSize"));
+
+		if (this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND)
+				.size() == seriesWithAllSegmentsAscendingSize)
 		{
 			bothSeriesHaveAllSegmentsAscending = bothSeriesHaveAllSegmentsAscending.multiply(new BigDecimal("1"));
 		}

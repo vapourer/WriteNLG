@@ -75,6 +75,9 @@ AGGREGATION_CONCEPT_TYPE	:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
 							|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_ASCENDING'
 							|	'BOTH_SERIES_HAVE_MOST_SEGMENTS_DESCENDING'
 							|	'IDENTICAL_TIME_SLICES'
+							|	'AGGREGATE_MAXIMA'
+							|	'AGGREGATE_MINIMA'
+							|	'AGGREGATE_MAXIMUM_AND_MINIMUM'
 							;	
 							
 CONSTRAINT_NAME				:	'LinesCross'
@@ -102,6 +105,11 @@ CONSTRAINT_NAME				:	'LinesCross'
 							|	'BothSeriesHaveMostSegmentsAscending'
 							|	'BothSeriesHaveMostSegmentsDescending'
 							|	'IdenticalTimeSlices'
+							|	'MaximumRequired'
+							|	'MinimumRequired'
+							|	'MaximaAllPresent'
+							|	'MinimaAllPresent'
+							|	'MaximaAndMinimaAllPresent'
 							;
 							
 INITIAL_VALUE				:	DIGIT+ '.' DIGIT+

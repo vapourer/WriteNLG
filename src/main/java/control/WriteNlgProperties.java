@@ -99,6 +99,8 @@ public class WriteNlgProperties
 				this.properties.getProperty("MostSegmentsSameSlopePercentageThreshold")));
 		LOGGER.info(String.format("Property IntroductoryInformationElementSize = %s",
 				this.properties.getProperty("IntroductoryInformationElementSize")));
+		LOGGER.info(String.format("Property SeriesWithAllSegmentsAscendingSize = %s",
+				this.properties.getProperty("SeriesWithAllSegmentsAscendingSize")));
 	}
 
 	/**
