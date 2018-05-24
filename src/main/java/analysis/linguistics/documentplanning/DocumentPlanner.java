@@ -240,6 +240,13 @@ public class DocumentPlanner
 		clause.addAssignment(PartOfSpeech.SUBJECT, specification.getSubject().getNounPhrase().getText());
 		clause.setSubjectPlural(specification.getSubject().getNounPhrase().isPlural());
 
+		NounPhrase additionalNounPhrase = specification.getSubject().getAdditionalNounPhrase();
+
+		if (additionalNounPhrase != null)
+		{
+			clause.addAssignment(PartOfSpeech.ADDITIONAL_SUBJECT, additionalNounPhrase.getText());
+		}
+
 		LOGGER.info(String.format("Plural verb: %s", specification.getPredicate().getVerb().isPlural()));
 		clause.addAssignment(PartOfSpeech.VERB, specification.getPredicate().getVerb().getText());
 		clause.setVerbPlural(specification.getPredicate().getVerb().isPlural());

@@ -71,7 +71,6 @@ public class NounPhrase extends AbstractPartOfSpeech
 	{
 		NounPhrase newNounPhrase = new NounPhrase(getText().replaceAll(regex, substitution), this.getConstraintGroup());
 		LOGGER.info(String.format("replaceAll NounPhrase %s is plural: %s", getText(), this.plural));
-		// newNounPhrase.setPlural(this.plural);
 
 		return newNounPhrase;
 	}

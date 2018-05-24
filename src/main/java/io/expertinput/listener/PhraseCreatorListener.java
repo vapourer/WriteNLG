@@ -222,6 +222,11 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 				LOGGER.info(String.format("New NounPhrase added to Subject: %s; plural: %s", expression,
 						this.isSubjectPlural));
 				break;
+			case ADDITIONAL_NOUN:
+				this.subject.addAdditionalNounPhrase(new NounPhrase(expression, constraintGroup));
+				LOGGER.info(String.format("New additional NounPhrase added to Subject: %s; plural: %s", expression,
+						this.isSubjectPlural));
+				break;
 			case VERB:
 				break;
 			case ADJECTIVE:

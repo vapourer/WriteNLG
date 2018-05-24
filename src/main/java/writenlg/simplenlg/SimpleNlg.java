@@ -10,6 +10,7 @@ import simplenlg.framework.DocumentElement;
 import simplenlg.framework.NLGElement;
 import simplenlg.framework.NLGFactory;
 import simplenlg.lexicon.Lexicon;
+import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.realiser.english.Realiser;
 
@@ -58,6 +59,17 @@ public class SimpleNlg
 	}
 
 	/**
+	 * Creates a new NPPhraseSpec according to text
+	 * 
+	 * @param text
+	 * @return NPPhraseSpec
+	 */
+	public NPPhraseSpec createNounPhraseSpecification(String text)
+	{
+		return this.nlgFactory.createNounPhrase(text);
+	}
+
+	/**
 	 * Creates a new SPhraseSpec
 	 *
 	 * @return SPhraseSpec
@@ -75,6 +87,18 @@ public class SimpleNlg
 	public CoordinatedPhraseElement createCoordinatedPhraseElement()
 	{
 		return this.nlgFactory.createCoordinatedPhrase();
+	}
+
+	/**
+	 * Returns a new CoordinatedPhraseElement, according to coordinate1 and coordinate2.
+	 * 
+	 * @param coordinate1
+	 * @param coordinate2
+	 * @return
+	 */
+	public CoordinatedPhraseElement createCoordinatedPhraseElement(Object coordinate1, Object coordinate2)
+	{
+		return this.nlgFactory.createCoordinatedPhrase(coordinate1, coordinate2);
 	}
 
 	/**

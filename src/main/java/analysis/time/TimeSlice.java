@@ -21,6 +21,7 @@ public class TimeSlice
 	private final long time2;
 	private Long interval;
 	private String intervalAsString;
+	private String intervalAsAdjective;
 
 	/**
 	 * Creates a new TimeSlice instance.
@@ -70,6 +71,18 @@ public class TimeSlice
 		return this.intervalAsString;
 	}
 
+	public String asAdjective()
+	{
+		if (this.intervalAsAdjective == null)
+		{
+			this.intervalAsAdjective = calculateTimeSliceAsAdjective();
+
+			LOGGER.info(String.format("Adjective representation is %s", this.intervalAsAdjective));
+		}
+
+		return this.intervalAsAdjective;
+	}
+
 	/**
 	 * TODO: identify 1 week based on dates that cross from one month to the next. Not an immediate priority for current
 	 * experimentation.
@@ -113,6 +126,48 @@ public class TimeSlice
 		else
 		{
 			return ((this.time2 - this.time1) / MILLISECONDS_TO_DAYS) + " days";
+		}
+	}
+
+	private String calculateTimeSliceAsAdjective()
+	{
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTimeInMillis(this.time1);
+		int year1 = calendar.get(Calendar.YEAR);
+		int month1 = calendar.get(Calendar.MONTH);
+		int day1 = calendar.get(Calendar.DAY_OF_MONTH);
+		int weekOfYear1 = calendar.get(Calendar.WEEK_OF_YEAR);
+
+		calendar.setTimeInMillis(this.time2);
+		int year2 = calendar.get(Calendar.YEAR);
+		int month2 = calendar.get(Calendar.MONTH);
+		int day2 = calendar.get(Calendar.DAY_OF_MONTH);
+		int weekOfYear2 = calendar.get(Calendar.WEEK_OF_YEAR);
+
+		int yearDifference = year2 - year1;
+		int monthDifference = month2 - month1;
+		int dayDifference = day2 - day1;
+
+		if (monthDifference == 0 && (dayDifference == 0 || weekOfYear2 == weekOfYear1))
+		{
+			return yearDifference + " year";
+		}
+		else if (yearDifference == 0 && dayDifference == 0)
+		{
+			return monthDifference + " month";
+		}
+		else if (yearDifference == 0 && monthDifference == 0 && dayDifference % 7 == 0)
+		{
+			return (dayDifference / 7) + " week";
+		}
+		else if (yearDifference == 0 && monthDifference == 0 && dayDifference % 7 > 0)
+		{
+			return dayDifference + " day";
+		}
+		else
+		{
+			return ((this.time2 - this.time1) / MILLISECONDS_TO_DAYS) + " day";
 		}
 	}
 }

@@ -72,6 +72,14 @@ public class Substitutor implements Mapper
 		this.globalMappings.addSubstitution("@@TimeSlice@@",
 				this.lineGraphWithDerivedInformation.getTimeSlice().toString());
 
+		this.globalMappings.addSubstitution("@@TimeSliceAsAdjective@@",
+				this.lineGraphWithDerivedInformation.getTimeSlice().asAdjective());
+
+		List<String> seriesLegends = this.lineGraphWithDerivedInformation.getTimesSeriesLegends();
+		final String seriesLegendsAsPhrase = seriesLegends.get(0) + " and " + seriesLegends.get(1);
+
+		this.globalMappings.addSubstitution("@@SeriesLegends@@", seriesLegendsAsPhrase);
+
 		return this.globalMappings;
 	}
 

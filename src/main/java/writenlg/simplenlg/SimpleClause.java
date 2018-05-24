@@ -9,7 +9,9 @@ import java.util.Map;
 import simplenlg.features.Feature;
 import simplenlg.features.NumberAgreement;
 import simplenlg.features.Tense;
+import simplenlg.framework.CoordinatedPhraseElement;
 import simplenlg.framework.NLGElement;
+import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 
 /**
@@ -44,18 +46,21 @@ public class SimpleClause extends Clause
 	@Override
 	public void process()
 	{
+		String subject = "";
+		String additionalSubject = null;
+
 		for (final PartOfSpeech eachPartOfSpeech : this.assignments.keySet())
 		{
 			switch (eachPartOfSpeech)
 			{
 				case SUBJECT:
-					this.specification.setSubject(this.assignments.get(eachPartOfSpeech));
+					subject = this.assignments.get(eachPartOfSpeech);
 
-					if (this.subjectPlural)
-					{
-						this.specification.getSubject().setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
-					}
+					// this.specification.setSubject(this.assignments.get(eachPartOfSpeech));
 
+					break;
+				case ADDITIONAL_SUBJECT:
+					additionalSubject = this.assignments.get(eachPartOfSpeech);
 					break;
 				case VERB:
 					this.specification.setVerb(this.assignments.get(eachPartOfSpeech));
@@ -90,6 +95,24 @@ public class SimpleClause extends Clause
 				default:
 					throw new RuntimeException("Supplied enumeration value has not been implemented");
 			}
+		}
+
+		if (additionalSubject != null)
+		{
+			NPPhraseSpec subject1 = simpleNlg.createNounPhraseSpecification(subject);
+			NPPhraseSpec subject2 = simpleNlg.createNounPhraseSpecification(additionalSubject);
+			CoordinatedPhraseElement coordinatedPhraseElement = simpleNlg.createCoordinatedPhraseElement(subject1,
+					subject2);
+			this.specification.setSubject(coordinatedPhraseElement);
+		}
+		else
+		{
+			this.specification.setSubject(subject);
+		}
+
+		if (this.subjectPlural)
+		{
+			this.specification.getSubject().setFeature(Feature.NUMBER, NumberAgreement.PLURAL);
 		}
 
 		if (!this.complementiser.equals(""))

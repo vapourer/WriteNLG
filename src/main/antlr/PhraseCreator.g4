@@ -149,6 +149,7 @@ FEATURES					:	'Features'
 							;
 					
 PART_OF_SPEECH				:	'NOUN'
+							|	'ADDITIONAL_NOUN'
 							|	'PRONOUN'
 							|	'ADJECTIVE'
 							|	'DETERMINER'

@@ -4,18 +4,18 @@ Features
 SubjectNumber=plural
 VerbNumber=plural
 Subject
-NOUN		:	the lines
+NOUN			:	the lines
 Predicate
-VERB		:	cross
+VERB			:	cross
 GlobalConcept=LINES_DO_NOT_CROSS
 PhraseSpecification
 Features
 SubjectNumber=plural
 VerbNumber=plural
 Subject
-NOUN		:	the lines
+NOUN			:	the lines
 Predicate
-VERB		:	do not cross
+VERB			:	do not cross
 GlobalConcept=LINES_CROSS_MULTIPLE_TIMES
 PhraseSpecification
 Features
@@ -23,65 +23,65 @@ SubjectNumber=plural
 VerbNumber=plural
 ComplementNumber=plural
 Subject
-NOUN		:	the lines
+NOUN			:	the lines
 Predicate
-VERB		:	cross
-COMPLEMENT	:	@@CrossCount@@ times
+VERB			:	cross
+COMPLEMENT		:	@@CrossCount@@ times
 TimeSeriesConcept=SERIES_LEGEND
 PhraseSpecification
 Subject
-NOUN		:	the title
+NOUN			:	the title
 Predicate
-VERB		:	be
-COMPLEMENT	:	@@SeriesLegend@@
+VERB			:	be
+COMPLEMENT		:	@@SeriesLegend@@
 GlobalConcept=LINE_COUNT
 PhraseSpecification
 Subject
-NOUN		:	the series count
+NOUN			:	the series count
 Predicate
-VERB		:	be
-COMPLEMENT	:	@@LineCount@@
+VERB			:	be
+COMPLEMENT		:	@@LineCount@@
 TimeSeriesConcept=MAXIMUM
 PhraseSpecification
 Subject
-NOUN		:	the maximum
+NOUN			:	the maximum
 Predicate
-VERB		:	be
-COMPLEMENT	:	@@Maximum@@
+VERB			:	be
+COMPLEMENT		:	@@Maximum@@
 TimeSeriesConcept=MINIMUM
 PhraseSpecification
 Subject
-NOUN		:	the minimum
+NOUN			:	the minimum
 Predicate
-VERB		:	be
-COMPLEMENT	:	@@Minimum@@
+VERB			:	be
+COMPLEMENT		:	@@Minimum@@
 TimeSeriesConcept=RISING_TREND
 PhraseSpecification
 Subject
-NOUN		:	@@SeriesLegend@@
+NOUN			:	@@SeriesLegend@@
 Predicate
-VERB		:	rise
+VERB			:	rise
 TimeSeriesConcept=DESCENDING_TREND
 PhraseSpecification
 Subject
-NOUN		:	@@SeriesLegend@@
+NOUN			:	@@SeriesLegend@@
 Predicate
-VERB		:	fall
+VERB			:	fall
 TimeSeriesConcept=TIME_SLICE
 PhraseSpecification
 Subject
-NOUN		:	the time interval
+NOUN			:	the time interval
 Predicate
-VERB		:	be
-COMPLEMENT	:	@@TimeSlice@@
+VERB			:	be
+COMPLEMENT		:	@@TimeSlice@@
 AggregationConcept=ALL_INTRODUCTORY_INFORMATION_PRESENT
 PhraseSpecification
 Features
 SubjectNumber=plural
 VerbNumber=plural
 Subject
-NOUN		:	@@LineCountText@@ series
+NOUN			:	@@SeriesLegends@@
 Predicate
-VERB		:	be
-COMPLEMENT	:	recorded each
-COMPLEMENT2	:	@@TimeSlice@@
+VERB			:	be
+COMPLEMENT		:	@@LineCountText@@ time series with values displayed at
+COMPLEMENT2		:	@@TimeSliceAsAdjective@@ intervals

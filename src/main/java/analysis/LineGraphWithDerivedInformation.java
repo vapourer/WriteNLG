@@ -81,6 +81,21 @@ public class LineGraphWithDerivedInformation
 	}
 
 	/**
+	 * @return a List of all time series legends
+	 */
+	public List<String> getTimesSeriesLegends()
+	{
+		final List<String> legends = new ArrayList<>();
+
+		for (TimeSeriesWithDerivedInformation timeSeries : this.timeSeriesWithDerivedInformation)
+		{
+			legends.add(timeSeries.getSeriesLegend());
+		}
+
+		return legends;
+	}
+
+	/**
 	 * @return the timeSlice
 	 */
 	public TimeSlice getTimeSlice()

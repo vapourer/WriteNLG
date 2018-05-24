@@ -19,6 +19,7 @@ public class Subject
 	private static final Logger LOGGER = LogManager.getLogger("Subject.class");
 
 	private NounPhrase nounPhrase;
+	private NounPhrase additionalNounPhrase;
 
 	/**
 	 * Creates a new Subject instance.
@@ -35,8 +36,31 @@ public class Subject
 	 */
 	public Subject(final NounPhrase nounPhrase)
 	{
+		this();
 		this.nounPhrase = nounPhrase;
 		LOGGER.info(String.format("New Subject created: %s", this.nounPhrase.getText()));
+	}
+
+	/**
+	 * Creates a new Subject instance.
+	 * 
+	 * @param nounPhrase
+	 * @param additionalNounPhrase
+	 */
+	public Subject(final NounPhrase nounPhrase, final NounPhrase additionalNounPhrase)
+	{
+		this(nounPhrase);
+		this.additionalNounPhrase = additionalNounPhrase;
+	}
+
+	/**
+	 * For multiple subjects, or for use in a subordinate clause.
+	 * 
+	 * @param nounPhrase
+	 */
+	public void addAdditionalNounPhrase(final NounPhrase nounPhrase)
+	{
+		this.additionalNounPhrase = nounPhrase;
 	}
 
 	/**
@@ -58,13 +82,36 @@ public class Subject
 	}
 
 	/**
+	 * @return the additionalNounPhrases
+	 */
+	public NounPhrase getAdditionalNounPhrase()
+	{
+		return this.additionalNounPhrase;
+	}
+
+	/**
 	 * Replaces placeholders with values drawn from statistical analysis.
 	 * 
 	 * @param substitutions
 	 */
 	public Subject substitutePlaceholders(Map<String, String> substitutions)
 	{
-		NounPhrase replacement = new NounPhrase(this.nounPhrase.getText(), this.nounPhrase.getConstraintGroup());
+		final NounPhrase replacementNounPhrase = substitutePlaceholdersInNounPhrase(this.nounPhrase, substitutions);
+
+		if (this.additionalNounPhrase != null)
+		{
+			final NounPhrase replacementAdditionalNounPhrase = substitutePlaceholdersInNounPhrase(
+					this.additionalNounPhrase, substitutions);
+
+			return new Subject(replacementNounPhrase, replacementAdditionalNounPhrase);
+		}
+
+		return new Subject(replacementNounPhrase);
+	}
+
+	private NounPhrase substitutePlaceholdersInNounPhrase(NounPhrase nounPhrase, Map<String, String> substitutions)
+	{
+		NounPhrase replacement = new NounPhrase(nounPhrase.getText(), nounPhrase.getConstraintGroup());
 
 		for (final String eachPlaceHolder : substitutions.keySet())
 		{
@@ -73,7 +120,7 @@ public class Subject
 
 		replacement.setPlural(this.nounPhrase.isPlural());
 
-		return new Subject(replacement);
+		return replacement;
 	}
 
 	@Override
@@ -96,12 +143,13 @@ public class Subject
 
 		Subject otherSubject = (Subject) object;
 
-		return this.nounPhrase.getText().equals(otherSubject.nounPhrase.getText());
+		return this.nounPhrase.getText().equals(otherSubject.nounPhrase.getText())
+				&& this.additionalNounPhrase.getText().equals(otherSubject.additionalNounPhrase.getText());
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(this.nounPhrase.getText());
+		return Objects.hash(this.nounPhrase.getText(), this.additionalNounPhrase.getText());
 	}
 }
