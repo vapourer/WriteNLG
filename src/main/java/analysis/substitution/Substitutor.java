@@ -56,9 +56,14 @@ public class Substitutor implements Mapper
 			int crossingPointCount = this.lineGraphWithDerivedInformation.getCrossingPointCount(
 					timeSeriesWithDerivedInformation.get(0), timeSeriesWithDerivedInformation.get(1));
 			this.globalMappings.addSubstitution("@@CrossCount@@", String.valueOf(crossingPointCount));
-			this.globalMappings.addSubstitution("@@LinesCrossWindow@@",
-					this.lineGraphWithDerivedInformation.getCrossingPointWindows(
-							timeSeriesWithDerivedInformation.get(0), timeSeriesWithDerivedInformation.get(1)).get(0));
+
+			List<String> crossingPointWindows = this.lineGraphWithDerivedInformation.getCrossingPointWindows(
+					timeSeriesWithDerivedInformation.get(0), timeSeriesWithDerivedInformation.get(1));
+
+			if (crossingPointWindows.size() > 0)
+			{
+				this.globalMappings.addSubstitution("@@LinesCrossWindow@@", crossingPointWindows.get(0));
+			}
 		}
 		else
 		{

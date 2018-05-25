@@ -180,11 +180,13 @@ public class Aggregator
 				&& aggregateMaximumAndMinimumConceptSatisfactionLevel
 						.compareTo(aggregateMinimaConceptSatisfactionLevel) > 0)
 		{
+			LOGGER.info("Including AggregateMaximumAndMinimumConcept");
 			includeAggregateMaximumAndMinimumConcept(aggregateMaximumAndMinimumConcept);
 		}
 		else
 		{
 			checkAggregateMaximaAndAggregateMinimaConcepts(aggregateMaximaConcept, aggregateMinimaConcept);
+			LOGGER.info("Removing AggregateMaximumAndMinimumConcept");
 			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMUM_AND_MINIMUM);
 		}
 	}

@@ -23,6 +23,8 @@ import writenlg.constrain.HardConstraintGroup;
 import writenlg.constrain.HardConstraintProcessor;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.linguistics.phrase.PhraseSpecification;
+import writenlg.linguistics.phrase.Predicate;
+import writenlg.linguistics.phrase.Subject;
 import writenlg.linguistics.phrase.partofspeech.Complement;
 
 /**
@@ -65,6 +67,11 @@ public class AggregateMaximumAndMinimumConcept extends AbstractAggregationConcep
 		this.timeSeriesSpecificConcepts = timeSeriesSpecificConcepts;
 	}
 
+	// TODO: a current tension between the content determination and aggregation implementations left
+	// this with a bug, because content determination had not taken into account a subsequent need to pull specific time
+	// series back together for this specific concept. While this code could and should be improved, a potential need to
+	// implement further reviews of various linguistic aspects throughout the process suggests that the architecture
+	// needs review, specifically around connecting the content determination and aggregation elements.
 	@Override
 	protected void prepareAggregatedPhraseSpecification()
 	{
@@ -74,29 +81,70 @@ public class AggregateMaximumAndMinimumConcept extends AbstractAggregationConcep
 		List<AbstractConcept> minimumRequiredConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.MINIMUM);
 
-		int minimumRequiredConceptsSize = minimumRequiredConcepts.size();
-
 		if (!maximumRequiredConcepts.isEmpty() && !minimumRequiredConcepts.isEmpty()
-				&& minimumRequiredConceptsSize == maximumRequiredConcepts.size())
+				&& maximumRequiredConcepts.size() == minimumRequiredConcepts.size())
 		{
-			for (int i = 0; i < minimumRequiredConceptsSize; i++)
+			final PhraseSpecification maximumPhraseSpecification1 = maximumRequiredConcepts.get(0)
+					.getPhraseSpecifications().get(0);
+
+			final PhraseSpecification maximumPhraseSpecification2 = maximumRequiredConcepts.get(1)
+					.getPhraseSpecifications().get(0);
+
+			final Subject maximumSubject1 = maximumPhraseSpecification1.getSubject();
+			final Subject maximumSubject2 = maximumPhraseSpecification2.getSubject();
+
+			PhraseSpecification minimumPhraseSpecification1 = null;
+			PhraseSpecification minimumPhraseSpecification2 = null;
+
+			for (AbstractConcept eachMinimumRequiredConcept : minimumRequiredConcepts)
 			{
-				PhraseSpecification newPhraseSpecification = minimumRequiredConcepts.get(i).getPhraseSpecifications()
+				PhraseSpecification minimumPhraseSpecification = eachMinimumRequiredConcept.getPhraseSpecifications()
 						.get(0);
-				Complement currentComplement = newPhraseSpecification.getPredicate().getComplement();
 
-				String maximumComplementText = maximumRequiredConcepts.get(i).getPhraseSpecifications().get(0)
-						.getPredicate().getComplement().getText();
-				String newComplementText = currentComplement.getText() + " and " + maximumComplementText;
+				if (maximumSubject1.getNounPhrase().getText()
+						.equals(minimumPhraseSpecification.getSubject().getNounPhrase().getText()))
+				{
+					minimumPhraseSpecification1 = minimumPhraseSpecification;
+				}
+				else if (maximumSubject2.getNounPhrase().getText()
+						.equals(minimumPhraseSpecification.getSubject().getNounPhrase().getText()))
+				{
+					minimumPhraseSpecification2 = minimumPhraseSpecification;
+				}
+			}
 
-				Complement newComplement = new Complement(newComplementText, currentComplement.getConstraintGroup());
+			if (minimumPhraseSpecification1 != null && maximumPhraseSpecification1 != null)
+			{
+				createNewPhraseSpecification(minimumPhraseSpecification1, maximumPhraseSpecification1);
+			}
 
-				newPhraseSpecification.getPredicate().setComplement(newComplement);
-				addPhraseSpecification(newPhraseSpecification);
+			if (minimumPhraseSpecification2 != null && maximumPhraseSpecification2 != null)
+			{
+				createNewPhraseSpecification(minimumPhraseSpecification2, maximumPhraseSpecification2);
 			}
 
 			setConjunction("whilst");
 		}
+	}
+
+	private void createNewPhraseSpecification(final PhraseSpecification minimumPhraseSpecification,
+			final PhraseSpecification maximumPhraseSpecification)
+	{
+		Subject newSubject = minimumPhraseSpecification.getSubject();
+		Predicate currentPredicate = minimumPhraseSpecification.getPredicate();
+
+		Complement currentComplement = currentPredicate.getComplement();
+
+		String maximumComplementText = maximumPhraseSpecification.getPredicate().getComplement().getText();
+		String newComplementText = currentComplement.getText() + " and " + maximumComplementText;
+
+		Complement newComplement = new Complement(newComplementText, currentComplement.getConstraintGroup());
+
+		Predicate newPredicate = new Predicate(currentPredicate.getVerb(), null, newComplement);
+
+		PhraseSpecification newPhraseSpecification = new PhraseSpecification(newSubject, newPredicate);
+
+		addPhraseSpecification(newPhraseSpecification);
 	}
 
 	@Override
