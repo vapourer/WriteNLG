@@ -26,6 +26,8 @@ public class TimeSeriesWithDerivedInformationBuilder
 	private SortedMap<Long, BigDecimal> timeSeriesSmoothed;
 	private List<Segment> smoothedSegments;
 	private Slope directionOfLongestSegment;
+	private SortedMap<Long, BigDecimal> timeSeriesOutline;
+	private List<Segment> outlineSegments;
 
 	/**
 	 * Creates a new TimeSeriesWithDerivedInformation instance.
@@ -36,7 +38,7 @@ public class TimeSeriesWithDerivedInformationBuilder
 	{
 		return new TimeSeriesWithDerivedInformation(this.timeSeries, this.pointWithMaximumValue,
 				this.pointWithMinimumValue, this.segments, this.timeSlice, this.timeSeriesSmoothed,
-				this.smoothedSegments, this.directionOfLongestSegment);
+				this.smoothedSegments, this.directionOfLongestSegment, this.timeSeriesOutline, this.outlineSegments);
 	}
 
 	/**
@@ -109,5 +111,23 @@ public class TimeSeriesWithDerivedInformationBuilder
 	public void setSmoothedSegments(List<Segment> smoothedSegments)
 	{
 		this.smoothedSegments = smoothedSegments;
+	}
+
+	/**
+	 * @param timeSeriesOutline
+	 *            the timeSeriesOutline to set
+	 */
+	public void setTimeSeriesOutline(SortedMap<Long, BigDecimal> timeSeriesOutline)
+	{
+		this.timeSeriesOutline = timeSeriesOutline;
+	}
+
+	/**
+	 * @param outlineSegments
+	 *            the outlineSegments to set
+	 */
+	public void setOutlineSegments(List<Segment> outlineSegments)
+	{
+		this.outlineSegments = outlineSegments;
 	}
 }

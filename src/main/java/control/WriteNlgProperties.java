@@ -103,6 +103,8 @@ public class WriteNlgProperties
 				this.properties.getProperty("SeriesWithAllSegmentsAscendingSize")));
 		LOGGER.info(String.format("Property ExpectedTotalSeriesCount = %s",
 				this.properties.getProperty("ExpectedTotalSeriesCount")));
+		LOGGER.info(String.format("Property MaximumSegmentsAfterSmoothing = %s",
+				this.properties.getProperty("MaximumSegmentsAfterSmoothing")));
 	}
 
 	/**

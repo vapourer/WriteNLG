@@ -21,6 +21,7 @@ import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
 import analysis.statistics.pedergnanafurlani.BottomUpPiecewiseLinearFunction;
 import analysis.time.TimeSlice;
+import control.WriteNlgProperties;
 
 /**
  * Analyses a TimeSeries instance, from which derived information is stored in a TimeSeriesWithDerivedInformation
@@ -65,12 +66,22 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		builder.setSegments(this.segments);
 		builder.setTimeSlice(calculateTimeSlice());
 
-		Smoothing smoothing = new BottomUpPiecewiseLinearFunction(this.segments);
-		SortedMap<Long, BigDecimal> timeSeriesSmoothed = smoothing.getTimeSeriesSmoothed();
+		LOGGER.info("Commencing smoothing");
+		final Smoothing smoothing = new BottomUpPiecewiseLinearFunction(this.segments);
+		final SortedMap<Long, BigDecimal> timeSeriesSmoothed = smoothing.getTimeSeriesSmoothed();
 		builder.setTimeSeriesSmoothed(timeSeriesSmoothed);
 		builder.setSmoothedSegments(smoothing.getSmoothedSegments());
 		builder.setDirectionOfLongestSegment(
 				calculateDirectionOfLongestSegment(smoothing.getSmoothedSegments().toArray(new Segment[0])));
+
+		LOGGER.info("Commencing outline smoothing");
+		final int maximumSegmentsForOutlineSmoothing = Integer
+				.parseInt(WriteNlgProperties.getInstance().getProperty("MaximumSegmentsAfterSmoothing"));
+		final Smoothing outlineSmoothing = new BottomUpPiecewiseLinearFunction(this.segments,
+				maximumSegmentsForOutlineSmoothing, true);
+		final SortedMap<Long, BigDecimal> timeSeriesOutline = outlineSmoothing.getTimeSeriesSmoothed();
+		builder.setTimeSeriesOutline(timeSeriesOutline);
+		builder.setOutlineSegments(outlineSmoothing.getSmoothedSegments());
 
 		return builder.createTimeSeriesDerivedInformation();
 	}

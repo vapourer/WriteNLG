@@ -35,6 +35,8 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 	private final SortedSet<Segment> smoothedSegments;
 	private final BigDecimal maximumError;
 	private final DateFormat dateFormatter;
+	private final int maximumSegments;
+	private final boolean waiveMaximumErrorCheck;
 
 	/**
 	 * Creates a BottomUpPiecewiseLinearFunction instance.
@@ -43,11 +45,25 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 	 */
 	public BottomUpPiecewiseLinearFunction(final List<Segment> segments)
 	{
+		this(segments, 1, false);
+	}
+
+	/**
+	 * Creates a BottomUpPiecewiseLinearFunction instance.
+	 * 
+	 * @param segments
+	 * @param maximumSegments
+	 */
+	public BottomUpPiecewiseLinearFunction(final List<Segment> segments, final int maximumSegments,
+			final boolean waiveMaximumErrorCheck)
+	{
 		this.segments = segments;
 		this.dateFormatter = new SimpleDateFormat(WriteNlgProperties.getInstance().getProperty("DateFormat"));
 		this.maximumError = new BigDecimal(WriteNlgProperties.getInstance().getProperty("MaximumError"));
 		this.timeSeriesSmoothed = new TreeMap<>();
 		this.smoothedSegments = new TreeSet<>(new SegmentStartTimeComparator());
+		this.maximumSegments = maximumSegments;
+		this.waiveMaximumErrorCheck = waiveMaximumErrorCheck;
 
 		LOGGER.info("BottomUpPiecewiseLinearFunction object created");
 		LOGGER.info(String.format("BottomUpPiecewiseLinearFunction maximum error = %s", this.maximumError.toString()));
@@ -98,7 +114,8 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 		SegmentPair cheapestSegmentPair = queue.peek();
 
 		// TODO: explore whether the algorithm might be made more concise here.
-		while (cheapestSegmentPair.getCost().compareTo(this.maximumError) <= 0 && queue.size() > 1)
+		while ((cheapestSegmentPair.getCost().compareTo(this.maximumError) <= 0 || this.waiveMaximumErrorCheck)
+				&& queue.size() > this.maximumSegments)
 		{
 			cheapestSegmentPair = queue.poll();
 			SegmentPair nextSegmentPair = null;
