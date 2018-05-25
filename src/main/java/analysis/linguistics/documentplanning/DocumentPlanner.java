@@ -14,6 +14,8 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.aggregation.Aggregator;
+import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
+import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
 import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.IdenticalTimeSlicesConcept;
@@ -146,6 +148,44 @@ public class DocumentPlanner
 			Sentence sentence = new Sentence();
 			sentence.addClause(createSimpleClause(identicalTimeSlicesConcept.getPhraseSpecifications().get(0)));
 			paragraph1.addSentence(sentence);
+		}
+
+		AggregateMaximaConcept aggregateMaximaConcept = (AggregateMaximaConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_MAXIMA);
+
+		if (aggregateMaximaConcept != null)
+		{
+			List<PhraseSpecification> phraseSpecifications = aggregateMaximaConcept.getPhraseSpecifications();
+			Sentence sentence = new Sentence();
+			CoordinatedPhrase coordinatedPhrase = new CoordinatedPhrase();
+
+			for (PhraseSpecification eachPhraseSpecification : phraseSpecifications)
+			{
+				coordinatedPhrase.addClause((SimpleClause) createSimpleClause(eachPhraseSpecification));
+			}
+
+			coordinatedPhrase.setConjunction(aggregateMaximaConcept.getConjunction());
+			sentence.addClause(coordinatedPhrase);
+			paragraph2.addSentence(sentence);
+		}
+
+		AggregateMinimaConcept aggregateMinimaConcept = (AggregateMinimaConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_MINIMA);
+
+		if (aggregateMinimaConcept != null)
+		{
+			List<PhraseSpecification> phraseSpecifications = aggregateMinimaConcept.getPhraseSpecifications();
+			Sentence sentence = new Sentence();
+			CoordinatedPhrase coordinatedPhrase = new CoordinatedPhrase();
+
+			for (PhraseSpecification eachPhraseSpecification : phraseSpecifications)
+			{
+				coordinatedPhrase.addClause((SimpleClause) createSimpleClause(eachPhraseSpecification));
+			}
+
+			coordinatedPhrase.setConjunction(aggregateMinimaConcept.getConjunction());
+			sentence.addClause(coordinatedPhrase);
+			paragraph2.addSentence(sentence);
 		}
 
 		List<AbstractConcept> risingTrendConcepts = this.timeSeriesSpecificConcepts

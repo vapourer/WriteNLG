@@ -185,6 +185,7 @@ public class Aggregator
 		else
 		{
 			checkAggregateMaximaAndAggregateMinimaConcepts(aggregateMaximaConcept, aggregateMinimaConcept);
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMUM_AND_MINIMUM);
 		}
 	}
 
@@ -193,25 +194,42 @@ public class Aggregator
 	{
 		if (aggregateMaximaConcept.calculateSatisfactionLevel().compareTo(GlobalConstants.ZERO) > 0)
 		{
-			includeAggregateMaximaConcept();
+			includeAggregateMaximaConcept(aggregateMaximaConcept);
+		}
+		else
+		{
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMA);
 		}
 
 		if (aggregateMinimaConcept.calculateSatisfactionLevel().compareTo(GlobalConstants.ZERO) > 0)
 		{
-			includeAggregateMinimaConcept();
+			includeAggregateMinimaConcept(aggregateMinimaConcept);
+		}
+		else
+		{
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MINIMA);
 		}
 	}
 
-	private void includeAggregateMaximaConcept()
+	private void includeAggregateMaximaConcept(final AggregateMaximaConcept aggregateMaximaConcept)
 	{
-		// TODO Auto-generated method stub
+		LOGGER.info("Including AggregateMaximaConcept");
+		this.aggregationConcepts.put(AggregationConcept.AGGREGATE_MAXIMA, aggregateMaximaConcept);
 
+		this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).clear();
+
+		LOGGER.info(String.format("MaximumConcept count: %d",
+				this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).size()));
 	}
 
-	private void includeAggregateMinimaConcept()
+	private void includeAggregateMinimaConcept(final AggregateMinimaConcept aggregateMinimaConcept)
 	{
-		// TODO Auto-generated method stub
+		LOGGER.info("Including AggregateMinimaConcept");
+		this.aggregationConcepts.put(AggregationConcept.AGGREGATE_MINIMA, aggregateMinimaConcept);
 
+		this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).clear();
+		LOGGER.info(String.format("MinimumConcept count: %d",
+				this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).size()));
 	}
 
 	private void includeAggregateMaximumAndMinimumConcept()
@@ -294,6 +312,9 @@ public class Aggregator
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND).clear();
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).clear();
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).clear();
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMA);
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MINIMA);
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMUM_AND_MINIMUM);
 		}
 		else
 		{
