@@ -15,6 +15,7 @@ import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.Constraints;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
 import writenlg.aggregation.AbstractAggregationConcept;
@@ -75,6 +76,7 @@ public class BothSeriesHaveAllSegmentsAscendingConcept extends AbstractAggregati
 	{
 		List<AbstractConcept> risingTrendConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.RISING_TREND);
+
 		if (!risingTrendConcepts.isEmpty())
 		{
 			for (AbstractConcept eachConcept : risingTrendConcepts)
@@ -105,7 +107,7 @@ public class BothSeriesHaveAllSegmentsAscendingConcept extends AbstractAggregati
 		{
 			final Constraint<ConstraintType> allSegmentsAscendingConstraint = new HardConstraint<ConstraintType>(
 					ConstraintType.ALL_SEGMENTS_ASCENDING,
-					new SatisfactionLevel(allSegmentsAscending.multiply(new BigDecimal("1"))));
+					new SatisfactionLevel(allSegmentsAscending.multiply(GlobalConstants.ONE)));
 
 			addConstraint(allSegmentsAscendingConstraint);
 		}
@@ -122,16 +124,15 @@ public class BothSeriesHaveAllSegmentsAscendingConcept extends AbstractAggregati
 		if (this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND)
 				.size() == seriesWithAllSegmentsAscendingSize)
 		{
-			bothSeriesHaveAllSegmentsAscending = bothSeriesHaveAllSegmentsAscending.multiply(new BigDecimal("1"));
+			bothSeriesHaveAllSegmentsAscending = bothSeriesHaveAllSegmentsAscending.multiply(GlobalConstants.ONE);
 		}
 		else
 		{
-			bothSeriesHaveAllSegmentsAscending = bothSeriesHaveAllSegmentsAscending.multiply(new BigDecimal("0"));
+			bothSeriesHaveAllSegmentsAscending = bothSeriesHaveAllSegmentsAscending.multiply(GlobalConstants.ZERO);
 		}
 
 		final Constraint<ConstraintType> bothSeriesHaveAllSegmentsAscendingConstraint = new HardConstraint<ConstraintType>(
-				ConstraintType.ALL_SEGMENTS_ASCENDING,
-				new SatisfactionLevel(bothSeriesHaveAllSegmentsAscending.multiply(new BigDecimal("1"))));
+				ConstraintType.ALL_SEGMENTS_ASCENDING, new SatisfactionLevel(bothSeriesHaveAllSegmentsAscending));
 
 		addConstraint(bothSeriesHaveAllSegmentsAscendingConstraint);
 	}

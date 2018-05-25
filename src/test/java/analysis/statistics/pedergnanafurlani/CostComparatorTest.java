@@ -16,6 +16,7 @@ import org.junit.Test;
 import analysis.TestConstants;
 import analysis.graph.Point;
 import analysis.graph.Segment;
+import analysis.utilities.GlobalConstants;
 
 public class CostComparatorTest
 {
@@ -38,7 +39,7 @@ public class CostComparatorTest
 
 		this.calendar.set(2018, 4, 1);
 		final Long date1a = Long.valueOf(this.calendar.getTimeInMillis());
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1a);
+		final Point point1 = new Point(GlobalConstants.ONE, GlobalConstants.ONE, date1a);
 
 		this.calendar.set(2018, 4, 2);
 		final Long date2a = Long.valueOf(this.calendar.getTimeInMillis());

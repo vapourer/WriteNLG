@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.utilities.GlobalConstants;
+
 /**
  * Representation of a hard constraint.
  * 
@@ -29,8 +31,8 @@ public class HardConstraint<E> extends Constraint<E>
 	{
 		super(constrainedElement);
 
-		if (satisfactionLevel == null || (satisfactionLevel.getWeightedLevel().compareTo(new BigDecimal("0")) != 0
-				&& satisfactionLevel.getWeightedLevel().compareTo(new BigDecimal("1")) != 0))
+		if (satisfactionLevel == null || (satisfactionLevel.getWeightedLevel().compareTo(GlobalConstants.ZERO) != 0
+				&& satisfactionLevel.getWeightedLevel().compareTo(GlobalConstants.ONE) != 0))
 		{
 			LOGGER.error(String.format("Weighted satisfaction level was %s but must be 0 or 1", satisfactionLevel));
 			throw new IllegalArgumentException("Weighted satisfaction level must be 0 or 1");

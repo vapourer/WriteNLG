@@ -6,6 +6,7 @@ package analysis.graph;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 
 /**
@@ -134,13 +135,11 @@ public class Segment
 
 	private void setSlopeFromGradient()
 	{
-		BigDecimal zero = new BigDecimal("0");
-
-		if (getGradient().compareTo(zero) > 0)
+		if (getGradient().compareTo(GlobalConstants.ZERO) > 0)
 		{
 			this.slope = Slope.ASCENDING;
 		}
-		else if (getGradient().compareTo(zero) < 0)
+		else if (getGradient().compareTo(GlobalConstants.ZERO) < 0)
 		{
 			this.slope = Slope.DESCENDING;
 		}

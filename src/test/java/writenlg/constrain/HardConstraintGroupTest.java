@@ -12,12 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.constrain.ConstraintGroup;
-import writenlg.constrain.HardConstraint;
-import writenlg.constrain.HardConstraintGroup;
-import writenlg.constrain.HardConstraintProcessor;
-import writenlg.constrain.SatisfactionLevel;
-import writenlg.constrain.SoftConstraint;
+import analysis.utilities.GlobalConstants;
 
 public class HardConstraintGroupTest
 {
@@ -39,12 +34,12 @@ public class HardConstraintGroupTest
 		final BigDecimal valueExpected = new BigDecimal("6");
 
 		final ConstraintGroup<String> constraints = new HardConstraintGroup<>(new HardConstraintProcessor());
-		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Potato", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Turnip", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Cabbage", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Courgette", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Potato", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		// Act
 		final BigDecimal valueActual = constraints.evaluate();
@@ -59,15 +54,15 @@ public class HardConstraintGroupTest
 		LOGGER.info("Test: testGetValue_Zero");
 
 		// Arrange
-		final BigDecimal valueExpected = new BigDecimal("0");
+		final BigDecimal valueExpected = GlobalConstants.ZERO;
 
 		final ConstraintGroup<String> constraints = new HardConstraintGroup<>(new HardConstraintProcessor());
-		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.addConstraint(new HardConstraint<>("Potato", new SatisfactionLevel(new BigDecimal("0"))));
-		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Turnip", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Cabbage", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Courgette", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.addConstraint(new HardConstraint<>("Potato", new SatisfactionLevel(GlobalConstants.ZERO)));
+		constraints.addConstraint(new HardConstraint<>("Carrot", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		// Act
 		final BigDecimal valueActual = constraints.evaluate();

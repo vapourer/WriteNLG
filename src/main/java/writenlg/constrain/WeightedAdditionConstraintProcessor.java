@@ -9,6 +9,8 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.utilities.GlobalConstants;
+
 /**
  * Evaluates a Set of soft constraints using weighted addition.
  */
@@ -24,7 +26,7 @@ public class WeightedAdditionConstraintProcessor extends ConstraintProcessor
 	{
 		LOGGER.info("Evaluating soft constraints using weighted addition");
 
-		BigDecimal value = new BigDecimal("0");
+		BigDecimal value = GlobalConstants.ZERO;
 
 		for (final Constraint<E> constraint : constraints)
 		{

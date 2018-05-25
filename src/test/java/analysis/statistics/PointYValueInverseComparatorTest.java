@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import analysis.TestConstants;
 import analysis.graph.Point;
+import analysis.utilities.GlobalConstants;
 
 public class PointYValueInverseComparatorTest
 {
@@ -38,7 +39,7 @@ public class PointYValueInverseComparatorTest
 
 		this.calendar.set(2018, 4, 1);
 		final Long date1 = Long.valueOf(this.calendar.getTimeInMillis());
-		this.point1 = new Point(new BigDecimal("1"), new BigDecimal("7"), date1);
+		this.point1 = new Point(GlobalConstants.ONE, new BigDecimal("7"), date1);
 
 		this.calendar.set(2018, 4, 2);
 		this.date2 = Long.valueOf(this.calendar.getTimeInMillis());

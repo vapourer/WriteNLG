@@ -16,6 +16,7 @@ import org.junit.Test;
 import analysis.TestConstants;
 import analysis.graph.Point;
 import analysis.graph.TimeSeries;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 
 public class MaximumTest
@@ -38,7 +39,7 @@ public class MaximumTest
 		MathContext context = new MathContext(TestConstants.ROUNDING_PARAMETER_FOR_DATE_COMPARISON);
 
 		// Arrange
-		final BigDecimal xExpected = new BigDecimal("1");
+		final BigDecimal xExpected = GlobalConstants.ONE;
 		final BigDecimal yExpected = new BigDecimal("13715");
 
 		final Calendar calendar = Calendar.getInstance();

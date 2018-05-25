@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 
 public class SegmentTest
@@ -42,7 +43,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, GlobalConstants.ONE, date1);
 		final Point point2 = new Point(new BigDecimal("4"), new BigDecimal("5"), date2);
 
 		final Segment segment = new Segment(point1, point2);
@@ -68,7 +69,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, GlobalConstants.ONE, date1);
 		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("7"), date2);
 
 		final Segment segment = new Segment(point1, point2);
@@ -96,7 +97,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, GlobalConstants.ONE, date1);
 		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("7"), date2);
 
 		final Segment segment = new Segment(point1, point2);
@@ -122,7 +123,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("14"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, new BigDecimal("14"), date1);
 		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("4"), date2);
 
 		final Segment segment = new Segment(point1, point2);
@@ -140,7 +141,7 @@ public class SegmentTest
 		LOGGER.info("Test: testGetGradient_Flat");
 
 		// Arrange
-		BigDecimal gradientExpected = new BigDecimal("0");
+		BigDecimal gradientExpected = GlobalConstants.ZERO;
 
 		final Calendar calendar = Calendar.getInstance();
 		calendar.set(2018, 4, 1);
@@ -148,7 +149,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("23"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, new BigDecimal("23"), date1);
 		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("23"), date2);
 
 		final Segment segment = new Segment(point1, point2);
@@ -174,7 +175,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("1"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, GlobalConstants.ONE, date1);
 		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("7"), date2);
 
 		final Segment segment = new Segment(point1, point2);
@@ -200,7 +201,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("14"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, new BigDecimal("14"), date1);
 		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("4"), date2);
 
 		final Segment segment = new Segment(point1, point2);
@@ -226,7 +227,7 @@ public class SegmentTest
 		calendar.set(2018, 4, 8);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());
 
-		final Point point1 = new Point(new BigDecimal("1"), new BigDecimal("23"), date1);
+		final Point point1 = new Point(GlobalConstants.ONE, new BigDecimal("23"), date1);
 		final Point point2 = new Point(new BigDecimal("5"), new BigDecimal("23"), date2);
 
 		final Segment segment = new Segment(point1, point2);

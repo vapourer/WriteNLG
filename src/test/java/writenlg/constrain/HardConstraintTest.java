@@ -12,8 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.constrain.HardConstraint;
-import writenlg.constrain.SatisfactionLevel;
+import analysis.utilities.GlobalConstants;
 
 public class HardConstraintTest
 {
@@ -31,7 +30,7 @@ public class HardConstraintTest
 	{
 		LOGGER.info("Test: testConstructor_NullConstrainedProperty");
 
-		new HardConstraint<String>(null, new SatisfactionLevel(new BigDecimal("0")));
+		new HardConstraint<String>(null, new SatisfactionLevel(GlobalConstants.ZERO));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -57,10 +56,10 @@ public class HardConstraintTest
 
 		// Arrange
 		final String constrainedPropertyExpected = "Success";
-		final BigDecimal satisfactionLevelExpected = new BigDecimal("1");
+		final BigDecimal satisfactionLevelExpected = GlobalConstants.ONE;
 
 		final HardConstraint<String> constraint = new HardConstraint<>("Success",
-				new SatisfactionLevel(new BigDecimal("1")));
+				new SatisfactionLevel(GlobalConstants.ONE));
 
 		// Act
 		final String constrainedPropertyActual = constraint.getConstrainedElement();

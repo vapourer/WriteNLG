@@ -101,6 +101,8 @@ public class WriteNlgProperties
 				this.properties.getProperty("IntroductoryInformationElementSize")));
 		LOGGER.info(String.format("Property SeriesWithAllSegmentsAscendingSize = %s",
 				this.properties.getProperty("SeriesWithAllSegmentsAscendingSize")));
+		LOGGER.info(String.format("Property ExpectedTotalSeriesCount = %s",
+				this.properties.getProperty("ExpectedTotalSeriesCount")));
 	}
 
 	/**

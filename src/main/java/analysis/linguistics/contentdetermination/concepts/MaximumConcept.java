@@ -18,6 +18,7 @@ import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.statistics.Maximum;
 import analysis.statistics.NinetyPercentile;
 import analysis.statistics.UpperTurningPointsSmoothed;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
 import writenlg.constrain.BoundedWeightedConstraint;
@@ -76,14 +77,14 @@ public class MaximumConcept extends AbstractConcept
 
 		BigDecimal maximumAtStartConstraintValue = null;
 
-		if (maximumPoint.getX().compareTo(new BigDecimal("0")) == 0)
+		if (maximumPoint.getX().compareTo(GlobalConstants.ZERO) == 0)
 		{
-			maximumAtStartConstraintValue = new BigDecimal("1")
+			maximumAtStartConstraintValue = GlobalConstants.ONE
 					.multiply(maximumAtStartConstraintConfiguration.getValue());
 		}
 		else
 		{
-			maximumAtStartConstraintValue = new BigDecimal("0")
+			maximumAtStartConstraintValue = GlobalConstants.ZERO
 					.multiply(maximumAtStartConstraintConfiguration.getValue());
 		}
 
@@ -109,11 +110,11 @@ public class MaximumConcept extends AbstractConcept
 
 		if (maximumPoint.getX().compareTo(new BigDecimal(this.timeSeries.getPoints().size() - 1)) == 0)
 		{
-			maximumAtEndConstraintValue = new BigDecimal("1").multiply(maximumAtEndConstraintConfiguration.getValue());
+			maximumAtEndConstraintValue = GlobalConstants.ONE.multiply(maximumAtEndConstraintConfiguration.getValue());
 		}
 		else
 		{
-			maximumAtEndConstraintValue = new BigDecimal("0").multiply(maximumAtEndConstraintConfiguration.getValue());
+			maximumAtEndConstraintValue = GlobalConstants.ZERO.multiply(maximumAtEndConstraintConfiguration.getValue());
 		}
 
 		final Constraint<ConstraintType> maximumAtEndConstraint = new BoundedWeightedConstraint<ConstraintType>(
@@ -137,7 +138,7 @@ public class MaximumConcept extends AbstractConcept
 		switch (highPointCount)
 		{
 			case 1:
-				multipleHighTurningPointsConstraintValue = new BigDecimal("0")
+				multipleHighTurningPointsConstraintValue = GlobalConstants.ZERO
 						.multiply(multipleHighTurningPointsConstraintConfiguration.getValue());
 				break;
 			case 2:
@@ -149,7 +150,7 @@ public class MaximumConcept extends AbstractConcept
 						.multiply(multipleHighTurningPointsConstraintConfiguration.getValue());
 				break;
 			default:
-				multipleHighTurningPointsConstraintValue = new BigDecimal("1")
+				multipleHighTurningPointsConstraintValue = GlobalConstants.ONE
 						.multiply(multipleHighTurningPointsConstraintConfiguration.getValue());
 				break;
 		}
@@ -175,7 +176,7 @@ public class MaximumConcept extends AbstractConcept
 		switch (highPointCount)
 		{
 			case 1:
-				singleObviousMaximumConstraintValue = new BigDecimal("1")
+				singleObviousMaximumConstraintValue = GlobalConstants.ONE
 						.multiply(singleObviousMaximumConstraintConfiguration.getValue());
 				break;
 			case 2:

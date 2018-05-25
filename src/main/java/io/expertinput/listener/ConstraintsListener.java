@@ -12,6 +12,7 @@ import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.Constraints;
 import analysis.linguistics.aggregation.AggregationConcept;
+import analysis.utilities.GlobalConstants;
 import io.antlrgenerated.ConstraintsBaseListener;
 import io.antlrgenerated.ConstraintsParser;
 import io.antlrgenerated.ConstraintsParser.AggregationConceptContext;
@@ -43,7 +44,7 @@ public class ConstraintsListener extends ConstraintsBaseListener
 	{
 		final String constraintName = context.constraintName().getText();
 		final BigDecimal initialValue = new BigDecimal(context.initialValue().getText());
-		final BigDecimal weighting = context.weighting() == null ? new BigDecimal("1")
+		final BigDecimal weighting = context.weighting() == null ? GlobalConstants.ONE
 				: new BigDecimal(context.weighting().getText());
 
 		switch (this.conceptType)

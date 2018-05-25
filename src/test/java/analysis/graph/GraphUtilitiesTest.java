@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import analysis.utilities.GlobalConstants;
 
 public class GraphUtilitiesTest
 {
@@ -36,7 +37,7 @@ public class GraphUtilitiesTest
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2018, 3, 1);
-		Point point1 = new Point(new BigDecimal("0"), new BigDecimal("0"), Long.valueOf(calendar.getTimeInMillis()));
+		Point point1 = new Point(GlobalConstants.ZERO, GlobalConstants.ZERO, Long.valueOf(calendar.getTimeInMillis()));
 		calendar.set(2018, 3, 2);
 		Point point2 = new Point(new BigDecimal("3"), new BigDecimal("4"), Long.valueOf(calendar.getTimeInMillis()));
 
@@ -57,7 +58,7 @@ public class GraphUtilitiesTest
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2018, 3, 1);
-		Point point1 = new Point(new BigDecimal("0"), new BigDecimal("0"), Long.valueOf(calendar.getTimeInMillis()));
+		Point point1 = new Point(GlobalConstants.ZERO, GlobalConstants.ZERO, Long.valueOf(calendar.getTimeInMillis()));
 		calendar.set(2018, 3, 2);
 		Point point2 = new Point(new BigDecimal("4"), new BigDecimal("5"), Long.valueOf(calendar.getTimeInMillis()));
 

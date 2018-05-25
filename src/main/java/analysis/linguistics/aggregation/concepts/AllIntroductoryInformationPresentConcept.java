@@ -16,6 +16,7 @@ import analysis.TimeSeriesSpecificConcept;
 import analysis.constrain.Constraints;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
 import writenlg.aggregation.AbstractAggregationConcept;
@@ -111,12 +112,12 @@ public class AllIntroductoryInformationPresentConcept extends AbstractAggregatio
 
 		if (this.globalConcepts.get(GlobalConcept.LINE_COUNT) != null)
 		{
-			lineCountPresent = lineCountPresent.multiply(new BigDecimal("1"));
+			lineCountPresent = lineCountPresent.multiply(GlobalConstants.ONE);
 			this.introductoryInformationElementCount++;
 		}
 		else
 		{
-			lineCountPresent = lineCountPresent.multiply(new BigDecimal("0"));
+			lineCountPresent = lineCountPresent.multiply(GlobalConstants.ZERO);
 		}
 
 		final Constraint<ConstraintType> lineCountRequiredConstraint = new HardConstraint<ConstraintType>(
@@ -139,7 +140,7 @@ public class AllIntroductoryInformationPresentConcept extends AbstractAggregatio
 		{
 			final Constraint<ConstraintType> timeSliceRequiredConstraint = new HardConstraint<ConstraintType>(
 					ConstraintType.SERIES_LEGEND,
-					new SatisfactionLevel(seriesLegendsPresent.multiply(new BigDecimal("1"))));
+					new SatisfactionLevel(seriesLegendsPresent.multiply(GlobalConstants.ONE)));
 
 			addConstraint(timeSliceRequiredConstraint);
 		}
@@ -153,12 +154,12 @@ public class AllIntroductoryInformationPresentConcept extends AbstractAggregatio
 
 		if (!this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TIME_SLICE).isEmpty())
 		{
-			timeSlicePresent = timeSlicePresent.multiply(new BigDecimal("1"));
+			timeSlicePresent = timeSlicePresent.multiply(GlobalConstants.ONE);
 			this.introductoryInformationElementCount++;
 		}
 		else
 		{
-			timeSlicePresent = timeSlicePresent.multiply(new BigDecimal("0"));
+			timeSlicePresent = timeSlicePresent.multiply(GlobalConstants.ZERO);
 		}
 
 		final Constraint<ConstraintType> timeSliceRequiredConstraint = new HardConstraint<ConstraintType>(
@@ -177,11 +178,11 @@ public class AllIntroductoryInformationPresentConcept extends AbstractAggregatio
 
 		if (this.introductoryInformationElementCount == introductoryInformationElementSizeRequired)
 		{
-			allIntroductoryInformationPresent = allIntroductoryInformationPresent.multiply(new BigDecimal("1"));
+			allIntroductoryInformationPresent = allIntroductoryInformationPresent.multiply(GlobalConstants.ONE);
 		}
 		else
 		{
-			allIntroductoryInformationPresent = allIntroductoryInformationPresent.multiply(new BigDecimal("0"));
+			allIntroductoryInformationPresent = allIntroductoryInformationPresent.multiply(GlobalConstants.ZERO);
 		}
 
 		final Constraint<ConstraintType> allIntroductoryInformationPresentConstraint = new HardConstraint<ConstraintType>(

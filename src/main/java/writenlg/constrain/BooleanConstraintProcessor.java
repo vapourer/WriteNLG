@@ -9,6 +9,8 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.utilities.GlobalConstants;
+
 /**
  * Returns 1 if all constraints have satisfactionLevel = 1; otherwise returns 0
  */
@@ -28,10 +30,10 @@ public class BooleanConstraintProcessor extends ConstraintProcessor
 
 		if (constraints.isEmpty())
 		{
-			return new BigDecimal("0");
+			return GlobalConstants.ZERO;
 		}
 
-		BigDecimal value = new BigDecimal("1");
+		BigDecimal value = GlobalConstants.ONE;
 
 		for (final Constraint<E> constraint : constraints)
 		{

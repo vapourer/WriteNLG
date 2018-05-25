@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.utilities.GlobalConstants;
+
 /**
  * Represents the SatisfactionLevel element of a constraint. Weighting defaults to 1, but can be set for use in a
  * weighted constraint.
@@ -27,7 +29,7 @@ public class SatisfactionLevel
 	 */
 	public SatisfactionLevel(BigDecimal level)
 	{
-		this(level, new BigDecimal("1"));
+		this(level, GlobalConstants.ONE);
 		LOGGER.info("Default weighting");
 	}
 

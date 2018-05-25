@@ -12,12 +12,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import analysis.utilities.GlobalConstants;
 import writenlg.constrain.BoundedSoftConstraint;
 import writenlg.constrain.ConstraintGroup;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAdditionConstraintProcessor;
-import writenlg.linguistics.phrase.partofspeech.Verb;
 
 public class VerbTest
 {
@@ -42,9 +42,9 @@ public class VerbTest
 				new WeightedAdditionConstraintProcessor());
 
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Too slow",
-				new SatisfactionLevel(new BigDecimal("0.6")), new BigDecimal("0"), new BigDecimal("1")));
+				new SatisfactionLevel(new BigDecimal("0.6")), GlobalConstants.ZERO, GlobalConstants.ONE));
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Speed merchant",
-				new SatisfactionLevel(new BigDecimal("0.8")), new BigDecimal("0"), new BigDecimal("1")));
+				new SatisfactionLevel(new BigDecimal("0.8")), GlobalConstants.ZERO, GlobalConstants.ONE));
 
 		final Verb verb = new Verb("hurtle", constraintGroup);
 

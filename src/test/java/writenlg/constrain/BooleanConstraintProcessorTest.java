@@ -14,12 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.constrain.BooleanConstraintProcessor;
-import writenlg.constrain.BoundedSoftConstraint;
-import writenlg.constrain.Constraint;
-import writenlg.constrain.ConstraintProcessor;
-import writenlg.constrain.HardConstraint;
-import writenlg.constrain.SatisfactionLevel;
+import analysis.utilities.GlobalConstants;
 
 public class BooleanConstraintProcessorTest
 {
@@ -37,13 +32,13 @@ public class BooleanConstraintProcessorTest
 	{
 		LOGGER.info("Test: testEvaluate_AllConstraintsPositive");
 
-		final BigDecimal valueExpected = new BigDecimal("1");
+		final BigDecimal valueExpected = GlobalConstants.ONE;
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Onion", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Parsnip", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Lettuce", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Tomato", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Onion", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Parsnip", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Lettuce", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Tomato", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		final ConstraintProcessor processor = new BooleanConstraintProcessor();
 
@@ -60,13 +55,13 @@ public class BooleanConstraintProcessorTest
 		LOGGER.info("Test: testEvaluate_OneNegativeConstraint");
 
 		// Arrange
-		final BigDecimal valueExpected = new BigDecimal("0");
+		final BigDecimal valueExpected = GlobalConstants.ZERO;
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Onion", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Parsnip", new SatisfactionLevel(new BigDecimal("0"))));
-		constraints.add(new HardConstraint<>("Lettuce", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Tomato", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Onion", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Parsnip", new SatisfactionLevel(GlobalConstants.ZERO)));
+		constraints.add(new HardConstraint<>("Lettuce", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Tomato", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		final ConstraintProcessor processor = new BooleanConstraintProcessor();
 
@@ -84,11 +79,11 @@ public class BooleanConstraintProcessorTest
 
 		// Arrange
 		final Set<Constraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Onion", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Parsnip", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Onion", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Parsnip", new SatisfactionLevel(GlobalConstants.ONE)));
 		constraints.add(new BoundedSoftConstraint<String>("Lettuce", new SatisfactionLevel(new BigDecimal("0.5")),
 				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS));
-		constraints.add(new HardConstraint<>("Tomato", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Tomato", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		final ConstraintProcessor processor = new BooleanConstraintProcessor();
 

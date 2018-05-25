@@ -17,6 +17,7 @@ import org.junit.Test;
 import analysis.TestConstants;
 import analysis.graph.Point;
 import analysis.graph.Segment;
+import analysis.utilities.GlobalConstants;
 
 public class SegmentStartTimeComparatorTest
 {
@@ -43,7 +44,7 @@ public class SegmentStartTimeComparatorTest
 
 		calendar.set(2018, 4, 12);
 		final Long date1 = Long.valueOf(calendar.getTimeInMillis());
-		final Point point1 = new Point(new BigDecimal("14"), new BigDecimal("1"), date1);
+		final Point point1 = new Point(new BigDecimal("14"), GlobalConstants.ONE, date1);
 
 		calendar.set(2018, 4, 16);
 		final Long date2 = Long.valueOf(calendar.getTimeInMillis());

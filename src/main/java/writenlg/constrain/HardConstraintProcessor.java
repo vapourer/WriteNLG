@@ -9,6 +9,8 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.utilities.GlobalConstants;
+
 /**
  * Returns the count of the included constraints, if all have satisfactionLevel = 1; otherwise returns 0.
  */
@@ -26,8 +28,8 @@ public class HardConstraintProcessor extends ConstraintProcessor
 	{
 		LOGGER.info("Evaluating hard constraints");
 
-		BigDecimal value = new BigDecimal("0");
-		BigDecimal minValue = new BigDecimal("1");
+		BigDecimal value = GlobalConstants.ZERO;
+		BigDecimal minValue = GlobalConstants.ONE;
 
 		for (final Constraint<E> constraint : constraints)
 		{

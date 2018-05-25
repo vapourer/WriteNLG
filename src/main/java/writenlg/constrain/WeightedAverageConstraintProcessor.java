@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 
 /**
@@ -27,8 +28,8 @@ public class WeightedAverageConstraintProcessor extends ConstraintProcessor
 	{
 		LOGGER.info("Evaluating weighted constraints by calculating a weighted mean average");
 
-		BigDecimal totalledValues = new BigDecimal("0");
-		BigDecimal totalledWeightings = new BigDecimal("0");
+		BigDecimal totalledValues = GlobalConstants.ZERO;
+		BigDecimal totalledWeightings = GlobalConstants.ZERO;
 
 		for (final Constraint<E> constraint : constraints)
 		{

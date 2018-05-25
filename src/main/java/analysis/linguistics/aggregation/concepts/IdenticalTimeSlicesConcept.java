@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import analysis.constrain.Constraints;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import analysis.utilities.GlobalConstants;
 import writenlg.AbstractConcept;
 import writenlg.aggregation.AbstractAggregationConcept;
 import writenlg.constrain.BooleanConstraintProcessor;
@@ -90,11 +91,11 @@ public class IdenticalTimeSlicesConcept extends AbstractAggregationConcept
 
 		if (this.timeSliceConcepts.size() == 2)
 		{
-			seriesTimeSlicesArePresent = seriesTimeSlicesArePresent.multiply(new BigDecimal("1"));
+			seriesTimeSlicesArePresent = seriesTimeSlicesArePresent.multiply(GlobalConstants.ONE);
 		}
 		else if (this.timeSliceConcepts.size() == 0)
 		{
-			seriesTimeSlicesArePresent = seriesTimeSlicesArePresent.multiply(new BigDecimal("0"));
+			seriesTimeSlicesArePresent = seriesTimeSlicesArePresent.multiply(GlobalConstants.ZERO);
 		}
 		else
 		{
@@ -117,12 +118,12 @@ public class IdenticalTimeSlicesConcept extends AbstractAggregationConcept
 
 		if (this.timeSliceConcepts.isEmpty())
 		{
-			seriesTimeSlicesAreIdentical = seriesTimeSlicesAreIdentical.multiply(new BigDecimal("0"));
+			seriesTimeSlicesAreIdentical = seriesTimeSlicesAreIdentical.multiply(GlobalConstants.ZERO);
 		}
 		else if (this.timeSliceConcepts.get(0).getPhraseSpecifications().get(0)
 				.equals(this.timeSliceConcepts.get(1).getPhraseSpecifications().get(0)))
 		{
-			seriesTimeSlicesAreIdentical = seriesTimeSlicesAreIdentical.multiply(new BigDecimal("1"));
+			seriesTimeSlicesAreIdentical = seriesTimeSlicesAreIdentical.multiply(GlobalConstants.ONE);
 		}
 		else
 		{

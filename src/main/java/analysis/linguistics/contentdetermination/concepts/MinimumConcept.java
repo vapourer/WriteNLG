@@ -18,6 +18,7 @@ import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.statistics.LowerTurningPointsSmoothed;
 import analysis.statistics.Minimum;
 import analysis.statistics.TenPercentile;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
 import writenlg.constrain.BoundedWeightedConstraint;
@@ -76,14 +77,14 @@ public class MinimumConcept extends AbstractConcept
 
 		BigDecimal minimumAtStartConstraintValue = null;
 
-		if (minimumPoint.getX().compareTo(new BigDecimal("0")) == 0)
+		if (minimumPoint.getX().compareTo(GlobalConstants.ZERO) == 0)
 		{
-			minimumAtStartConstraintValue = new BigDecimal("1")
+			minimumAtStartConstraintValue = GlobalConstants.ONE
 					.multiply(minimumAtStartConstraintConfiguration.getValue());
 		}
 		else
 		{
-			minimumAtStartConstraintValue = new BigDecimal("0")
+			minimumAtStartConstraintValue = GlobalConstants.ZERO
 					.multiply(minimumAtStartConstraintConfiguration.getValue());
 		}
 
@@ -109,11 +110,11 @@ public class MinimumConcept extends AbstractConcept
 
 		if (minimumPoint.getX().compareTo(new BigDecimal(this.timeSeries.getPoints().size() - 1)) == 0)
 		{
-			minimumAtEndConstraintValue = new BigDecimal("1").multiply(minimumAtEndConstraintConfiguration.getValue());
+			minimumAtEndConstraintValue = GlobalConstants.ONE.multiply(minimumAtEndConstraintConfiguration.getValue());
 		}
 		else
 		{
-			minimumAtEndConstraintValue = new BigDecimal("0").multiply(minimumAtEndConstraintConfiguration.getValue());
+			minimumAtEndConstraintValue = GlobalConstants.ZERO.multiply(minimumAtEndConstraintConfiguration.getValue());
 		}
 
 		final Constraint<ConstraintType> minimumAtEndConstraint = new BoundedWeightedConstraint<ConstraintType>(
@@ -137,7 +138,7 @@ public class MinimumConcept extends AbstractConcept
 		switch (lowPointCount)
 		{
 			case 1:
-				multipleLowTurningPointsConstraintValue = new BigDecimal("0")
+				multipleLowTurningPointsConstraintValue = GlobalConstants.ZERO
 						.multiply(multipleLowTurningPointsConstraintConfiguration.getValue());
 				break;
 			case 2:
@@ -149,7 +150,7 @@ public class MinimumConcept extends AbstractConcept
 						.multiply(multipleLowTurningPointsConstraintConfiguration.getValue());
 				break;
 			default:
-				multipleLowTurningPointsConstraintValue = new BigDecimal("1")
+				multipleLowTurningPointsConstraintValue = GlobalConstants.ONE
 						.multiply(multipleLowTurningPointsConstraintConfiguration.getValue());
 				break;
 		}
@@ -176,7 +177,7 @@ public class MinimumConcept extends AbstractConcept
 		switch (lowPointCount)
 		{
 			case 1:
-				singleObviousMinimumConstraintValue = new BigDecimal("1")
+				singleObviousMinimumConstraintValue = GlobalConstants.ONE
 						.multiply(singleObviousMinimumConstraintConfiguration.getValue());
 				break;
 			case 2:

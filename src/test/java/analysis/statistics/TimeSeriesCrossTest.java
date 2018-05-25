@@ -18,6 +18,7 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TestConstants;
 import analysis.TimeSeriesWithDerivedInformation;
 import analysis.graph.LineGraph;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 
 public class TimeSeriesCrossTest
@@ -113,7 +114,7 @@ public class TimeSeriesCrossTest
 		LOGGER.info("Test: testIdentifySegmentsWithCrossingPoints_OneCrossingPointAtStart");
 
 		// Arrange
-		BigDecimal indexExpected = new BigDecimal("0");
+		BigDecimal indexExpected = GlobalConstants.ZERO;
 
 		final String times1 = "Week ended,08/01/2016,15/01/2016,22/01/2016,29/01/2016,05/02/2016,12/02/2016,19/02/2016,26/02/2016";
 		final String values1 = "Deaths 2016,13045,11501,11473,11317,11052,11170,10590,11056";

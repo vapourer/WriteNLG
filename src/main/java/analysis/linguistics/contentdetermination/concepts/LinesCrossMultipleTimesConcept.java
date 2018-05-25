@@ -12,6 +12,7 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesWithDerivedInformation;
 import analysis.constrain.Constraints;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import analysis.utilities.GlobalConstants;
 import writenlg.AbstractConcept;
 import writenlg.constrain.BooleanConstraintProcessor;
 import writenlg.constrain.Constraint;
@@ -60,11 +61,11 @@ public class LinesCrossMultipleTimesConcept extends AbstractConcept
 
 		BigDecimal initialLinesCrossMultipleTimesConstraintValue = linesCrossMultipleTimesConstraintConfiguration
 				.getValue();
-		BigDecimal linesCrossMultipleTimes = new BigDecimal("0");
+		BigDecimal linesCrossMultipleTimes = GlobalConstants.ZERO;
 
 		if (crossingPointCount > 1)
 		{
-			linesCrossMultipleTimes = new BigDecimal("1");
+			linesCrossMultipleTimes = GlobalConstants.ONE;
 		}
 
 		linesCrossMultipleTimes = linesCrossMultipleTimes.multiply(initialLinesCrossMultipleTimesConstraintValue);
@@ -76,11 +77,11 @@ public class LinesCrossMultipleTimesConcept extends AbstractConcept
 				.get(ConstraintType.LINES_CROSS_ONCE.getTextualForm());
 
 		BigDecimal initialLinesCrossOnceConstraintValue = linesCrossOnceConstraintConfiguration.getValue();
-		BigDecimal linesCrossOnce = new BigDecimal("1");
+		BigDecimal linesCrossOnce = GlobalConstants.ONE;
 
 		if (crossingPointCount == 1)
 		{
-			linesCrossOnce = new BigDecimal("0");
+			linesCrossOnce = GlobalConstants.ZERO;
 		}
 
 		linesCrossOnce = linesCrossOnce.multiply(initialLinesCrossOnceConstraintValue);

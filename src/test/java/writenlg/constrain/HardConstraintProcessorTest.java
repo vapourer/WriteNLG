@@ -14,12 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.constrain.BoundedSoftConstraint;
-import writenlg.constrain.Constraint;
-import writenlg.constrain.ConstraintProcessor;
-import writenlg.constrain.HardConstraint;
-import writenlg.constrain.HardConstraintProcessor;
-import writenlg.constrain.SatisfactionLevel;
+import analysis.utilities.GlobalConstants;
 
 public class HardConstraintProcessorTest
 {
@@ -41,10 +36,10 @@ public class HardConstraintProcessorTest
 		final BigDecimal valueExpected = new BigDecimal("4");
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Cabbage", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		final ConstraintProcessor processor = new HardConstraintProcessor();
 
@@ -61,13 +56,13 @@ public class HardConstraintProcessorTest
 		LOGGER.info("Test: testEvaluate_OneNegativeConstraint");
 
 		// Arrange
-		final BigDecimal valueExpected = new BigDecimal("0");
+		final BigDecimal valueExpected = GlobalConstants.ZERO;
 
 		final Set<HardConstraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Cabbage", new SatisfactionLevel(new BigDecimal("0"))));
-		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Cabbage", new SatisfactionLevel(GlobalConstants.ZERO)));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		final ConstraintProcessor processor = new HardConstraintProcessor();
 
@@ -85,11 +80,11 @@ public class HardConstraintProcessorTest
 
 		// Arrange
 		final Set<Constraint<String>> constraints = new HashSet<>();
-		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
-		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Radish", new SatisfactionLevel(GlobalConstants.ONE)));
+		constraints.add(new HardConstraint<>("Turnip", new SatisfactionLevel(GlobalConstants.ONE)));
 		constraints.add(new BoundedSoftConstraint<String>("Cabbage", new SatisfactionLevel(new BigDecimal("0.5")),
 				TestConstants.LOWER_BOUND_FOR_CONSTRAINTS_TESTS, TestConstants.UPPER_BOUND_FOR_CONSTRAINTS_TESTS));
-		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(GlobalConstants.ONE)));
 
 		final ConstraintProcessor processor = new HardConstraintProcessor();
 

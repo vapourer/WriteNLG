@@ -12,12 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.constrain.ConstraintGroup;
-import writenlg.constrain.HardConstraint;
-import writenlg.constrain.SatisfactionLevel;
-import writenlg.constrain.SoftConstraint;
-import writenlg.constrain.SoftConstraintGroup;
-import writenlg.constrain.WeightedAdditionConstraintProcessor;
+import analysis.utilities.GlobalConstants;
 
 public class SoftConstraintGroupTest
 {
@@ -68,7 +63,7 @@ public class SoftConstraintGroupTest
 		constraints.addConstraint(
 				new SoftConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("3"))));
 		constraints.addConstraint(
-				new SoftConstraint<>("Daffodil", new SatisfactionLevel(new BigDecimal("0.2"), new BigDecimal("1"))));
+				new SoftConstraint<>("Daffodil", new SatisfactionLevel(new BigDecimal("0.2"), GlobalConstants.ONE)));
 		constraints.addConstraint(
 				new SoftConstraint<>("Dandelion", new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("7"))));
 		constraints.addConstraint(
@@ -88,6 +83,6 @@ public class SoftConstraintGroupTest
 
 		final ConstraintGroup<String> constraints = new SoftConstraintGroup<>(
 				new WeightedAdditionConstraintProcessor());
-		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.addConstraint(new HardConstraint<>("Radish", new SatisfactionLevel(GlobalConstants.ONE)));
 	}
 }

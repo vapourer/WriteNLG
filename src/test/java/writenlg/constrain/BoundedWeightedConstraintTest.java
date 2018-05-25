@@ -1,3 +1,4 @@
+
 package writenlg.constrain;
 
 import java.math.BigDecimal;
@@ -9,9 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.constrain.BoundedWeightedConstraint;
-import writenlg.constrain.Constraint;
-import writenlg.constrain.SatisfactionLevel;
+import analysis.utilities.GlobalConstants;
 
 public class BoundedWeightedConstraintTest
 {
@@ -33,8 +32,8 @@ public class BoundedWeightedConstraintTest
 		BigDecimal weightingExpected = new BigDecimal("5");
 
 		BoundedWeightedConstraint<String> constraint = new BoundedWeightedConstraint<String>("Yellowhammer",
-				new SatisfactionLevel(new BigDecimal("0.2"), new BigDecimal("5")), new BigDecimal("0"),
-				new BigDecimal("1"));
+				new SatisfactionLevel(new BigDecimal("0.2"), new BigDecimal("5")), GlobalConstants.ZERO,
+				GlobalConstants.ONE);
 
 		// Act
 		BigDecimal weightingActual = constraint.getWeighting();
@@ -52,8 +51,8 @@ public class BoundedWeightedConstraintTest
 		BigDecimal weightedLevelExpected = new BigDecimal("1.2");
 
 		Constraint<String> constraint = new BoundedWeightedConstraint<String>("Yellowhammer",
-				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("3")), new BigDecimal("0"),
-				new BigDecimal("1"));
+				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("3")), GlobalConstants.ZERO,
+				GlobalConstants.ONE);
 
 		// Act
 		BigDecimal weightedLevelActual = constraint.getSatisfactionLevelAsValue();

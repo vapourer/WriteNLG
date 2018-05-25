@@ -11,6 +11,9 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
+import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
+import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
 import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsDescendingConcept;
@@ -80,6 +83,16 @@ public class AggregationConcepts
 				break;
 			case IDENTICAL_TIME_SLICES:
 				this.aggregationConcepts.put(aggregationConcept, new IdenticalTimeSlicesConcept(phraseSpecifications));
+				break;
+			case AGGREGATE_MAXIMA:
+				this.aggregationConcepts.put(aggregationConcept, new AggregateMaximaConcept(phraseSpecifications));
+				break;
+			case AGGREGATE_MINIMA:
+				this.aggregationConcepts.put(aggregationConcept, new AggregateMinimaConcept(phraseSpecifications));
+				break;
+			case AGGREGATE_MAXIMUM_AND_MINIMUM:
+				this.aggregationConcepts.put(aggregationConcept,
+						new AggregateMaximumAndMinimumConcept(phraseSpecifications));
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", aggregationConcept));

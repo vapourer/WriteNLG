@@ -16,6 +16,7 @@ import analysis.constrain.Constraints;
 import analysis.graph.Segment;
 import analysis.graph.Slope;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
 import writenlg.constrain.BoundedWeightedConstraint;
@@ -76,12 +77,12 @@ public class DescendingTrendConcept extends AbstractConcept
 
 		if (descendingSmoothedSegmentPercentage.compareTo(mostSegmentsDescendingPercentageThreshold) >= 0)
 		{
-			mostSegmentsDescendingConstraintValue = new BigDecimal("1")
+			mostSegmentsDescendingConstraintValue = GlobalConstants.ONE
 					.multiply(mostSegmentsDescendingConstraintConfiguration.getValue());
 		}
 		else
 		{
-			mostSegmentsDescendingConstraintValue = new BigDecimal("0")
+			mostSegmentsDescendingConstraintValue = GlobalConstants.ZERO
 					.multiply(mostSegmentsDescendingConstraintConfiguration.getValue());
 		}
 
@@ -109,12 +110,12 @@ public class DescendingTrendConcept extends AbstractConcept
 
 		if (descendingSmoothedSegmentPercentage.compareTo(new BigDecimal("100")) == 0)
 		{
-			allSegmentsDescendingConstraintValue = new BigDecimal("1")
+			allSegmentsDescendingConstraintValue = GlobalConstants.ONE
 					.multiply(allSegmentsDescendingConstraintConfiguration.getValue());
 		}
 		else
 		{
-			allSegmentsDescendingConstraintValue = new BigDecimal("0")
+			allSegmentsDescendingConstraintValue = GlobalConstants.ZERO
 					.multiply(allSegmentsDescendingConstraintConfiguration.getValue());
 		}
 

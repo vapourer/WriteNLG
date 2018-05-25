@@ -14,12 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
-import writenlg.constrain.Constraint;
-import writenlg.constrain.ConstraintProcessor;
-import writenlg.constrain.HardConstraint;
-import writenlg.constrain.SatisfactionLevel;
-import writenlg.constrain.SoftConstraint;
-import writenlg.constrain.WeightedAdditionConstraintProcessor;
+import analysis.utilities.GlobalConstants;
 
 public class WeightedAdditionConstraintProcessorTest
 {
@@ -90,7 +85,7 @@ public class WeightedAdditionConstraintProcessorTest
 				new SoftConstraint<>("Buttercup", new SatisfactionLevel(new BigDecimal("0.5"), new BigDecimal("3"))));
 		constraints
 				.add(new SoftConstraint<>("Pansy", new SatisfactionLevel(new BigDecimal("0.7"), new BigDecimal("2"))));
-		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(new BigDecimal("1"))));
+		constraints.add(new HardConstraint<>("Courgette", new SatisfactionLevel(GlobalConstants.ONE)));
 		constraints
 				.add(new SoftConstraint<>("Dahlia", new SatisfactionLevel(new BigDecimal("0.8"), new BigDecimal("4"))));
 

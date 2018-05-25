@@ -12,6 +12,7 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesWithDerivedInformation;
 import analysis.constrain.Constraints;
 import analysis.linguistics.contentdetermination.ConstraintType;
+import analysis.utilities.GlobalConstants;
 import writenlg.AbstractConcept;
 import writenlg.constrain.BooleanConstraintProcessor;
 import writenlg.constrain.Constraint;
@@ -59,11 +60,11 @@ public class LinesDoNotCrossConcept extends AbstractConcept
 				.get(ConstraintType.LINES_DO_NOT_CROSS.getTextualForm());
 
 		BigDecimal initialLinesDoNotCrossConstraintValue = linesDoNotCrossConstraintConfiguration.getValue();
-		BigDecimal linesDoNotCross = new BigDecimal("0");
+		BigDecimal linesDoNotCross = GlobalConstants.ZERO;
 
 		if (crossingPointCount == 0)
 		{
-			linesDoNotCross = new BigDecimal("1");
+			linesDoNotCross = GlobalConstants.ONE;
 		}
 
 		linesDoNotCross = linesDoNotCross.multiply(initialLinesDoNotCrossConstraintValue);

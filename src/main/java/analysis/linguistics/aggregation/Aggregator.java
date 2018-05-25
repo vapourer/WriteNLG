@@ -34,6 +34,7 @@ import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
+import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import io.AntlrInputReader;
 import io.LexerParser;
@@ -91,6 +92,7 @@ public class Aggregator
 	private void processAggregation()
 	{
 		processAllIntroductoryInformationPresentConcept();
+		processMaximaMinimaAggregationConcepts();
 		processIdenticalTimeSlicesConcept();
 		processBothSeriesHaveAllSegmentsAscendingConcept();
 	}
@@ -152,7 +154,7 @@ public class Aggregator
 		}
 
 		if (identicalTimeSlicesConcept != null
-				&& identicalTimeSlicesConcept.calculateSatisfactionLevel().compareTo(new BigDecimal("1")) == 0)
+				&& identicalTimeSlicesConcept.calculateSatisfactionLevel().compareTo(GlobalConstants.ONE) == 0)
 		{
 			this.aggregationConcepts.put(AggregationConcept.IDENTICAL_TIME_SLICES, identicalTimeSlicesConcept);
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TIME_SLICE).clear();
@@ -161,6 +163,113 @@ public class Aggregator
 		{
 			this.aggregationConcepts.remove(AggregationConcept.IDENTICAL_TIME_SLICES);
 		}
+	}
+
+	private void processMaximaMinimaAggregationConcepts()
+	{
+		final AggregateMaximaConcept aggregateMaximaConcept = processAggregateMaximaConcept();
+		final AggregateMinimaConcept aggregateMinimaConcept = processAggregateMinimaConcept();
+		final AggregateMaximumAndMinimumConcept aggregateMaximumAndMinimumConcept = processAggregateMaximumAndMinimumConcept();
+
+		final BigDecimal aggregateMaximaConceptSatisfactionLevel = calculateSatisfactionLevel(aggregateMaximaConcept);
+		final BigDecimal aggregateMinimaConceptSatisfactionLevel = calculateSatisfactionLevel(aggregateMinimaConcept);
+		final BigDecimal aggregateMaximumAndMinimumConceptSatisfactionLevel = calculateSatisfactionLevel(
+				aggregateMaximumAndMinimumConcept);
+
+		if (aggregateMaximumAndMinimumConceptSatisfactionLevel.compareTo(aggregateMaximaConceptSatisfactionLevel) > 0
+				&& aggregateMaximumAndMinimumConceptSatisfactionLevel
+						.compareTo(aggregateMinimaConceptSatisfactionLevel) > 0)
+		{
+			includeAggregateMaximumAndMinimumConcept();
+		}
+		else
+		{
+			checkAggregateMaximaAndAggregateMinimaConcepts(aggregateMaximaConcept, aggregateMinimaConcept);
+		}
+	}
+
+	private void checkAggregateMaximaAndAggregateMinimaConcepts(final AggregateMaximaConcept aggregateMaximaConcept,
+			final AggregateMinimaConcept aggregateMinimaConcept)
+	{
+		if (aggregateMaximaConcept.calculateSatisfactionLevel().compareTo(GlobalConstants.ZERO) > 0)
+		{
+			includeAggregateMaximaConcept();
+		}
+
+		if (aggregateMinimaConcept.calculateSatisfactionLevel().compareTo(GlobalConstants.ZERO) > 0)
+		{
+			includeAggregateMinimaConcept();
+		}
+	}
+
+	private void includeAggregateMaximaConcept()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	private void includeAggregateMinimaConcept()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	private void includeAggregateMaximumAndMinimumConcept()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	private BigDecimal calculateSatisfactionLevel(AbstractAggregationConcept concept)
+	{
+		if (concept != null)
+		{
+			return concept.calculateSatisfactionLevel();
+		}
+
+		return GlobalConstants.ZERO;
+	}
+
+	private AggregateMaximaConcept processAggregateMaximaConcept()
+	{
+		AggregateMaximaConcept aggregateMaximaConcept = (AggregateMaximaConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_MAXIMA);
+
+		if (aggregateMaximaConcept != null)
+		{
+			aggregateMaximaConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
+			aggregateMaximaConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
+
+		return aggregateMaximaConcept;
+	}
+
+	private AggregateMinimaConcept processAggregateMinimaConcept()
+	{
+		AggregateMinimaConcept aggregateMinimaConcept = (AggregateMinimaConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_MINIMA);
+
+		if (aggregateMinimaConcept != null)
+		{
+			aggregateMinimaConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
+			aggregateMinimaConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
+
+		return aggregateMinimaConcept;
+	}
+
+	private AggregateMaximumAndMinimumConcept processAggregateMaximumAndMinimumConcept()
+	{
+		AggregateMaximumAndMinimumConcept aggregateMaximumAndMinimumConcept = (AggregateMaximumAndMinimumConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_MAXIMUM_AND_MINIMUM);
+
+		if (aggregateMaximumAndMinimumConcept != null)
+		{
+			aggregateMaximumAndMinimumConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
+			aggregateMaximumAndMinimumConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
+
+		return aggregateMaximumAndMinimumConcept;
 	}
 
 	private void processBothSeriesHaveAllSegmentsAscendingConcept()

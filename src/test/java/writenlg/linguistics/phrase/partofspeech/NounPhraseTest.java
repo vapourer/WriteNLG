@@ -12,13 +12,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import analysis.TestConstants;
+import analysis.utilities.GlobalConstants;
 import writenlg.constrain.BoundedSoftConstraint;
 import writenlg.constrain.ConstraintGroup;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.constrain.SoftConstraint;
 import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAdditionConstraintProcessor;
-import writenlg.linguistics.phrase.partofspeech.NounPhrase;
 
 public class NounPhraseTest
 {
@@ -43,9 +43,9 @@ public class NounPhraseTest
 				new WeightedAdditionConstraintProcessor());
 
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Radishes are nice",
-				new SatisfactionLevel(new BigDecimal("0.7")), new BigDecimal("0"), new BigDecimal("1")));
+				new SatisfactionLevel(new BigDecimal("0.7")), GlobalConstants.ZERO, GlobalConstants.ONE));
 		constraintGroup.addConstraint(new BoundedSoftConstraint<>("Radishes are red",
-				new SatisfactionLevel(new BigDecimal("0.8")), new BigDecimal("0"), new BigDecimal("1")));
+				new SatisfactionLevel(new BigDecimal("0.8")), GlobalConstants.ZERO, GlobalConstants.ONE));
 
 		final NounPhrase nounPhrase = new NounPhrase("radish", constraintGroup);
 
