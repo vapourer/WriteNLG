@@ -23,6 +23,7 @@ import writenlg.constrain.HardConstraintGroup;
 import writenlg.constrain.HardConstraintProcessor;
 import writenlg.constrain.SatisfactionLevel;
 import writenlg.linguistics.phrase.PhraseSpecification;
+import writenlg.linguistics.phrase.partofspeech.Complement;
 
 /**
  * Aggregation of maximum and minimum for each series.
@@ -67,18 +68,35 @@ public class AggregateMaximumAndMinimumConcept extends AbstractAggregationConcep
 	@Override
 	protected void prepareAggregatedPhraseSpecification()
 	{
-		// List<AbstractConcept> maximumRequiredConcepts = this.timeSeriesSpecificConcepts
-		// .get(TimeSeriesSpecificConcept.MAXIMUM);
-		//
-		// if (!maximumRequiredConcepts.isEmpty())
-		// {
-		// for (AbstractConcept eachConcept : maximumRequiredConcepts)
-		// {
-		// addPhraseSpecification(eachConcept.getPhraseSpecifications().get(0));
-		// }
-		//
-		// setConjunction("whilst");
-		// }
+		List<AbstractConcept> maximumRequiredConcepts = this.timeSeriesSpecificConcepts
+				.get(TimeSeriesSpecificConcept.MAXIMUM);
+
+		List<AbstractConcept> minimumRequiredConcepts = this.timeSeriesSpecificConcepts
+				.get(TimeSeriesSpecificConcept.MINIMUM);
+
+		int minimumRequiredConceptsSize = minimumRequiredConcepts.size();
+
+		if (!maximumRequiredConcepts.isEmpty() && !minimumRequiredConcepts.isEmpty()
+				&& minimumRequiredConceptsSize == maximumRequiredConcepts.size())
+		{
+			for (int i = 0; i < minimumRequiredConceptsSize; i++)
+			{
+				PhraseSpecification newPhraseSpecification = minimumRequiredConcepts.get(i).getPhraseSpecifications()
+						.get(0);
+				Complement currentComplement = newPhraseSpecification.getPredicate().getComplement();
+
+				String maximumComplementText = maximumRequiredConcepts.get(i).getPhraseSpecifications().get(0)
+						.getPredicate().getComplement().getText();
+				String newComplementText = currentComplement.getText() + " and " + maximumComplementText;
+
+				Complement newComplement = new Complement(newComplementText, currentComplement.getConstraintGroup());
+
+				newPhraseSpecification.getPredicate().setComplement(newComplement);
+				addPhraseSpecification(newPhraseSpecification);
+			}
+
+			setConjunction("whilst");
+		}
 	}
 
 	@Override

@@ -180,7 +180,7 @@ public class Aggregator
 				&& aggregateMaximumAndMinimumConceptSatisfactionLevel
 						.compareTo(aggregateMinimaConceptSatisfactionLevel) > 0)
 		{
-			includeAggregateMaximumAndMinimumConcept();
+			includeAggregateMaximumAndMinimumConcept(aggregateMaximumAndMinimumConcept);
 		}
 		else
 		{
@@ -232,10 +232,15 @@ public class Aggregator
 				this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).size()));
 	}
 
-	private void includeAggregateMaximumAndMinimumConcept()
+	private void includeAggregateMaximumAndMinimumConcept(
+			final AggregateMaximumAndMinimumConcept aggregateMaximumAndMinimumConcept)
 	{
-		// TODO Auto-generated method stub
-
+		this.aggregationConcepts.put(AggregationConcept.AGGREGATE_MAXIMUM_AND_MINIMUM,
+				aggregateMaximumAndMinimumConcept);
+		this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMA);
+		this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MINIMA);
+		this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).clear();
+		this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).clear();
 	}
 
 	private BigDecimal calculateSatisfactionLevel(AbstractAggregationConcept concept)
