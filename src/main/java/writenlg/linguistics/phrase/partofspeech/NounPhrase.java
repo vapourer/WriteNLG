@@ -19,6 +19,9 @@ public class NounPhrase extends AbstractPartOfSpeech
 {
 	private static final Logger LOGGER = LogManager.getLogger("NounPhrase.class");
 
+	// TODO: Reconsider this implementation of a pre-modifier, and complete full implementation of front-modifier,
+	// pre-modifier and post-modifier in all relevant contexts.
+	private String preModifier;
 	private boolean plural;
 
 	/**
@@ -58,6 +61,23 @@ public class NounPhrase extends AbstractPartOfSpeech
 	{
 		this.plural = plural;
 		LOGGER.info(String.format("setPlural NounPhrase %s is plural: %s", getText(), this.plural));
+	}
+
+	/**
+	 * @return the preModifier
+	 */
+	public String getPreModifier()
+	{
+		return preModifier;
+	}
+
+	/**
+	 * @param preModifier
+	 *            the preModifier to set
+	 */
+	public void setPreModifier(String preModifier)
+	{
+		this.preModifier = preModifier;
 	}
 
 	/**

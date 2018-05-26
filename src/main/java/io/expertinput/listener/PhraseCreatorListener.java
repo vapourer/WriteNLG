@@ -245,6 +245,14 @@ public class PhraseCreatorListener extends PhraseCreatorBaseListener
 				break;
 			case COMPLEMENT:
 				break;
+			case FRONT_MODIFIER:
+				break;
+			case PRE_MODIFIER:
+				this.subject.getNounPhrase().setPreModifier(expression);
+				LOGGER.info(String.format("New PreModifier added to Subject: %s", expression));
+				break;
+			case POST_MODIFIER:
+				break;
 			default:
 				break;
 		}

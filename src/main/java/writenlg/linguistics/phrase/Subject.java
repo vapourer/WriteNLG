@@ -118,6 +118,7 @@ public class Subject
 			replacement = replacement.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
 		}
 
+		replacement.setPreModifier(this.nounPhrase.getPreModifier());
 		replacement.setPlural(this.nounPhrase.isPlural());
 
 		return replacement;
@@ -144,6 +145,8 @@ public class Subject
 		Subject otherSubject = (Subject) object;
 
 		return this.nounPhrase.getText().equals(otherSubject.nounPhrase.getText())
+				&& ((this.nounPhrase.getPreModifier() == null && otherSubject.nounPhrase.getPreModifier() == null)
+						|| (this.nounPhrase.getPreModifier().equals(otherSubject.nounPhrase.getPreModifier())))
 				&& ((this.additionalNounPhrase == null && otherSubject.additionalNounPhrase == null)
 						|| (this.additionalNounPhrase.getText().equals(otherSubject.additionalNounPhrase.getText())));
 	}

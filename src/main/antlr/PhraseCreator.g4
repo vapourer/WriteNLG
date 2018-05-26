@@ -165,6 +165,9 @@ PART_OF_SPEECH				:	'NOUN'
 							|	'COMPLEMENT'
 							|	'COMPLEMENT2'
 							|	'COMPLEMENT3'
+							|	'FRONT_MODIFIER'
+							|	'PRE_MODIFIER'
+							|	'POST_MODIFIER'
 							;
 					
 STRING						:	[a-zA-Z0-9][a-zA-Z0-9 ]*

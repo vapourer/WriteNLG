@@ -99,6 +99,7 @@ TimeSeriesConcept=TREND
 PhraseSpecification
 Subject
 NOUN			:	@@SeriesLegend@@
+PRE_MODIFIER	:	overall trends indicate
 Predicate
 VERB			:	@@AscendOrFall1@@
 COMPLEMENT		:	from
