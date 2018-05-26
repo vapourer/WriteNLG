@@ -20,6 +20,7 @@ import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
+import analysis.linguistics.contentdetermination.concepts.TrendConcept;
 import analysis.substitution.Substitutor;
 import analysis.substitution.TimeSeriesMapping;
 import writenlg.AbstractConcept;
@@ -259,6 +260,46 @@ public class Concepts implements ConceptLoader
 
 					this.timeSeriesSpecificConcepts.add(timeSliceConcept);
 				}
+				break;
+			case TREND:
+				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				{
+					LOGGER.info(String.format("Mapping for %s",
+							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					final TrendConcept trendConcept = new TrendConcept(conceptPhraseSpecifications,
+							mapping.getTimeSeriesWithDerivedInformation());
+
+					this.timeSeriesSpecificConcepts.add(trendConcept);
+				}
+				break;
+			case TURNING_POINTS:
+				// for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				// {
+				// LOGGER.info(String.format("Mapping for %s",
+				// mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+				//
+				// final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+				//
+				// for (PhraseSpecification specification : phraseSpecifications)
+				// {
+				// conceptPhraseSpecifications
+				// .add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+				// }
+				//
+				// final TurningPointsConcept turningPointsConcept = new TurningPointsConcept(
+				// conceptPhraseSpecifications);
+				//
+				// this.timeSeriesSpecificConcepts.add(turningPointsConcept);
+				// }
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", timeSeriesSpecificConcept));

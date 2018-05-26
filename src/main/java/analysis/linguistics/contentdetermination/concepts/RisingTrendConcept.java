@@ -68,9 +68,9 @@ public class RisingTrendConcept extends AbstractConcept
 		final ConstraintConfiguration mostSegmentsAscendingConstraintConfiguration = this.constraints
 				.get(ConstraintType.MOST_SEGMENTS_ASCENDING.getTextualForm());
 
-		BigDecimal ascendingSmoothedSegmentPercentage = calculateAscendingSmoothedSegmentPercentage();
+		final BigDecimal ascendingSmoothedSegmentPercentage = calculateAscendingSmoothedSegmentPercentage();
 
-		BigDecimal mostSegmentsAscendingPercentageThreshold = new BigDecimal(
+		final BigDecimal mostSegmentsAscendingPercentageThreshold = new BigDecimal(
 				WriteNlgProperties.getInstance().getProperty("MostSegmentsSameSlopePercentageThreshold"));
 
 		BigDecimal mostSegmentsAscendingConstraintValue = null;

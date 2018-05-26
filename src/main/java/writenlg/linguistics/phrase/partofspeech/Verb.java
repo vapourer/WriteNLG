@@ -58,4 +58,19 @@ public class Verb extends AbstractPartOfSpeech
 	{
 		this.plural = plural;
 	}
+
+	/**
+	 * Returns this text with placeholders replaced by analysis derived information.
+	 * 
+	 * @param regex
+	 * @param substitution
+	 * @return a replacement Verb with substitutions
+	 */
+	public Verb replaceAll(String regex, String substitution)
+	{
+		Verb newVerb = new Verb(getText().replaceAll(regex, substitution), this.getConstraintGroup());
+		LOGGER.info(String.format("replaceAll Verb %s is plural: %s", getText(), this.plural));
+
+		return newVerb;
+	}
 }

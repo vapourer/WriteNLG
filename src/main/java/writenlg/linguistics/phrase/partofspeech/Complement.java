@@ -63,7 +63,7 @@ public class Complement extends AbstractPartOfSpeech
 	 * 
 	 * @param regex
 	 * @param substitution
-	 * @return
+	 * @return a replacement Complement with substitutions
 	 */
 	public Complement replaceAll(String regex, String substitution)
 	{

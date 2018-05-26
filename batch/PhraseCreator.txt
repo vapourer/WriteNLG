@@ -95,3 +95,46 @@ Predicate
 VERB			:	be
 COMPLEMENT		:	@@LineCountText@@ time series with values displayed at
 COMPLEMENT2		:	@@TimeSliceAsAdjective@@ intervals
+TimeSeriesConcept=TREND
+PhraseSpecification
+Subject
+NOUN			:	@@SeriesLegend@@
+Predicate
+VERB			:	@@AscendOrFall1@@
+COMPLEMENT		:	from
+COMPLEMENT2		:	@@Trend1Start@@ to
+COMPLEMENT3		:	@@Trend1End@@
+PhraseSpecification
+Subject
+NOUN			:	@@SeriesLegend@@
+Predicate
+VERB			:	@@AscendOrFall2@@
+COMPLEMENT		:	to
+COMPLEMENT2		:	@@Trend2End@@
+PhraseSpecification
+Subject
+NOUN			:	@@SeriesLegend@@
+Predicate
+VERB			:	@@AscendOrFall3@@
+COMPLEMENT		:	to
+COMPLEMENT2		:	@@Trend3End@@
+PhraseSpecification
+Subject
+NOUN			:	@@SeriesLegend@@
+Predicate
+VERB			:	@@AscendOrFall4@@
+COMPLEMENT		:	to
+COMPLEMENT2		:	@@Trend4End@@
+PhraseSpecification
+Subject
+NOUN			:	@@SeriesLegend@@
+Predicate
+VERB			:	@@AscendOrFall5@@
+COMPLEMENT		:	to
+COMPLEMENT2		:	@@Trend5End@@
+TimeSeriesConcept=TURNING_POINTS
+PhraseSpecification
+Subject
+NOUN			:	@@SeriesLegend@@
+Predicate
+VERB			:	@@Fluctuate@@

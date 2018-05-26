@@ -21,6 +21,7 @@ import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAdditionConstraintProcessor;
 import writenlg.linguistics.phrase.partofspeech.Complement;
 import writenlg.linguistics.phrase.partofspeech.NounPhrase;
+import writenlg.linguistics.phrase.partofspeech.Verb;
 
 public class PhraseSpecificationTest
 {
@@ -59,17 +60,21 @@ public class PhraseSpecificationTest
 		Subject subject = new Subject();
 		subject.setNounPhrase(subjectNounPhrase);
 
-		final ConstraintGroup<String> predicateConstraintGroup = new SoftConstraintGroup<>(
+		final ConstraintGroup<String> verbConstraintGroup = new SoftConstraintGroup<>(
 				new WeightedAdditionConstraintProcessor());
 
-		predicateConstraintGroup.addConstraint(new SoftConstraint<>("Beetroot is purple",
+		final ConstraintGroup<String> nounConstraintGroup = new SoftConstraintGroup<>(
+				new WeightedAdditionConstraintProcessor());
+
+		nounConstraintGroup.addConstraint(new SoftConstraint<>("Beetroot is purple",
 				new SatisfactionLevel(new BigDecimal("0.3"), new BigDecimal("3"))));
-		predicateConstraintGroup.addConstraint(new SoftConstraint<>("Lettuce is green",
+		nounConstraintGroup.addConstraint(new SoftConstraint<>("Lettuce is green",
 				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("2"))));
 
-		final NounPhrase predicateNounPhrase = new NounPhrase("@@Lemon@@", predicateConstraintGroup);
+		final NounPhrase predicateNounPhrase = new NounPhrase("@@Lemon@@", nounConstraintGroup);
 
 		Predicate predicate = new Predicate();
+		predicate.setVerb(new Verb("be", verbConstraintGroup));
 		predicate.setNounPhrase(predicateNounPhrase);
 
 		PhraseSpecification phraseSpecification = new PhraseSpecification();
@@ -112,17 +117,21 @@ public class PhraseSpecificationTest
 		Subject subject = new Subject();
 		subject.setNounPhrase(subjectNounPhrase);
 
-		final ConstraintGroup<String> predicateConstraintGroup = new SoftConstraintGroup<>(
+		final ConstraintGroup<String> verbConstraintGroup = new SoftConstraintGroup<>(
 				new WeightedAdditionConstraintProcessor());
 
-		predicateConstraintGroup.addConstraint(new SoftConstraint<>("Beetroot is purple",
+		final ConstraintGroup<String> complementConstraintGroup = new SoftConstraintGroup<>(
+				new WeightedAdditionConstraintProcessor());
+
+		complementConstraintGroup.addConstraint(new SoftConstraint<>("Beetroot is purple",
 				new SatisfactionLevel(new BigDecimal("0.3"), new BigDecimal("3"))));
-		predicateConstraintGroup.addConstraint(new SoftConstraint<>("Lettuce is green",
+		complementConstraintGroup.addConstraint(new SoftConstraint<>("Lettuce is green",
 				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("2"))));
 
-		final Complement predicateComplement = new Complement("@@Apple@@", predicateConstraintGroup);
+		final Complement predicateComplement = new Complement("@@Apple@@", complementConstraintGroup);
 
 		Predicate predicate = new Predicate();
+		predicate.setVerb(new Verb("be", verbConstraintGroup));
 		predicate.setComplement(predicateComplement);
 
 		PhraseSpecification phraseSpecification = new PhraseSpecification();

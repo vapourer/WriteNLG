@@ -37,7 +37,9 @@ public enum ConstraintType
 	MINIMUM_REQUIRED("MinimumRequired"),
 	MAXIMA_ALL_PRESENT("MaximaAllPresent"),
 	MINIMA_ALL_PRESENT("MinimaAllPresent"),
-	MAXIMA_AND_MINIMA_ALL_PRESENT("MaximaAndMinimaAllPresent");
+	MAXIMA_AND_MINIMA_ALL_PRESENT("MaximaAndMinimaAllPresent"),
+	MULTIPLE_TRENDS("MultipleTrends"),
+	ASCENDING_AND_DESCENDING("AscendingAndDescending");
 
 	final private String textualForm;
 

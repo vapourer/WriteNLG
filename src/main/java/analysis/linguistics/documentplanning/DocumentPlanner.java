@@ -151,6 +151,18 @@ public class DocumentPlanner
 			paragraph1.addSentence(sentence);
 		}
 
+		List<AbstractConcept> trendConcepts = this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND);
+
+		if (!trendConcepts.isEmpty())
+		{
+			for (AbstractConcept eachConcept : trendConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph2.addSentence(sentence);
+			}
+		}
+
 		AggregateMaximumAndMinimumConcept aggregateMaximumAndMinimumConcept = (AggregateMaximumAndMinimumConcept) this.aggregationConcepts
 				.get(AggregationConcept.AGGREGATE_MAXIMUM_AND_MINIMUM);
 

@@ -67,6 +67,8 @@ TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'DESCENDING_TREND'
 							|	'SERIES_LEGEND'
 							|	'TIME_SLICE'
+							|	'TREND'
+							|	'TURNING_POINTS'
 							;
 							
 AGGREGATION_CONCEPT_TYPE	:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
@@ -110,6 +112,8 @@ CONSTRAINT_NAME				:	'LinesCross'
 							|	'MaximaAllPresent'
 							|	'MinimaAllPresent'
 							|	'MaximaAndMinimaAllPresent'
+							|	'MultipleTrends'
+							|	'AscendingAndDescending'
 							;
 							
 INITIAL_VALUE				:	DIGIT+ '.' DIGIT+

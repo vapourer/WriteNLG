@@ -125,11 +125,7 @@ TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'DESCENDING_TREND'
 							|	'SERIES_LEGEND'
 							|	'TIME_SLICE'
-							|	'TREND_1'
-							|	'TREND_2'
-							|	'TREND_3'
-							|	'TREND_4'
-							|	'TREND_5'
+							|	'TREND'
 							|	'TURNING_POINTS'
 							;
 							

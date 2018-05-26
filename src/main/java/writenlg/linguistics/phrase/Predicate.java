@@ -131,6 +131,15 @@ public class Predicate
 		NounPhrase replacementNounPhrase = null;
 		Complement replacementComplement = null;
 
+		Verb replacementVerb = new Verb(this.verb.getText(), this.verb.getConstraintGroup());
+
+		for (final String eachPlaceHolder : substitutions.keySet())
+		{
+			replacementVerb = replacementVerb.replaceAll(eachPlaceHolder, substitutions.get(eachPlaceHolder));
+		}
+
+		replacementVerb.setPlural(this.verb.isPlural());
+
 		if (this.nounPhrase != null)
 		{
 			replacementNounPhrase = new NounPhrase(this.nounPhrase.getText(), this.nounPhrase.getConstraintGroup());
@@ -157,7 +166,7 @@ public class Predicate
 			replacementComplement.setPlural(this.complement.isPlural());
 		}
 
-		return new Predicate(this.verb, replacementNounPhrase, replacementComplement);
+		return new Predicate(replacementVerb, replacementNounPhrase, replacementComplement);
 	}
 
 	@Override

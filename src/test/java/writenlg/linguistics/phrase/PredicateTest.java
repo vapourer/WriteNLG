@@ -21,6 +21,7 @@ import writenlg.constrain.SoftConstraintGroup;
 import writenlg.constrain.WeightedAdditionConstraintProcessor;
 import writenlg.linguistics.phrase.partofspeech.Complement;
 import writenlg.linguistics.phrase.partofspeech.NounPhrase;
+import writenlg.linguistics.phrase.partofspeech.Verb;
 
 public class PredicateTest
 {
@@ -41,20 +42,24 @@ public class PredicateTest
 		// Arrange
 		String nounPhraseTextExpected = "1234";
 
-		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(
+		final ConstraintGroup<String> verbConstraintGroup = new SoftConstraintGroup<>(
+				new WeightedAdditionConstraintProcessor());
+
+		final ConstraintGroup<String> nounConstraintGroup = new SoftConstraintGroup<>(
 				new WeightedAdditionConstraintProcessor());
 
 		Map<String, String> substitutions = new HashMap<>();
 		substitutions.put("@@Pansy@@", "1234");
 
-		constraintGroup.addConstraint(new SoftConstraint<>("Radishes are nice",
+		nounConstraintGroup.addConstraint(new SoftConstraint<>("Radishes are nice",
 				new SatisfactionLevel(new BigDecimal("0.3"), new BigDecimal("3"))));
-		constraintGroup.addConstraint(new SoftConstraint<>("Radishes are red",
+		nounConstraintGroup.addConstraint(new SoftConstraint<>("Radishes are red",
 				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("2"))));
 
-		final NounPhrase nounPhrase = new NounPhrase("@@Pansy@@", constraintGroup);
+		final NounPhrase nounPhrase = new NounPhrase("@@Pansy@@", nounConstraintGroup);
 
 		Predicate predicate = new Predicate();
+		predicate.setVerb(new Verb("be", verbConstraintGroup));
 		predicate.setNounPhrase(nounPhrase);
 
 		// Act
@@ -73,20 +78,24 @@ public class PredicateTest
 		// Arrange
 		String complementTextExpected = "5678";
 
-		final ConstraintGroup<String> constraintGroup = new SoftConstraintGroup<>(
+		final ConstraintGroup<String> verbConstraintGroup = new SoftConstraintGroup<>(
+				new WeightedAdditionConstraintProcessor());
+
+		final ConstraintGroup<String> complementConstraintGroup = new SoftConstraintGroup<>(
 				new WeightedAdditionConstraintProcessor());
 
 		Map<String, String> substitutions = new HashMap<>();
 		substitutions.put("@@Buttercup@@", "5678");
 
-		constraintGroup.addConstraint(new SoftConstraint<>("Radishes are nice",
+		complementConstraintGroup.addConstraint(new SoftConstraint<>("Radishes are nice",
 				new SatisfactionLevel(new BigDecimal("0.3"), new BigDecimal("3"))));
-		constraintGroup.addConstraint(new SoftConstraint<>("Radishes are red",
+		complementConstraintGroup.addConstraint(new SoftConstraint<>("Radishes are red",
 				new SatisfactionLevel(new BigDecimal("0.4"), new BigDecimal("2"))));
 
-		final Complement complement = new Complement("@@Buttercup@@", constraintGroup);
+		final Complement complement = new Complement("@@Buttercup@@", complementConstraintGroup);
 
 		Predicate predicate = new Predicate();
+		predicate.setVerb(new Verb("be", verbConstraintGroup));
 		predicate.setComplement(complement);
 
 		// Act

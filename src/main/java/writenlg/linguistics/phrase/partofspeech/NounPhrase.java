@@ -65,7 +65,7 @@ public class NounPhrase extends AbstractPartOfSpeech
 	 * 
 	 * @param regex
 	 * @param substitution
-	 * @return
+	 * @return a replacement NounPhrase with substitutions
 	 */
 	public NounPhrase replaceAll(String regex, String substitution)
 	{
