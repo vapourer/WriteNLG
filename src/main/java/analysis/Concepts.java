@@ -267,6 +267,22 @@ public class Concepts implements ConceptLoader
 					LOGGER.info(String.format("Mapping for %s",
 							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
 
+					final int smoothedSegmentCount = mapping.getTimeSeriesWithDerivedInformation().getSmoothedSegments()
+							.size();
+					final int outlineSegmentCount = mapping.getTimeSeriesWithDerivedInformation().getOutlineSegments()
+							.size();
+
+					LOGGER.info(String.format("smoothedSegmentCount: %d; outlineSegmentCount: %d", smoothedSegmentCount,
+							outlineSegmentCount));
+
+					final int segmentCount = outlineSegmentCount < smoothedSegmentCount ? outlineSegmentCount
+							: smoothedSegmentCount;
+
+					for (int i = phraseSpecifications.size(); i >= segmentCount; i--)
+					{
+						phraseSpecifications.remove(i - 1);
+					}
+
 					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
 
 					for (PhraseSpecification specification : phraseSpecifications)

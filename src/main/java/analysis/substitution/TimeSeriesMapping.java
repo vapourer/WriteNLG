@@ -33,12 +33,12 @@ public class TimeSeriesMapping
 		this.timeSeriesWithDerivedInformation = timeSeriesWithDerivedInformation;
 		this.substitutions = substitutions;
 
-		LOGGER.info(
-				String.format("TimeSeriesMapping created for %s", timeSeriesWithDerivedInformation.getSeriesLegend()));
+		LOGGER.info(String.format("TimeSeriesMapping created for %s",
+				this.timeSeriesWithDerivedInformation.getSeriesLegend()));
 
 		for (String placeHolder : substitutions.getSubstitutions().keySet())
 		{
-			LOGGER.info(String.format("%s substituted for %s", substitutions.getSubstitutions().get(placeHolder),
+			LOGGER.info(String.format("%s substituted for %s", this.substitutions.getSubstitutions().get(placeHolder),
 					placeHolder));
 		}
 	}
@@ -48,7 +48,7 @@ public class TimeSeriesMapping
 	 */
 	public TimeSeriesWithDerivedInformation getTimeSeriesWithDerivedInformation()
 	{
-		return timeSeriesWithDerivedInformation;
+		return this.timeSeriesWithDerivedInformation;
 	}
 
 	/**
