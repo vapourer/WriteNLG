@@ -56,7 +56,7 @@ public class UpperTurningPointsSmoothedTest
 		final List<TimeSeriesWithDerivedInformation> series = lineGraphWithDerivedInformation
 				.getTimeSeriesDerivedInformation();
 
-		final UpperTurningPointsSmoothed turningPoints = new UpperTurningPointsSmoothed(series.get(0));
+		final UpperTurningPointsNinetyPercentile turningPoints = new UpperTurningPointsNinetyPercentile(series.get(0));
 		List<Point> upperTurningPoints = turningPoints.identify();
 
 		// Assert

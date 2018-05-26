@@ -18,18 +18,18 @@ import analysis.graph.Slope;
 /**
  * Identifies upper turning points above the 0.9 centile of a time series after smoothing.
  */
-public class UpperTurningPointsSmoothed
+public class UpperTurningPointsNinetyPercentile
 {
-	private static final Logger LOGGER = LogManager.getLogger("UpperTurningPointsSmoothed.class");
+	private static final Logger LOGGER = LogManager.getLogger("UpperTurningPointsNinetyPercentile.class");
 
 	private final TimeSeriesWithDerivedInformation timeSeries;
 
 	/**
-	 * Creates an UpperTurningPointsSmoothed instance.
+	 * Creates an UpperTurningPointsNinetyPercentile instance.
 	 * 
 	 * @param timeSeriesWithDerivedInformation
 	 */
-	public UpperTurningPointsSmoothed(final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
+	public UpperTurningPointsNinetyPercentile(final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
 	{
 		this.timeSeries = timeSeriesWithDerivedInformation;
 	}

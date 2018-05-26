@@ -18,18 +18,18 @@ import analysis.graph.Slope;
 /**
  * Identifies lower turning points below the 0.1 centile of a time series after smoothing.
  */
-public class LowerTurningPointsSmoothed
+public class LowerTurningPointsTenPercentile
 {
-	private static final Logger LOGGER = LogManager.getLogger("LowerTurningPointsSmoothed.class");
+	private static final Logger LOGGER = LogManager.getLogger("LowerTurningPointsTenPercentile.class");
 
 	private final TimeSeriesWithDerivedInformation timeSeries;
 
 	/**
-	 * Creates a LowerTurningPointsSmoothed instance.
+	 * Creates a LowerTurningPointsTenPercentile instance.
 	 * 
 	 * @param timeSeriesWithDerivedInformation
 	 */
-	public LowerTurningPointsSmoothed(final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
+	public LowerTurningPointsTenPercentile(final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
 	{
 		this.timeSeries = timeSeriesWithDerivedInformation;
 	}

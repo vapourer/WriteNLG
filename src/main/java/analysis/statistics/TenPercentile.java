@@ -17,7 +17,7 @@ import analysis.graph.Point;
  */
 public class TenPercentile
 {
-	private static final Logger LOGGER = LogManager.getLogger("UpperTurningPointsSmoothed.class");
+	private static final Logger LOGGER = LogManager.getLogger("UpperTurningPointsNinetyPercentile.class");
 
 	private final TimeSeriesWithDerivedInformation timeSeries;
 

@@ -17,7 +17,7 @@ import analysis.graph.Point;
 import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.statistics.Maximum;
 import analysis.statistics.NinetyPercentile;
-import analysis.statistics.UpperTurningPointsSmoothed;
+import analysis.statistics.UpperTurningPointsNinetyPercentile;
 import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
@@ -205,7 +205,7 @@ public class MaximumConcept extends AbstractConcept
 
 	private int calculateHighPointsCount()
 	{
-		final UpperTurningPointsSmoothed upperTurningPoints = new UpperTurningPointsSmoothed(this.timeSeries);
+		final UpperTurningPointsNinetyPercentile upperTurningPoints = new UpperTurningPointsNinetyPercentile(this.timeSeries);
 		final List<Point> ninetyPercentileSmoothed = upperTurningPoints.identify();
 
 		int highPointCount = ninetyPercentileSmoothed.size();

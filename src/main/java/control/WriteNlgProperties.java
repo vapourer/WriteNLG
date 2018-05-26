@@ -105,6 +105,10 @@ public class WriteNlgProperties
 				this.properties.getProperty("ExpectedTotalSeriesCount")));
 		LOGGER.info(String.format("Property MaximumSegmentsAfterSmoothing = %s",
 				this.properties.getProperty("MaximumSegmentsAfterSmoothing")));
+		LOGGER.info(String.format("Property TimeSeriesFluctuatesThresholdAsPercentage = %s",
+				this.properties.getProperty("TimeSeriesFluctuatesThresholdAsPercentage")));
+		LOGGER.info(String.format("Property TimeSeriesFluctuatesSlightlyThresholdAsPercentage = %s",
+				this.properties.getProperty("TimeSeriesFluctuatesSlightlyThresholdAsPercentage")));
 	}
 
 	/**

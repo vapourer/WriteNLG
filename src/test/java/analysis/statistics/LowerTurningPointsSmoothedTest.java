@@ -60,7 +60,7 @@ public class LowerTurningPointsSmoothedTest
 		final List<TimeSeriesWithDerivedInformation> series = lineGraphWithDerivedInformation
 				.getTimeSeriesDerivedInformation();
 
-		final LowerTurningPointsSmoothed turningPoints = new LowerTurningPointsSmoothed(series.get(0));
+		final LowerTurningPointsTenPercentile turningPoints = new LowerTurningPointsTenPercentile(series.get(0));
 		List<Point> lowerTurningPoints = turningPoints.identify();
 
 		// Assert

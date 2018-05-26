@@ -8,17 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import analysis.graph.Point;
 import analysis.graph.Segment;
 import analysis.graph.Slope;
 import analysis.graph.TimeSeries;
+import analysis.statistics.TurningPoints;
 import analysis.time.TimeSlice;
+import control.WriteNlgProperties;
 
 /**
  * Container for analysis of a time series, based on selected statistical algorithms.
  */
 public class TimeSeriesWithDerivedInformation
 {
+	private static final Logger LOGGER = LogManager.getLogger("TimeSeriesWithDerivedInformation.class");
+
+	private final static int HUNDRED = 100;
+
 	private final TimeSeries timeSeries;
 	private final Point pointWithMaximumValue;
 	private final Point pointWithMinimumValue;
@@ -31,6 +40,8 @@ public class TimeSeriesWithDerivedInformation
 	private final Slope directionOfLongestSegment;
 	private List<Point> points;
 	private List<Point> smoothedPoints;
+	private List<Point> upperTurningPoints;
+	private List<Point> lowerTurningPoints;
 
 	/**
 	 * Creates a TimeSeriesWithDerivedInformation instance.
@@ -190,5 +201,84 @@ public class TimeSeriesWithDerivedInformation
 		}
 
 		return this.smoothedPoints;
+	}
+
+	/**
+	 * @return the timeSeriesOutline
+	 */
+	public SortedMap<Long, BigDecimal> getTimeSeriesOutline()
+	{
+		return this.timeSeriesOutline;
+	}
+
+	/**
+	 * @return the outlineSegments
+	 */
+	public List<Segment> getOutlineSegments()
+	{
+		return this.outlineSegments;
+	}
+
+	/**
+	 * @return the upperTurningPoints
+	 */
+	public List<Point> getUpperTurningPoints()
+	{
+		if (this.upperTurningPoints == null)
+		{
+			this.upperTurningPoints = TurningPoints.getInstance(getSmoothedPoints(), getSmoothedSegments())
+					.getUpperTurningPoints();
+		}
+
+		return this.upperTurningPoints;
+	}
+
+	/**
+	 * @return the lowerTurningPoints
+	 */
+	public List<Point> getLowerTurningPoints()
+	{
+		if (this.lowerTurningPoints == null)
+		{
+			this.lowerTurningPoints = TurningPoints.getInstance(getSmoothedPoints(), getSmoothedSegments())
+					.getLowerTurningPoints();
+		}
+
+		return this.lowerTurningPoints;
+	}
+
+	public boolean timeSeriesFluctuates()
+	{
+		LOGGER.info("Checking for time series fluctuation");
+
+		final int fluctuatesThreshold = getSmoothedPoints().size()
+				* Integer.parseInt(
+						WriteNlgProperties.getInstance().getProperty("TimeSeriesFluctuatesThresholdAsPercentage"))
+				/ HUNDRED;
+
+		LOGGER.info(String.format("Fluctuates threshold: %d", fluctuatesThreshold));
+
+		final int turningPointCount = getUpperTurningPoints().size() + getLowerTurningPoints().size();
+
+		LOGGER.info(String.format("Turning point count: %d", turningPointCount));
+
+		return turningPointCount >= fluctuatesThreshold;
+	}
+
+	public boolean timeSeriesFluctuatesSlightly()
+	{
+		LOGGER.info("Checking for slight time series fluctuation");
+
+		final int fluctuatesSlightlyThreshold = getSmoothedPoints().size() * Integer.parseInt(
+				WriteNlgProperties.getInstance().getProperty("TimeSeriesFluctuatesSlightlyThresholdAsPercentage"))
+				/ HUNDRED;
+
+		LOGGER.info(String.format("Fluctuates slightly threshold: %d", fluctuatesSlightlyThreshold));
+
+		final int turningPointCount = getUpperTurningPoints().size() + getLowerTurningPoints().size();
+
+		LOGGER.info(String.format("Turning point count: %d", turningPointCount));
+
+		return turningPointCount >= fluctuatesSlightlyThreshold;
 	}
 }

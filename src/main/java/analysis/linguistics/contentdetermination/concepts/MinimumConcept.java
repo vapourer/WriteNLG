@@ -15,7 +15,7 @@ import analysis.TimeSeriesWithDerivedInformation;
 import analysis.constrain.Constraints;
 import analysis.graph.Point;
 import analysis.linguistics.contentdetermination.ConstraintType;
-import analysis.statistics.LowerTurningPointsSmoothed;
+import analysis.statistics.LowerTurningPointsTenPercentile;
 import analysis.statistics.Minimum;
 import analysis.statistics.TenPercentile;
 import analysis.utilities.GlobalConstants;
@@ -206,7 +206,7 @@ public class MinimumConcept extends AbstractConcept
 
 	private int calculateLowPointsCount()
 	{
-		final LowerTurningPointsSmoothed lowerTurningPoints = new LowerTurningPointsSmoothed(this.timeSeries);
+		final LowerTurningPointsTenPercentile lowerTurningPoints = new LowerTurningPointsTenPercentile(this.timeSeries);
 		final List<Point> tenPercentileSmoothed = lowerTurningPoints.identify();
 
 		int lowPointCount = tenPercentileSmoothed.size();
