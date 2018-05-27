@@ -80,6 +80,13 @@ public class LineGraphWithDerivedInformation
 		return new TimeSeriesCross(series1, series2).identifySegmentsWithCrossingPoints().size();
 	}
 
+	/**
+	 * TODO: consider refactoring to use TimesAndWindows class.
+	 * 
+	 * @param series1
+	 * @param series2
+	 * @return a List of String representations of time intervals during which lines cross.
+	 */
 	public List<String> getCrossingPointWindows(TimeSeriesWithDerivedInformation series1,
 			TimeSeriesWithDerivedInformation series2)
 	{

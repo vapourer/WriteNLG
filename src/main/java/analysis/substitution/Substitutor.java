@@ -14,6 +14,8 @@ import analysis.TimeSeriesWithDerivedInformation;
 import analysis.graph.Segment;
 import analysis.graph.Slope;
 import analysis.interfaces.Mapper;
+import analysis.time.TimesAndWindows;
+import analysis.utilities.GlobalConstants;
 import writenlg.substitution.NumberTransformations;
 import writenlg.substitution.Substitutions;
 
@@ -139,42 +141,54 @@ public class Substitutor implements Mapper
 					? eachTimeSeriesWithDerivedInformation.getOutlineSegments()
 					: eachTimeSeriesWithDerivedInformation.getSmoothedSegments();
 
+			final TimesAndWindows timesAndWindows = new TimesAndWindows(outlineSegments,
+					eachTimeSeriesWithDerivedInformation.getTimeSlice());
+
+			final List<String> startTimes = timesAndWindows.getWindowsForSegmentStartPoints();
+			final List<String> endTimes = timesAndWindows.getWindowsForSegmentEndPoints();
+
 			final int segmentCount = outlineSegments.size();
 
 			if (segmentCount >= 1)
 			{
 				substitutions.addSubstitution("@@AscendOrFall1@@",
 						outlineSegments.get(0).getSlope() == Slope.ASCENDING ? "rises" : "falls");
-				substitutions.addSubstitution("@@Trend1Start@@", outlineSegments.get(0).getPoint1().getY().toString());
-				substitutions.addSubstitution("@@Trend1End@@", outlineSegments.get(0).getPoint2().getY().toString());
+				substitutions.addSubstitution("@@Trend1Start@@", outlineSegments.get(0).getPoint1().getY().toString()
+						+ GlobalConstants.SPACE + startTimes.get(0));
+				substitutions.addSubstitution("@@Trend1End@@",
+						outlineSegments.get(0).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(0));
 			}
 
 			if (segmentCount >= 2)
 			{
 				substitutions.addSubstitution("@@AscendOrFall2@@",
 						outlineSegments.get(1).getSlope() == Slope.ASCENDING ? "rises" : "falls");
-				substitutions.addSubstitution("@@Trend2End@@", outlineSegments.get(1).getPoint2().getY().toString());
+				substitutions.addSubstitution("@@Trend2End@@",
+						outlineSegments.get(1).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(1));
 			}
 
 			if (segmentCount >= 3)
 			{
 				substitutions.addSubstitution("@@AscendOrFall3@@",
 						outlineSegments.get(2).getSlope() == Slope.ASCENDING ? "rises" : "falls");
-				substitutions.addSubstitution("@@Trend3End@@", outlineSegments.get(2).getPoint2().getY().toString());
+				substitutions.addSubstitution("@@Trend3End@@",
+						outlineSegments.get(2).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(2));
 			}
 
 			if (segmentCount >= 4)
 			{
 				substitutions.addSubstitution("@@AscendOrFall4@@",
 						outlineSegments.get(3).getSlope() == Slope.ASCENDING ? "rises" : "falls");
-				substitutions.addSubstitution("@@Trend4End@@", outlineSegments.get(3).getPoint2().getY().toString());
+				substitutions.addSubstitution("@@Trend4End@@",
+						outlineSegments.get(3).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(3));
 			}
 
 			if (segmentCount >= 5)
 			{
 				substitutions.addSubstitution("@@AscendOrFall5@@",
 						outlineSegments.get(4).getSlope() == Slope.ASCENDING ? "rises" : "falls");
-				substitutions.addSubstitution("@@Trend5End@@", outlineSegments.get(4).getPoint2().getY().toString());
+				substitutions.addSubstitution("@@Trend5End@@",
+						outlineSegments.get(4).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(4));
 			}
 
 			this.timeSeriesMappings.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation, substitutions));

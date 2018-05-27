@@ -38,9 +38,6 @@ public class TrendConcept extends AbstractConcept
 {
 	private static final Logger LOGGER = LogManager.getLogger("TrendConcept.class");
 
-	private static final String SPACE = " ";
-	private static final String COMMA = ",";
-
 	private final TimeSeriesWithDerivedInformation timeSeries;
 	private final Map<String, ConstraintConfiguration> constraints;
 
@@ -80,12 +77,12 @@ public class TrendConcept extends AbstractConcept
 
 		if (segmentCount != getPhraseSpecifications().size())
 		{
-			LOGGER.error(
-					"Inconsistent values for reported trend size. PhraseSpecification list should have been adjusted to match smallest smoothed segment collection");
+			LOGGER.error(String.format(
+					"Inconsistent values for reported trend size - segmentCount: %d; PhraseSpecification count: %d. PhraseSpecification list should have been adjusted to match smallest smoothed segment collection",
+					segmentCount, getPhraseSpecifications().size()));
 
-			// throw new RuntimeException(
-			// "Inconsistent values for reported trend size. PhraseSpecification list should have been adjusted to match
-			// smallest smoothed segment collection");
+			throw new RuntimeException(
+					"Inconsistent values for reported trend size. PhraseSpecification list should have been adjusted to match smallest smoothed segment collection");
 		}
 
 		final BigDecimal multipleTrendsConstraintValue = segmentCount > 1 ? GlobalConstants.ONE : GlobalConstants.ZERO;
@@ -155,27 +152,36 @@ public class TrendConcept extends AbstractConcept
 
 			Subject subject = getPhraseSpecifications().get(0).getSubject();
 			builder.append(subject.getNounPhrase().getPreModifier());
-			builder.append(SPACE);
+			builder.append(GlobalConstants.SPACE);
 			builder.append(subject.getNounPhrase().getText());
-			builder.append(SPACE);
+			builder.append(GlobalConstants.SPACE);
 
-			Predicate predicate = getPhraseSpecifications().get(0).getPredicate();
-			builder.append(predicate.getVerb().getText());
-			builder.append(SPACE);
-			builder.append(predicate.getComplement().getText());
-			builder.append(SPACE);
+			Predicate firstPredicate = getPhraseSpecifications().get(0).getPredicate();
+			builder.append(firstPredicate.getVerb().getText());
+			builder.append(GlobalConstants.SPACE);
+			builder.append(firstPredicate.getComplement().getText());
+			builder.append(GlobalConstants.SPACE);
 
-			for (int i = 1; i < phraseSpecificationCount; i++)
+			int counter;
+
+			for (counter = 1; counter < phraseSpecificationCount - 1; counter++)
 			{
-				builder.append(COMMA);
-				builder.append(SPACE);
+				builder.append(GlobalConstants.COMMA);
+				builder.append(GlobalConstants.SPACE);
 
-				Predicate additionalPredicate = getPhraseSpecifications().get(i).getPredicate();
+				Predicate additionalPredicate = getPhraseSpecifications().get(counter).getPredicate();
 				builder.append(additionalPredicate.getVerb().getText());
-				builder.append(SPACE);
+				builder.append(GlobalConstants.SPACE);
 				builder.append(additionalPredicate.getComplement().getText());
-				builder.append(SPACE);
+				builder.append(GlobalConstants.SPACE);
 			}
+
+			builder.append("and ");
+
+			Predicate lastPredicate = getPhraseSpecifications().get(counter).getPredicate();
+			builder.append(lastPredicate.getVerb().getText());
+			builder.append(GlobalConstants.SPACE);
+			builder.append(lastPredicate.getComplement().getText());
 
 			this.completeText = builder.toString();
 		}

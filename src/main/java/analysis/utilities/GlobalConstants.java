@@ -12,4 +12,7 @@ public final class GlobalConstants
 {
 	public static final BigDecimal ZERO = new BigDecimal("0");
 	public static final BigDecimal ONE = new BigDecimal("1");
+
+	public static final String SPACE = " ";
+	public static final String COMMA = ",";
 }

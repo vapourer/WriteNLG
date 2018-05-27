@@ -278,7 +278,7 @@ public class Concepts implements ConceptLoader
 					final int segmentCount = outlineSegmentCount < smoothedSegmentCount ? outlineSegmentCount
 							: smoothedSegmentCount;
 
-					for (int i = phraseSpecifications.size(); i >= segmentCount; i--)
+					for (int i = phraseSpecifications.size(); i > segmentCount; i--)
 					{
 						phraseSpecifications.remove(i - 1);
 					}
