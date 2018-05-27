@@ -138,4 +138,11 @@ PhraseSpecification
 Subject
 NOUN			:	@@SeriesLegend@@
 Predicate
-VERB			:	@@Fluctuate@@
+VERB			:	fluctuate
+TimeSeriesConcept=STATIONARY
+PhraseSpecification
+Subject
+NOUN			:	@@SeriesLegend@@
+Predicate
+VERB			:	show
+COMPLEMENT		:	little trend

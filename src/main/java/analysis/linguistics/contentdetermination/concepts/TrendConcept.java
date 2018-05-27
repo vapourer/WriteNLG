@@ -43,6 +43,12 @@ public class TrendConcept extends AbstractConcept
 
 	private String completeText;
 
+	/**
+	 * Creates a new TrendConcept instance.
+	 * 
+	 * @param phraseSpecifications
+	 * @param timeSeriesWithDerivedInformation
+	 */
 	public TrendConcept(List<PhraseSpecification> phraseSpecifications,
 			final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
 	{

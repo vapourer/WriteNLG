@@ -52,3 +52,7 @@ MaximaAndMinimaAllPresent=1.0
 TimeSeriesConcept=TREND
 MultipleTrends=1.0 (3)
 AscendingAndDescending=1.0 (3)
+TimeSeriesConcept=TURNING_POINTS
+TurningPointCountExceedsLowerThreshold=1.0 (2)
+TimeSeriesConcept=STATIONARY
+NoSignificantTrend=1.0 (3)

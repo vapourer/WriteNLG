@@ -39,7 +39,9 @@ public enum ConstraintType
 	MINIMA_ALL_PRESENT("MinimaAllPresent"),
 	MAXIMA_AND_MINIMA_ALL_PRESENT("MaximaAndMinimaAllPresent"),
 	MULTIPLE_TRENDS("MultipleTrends"),
-	ASCENDING_AND_DESCENDING("AscendingAndDescending");
+	ASCENDING_AND_DESCENDING("AscendingAndDescending"),
+	TURNING_POINT_COUNT_EXCEEDS_LOWER_THRESHOLD("TurningPointCountExceedsLowerThreshold"),
+	NO_SIGNIFICANT_TREND("NoSignificantTrend");
 
 	final private String textualForm;
 

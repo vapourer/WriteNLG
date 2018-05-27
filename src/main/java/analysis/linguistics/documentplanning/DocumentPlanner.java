@@ -281,6 +281,19 @@ public class DocumentPlanner
 			}
 		}
 
+		List<AbstractConcept> turningPointsConcepts = this.timeSeriesSpecificConcepts
+				.get(TimeSeriesSpecificConcept.TURNING_POINTS);
+
+		if (!turningPointsConcepts.isEmpty())
+		{
+			for (AbstractConcept eachConcept : turningPointsConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
+				paragraph2.addSentence(sentence);
+			}
+		}
+
 		List<AbstractConcept> trendConcepts = this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND);
 
 		if (!trendConcepts.isEmpty())
@@ -307,6 +320,19 @@ public class DocumentPlanner
 					sentence.setCompleteSentence(trendSentence);
 				}
 
+				paragraph2.addSentence(sentence);
+			}
+		}
+
+		List<AbstractConcept> stationaryConcepts = this.timeSeriesSpecificConcepts
+				.get(TimeSeriesSpecificConcept.STATIONARY);
+
+		if (!stationaryConcepts.isEmpty())
+		{
+			for (AbstractConcept eachConcept : stationaryConcepts)
+			{
+				Sentence sentence = new Sentence();
+				sentence.addClause(createSimpleClause(eachConcept.getPhraseSpecifications().get(0)));
 				paragraph2.addSentence(sentence);
 			}
 		}

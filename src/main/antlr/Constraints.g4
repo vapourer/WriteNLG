@@ -69,6 +69,7 @@ TIME_SERIES_CONCEPT_TYPE	:	'MAXIMUM'
 							|	'TIME_SLICE'
 							|	'TREND'
 							|	'TURNING_POINTS'
+							|	'STATIONARY'
 							;
 							
 AGGREGATION_CONCEPT_TYPE	:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
@@ -114,6 +115,8 @@ CONSTRAINT_NAME				:	'LinesCross'
 							|	'MaximaAndMinimaAllPresent'
 							|	'MultipleTrends'
 							|	'AscendingAndDescending'
+							|	'TurningPointCountExceedsLowerThreshold'
+							|	'NoSignificantTrend'
 							;
 							
 INITIAL_VALUE				:	DIGIT+ '.' DIGIT+

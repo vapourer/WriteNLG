@@ -33,8 +33,10 @@ import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
 import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
+import analysis.linguistics.contentdetermination.concepts.StationaryConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
 import analysis.linguistics.contentdetermination.concepts.TrendConcept;
+import analysis.linguistics.contentdetermination.concepts.TurningPointsConcept;
 import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
 import io.AntlrInputReader;
@@ -96,6 +98,18 @@ public class Aggregator
 		processMaximaMinimaAggregationConcepts();
 		processIdenticalTimeSlicesConcept();
 		processBothSeriesHaveAllSegmentsAscendingConcept();
+		rationaliseTrendAndStationaryConcepts();
+	}
+
+	private void rationaliseTrendAndStationaryConcepts()
+	{
+		final int seriesCount = Integer
+				.parseInt(WriteNlgProperties.getInstance().getProperty("ExpectedTotalSeriesCount"));
+
+		if (this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).size() == seriesCount)
+		{
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND).clear();
+		}
 	}
 
 	private void processAllIntroductoryInformationPresentConcept()
@@ -420,6 +434,8 @@ public class Aggregator
 		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.SERIES_LEGEND, new ArrayList<>());
 		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.TIME_SLICE, new ArrayList<>());
 		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.TREND, new ArrayList<>());
+		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.TURNING_POINTS, new ArrayList<>());
+		this.timeSeriesSpecificConcepts.put(TimeSeriesSpecificConcept.STATIONARY, new ArrayList<>());
 	}
 
 	private void loadConcepts()
@@ -493,6 +509,19 @@ public class Aggregator
 			{
 				this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND).add(eachConcept);
 				LOGGER.info(String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.TREND));
+			}
+
+			if (eachConcept instanceof TurningPointsConcept)
+			{
+				this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TURNING_POINTS).add(eachConcept);
+				LOGGER.info(
+						String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.TURNING_POINTS));
+			}
+
+			if (eachConcept instanceof StationaryConcept)
+			{
+				this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).add(eachConcept);
+				LOGGER.info(String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.STATIONARY));
 			}
 		}
 	}

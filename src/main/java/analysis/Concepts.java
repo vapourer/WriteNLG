@@ -19,8 +19,10 @@ import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
 import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
+import analysis.linguistics.contentdetermination.concepts.StationaryConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
 import analysis.linguistics.contentdetermination.concepts.TrendConcept;
+import analysis.linguistics.contentdetermination.concepts.TurningPointsConcept;
 import analysis.substitution.Substitutor;
 import analysis.substitution.TimeSeriesMapping;
 import writenlg.AbstractConcept;
@@ -298,24 +300,44 @@ public class Concepts implements ConceptLoader
 				}
 				break;
 			case TURNING_POINTS:
-				// for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
-				// {
-				// LOGGER.info(String.format("Mapping for %s",
-				// mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
-				//
-				// final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
-				//
-				// for (PhraseSpecification specification : phraseSpecifications)
-				// {
-				// conceptPhraseSpecifications
-				// .add(specification.substitutePlaceholders(mapping.getSubstitutions()));
-				// }
-				//
-				// final TurningPointsConcept turningPointsConcept = new TurningPointsConcept(
-				// conceptPhraseSpecifications);
-				//
-				// this.timeSeriesSpecificConcepts.add(turningPointsConcept);
-				// }
+				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				{
+					LOGGER.info(String.format("Mapping for %s",
+							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					final TurningPointsConcept turningPointsConcept = new TurningPointsConcept(
+							conceptPhraseSpecifications, mapping.getTimeSeriesWithDerivedInformation());
+
+					this.timeSeriesSpecificConcepts.add(turningPointsConcept);
+				}
+				break;
+			case STATIONARY:
+				for (TimeSeriesMapping mapping : substitutor.getTimeSeriesMappings())
+				{
+					LOGGER.info(String.format("Mapping for %s",
+							mapping.getTimeSeriesWithDerivedInformation().getSeriesLegend()));
+
+					final List<PhraseSpecification> conceptPhraseSpecifications = new ArrayList<>();
+
+					for (PhraseSpecification specification : phraseSpecifications)
+					{
+						conceptPhraseSpecifications
+								.add(specification.substitutePlaceholders(mapping.getSubstitutions()));
+					}
+
+					final StationaryConcept stationaryConcept = new StationaryConcept(conceptPhraseSpecifications,
+							mapping.getTimeSeriesWithDerivedInformation());
+
+					this.timeSeriesSpecificConcepts.add(stationaryConcept);
+				}
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", timeSeriesSpecificConcept));
