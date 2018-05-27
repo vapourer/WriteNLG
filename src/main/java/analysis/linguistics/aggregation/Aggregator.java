@@ -334,6 +334,7 @@ public class Aggregator
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.RISING_TREND).clear();
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MAXIMUM).clear();
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.MINIMUM).clear();
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).clear();
 			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMA);
 			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MINIMA);
 			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_MAXIMUM_AND_MINIMUM);
