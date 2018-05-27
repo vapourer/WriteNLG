@@ -25,6 +25,7 @@ import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
 import analysis.linguistics.contentdetermination.concepts.TrendConcept;
+import analysis.utilities.GlobalConstants;
 import writenlg.AbstractConcept;
 import writenlg.aggregation.AbstractAggregationConcept;
 import writenlg.linguistics.phrase.PhraseSpecification;
@@ -284,10 +285,28 @@ public class DocumentPlanner
 
 		if (!trendConcepts.isEmpty())
 		{
+			int conceptCount = 0;
+
 			for (AbstractConcept eachConcept : trendConcepts)
 			{
 				Sentence sentence = new Sentence();
-				sentence.setCompleteSentence(((TrendConcept) eachConcept).toString());
+
+				if (conceptCount++ == 0)
+				{
+					sentence.setCompleteSentence(((TrendConcept) eachConcept).toString());
+				}
+				else
+				{
+					String preModifier = eachConcept.getPhraseSpecifications().get(0).getSubject().getNounPhrase()
+							.getPreModifier();
+					preModifier += GlobalConstants.SPACE;
+
+					String trendSentence = ((TrendConcept) eachConcept).toString();
+					trendSentence = trendSentence.replaceFirst(preModifier, "");
+
+					sentence.setCompleteSentence(trendSentence);
+				}
+
 				paragraph2.addSentence(sentence);
 			}
 		}

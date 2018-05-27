@@ -141,6 +141,8 @@ public class TrendConcept extends AbstractConcept
 		addConstraint(ascendingAndDescendingConstraint);
 	}
 
+	// TODO: the intended sentence, here, does not sit well with the current PhraseSpecification implementation or the
+	// apparent SimpleNLG offer. Clearly, there are a range of opportunities for improvement/further development.
 	@Override
 	public String toString()
 	{

@@ -31,6 +31,8 @@ public class Substitutor implements Mapper
 	private final List<TimeSeriesMapping> timeSeriesMappings;
 	private final List<TimeSeriesMapping> timeSeriesMappingsForTrend;
 
+	private int thenCount;
+
 	/**
 	 * Creates a Substitutor instance.
 	 * 
@@ -43,6 +45,7 @@ public class Substitutor implements Mapper
 		this.globalMappings = new Substitutions();
 		this.timeSeriesMappings = new ArrayList<>();
 		this.timeSeriesMappingsForTrend = new ArrayList<>();
+
 		loadMappings();
 	}
 
@@ -148,50 +151,104 @@ public class Substitutor implements Mapper
 			final List<String> endTimes = timesAndWindows.getWindowsForSegmentEndPoints();
 
 			final int segmentCount = outlineSegments.size();
+			Segment currentSegment = outlineSegments.get(0);
 
 			if (segmentCount >= 1)
 			{
-				substitutions.addSubstitution("@@AscendOrFall1@@",
-						outlineSegments.get(0).getSlope() == Slope.ASCENDING ? "rises" : "falls");
-				substitutions.addSubstitution("@@Trend1Start@@", outlineSegments.get(0).getPoint1().getY().toString()
-						+ GlobalConstants.SPACE + startTimes.get(0));
+				substitutions.addSubstitution("@@AscendOrFall1@@", getVerbSubstitution(null, currentSegment));
+				substitutions.addSubstitution("@@Trend1Start@@",
+						currentSegment.getPoint1().getY().toString() + GlobalConstants.SPACE + startTimes.get(0));
 				substitutions.addSubstitution("@@Trend1End@@",
-						outlineSegments.get(0).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(0));
+						currentSegment.getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(0));
 			}
 
 			if (segmentCount >= 2)
 			{
-				substitutions.addSubstitution("@@AscendOrFall2@@",
-						outlineSegments.get(1).getSlope() == Slope.ASCENDING ? "rises" : "falls");
+				Segment newSegment = outlineSegments.get(1);
+
+				substitutions.addSubstitution("@@AscendOrFall2@@", getVerbSubstitution(currentSegment, newSegment));
 				substitutions.addSubstitution("@@Trend2End@@",
-						outlineSegments.get(1).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(1));
+						newSegment.getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(1));
+
+				currentSegment = newSegment;
 			}
 
 			if (segmentCount >= 3)
 			{
-				substitutions.addSubstitution("@@AscendOrFall3@@",
-						outlineSegments.get(2).getSlope() == Slope.ASCENDING ? "rises" : "falls");
+				Segment newSegment = outlineSegments.get(2);
+
+				substitutions.addSubstitution("@@AscendOrFall3@@", getVerbSubstitution(currentSegment, newSegment));
 				substitutions.addSubstitution("@@Trend3End@@",
-						outlineSegments.get(2).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(2));
+						newSegment.getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(2));
+
+				currentSegment = newSegment;
 			}
 
 			if (segmentCount >= 4)
 			{
-				substitutions.addSubstitution("@@AscendOrFall4@@",
-						outlineSegments.get(3).getSlope() == Slope.ASCENDING ? "rises" : "falls");
+				Segment newSegment = outlineSegments.get(3);
+
+				substitutions.addSubstitution("@@AscendOrFall4@@", getVerbSubstitution(currentSegment, newSegment));
 				substitutions.addSubstitution("@@Trend4End@@",
-						outlineSegments.get(3).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(3));
+						newSegment.getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(3));
+
+				currentSegment = newSegment;
 			}
 
 			if (segmentCount >= 5)
 			{
-				substitutions.addSubstitution("@@AscendOrFall5@@",
-						outlineSegments.get(4).getSlope() == Slope.ASCENDING ? "rises" : "falls");
+				Segment newSegment = outlineSegments.get(4);
+
+				substitutions.addSubstitution("@@AscendOrFall5@@", getVerbSubstitution(currentSegment, newSegment));
 				substitutions.addSubstitution("@@Trend5End@@",
-						outlineSegments.get(4).getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(4));
+						newSegment.getPoint2().getY().toString() + GlobalConstants.SPACE + endTimes.get(4));
 			}
 
 			this.timeSeriesMappings.add(new TimeSeriesMapping(eachTimeSeriesWithDerivedInformation, substitutions));
 		}
+	}
+
+	private String getVerbSubstitution(final Segment oldSegment, final Segment newSegment)
+	{
+		String verbPhrase = newSegment.getSlope() == Slope.ASCENDING ? "rises" : "falls";
+
+		if (oldSegment != null && oldSegment.getSlope() == newSegment.getSlope())
+		{
+			switch (newSegment.getSlope())
+			{
+				case ASCENDING:
+					if (newSegment.getGradient().compareTo(oldSegment.getGradient()) > 0)
+					{
+						verbPhrase += " more sharply";
+					}
+					else
+					{
+						verbPhrase += " less sharply";
+					}
+					break;
+				case DESCENDING:
+					if (newSegment.getGradient().compareTo(oldSegment.getGradient()) < 0)
+					{
+						verbPhrase += " more sharply";
+					}
+					else
+					{
+						verbPhrase += " less sharply";
+					}
+					break;
+				case FLAT:
+				default:
+					LOGGER.error(String.format("%s not implemented", newSegment.getSlope()));
+					throw new RuntimeException("Enum value not implemented");
+			}
+
+			if (this.thenCount == 0)
+			{
+				verbPhrase = "then " + verbPhrase;
+				this.thenCount++;
+			}
+		}
+
+		return verbPhrase;
 	}
 }
