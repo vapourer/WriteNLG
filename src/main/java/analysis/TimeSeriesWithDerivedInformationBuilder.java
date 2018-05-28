@@ -28,6 +28,7 @@ public class TimeSeriesWithDerivedInformationBuilder
 	private Slope directionOfLongestSegment;
 	private SortedMap<Long, BigDecimal> timeSeriesOutline;
 	private List<Segment> outlineSegments;
+	private SortedMap<Long, BigDecimal> centredMovingAverages;
 
 	/**
 	 * Creates a new TimeSeriesWithDerivedInformation instance.
@@ -38,7 +39,8 @@ public class TimeSeriesWithDerivedInformationBuilder
 	{
 		return new TimeSeriesWithDerivedInformation(this.timeSeries, this.pointWithMaximumValue,
 				this.pointWithMinimumValue, this.segments, this.timeSlice, this.timeSeriesSmoothed,
-				this.smoothedSegments, this.directionOfLongestSegment, this.timeSeriesOutline, this.outlineSegments);
+				this.smoothedSegments, this.directionOfLongestSegment, this.timeSeriesOutline, this.outlineSegments,
+				this.centredMovingAverages);
 	}
 
 	/**
@@ -129,5 +131,14 @@ public class TimeSeriesWithDerivedInformationBuilder
 	public void setOutlineSegments(List<Segment> outlineSegments)
 	{
 		this.outlineSegments = outlineSegments;
+	}
+
+	/**
+	 * @param centredMovingAverages
+	 *            the centredMovingAverages to set
+	 */
+	public void setCentredMovingAverages(SortedMap<Long, BigDecimal> centredMovingAverages)
+	{
+		this.centredMovingAverages = centredMovingAverages;
 	}
 }

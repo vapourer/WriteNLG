@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +39,7 @@ public class TimeSeriesWithDerivedInformation
 	private final SortedMap<Long, BigDecimal> timeSeriesOutline;
 	private final List<Segment> outlineSegments;
 	private final Slope directionOfLongestSegment;
+	private final SortedMap<Long, BigDecimal> centredMovingAverages;
 	private List<Point> points;
 	private List<Point> smoothedPoints;
 	private List<Point> upperTurningPoints;
@@ -56,12 +58,13 @@ public class TimeSeriesWithDerivedInformation
 	 * @param directionOfLongestSegment
 	 * @param timeSeriesOutline
 	 * @param outlineSegments
+	 * @param centredMovingAverages
 	 */
 	public TimeSeriesWithDerivedInformation(final TimeSeries timeSeries, final Point pointWithMaximumValue,
 			final Point pointWithMinimumValue, final List<Segment> segments, final TimeSlice timeSlice,
 			final SortedMap<Long, BigDecimal> timeSeriesSmoothed, final List<Segment> smoothedSegments,
 			final Slope directionOfLongestSegment, final SortedMap<Long, BigDecimal> timeSeriesOutline,
-			final List<Segment> outlineSegments)
+			final List<Segment> outlineSegments, final SortedMap<Long, BigDecimal> centredMovingAverages)
 	{
 		this.timeSeries = timeSeries;
 		this.pointWithMaximumValue = pointWithMaximumValue;
@@ -73,6 +76,7 @@ public class TimeSeriesWithDerivedInformation
 		this.directionOfLongestSegment = directionOfLongestSegment;
 		this.timeSeriesOutline = timeSeriesOutline;
 		this.outlineSegments = outlineSegments;
+		this.centredMovingAverages = centredMovingAverages;
 	}
 
 	/**
@@ -280,5 +284,13 @@ public class TimeSeriesWithDerivedInformation
 		LOGGER.info(String.format("Turning point count: %d", turningPointCount));
 
 		return turningPointCount >= fluctuatesSlightlyThreshold;
+	}
+
+	/**
+	 * @return the centredMovingAverages
+	 */
+	public SortedMap<Long, BigDecimal> getCentredMovingAverages()
+	{
+		return new TreeMap<>(this.centredMovingAverages);
 	}
 }

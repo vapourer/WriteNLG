@@ -19,6 +19,7 @@ import analysis.interfaces.Smoothing;
 import analysis.interfaces.TimeSeriesAnalysis;
 import analysis.statistics.Maximum;
 import analysis.statistics.Minimum;
+import analysis.statistics.engineeringstatisticshandbook.CentredMovingAverage;
 import analysis.statistics.pedergnanafurlani.BottomUpPiecewiseLinearFunction;
 import analysis.time.TimeSlice;
 import control.WriteNlgProperties;
@@ -82,6 +83,9 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		final SortedMap<Long, BigDecimal> timeSeriesOutline = outlineSmoothing.getTimeSeriesSmoothed();
 		builder.setTimeSeriesOutline(timeSeriesOutline);
 		builder.setOutlineSegments(outlineSmoothing.getSmoothedSegments());
+
+		builder.setCentredMovingAverages(new CentredMovingAverage(this.timeSeries.getSeries(),
+				Integer.parseInt(WriteNlgProperties.getInstance().getProperty("MovingAverageWindow"))).averageGraph());
 
 		return builder.createTimeSeriesDerivedInformation();
 	}

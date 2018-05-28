@@ -3,21 +3,28 @@
 
 package analysis;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import analysis.graph.LineGraph;
 import analysis.graph.Segment;
+import analysis.graph.Segmenter;
 import analysis.graph.TimeSeries;
+import analysis.interfaces.Smoothing;
 import analysis.statistics.CrossingSegments;
 import analysis.statistics.TimeSeriesCross;
+import analysis.statistics.pedergnanafurlani.BottomUpPiecewiseLinearFunction;
 import analysis.time.TimeSlice;
 import analysis.utilities.GlobalConstants;
 import control.WriteNlgProperties;
@@ -32,6 +39,9 @@ public class LineGraphWithDerivedInformation
 	private final LineGraph lineGraph;
 	private final List<TimeSeriesWithDerivedInformation> timeSeriesWithDerivedInformation;
 	private final int timeSeriesCount;
+	private SortedMap<Long, BigDecimal> averagedDifferencesSmoothed;
+	private List<Segment> smoothedAveragedDifferenceSegments;
+	private BigDecimal averagedDifferenceMean;
 
 	/**
 	 * Create a new LineGraphWithDerivedInformation instance.
@@ -44,6 +54,8 @@ public class LineGraphWithDerivedInformation
 		this.lineGraph = lineGraph;
 		this.timeSeriesWithDerivedInformation = timeSeriesWithDerivedInformation;
 		this.timeSeriesCount = timeSeriesCount;
+
+		populateAveragedDifferenceInformation();
 	}
 
 	/**
@@ -202,5 +214,93 @@ public class LineGraphWithDerivedInformation
 		}
 
 		return timeSlice;
+	}
+
+	/**
+	 * @return the averagedDifferencesSmoothed
+	 */
+	public SortedMap<Long, BigDecimal> getAveragedDifferencesSmoothed()
+	{
+		return new TreeMap<>(this.averagedDifferencesSmoothed);
+	}
+
+	/**
+	 * @return the smoothedAveragedDifferenceSegments
+	 */
+	public List<Segment> getSmoothedAveragedDifferenceSegments()
+	{
+		return new ArrayList<>(this.smoothedAveragedDifferenceSegments);
+	}
+
+	/**
+	 * @return the averagedDifferenceMean
+	 */
+	public BigDecimal getAveragedDifferenceMean()
+	{
+		return this.averagedDifferenceMean;
+	}
+
+	private void populateAveragedDifferenceInformation()
+	{
+		smoothAveragedDifferences(calculateAveragedDifferences());
+		calculateAveragedDifferencesMean();
+	}
+
+	private void calculateAveragedDifferencesMean()
+	{
+		BigDecimal totalValues = GlobalConstants.ZERO;
+
+		for (BigDecimal eachValue : this.averagedDifferencesSmoothed.values())
+		{
+			totalValues.add(eachValue);
+		}
+
+		this.averagedDifferenceMean = totalValues.divide(new BigDecimal(this.averagedDifferencesSmoothed.size()),
+				new MathContext(WriteNlgProperties.getInstance().getProperty("MathContext")));
+	}
+
+	private SortedMap<Long, BigDecimal> calculateAveragedDifferences()
+	{
+		LOGGER.info(String.format("TimeSeriesWithDerivedInformation size: %d",
+				this.timeSeriesWithDerivedInformation.size()));
+
+		SortedMap<Long, BigDecimal> centredMovingAverages1 = this.timeSeriesWithDerivedInformation.get(0)
+				.getCentredMovingAverages();
+		SortedMap<Long, BigDecimal> centredMovingAverages2 = this.timeSeriesWithDerivedInformation.get(1)
+				.getCentredMovingAverages();
+
+		if (centredMovingAverages1.size() != centredMovingAverages2.size())
+		{
+			LOGGER.error(String.format("Map sizes unequal - centredMovingAverages1: %d; centredMovingAverages2: %d",
+					centredMovingAverages1.size(), centredMovingAverages2.size()));
+			throw new RuntimeException("Map sizes unequal");
+		}
+
+		int averagesCount = centredMovingAverages1.size();
+
+		Long[] keys = centredMovingAverages1.keySet().toArray(new Long[0]);
+		BigDecimal[] values1 = centredMovingAverages1.values().toArray(new BigDecimal[0]);
+		BigDecimal[] values2 = centredMovingAverages2.values().toArray(new BigDecimal[0]);
+
+		SortedMap<Long, BigDecimal> averagedDifferences = new TreeMap<>();
+
+		for (int i = 0; i < averagesCount; i++)
+		{
+			averagedDifferences.put(keys[i], (values1[i].subtract(values2[i])).abs());
+		}
+
+		return averagedDifferences;
+	}
+
+	private void smoothAveragedDifferences(final SortedMap<Long, BigDecimal> averagedDifferences)
+	{
+		final Smoothing smoothing = new BottomUpPiecewiseLinearFunction(
+				new Segmenter(averagedDifferences).createSegments(),
+				Integer.parseInt(
+						WriteNlgProperties.getInstance().getProperty("MovingAverageMaximumSegmentsAfterSmoothing")),
+				true);
+
+		this.averagedDifferencesSmoothed = smoothing.getTimeSeriesSmoothed();
+		this.smoothedAveragedDifferenceSegments = smoothing.getSmoothedSegments();
 	}
 }

@@ -38,6 +38,19 @@ public class Segmenter implements Segmentation
 	}
 
 	/**
+	 * Creates a new Segmenter instance.
+	 * 
+	 * @param timeSeries
+	 */
+	public Segmenter(final SortedMap<Long, BigDecimal> timeSeries)
+	{
+		this.timeSeries = timeSeries;
+		this.seriesLegend = "Map added directly";
+
+		LOGGER.info(String.format("Segmenter created for %s", this.seriesLegend));
+	}
+
+	/**
 	 * Returns a List of segments derived from a time series.
 	 */
 	@Override

@@ -109,6 +109,8 @@ public class WriteNlgProperties
 				this.properties.getProperty("TimeSeriesFluctuatesThresholdAsPercentage")));
 		LOGGER.info(String.format("Property TimeSeriesFluctuatesSlightlyThresholdAsPercentage = %s",
 				this.properties.getProperty("TimeSeriesFluctuatesSlightlyThresholdAsPercentage")));
+		LOGGER.info(String.format("Property MovingAverageMaximumSegmentsAfterSmoothing = %s",
+				this.properties.getProperty("MovingAverageMaximumSegmentsAfterSmoothing")));
 	}
 
 	/**
