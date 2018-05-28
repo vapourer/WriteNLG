@@ -81,8 +81,12 @@ public class AggregateMaximumAndMinimumConcept extends AbstractAggregationConcep
 		List<AbstractConcept> minimumRequiredConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.MINIMUM);
 
+		int expectedSeriesCount = Integer
+				.parseInt(WriteNlgProperties.getInstance().getProperty("ExpectedTotalSeriesCount"));
+
 		if (!maximumRequiredConcepts.isEmpty() && !minimumRequiredConcepts.isEmpty()
-				&& maximumRequiredConcepts.size() == minimumRequiredConcepts.size())
+				&& maximumRequiredConcepts.size() == minimumRequiredConcepts.size()
+				&& maximumRequiredConcepts.size() == expectedSeriesCount)
 		{
 			final PhraseSpecification maximumPhraseSpecification1 = maximumRequiredConcepts.get(0)
 					.getPhraseSpecifications().get(0);
