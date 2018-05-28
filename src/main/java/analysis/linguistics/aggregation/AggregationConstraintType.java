@@ -16,7 +16,9 @@ public enum AggregationConstraintType
 	IDENTICAL_TIME_SLICES("IdenticalTimeSlices"),
 	AGGREGATE_MAXIMA("AggregateMaximaConcept"),
 	AGGREGATE_MINIMA("AggregateMinima"),
-	AGGREGATE_MAXIMUM_AND_MINIMUM("AggregateMaximumAndMinimum");
+	AGGREGATE_MAXIMUM_AND_MINIMUM("AggregateMaximumAndMinimum"),
+	AGGREGATE_TURNING_POINTS("AggregateTurningPoints"),
+	AGGREGATE_STATIONARY("AggregateStationary");
 
 	final private String textualForm;
 

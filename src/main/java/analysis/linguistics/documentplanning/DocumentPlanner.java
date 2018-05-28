@@ -17,6 +17,8 @@ import analysis.linguistics.aggregation.Aggregator;
 import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
+import analysis.linguistics.aggregation.concepts.AggregateStationaryConcept;
+import analysis.linguistics.aggregation.concepts.AggregateTurningPointsConcept;
 import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.IdenticalTimeSlicesConcept;
@@ -281,6 +283,16 @@ public class DocumentPlanner
 			}
 		}
 
+		AggregateTurningPointsConcept aggregateTurningPointsConcept = (AggregateTurningPointsConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_TURNING_POINTS);
+
+		if (aggregateTurningPointsConcept != null)
+		{
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(aggregateTurningPointsConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
+		}
+
 		List<AbstractConcept> turningPointsConcepts = this.timeSeriesSpecificConcepts
 				.get(TimeSeriesSpecificConcept.TURNING_POINTS);
 
@@ -322,6 +334,16 @@ public class DocumentPlanner
 
 				paragraph2.addSentence(sentence);
 			}
+		}
+
+		AggregateStationaryConcept aggregateStationaryConcept = (AggregateStationaryConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_STATIONARY);
+
+		if (aggregateStationaryConcept != null)
+		{
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(aggregateStationaryConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
 		}
 
 		List<AbstractConcept> stationaryConcepts = this.timeSeriesSpecificConcepts

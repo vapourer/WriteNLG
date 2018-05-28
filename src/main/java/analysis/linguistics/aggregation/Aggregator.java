@@ -18,6 +18,8 @@ import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
+import analysis.linguistics.aggregation.concepts.AggregateStationaryConcept;
+import analysis.linguistics.aggregation.concepts.AggregateTurningPointsConcept;
 import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsDescendingConcept;
@@ -99,6 +101,8 @@ public class Aggregator
 		processIdenticalTimeSlicesConcept();
 		processBothSeriesHaveAllSegmentsAscendingConcept();
 		rationaliseTrendAndStationaryConcepts();
+		processAggregateStationaryConcept();
+		processAggregateTurningPointsConcept();
 	}
 
 	private void rationaliseTrendAndStationaryConcepts()
@@ -109,6 +113,59 @@ public class Aggregator
 		if (this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).size() == seriesCount)
 		{
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND).clear();
+		}
+	}
+
+	private void processAggregateStationaryConcept()
+	{
+		AggregateStationaryConcept aggregateStationaryConcept = (AggregateStationaryConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_STATIONARY);
+
+		if (aggregateStationaryConcept != null)
+		{
+			aggregateStationaryConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
+			aggregateStationaryConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
+
+		final int allSeriesStationaryCount = this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY)
+				.size();
+
+		if (aggregateStationaryConcept != null && aggregateStationaryConcept.calculateSatisfactionLevel()
+				.compareTo(new BigDecimal(allSeriesStationaryCount)) > 0)
+		{
+			this.aggregationConcepts.put(AggregationConcept.AGGREGATE_STATIONARY, aggregateStationaryConcept);
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).clear();
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND).clear();
+		}
+		else
+		{
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_STATIONARY);
+		}
+	}
+
+	private void processAggregateTurningPointsConcept()
+	{
+		AggregateTurningPointsConcept aggregateTurningPointsConcept = (AggregateTurningPointsConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_TURNING_POINTS);
+
+		if (aggregateTurningPointsConcept != null)
+		{
+			aggregateTurningPointsConcept.setTimeSeriesSpecificConcepts(this.timeSeriesSpecificConcepts);
+			aggregateTurningPointsConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
+
+		final int allSeriesFluctuateCount = this.timeSeriesSpecificConcepts
+				.get(TimeSeriesSpecificConcept.TURNING_POINTS).size();
+
+		if (aggregateTurningPointsConcept != null && aggregateTurningPointsConcept.calculateSatisfactionLevel()
+				.compareTo(new BigDecimal(allSeriesFluctuateCount)) > 0)
+		{
+			this.aggregationConcepts.put(AggregationConcept.AGGREGATE_TURNING_POINTS, aggregateTurningPointsConcept);
+			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TURNING_POINTS).clear();
+		}
+		else
+		{
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_TURNING_POINTS);
 		}
 	}
 

@@ -81,6 +81,8 @@ AGGREGATION_CONCEPT_TYPE	:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
 							|	'AGGREGATE_MAXIMA'
 							|	'AGGREGATE_MINIMA'
 							|	'AGGREGATE_MAXIMUM_AND_MINIMUM'
+							|	'AGGREGATE_TURNING_POINTS'
+							|	'AGGREGATE_STATIONARY'
 							;	
 							
 CONSTRAINT_NAME				:	'LinesCross'
@@ -117,6 +119,8 @@ CONSTRAINT_NAME				:	'LinesCross'
 							|	'AscendingAndDescending'
 							|	'TurningPointCountExceedsLowerThreshold'
 							|	'NoSignificantTrend'
+							|	'BothSeriesFluctuate'
+							|	'BothSeriesStationary'
 							;
 							
 INITIAL_VALUE				:	DIGIT+ '.' DIGIT+

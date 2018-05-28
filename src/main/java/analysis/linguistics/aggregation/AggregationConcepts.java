@@ -14,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
+import analysis.linguistics.aggregation.concepts.AggregateStationaryConcept;
+import analysis.linguistics.aggregation.concepts.AggregateTurningPointsConcept;
 import analysis.linguistics.aggregation.concepts.AllIntroductoryInformationPresentConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsAscendingConcept;
 import analysis.linguistics.aggregation.concepts.BothSeriesHaveAllSegmentsDescendingConcept;
@@ -93,6 +95,13 @@ public class AggregationConcepts
 			case AGGREGATE_MAXIMUM_AND_MINIMUM:
 				this.aggregationConcepts.put(aggregationConcept,
 						new AggregateMaximumAndMinimumConcept(phraseSpecifications));
+				break;
+			case AGGREGATE_TURNING_POINTS:
+				this.aggregationConcepts.put(aggregationConcept,
+						new AggregateTurningPointsConcept(phraseSpecifications));
+				break;
+			case AGGREGATE_STATIONARY:
+				this.aggregationConcepts.put(aggregationConcept, new AggregateStationaryConcept(phraseSpecifications));
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", aggregationConcept));

@@ -41,7 +41,9 @@ public enum ConstraintType
 	MULTIPLE_TRENDS("MultipleTrends"),
 	ASCENDING_AND_DESCENDING("AscendingAndDescending"),
 	TURNING_POINT_COUNT_EXCEEDS_LOWER_THRESHOLD("TurningPointCountExceedsLowerThreshold"),
-	NO_SIGNIFICANT_TREND("NoSignificantTrend");
+	NO_SIGNIFICANT_TREND("NoSignificantTrend"),
+	BOTH_SERIES_FLUCTUATE("BothSeriesFluctuate"),
+	BOTH_SERIES_STATIONARY("BothSeriesStationary");
 
 	final private String textualForm;
 

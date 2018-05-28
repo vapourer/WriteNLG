@@ -145,4 +145,21 @@ Subject
 NOUN			:	@@SeriesLegend@@
 Predicate
 VERB			:	show
-COMPLEMENT		:	little trend
+COMPLEMENT		:	no clear trend
+AggregationConcept=AGGREGATE_TURNING_POINTS
+PhraseSpecification
+Features
+SubjectNumber=plural
+VerbNumber=plural
+ComplementNumber=plural
+Subject
+NOUN			:	both series
+Predicate
+VERB			:	fluctuate
+AggregationConcept=AGGREGATE_STATIONARY
+PhraseSpecification
+Subject
+NOUN			:	neither series
+Predicate
+VERB			:	exhibit
+COMPLEMENT		:	a clear trend

@@ -56,8 +56,8 @@ public class TurningPointsConcept extends AbstractConcept
 		final int turningPointCount = this.timeSeries.getUpperTurningPoints().size()
 				+ this.timeSeries.getLowerTurningPoints().size();
 		final int smoothedPointCount = this.timeSeries.getSmoothedPoints().size();
-		final int lowerThresholdAsPercentage = Integer
-				.parseInt(WriteNlgProperties.getInstance().getProperty("TimeSeriesFluctuatesThresholdAsPercentage"));
+		final int lowerThresholdAsPercentage = Integer.parseInt(
+				WriteNlgProperties.getInstance().getProperty("TimeSeriesFluctuatesSlightlyThresholdAsPercentage"));
 
 		final BigDecimal turningPointCountExceedsLowerThresholdConstraintValue = ((turningPointCount * 100)
 				/ smoothedPointCount) > lowerThresholdAsPercentage ? GlobalConstants.ONE : GlobalConstants.ZERO;

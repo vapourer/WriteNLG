@@ -39,6 +39,8 @@ AGGREGATION_CONCEPT_GROUP			:	'ALL_INTRODUCTORY_INFORMATION_PRESENT'
 									|	'AGGREGATE_MAXIMA'
 									|	'AGGREGATE_MINIMA'
 									|	'AGGREGATE_MAXIMUM_AND_MINIMUM'
+									|	'AGGREGATE_TURNING_POINTS'
+									|	'AGGREGATE_STATIONARY'
 									;
 						
 GLOBAL_CONCEPT						:	'LINES_CROSS'
@@ -53,6 +55,9 @@ TIME_SERIES_CONCEPT					:	'MAXIMUM'
 									|	'DESCENDING_TREND'
 									|	'SERIES_LEGEND'
 									|	'TIME_SLICE'
+									|	'TREND'
+									|	'TURNING_POINTS'
+									|	'STATIONARY'
 									;
 						
 NEW_LINE							:	('\r'? '\n')
