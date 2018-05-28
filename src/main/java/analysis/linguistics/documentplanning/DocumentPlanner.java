@@ -26,6 +26,8 @@ import analysis.linguistics.contentdetermination.concepts.LineCountConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesCrossMultipleTimesConcept;
 import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesDifferencesAverageConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesDifferencesTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.TrendConcept;
 import analysis.utilities.GlobalConstants;
 import writenlg.AbstractConcept;
@@ -365,6 +367,26 @@ public class DocumentPlanner
 		{
 			Sentence sentence = new Sentence();
 			sentence.addClause(createSimpleClause(linesCrossConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
+		}
+
+		SeriesDifferencesAverageConcept seriesDifferencesAverageConcept = (SeriesDifferencesAverageConcept) this.globalConcepts
+				.get(GlobalConcept.SERIES_DIFFERENCES_AVERAGE);
+
+		if (seriesDifferencesAverageConcept != null)
+		{
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(seriesDifferencesAverageConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
+		}
+
+		SeriesDifferencesTrendConcept seriesDifferencesTrendConcept = (SeriesDifferencesTrendConcept) this.globalConcepts
+				.get(GlobalConcept.SERIES_DIFFERENCES_TREND);
+
+		if (seriesDifferencesTrendConcept != null)
+		{
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(seriesDifferencesTrendConcept.getPhraseSpecifications().get(0)));
 			paragraph2.addSentence(sentence);
 		}
 

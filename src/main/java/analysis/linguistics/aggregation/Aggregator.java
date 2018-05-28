@@ -34,6 +34,8 @@ import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept
 import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
 import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesDifferencesAverageConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesDifferencesTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.StationaryConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
@@ -580,6 +582,18 @@ public class Aggregator
 			{
 				this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).add(eachConcept);
 				LOGGER.info(String.format("TimeSeriesSpecificConcept added: %s", TimeSeriesSpecificConcept.STATIONARY));
+			}
+
+			if (eachConcept instanceof SeriesDifferencesTrendConcept)
+			{
+				this.globalConcepts.put(GlobalConcept.SERIES_DIFFERENCES_TREND, eachConcept);
+				LOGGER.info(String.format("GlobalConcept added: %s", GlobalConcept.SERIES_DIFFERENCES_TREND));
+			}
+
+			if (eachConcept instanceof SeriesDifferencesAverageConcept)
+			{
+				this.globalConcepts.put(GlobalConcept.SERIES_DIFFERENCES_AVERAGE, eachConcept);
+				LOGGER.info(String.format("GlobalConcept added: %s", GlobalConcept.SERIES_DIFFERENCES_AVERAGE));
 			}
 		}
 	}

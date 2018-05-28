@@ -163,3 +163,18 @@ NOUN			:	neither series
 Predicate
 VERB			:	exhibit
 COMPLEMENT		:	a clear trend
+GlobalConcept=SERIES_DIFFERENCES_TREND
+PhraseSpecification
+Subject
+NOUN			:	the gap between the series
+Predicate
+VERB			:	tend
+COMPLEMENT		:	to
+COMPLEMENT2		:	@@IncreaseOrDecrease@@ overall
+GlobalConcept=SERIES_DIFFERENCES_AVERAGE
+PhraseSpecification
+Subject
+NOUN			:	the gap between the series
+Predicate
+VERB			:	average
+COMPLEMENT		:	@@SeriesGapAverage@@

@@ -252,7 +252,7 @@ public class LineGraphWithDerivedInformation
 
 		for (BigDecimal eachValue : this.averagedDifferencesSmoothed.values())
 		{
-			totalValues.add(eachValue);
+			totalValues = totalValues.add(eachValue);
 		}
 
 		this.averagedDifferenceMean = totalValues.divide(new BigDecimal(this.averagedDifferencesSmoothed.size()),

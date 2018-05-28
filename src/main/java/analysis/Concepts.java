@@ -18,6 +18,8 @@ import analysis.linguistics.contentdetermination.concepts.LinesDoNotCrossConcept
 import analysis.linguistics.contentdetermination.concepts.MaximumConcept;
 import analysis.linguistics.contentdetermination.concepts.MinimumConcept;
 import analysis.linguistics.contentdetermination.concepts.RisingTrendConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesDifferencesAverageConcept;
+import analysis.linguistics.contentdetermination.concepts.SeriesDifferencesTrendConcept;
 import analysis.linguistics.contentdetermination.concepts.SeriesLegendConcept;
 import analysis.linguistics.contentdetermination.concepts.StationaryConcept;
 import analysis.linguistics.contentdetermination.concepts.TimeSliceConcept;
@@ -121,6 +123,32 @@ public class Concepts implements ConceptLoader
 
 				final LineCountConcept lineCountConcept = new LineCountConcept(lineCountPhraseSpecifications);
 				this.globalConcepts.add(lineCountConcept);
+				break;
+			case SERIES_DIFFERENCES_TREND:
+				final List<PhraseSpecification> seriesDifferencesTrendPhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					seriesDifferencesTrendPhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				final SeriesDifferencesTrendConcept seriesDifferencesTrendConcept = new SeriesDifferencesTrendConcept(
+						seriesDifferencesTrendPhraseSpecifications, this.lineGraph);
+				this.globalConcepts.add(seriesDifferencesTrendConcept);
+				break;
+			case SERIES_DIFFERENCES_AVERAGE:
+				final List<PhraseSpecification> seriesDifferencesAveragePhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					seriesDifferencesAveragePhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				final SeriesDifferencesAverageConcept seriesDifferencesAverageConcept = new SeriesDifferencesAverageConcept(
+						seriesDifferencesAveragePhraseSpecifications, this.lineGraph);
+				this.globalConcepts.add(seriesDifferencesAverageConcept);
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", globalConcept));

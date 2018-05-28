@@ -96,6 +96,55 @@ public class Substitutor implements Mapper
 
 		this.globalMappings.addSubstitution("@@SeriesLegends@@", seriesLegendsAsPhrase);
 
+		this.globalMappings.addSubstitution("@@SeriesGapAverage@@",
+				this.lineGraphWithDerivedInformation.getAveragedDifferenceMean().toString());
+
+		List<Segment> seriesGapTrends = this.lineGraphWithDerivedInformation.getSmoothedAveragedDifferenceSegments();
+
+		int seriesGapTrendsSize = seriesGapTrends.size();
+
+		LOGGER.info(String.format("List of averaged segments - size: %d", seriesGapTrendsSize));
+
+		if (seriesGapTrendsSize > 2)
+		{
+			LOGGER.error(String.format("List of averaged segments must not be greater than 2, but was %d",
+					seriesGapTrendsSize));
+			throw new RuntimeException("List of averaged segments must not be greater than 2");
+		}
+
+		LOGGER.info(String.format("Slope 1: %s; Slope 2: %s", seriesGapTrends.get(0).getSlope(),
+				seriesGapTrendsSize == 1 ? "None" : seriesGapTrends.get(1).getSlope()));
+
+		String increaseOrDecrease = null;
+
+		if ((seriesGapTrendsSize == 1 && seriesGapTrends.get(0).getSlope() == Slope.ASCENDING)
+				|| (seriesGapTrendsSize == 2 && seriesGapTrends.get(0).getSlope() == Slope.ASCENDING
+						&& seriesGapTrends.get(1).getSlope() == Slope.ASCENDING))
+		{
+			increaseOrDecrease = "widen";
+		}
+
+		if ((seriesGapTrendsSize == 1 && seriesGapTrends.get(0).getSlope() == Slope.DESCENDING)
+				|| (seriesGapTrendsSize == 2 && seriesGapTrends.get(0).getSlope() == Slope.DESCENDING
+						&& seriesGapTrends.get(1).getSlope() == Slope.DESCENDING))
+		{
+			increaseOrDecrease = "narrow";
+		}
+
+		if (seriesGapTrendsSize == 2 && seriesGapTrends.get(0).getSlope() == Slope.ASCENDING
+				&& seriesGapTrends.get(1).getSlope() == Slope.DESCENDING)
+		{
+			increaseOrDecrease = "widen then narrow";
+		}
+
+		if (seriesGapTrendsSize == 2 && seriesGapTrends.get(0).getSlope() == Slope.DESCENDING
+				&& seriesGapTrends.get(1).getSlope() == Slope.ASCENDING)
+		{
+			increaseOrDecrease = "narrow then widen";
+		}
+
+		this.globalMappings.addSubstitution("@@IncreaseOrDecrease@@", increaseOrDecrease);
+
 		return this.globalMappings;
 	}
 

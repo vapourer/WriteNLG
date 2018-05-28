@@ -62,3 +62,7 @@ BothSeriesFluctuate=1.0
 AggregationConcept=AGGREGATE_STATIONARY
 NoSignificantTrend=1.0
 BothSeriesStationary=1.0
+GlobalConcept=SERIES_DIFFERENCES_TREND
+LinesDoNotCross=1.0
+GlobalConcept=SERIES_DIFFERENCES_AVERAGE
+LinesDoNotCross=1.0
