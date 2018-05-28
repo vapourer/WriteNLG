@@ -14,6 +14,7 @@ import analysis.LineGraphWithDerivedInformation;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.linguistics.aggregation.AggregationConcept;
 import analysis.linguistics.aggregation.Aggregator;
+import analysis.linguistics.aggregation.concepts.AggregateLineBehaviourConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
@@ -367,6 +368,16 @@ public class DocumentPlanner
 		{
 			Sentence sentence = new Sentence();
 			sentence.addClause(createSimpleClause(linesCrossConcept.getPhraseSpecifications().get(0)));
+			paragraph2.addSentence(sentence);
+		}
+
+		AggregateLineBehaviourConcept aggregateLineBehaviourConcept = (AggregateLineBehaviourConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_LINE_BEHAVIOUR);
+
+		if (aggregateLineBehaviourConcept != null)
+		{
+			Sentence sentence = new Sentence();
+			sentence.addClause(createSimpleClause(aggregateLineBehaviourConcept.getPhraseSpecifications().get(0)));
 			paragraph2.addSentence(sentence);
 		}
 

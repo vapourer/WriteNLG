@@ -178,3 +178,11 @@ NOUN			:	the gap between the series
 Predicate
 VERB			:	average
 COMPLEMENT		:	@@SeriesGapAverage@@
+AggregationConcept=AGGREGATE_LINE_BEHAVIOUR
+PhraseSpecification
+Subject
+NOUN			:	the gap between the series
+Predicate
+VERB			:	average
+COMPLEMENT		:	@@SeriesGapAverage@@ and tends to
+COMPLEMENT2		:	@@IncreaseOrDecrease@@ overall

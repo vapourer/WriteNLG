@@ -11,6 +11,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import analysis.linguistics.aggregation.concepts.AggregateLineBehaviourConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
@@ -102,6 +103,18 @@ public class AggregationConcepts
 				break;
 			case AGGREGATE_STATIONARY:
 				this.aggregationConcepts.put(aggregationConcept, new AggregateStationaryConcept(phraseSpecifications));
+				break;
+			case AGGREGATE_LINE_BEHAVIOUR:
+				final List<PhraseSpecification> aggregateLineBehaviourPhraseSpecifications = new ArrayList<>();
+
+				for (PhraseSpecification specification : phraseSpecifications)
+				{
+					aggregateLineBehaviourPhraseSpecifications.add(specification
+							.substitutePlaceholders(this.substitutor.getGlobalMappings().getSubstitutions()));
+				}
+
+				this.aggregationConcepts.put(aggregationConcept,
+						new AggregateLineBehaviourConcept(aggregateLineBehaviourPhraseSpecifications));
 				break;
 			default:
 				LOGGER.error(String.format("%s not implemented", aggregationConcept));

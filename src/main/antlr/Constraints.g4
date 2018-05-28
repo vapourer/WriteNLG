@@ -124,6 +124,7 @@ CONSTRAINT_NAME				:	'LinesCross'
 							|	'NoSignificantTrend'
 							|	'BothSeriesFluctuate'
 							|	'BothSeriesStationary'
+							|	'GapAverageAndTrendPresent'
 							;
 							
 INITIAL_VALUE				:	DIGIT+ '.' DIGIT+

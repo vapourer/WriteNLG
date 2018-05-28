@@ -43,7 +43,8 @@ public enum ConstraintType
 	TURNING_POINT_COUNT_EXCEEDS_LOWER_THRESHOLD("TurningPointCountExceedsLowerThreshold"),
 	NO_SIGNIFICANT_TREND("NoSignificantTrend"),
 	BOTH_SERIES_FLUCTUATE("BothSeriesFluctuate"),
-	BOTH_SERIES_STATIONARY("BothSeriesStationary");
+	BOTH_SERIES_STATIONARY("BothSeriesStationary"),
+	GAP_AVERAGE_AND_TREND_PRESENT("GapAverageAndTrendPresent");
 
 	final private String textualForm;
 

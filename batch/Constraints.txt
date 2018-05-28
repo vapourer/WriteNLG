@@ -66,3 +66,6 @@ GlobalConcept=SERIES_DIFFERENCES_TREND
 LinesDoNotCross=1.0
 GlobalConcept=SERIES_DIFFERENCES_AVERAGE
 LinesDoNotCross=1.0
+AggregationConcept=AGGREGATE_LINE_BEHAVIOUR
+LinesDoNotCross=1.0
+GapAverageAndTrendPresent=1.0

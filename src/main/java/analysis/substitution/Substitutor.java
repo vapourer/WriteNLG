@@ -51,6 +51,8 @@ public class Substitutor implements Mapper
 
 	/**
 	 * TODO: current implementation cannot handle more than two time series.
+	 * TODO: some substitutions involve logic. Time limitations prevented incorporating these into the constraint
+	 * framework, but some elements are in place to accommodate such a revision.
 	 * 
 	 * @return the globalMappings
 	 */

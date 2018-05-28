@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import analysis.GlobalConcept;
 import analysis.TimeSeriesSpecificConcept;
+import analysis.linguistics.aggregation.concepts.AggregateLineBehaviourConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximaConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMaximumAndMinimumConcept;
 import analysis.linguistics.aggregation.concepts.AggregateMinimaConcept;
@@ -52,6 +53,8 @@ import writenlg.aggregation.AbstractAggregationConcept;
 import writenlg.aggregation.ConceptGroup;
 
 /**
+ * TODO: The various enum classes need rationalising or reworking, so that the full aggregation configuration can be
+ * used to control addition and removal of concepts. Then it should be possible to simplify this class considerably.
  * Performs aggregation in conjunction with document planning, according to constraints
  */
 public class Aggregator
@@ -105,6 +108,31 @@ public class Aggregator
 		rationaliseTrendAndStationaryConcepts();
 		processAggregateStationaryConcept();
 		processAggregateTurningPointsConcept();
+		processAggregateLineBehaviourConcept();
+	}
+
+	private void processAggregateLineBehaviourConcept()
+	{
+		AggregateLineBehaviourConcept aggregateLineBehaviourConcept = (AggregateLineBehaviourConcept) this.aggregationConcepts
+				.get(AggregationConcept.AGGREGATE_LINE_BEHAVIOUR);
+
+		if (aggregateLineBehaviourConcept != null)
+		{
+			aggregateLineBehaviourConcept.setGlobalConcepts(this.globalConcepts);
+			aggregateLineBehaviourConcept.prepareAggregatedPhraseSpecificationAndAssessConstraints();
+		}
+
+		if (aggregateLineBehaviourConcept != null
+				&& aggregateLineBehaviourConcept.calculateSatisfactionLevel().compareTo(new BigDecimal("0")) > 0)
+		{
+			this.aggregationConcepts.put(AggregationConcept.AGGREGATE_LINE_BEHAVIOUR, aggregateLineBehaviourConcept);
+			this.globalConcepts.remove(GlobalConcept.SERIES_DIFFERENCES_AVERAGE);
+			this.globalConcepts.remove(GlobalConcept.SERIES_DIFFERENCES_TREND);
+		}
+		else
+		{
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_LINE_BEHAVIOUR);
+		}
 	}
 
 	private void rationaliseTrendAndStationaryConcepts()
