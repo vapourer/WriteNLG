@@ -188,7 +188,10 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 
 			if (queue.peek() == null)
 			{
-				this.smoothedSegments.add(segment2);
+				final Segment lastSmoothedSegment = this.smoothedSegments.last();
+				this.smoothedSegments.remove(lastSmoothedSegment);
+				this.smoothedSegments.add(
+						new SegmentPair(lastSmoothedSegment, this.segments.get(this.segments.size() - 1)).convert());
 			}
 		}
 

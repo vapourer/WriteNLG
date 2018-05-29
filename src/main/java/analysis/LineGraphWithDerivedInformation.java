@@ -302,5 +302,16 @@ public class LineGraphWithDerivedInformation
 
 		this.averagedDifferencesSmoothed = smoothing.getTimeSeriesSmoothed();
 		this.smoothedAveragedDifferenceSegments = smoothing.getSmoothedSegments();
+
+		for (Long eachTime : this.averagedDifferencesSmoothed.keySet())
+		{
+			LOGGER.info(String.format("averagedDifferencesSmoothed - Time: %s; Difference: %s", eachTime,
+					this.averagedDifferencesSmoothed.get(eachTime)));
+		}
+
+		for (Segment eachSegment : this.smoothedAveragedDifferenceSegments)
+		{
+			LOGGER.info(String.format("smoothedAveragedDifferenceSegments - %s", eachSegment));
+		}
 	}
 }

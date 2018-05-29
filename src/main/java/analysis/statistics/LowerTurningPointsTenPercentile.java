@@ -66,9 +66,11 @@ public class LowerTurningPointsTenPercentile
 			if (eachPoint.getY().compareTo(tenPercentileThreshold) <= 0 && isTurningPoint(eachPoint))
 			{
 				tenPercentileSmoothed.add(eachPoint);
-				LOGGER.info(String.format("Upper turning point identified in ninety percentile - %s", eachPoint));
+				LOGGER.info(String.format("Lower turning point identified in ten percentile - %s", eachPoint));
 			}
 		}
+
+		LOGGER.info(String.format("%d turning points", tenPercentileSmoothed.size()));
 
 		return tenPercentileSmoothed;
 	}
