@@ -13,16 +13,17 @@ import org.apache.logging.log4j.Logger;
 import analysis.TimeSeriesSpecificConcept;
 import analysis.TimeSeriesWithDerivedInformation;
 import analysis.constrain.Constraints;
+import analysis.graph.Segment;
+import analysis.graph.Slope;
 import analysis.linguistics.contentdetermination.ConstraintType;
 import analysis.utilities.GlobalConstants;
-import control.WriteNlgProperties;
 import writenlg.AbstractConcept;
-import writenlg.constrain.BoundedWeightedConstraint;
 import writenlg.constrain.Constraint;
 import writenlg.constrain.ConstraintConfiguration;
+import writenlg.constrain.HardConstraint;
+import writenlg.constrain.HardConstraintGroup;
+import writenlg.constrain.HardConstraintProcessor;
 import writenlg.constrain.SatisfactionLevel;
-import writenlg.constrain.SoftConstraintGroup;
-import writenlg.constrain.WeightedAverageConstraintProcessor;
 import writenlg.linguistics.phrase.PhraseSpecification;
 
 /**
@@ -38,7 +39,7 @@ public class StationaryConcept extends AbstractConcept
 	public StationaryConcept(List<PhraseSpecification> phraseSpecifications,
 			final TimeSeriesWithDerivedInformation timeSeriesWithDerivedInformation)
 	{
-		super(phraseSpecifications, new SoftConstraintGroup<>(new WeightedAverageConstraintProcessor()));
+		super(phraseSpecifications, new HardConstraintGroup<>(new HardConstraintProcessor()));
 
 		this.timeSeries = timeSeriesWithDerivedInformation;
 		this.constraints = Constraints.getInstance()
@@ -48,6 +49,12 @@ public class StationaryConcept extends AbstractConcept
 	}
 
 	private void assessConstraints()
+	{
+		assessNoSignificantTrendConstraint();
+		assessAscendingAndDescendingConstraint();
+	}
+
+	private void assessNoSignificantTrendConstraint()
 	{
 		final ConstraintConfiguration noSignificantTrendConstraintConfiguration = this.constraints
 				.get(ConstraintType.NO_SIGNIFICANT_TREND.getTextualForm());
@@ -64,15 +71,52 @@ public class StationaryConcept extends AbstractConcept
 		final BigDecimal noSignificantTrendConstraintValue = segmentCount > 1 ? GlobalConstants.ZERO
 				: GlobalConstants.ONE;
 
-		final Constraint<ConstraintType> noSignificantTrendConstraint = new BoundedWeightedConstraint<ConstraintType>(
-				ConstraintType.MOST_SEGMENTS_ASCENDING,
+		final Constraint<ConstraintType> noSignificantTrendConstraint = new HardConstraint<ConstraintType>(
+				ConstraintType.NO_SIGNIFICANT_TREND,
 				new SatisfactionLevel(
 						noSignificantTrendConstraintValue
 								.multiply(noSignificantTrendConstraintConfiguration.getValue()),
-						noSignificantTrendConstraintConfiguration.getWeighting()),
-				new BigDecimal(WriteNlgProperties.getInstance().getProperty("WeightedConstraintLowerBound")),
-				new BigDecimal(WriteNlgProperties.getInstance().getProperty("WeightedConstraintUpperBound")));
+						noSignificantTrendConstraintConfiguration.getWeighting()));
 
 		addConstraint(noSignificantTrendConstraint);
+	}
+
+	private void assessAscendingAndDescendingConstraint()
+	{
+		final ConstraintConfiguration ascendingAndDescendingConstraintConfiguration = this.constraints
+				.get(ConstraintType.ASCENDING_AND_DESCENDING.getTextualForm());
+
+		final List<Segment> smoothedSegments = this.timeSeries.getSegments();
+
+		int ascendingSegmentCount = 0;
+		int descendingSegmentCount = 0;
+
+		for (Segment eachSegment : smoothedSegments)
+		{
+			if (eachSegment.getSlope() == Slope.ASCENDING)
+			{
+				ascendingSegmentCount++;
+			}
+
+			if (eachSegment.getSlope() == Slope.DESCENDING)
+			{
+				descendingSegmentCount++;
+			}
+		}
+
+		final BigDecimal ascendingAndDescendingConstraintValue = ascendingSegmentCount == 0
+				|| descendingSegmentCount == 0 ? GlobalConstants.ZERO : GlobalConstants.ONE;
+
+		LOGGER.info(
+				String.format("Ascending and descending constraint value: %s", ascendingAndDescendingConstraintValue));
+
+		final Constraint<ConstraintType> ascendingAndDescendingConstraint = new HardConstraint<ConstraintType>(
+				ConstraintType.ASCENDING_AND_DESCENDING,
+				new SatisfactionLevel(
+						ascendingAndDescendingConstraintValue
+								.multiply(ascendingAndDescendingConstraintConfiguration.getValue()),
+						ascendingAndDescendingConstraintConfiguration.getWeighting()));
+
+		addConstraint(ascendingAndDescendingConstraint);
 	}
 }

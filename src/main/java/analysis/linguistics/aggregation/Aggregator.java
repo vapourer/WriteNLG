@@ -101,11 +101,11 @@ public class Aggregator
 
 	private void processAggregation()
 	{
+		rationaliseTrendAndStationaryConcepts();
 		processAllIntroductoryInformationPresentConcept();
 		processMaximaMinimaAggregationConcepts();
 		processIdenticalTimeSlicesConcept();
 		processBothSeriesHaveAllSegmentsAscendingConcept();
-		rationaliseTrendAndStationaryConcepts();
 		processAggregateStationaryConcept();
 		processAggregateTurningPointsConcept();
 		processAggregateLineBehaviourConcept();
@@ -144,6 +144,12 @@ public class Aggregator
 		{
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND).clear();
 		}
+
+		if (this.globalConcepts.get(GlobalConcept.LINES_CROSS) != null
+				|| this.globalConcepts.get(GlobalConcept.LINES_CROSS_MULTIPLE_TIMES) != null)
+		{
+			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_STATIONARY);
+		}
 	}
 
 	private void processAggregateStationaryConcept()
@@ -164,13 +170,14 @@ public class Aggregator
 				.compareTo(new BigDecimal(allSeriesStationaryCount)) > 0)
 		{
 			this.aggregationConcepts.put(AggregationConcept.AGGREGATE_STATIONARY, aggregateStationaryConcept);
-			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).clear();
 			this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.TREND).clear();
 		}
 		else
 		{
 			this.aggregationConcepts.remove(AggregationConcept.AGGREGATE_STATIONARY);
 		}
+
+		this.timeSeriesSpecificConcepts.get(TimeSeriesSpecificConcept.STATIONARY).clear();
 	}
 
 	private void processAggregateTurningPointsConcept()

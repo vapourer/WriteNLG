@@ -96,7 +96,7 @@ public class TrendConcept extends AbstractConcept
 		LOGGER.info(String.format("Multiple trends constraint value: %s", multipleTrendsConstraintValue));
 
 		final Constraint<ConstraintType> multipleTrendsConstraint = new BoundedWeightedConstraint<ConstraintType>(
-				ConstraintType.MOST_SEGMENTS_ASCENDING,
+				ConstraintType.MULTIPLE_TRENDS,
 				new SatisfactionLevel(
 						multipleTrendsConstraintValue.multiply(multipleTrendsConstraintConfiguration.getValue()),
 						multipleTrendsConstraintConfiguration.getWeighting()),
@@ -136,7 +136,7 @@ public class TrendConcept extends AbstractConcept
 				String.format("Ascending and descending constraint value: %s", ascendingAndDescendingConstraintValue));
 
 		final Constraint<ConstraintType> ascendingAndDescendingConstraint = new BoundedWeightedConstraint<ConstraintType>(
-				ConstraintType.MOST_SEGMENTS_ASCENDING,
+				ConstraintType.ASCENDING_AND_DESCENDING,
 				new SatisfactionLevel(
 						ascendingAndDescendingConstraintValue
 								.multiply(ascendingAndDescendingConstraintConfiguration.getValue()),
@@ -184,12 +184,15 @@ public class TrendConcept extends AbstractConcept
 				builder.append(GlobalConstants.SPACE);
 			}
 
-			builder.append("and ");
+			if (phraseSpecificationCount > 1)
+			{
+				builder.append("and ");
 
-			Predicate lastPredicate = getPhraseSpecifications().get(counter).getPredicate();
-			builder.append(lastPredicate.getVerb().getText());
-			builder.append(GlobalConstants.SPACE);
-			builder.append(lastPredicate.getComplement().getText());
+				Predicate lastPredicate = getPhraseSpecifications().get(counter).getPredicate();
+				builder.append(lastPredicate.getVerb().getText());
+				builder.append(GlobalConstants.SPACE);
+				builder.append(lastPredicate.getComplement().getText());
+			}
 
 			this.completeText = builder.toString();
 		}
