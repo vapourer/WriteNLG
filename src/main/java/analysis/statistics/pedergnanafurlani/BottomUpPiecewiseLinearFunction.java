@@ -185,15 +185,13 @@ public class BottomUpPiecewiseLinearFunction implements Smoothing
 			final Long startTime2 = segment2.getStartTime();
 			final BigDecimal value2 = segment2.getPoint1().getY();
 			this.timeSeriesSmoothed.put(startTime2, value2);
-
-			if (queue.peek() == null)
-			{
-				final Segment lastSmoothedSegment = this.smoothedSegments.last();
-				this.smoothedSegments.remove(lastSmoothedSegment);
-				this.smoothedSegments.add(
-						new SegmentPair(lastSmoothedSegment, this.segments.get(this.segments.size() - 1)).convert());
-			}
 		}
+
+		LOGGER.info("Adding final segment");
+		final Segment lastSmoothedSegment = this.smoothedSegments.last();
+		this.smoothedSegments.remove(lastSmoothedSegment);
+		this.smoothedSegments
+				.add(new SegmentPair(lastSmoothedSegment, this.segments.get(this.segments.size() - 1)).convert());
 
 		final Segment lastSegment = this.segments.get(this.segments.size() - 1);
 		this.timeSeriesSmoothed.put(lastSegment.getEndTime(), lastSegment.getPoint2().getY());

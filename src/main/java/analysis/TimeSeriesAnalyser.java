@@ -84,6 +84,8 @@ public class TimeSeriesAnalyser implements TimeSeriesAnalysis
 		builder.setTimeSeriesOutline(timeSeriesOutline);
 		builder.setOutlineSegments(outlineSmoothing.getSmoothedSegments());
 
+		LOGGER.info(String.format("OutlineSegments count: %d", outlineSmoothing.getSmoothedSegments().size()));
+
 		builder.setCentredMovingAverages(new CentredMovingAverage(this.timeSeries.getSeries(),
 				Integer.parseInt(WriteNlgProperties.getInstance().getProperty("MovingAverageWindow"))).averageGraph());
 

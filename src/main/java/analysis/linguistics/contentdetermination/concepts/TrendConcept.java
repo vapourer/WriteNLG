@@ -170,6 +170,8 @@ public class TrendConcept extends AbstractConcept
 			builder.append(firstPredicate.getComplement().getText());
 			builder.append(GlobalConstants.SPACE);
 
+			LOGGER.info(String.format("Builder output: %s", builder.toString()));
+
 			int counter;
 
 			for (counter = 1; counter < phraseSpecificationCount - 1; counter++)
@@ -182,6 +184,8 @@ public class TrendConcept extends AbstractConcept
 				builder.append(GlobalConstants.SPACE);
 				builder.append(additionalPredicate.getComplement().getText());
 				builder.append(GlobalConstants.SPACE);
+
+				LOGGER.info(String.format("Builder output: %s", builder.toString()));
 			}
 
 			if (phraseSpecificationCount > 1)
@@ -192,6 +196,8 @@ public class TrendConcept extends AbstractConcept
 				builder.append(lastPredicate.getVerb().getText());
 				builder.append(GlobalConstants.SPACE);
 				builder.append(lastPredicate.getComplement().getText());
+
+				LOGGER.info(String.format("Builder output: %s", builder.toString()));
 			}
 
 			this.completeText = builder.toString();

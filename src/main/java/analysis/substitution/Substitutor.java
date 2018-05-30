@@ -117,7 +117,7 @@ public class Substitutor implements Mapper
 		LOGGER.info(String.format("Slope 1: %s; Slope 2: %s", seriesGapTrends.get(0).getSlope(),
 				seriesGapTrendsSize == 1 ? "None" : seriesGapTrends.get(1).getSlope()));
 
-		String increaseOrDecrease = null;
+		String increaseOrDecrease = "";
 
 		if ((seriesGapTrendsSize == 1 && seriesGapTrends.get(0).getSlope() == Slope.ASCENDING)
 				|| (seriesGapTrendsSize == 2 && seriesGapTrends.get(0).getSlope() == Slope.ASCENDING
@@ -202,6 +202,8 @@ public class Substitutor implements Mapper
 			final List<String> endTimes = timesAndWindows.getWindowsForSegmentEndPoints();
 
 			final int segmentCount = outlineSegments.size();
+			LOGGER.info(String.format("segmentCount: %d", segmentCount));
+
 			Segment currentSegment = outlineSegments.get(0);
 
 			if (segmentCount >= 1)

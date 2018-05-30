@@ -5,6 +5,9 @@ package analysis.statistics.pedergnanafurlani;
 
 import java.math.BigDecimal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import analysis.graph.GraphUtilities;
 import analysis.graph.Segment;
 
@@ -13,6 +16,8 @@ import analysis.graph.Segment;
  */
 public class SegmentPair
 {
+	private static final Logger LOGGER = LogManager.getLogger("SegmentPair.class");
+
 	private final Segment segment1;
 	private BigDecimal cost;
 	private Segment segment2;
@@ -28,6 +33,9 @@ public class SegmentPair
 	{
 		this.segment1 = segment1;
 		this.segment2 = segment2;
+
+		LOGGER.info(String.format("segment1: %s", this.segment1));
+		LOGGER.info(String.format("segment2: %s", this.segment2));
 
 		final BigDecimal euclideanDistance = GraphUtilities.calculateEuclideanDistance(this.segment1.getPoint1(),
 				this.segment2.getPoint2());
