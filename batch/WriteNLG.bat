@@ -14,4 +14,6 @@ REM java -cp libs/*;log4j-api-2.10.0.jar;log4j-core-2.10.0.jar control.WriteNlg 
 
 REM java -cp libs/*;log4j-api-2.10.0.jar;log4j-core-2.10.0.jar control.WriteNlg log4j2Configuration.xml WriteNLG.properties ../evaluation/RenewableEnergySources.csv
 
-java -cp libs/*;log4j-api-2.10.0.jar;log4j-core-2.10.0.jar control.WriteNlg log4j2Configuration.xml WriteNLG.properties ../evaluation/GreenhouseGasEmissions.csv
+REM java -cp libs/*;log4j-api-2.10.0.jar;log4j-core-2.10.0.jar control.WriteNlg log4j2Configuration.xml WriteNLG.properties ../evaluation/GreenhouseGasEmissions.csv
+
+java -cp libs/*;log4j-api-2.10.0.jar;log4j-core-2.10.0.jar control.WriteNlg log4j2Configuration.xml WriteNLG.properties ../evaluation/CoalPetroleumAndNaturalGas.csv
